@@ -3,6 +3,7 @@ package com.example.codeacademyapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -16,13 +17,17 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.codeacademyapp.adapters.TabPagerAdapter;
+import com.example.codeacademyapp.adapters.ViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.viewpagerindicator.CirclePageIndicator;
 
 public class MainActivity extends AppCompatActivity {
+
+    int [] landing_slika;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +54,19 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        landing_slika = new int[]{
+                R.drawable.comunicate,
+                R.drawable.task_manage,
+                R.drawable.team_work
+        };
+
+        ViewPager viewPagerImages = findViewById(R.id.view_pager_imgs);
+        PagerAdapter pagerAdapter;
+        pagerAdapter = new ViewPagerAdapter(this, landing_slika);
+        CirclePageIndicator mIndicator = findViewById(R.id.page_indicator);
+        viewPagerImages.setAdapter(pagerAdapter);
+        mIndicator.setViewPager(viewPagerImages);
+
     }
 }
