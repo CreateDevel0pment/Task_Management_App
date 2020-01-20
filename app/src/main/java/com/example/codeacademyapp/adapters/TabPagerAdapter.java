@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.codeacademyapp.MainActivity;
 import com.example.codeacademyapp.ui.SignInFragment;
 import com.example.codeacademyapp.ui.SignUpFragment;
 

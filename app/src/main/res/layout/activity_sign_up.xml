@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:weightSum="5"
-    tools:context=".MainActivity">
+    tools:context=".SignUpActivity">
 
 
     <androidx.viewpager.widget.ViewPager
