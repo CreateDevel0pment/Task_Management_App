@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.codeacademyapp.MainActivity;
+import com.example.codeacademyapp.SignUpActivity;
 import com.example.codeacademyapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -193,7 +193,7 @@ public class SignUpFragment extends Fragment {
                                                         "Successful Registered",
                                                         Toast.LENGTH_SHORT).show();
 
-                                                startActivity(new Intent(getContext(), MainActivity.class));
+                                                startActivity(new Intent(getContext(), SignUpActivity.class));
                                             } else {
 
                                                 Toast.makeText(getContext(),

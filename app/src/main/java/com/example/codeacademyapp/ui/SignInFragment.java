@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.codeacademyapp.MainActivity;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.StartActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +30,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignInFragment extends Fragment {
 
    private EditText mail_et, password_et;
+   private TextView forgot_pass;
    private Button log_in_btn;
     private FirebaseAuth auth;
 
@@ -42,6 +43,7 @@ public class SignInFragment extends Fragment {
         mail_et=view.findViewById(R.id.mail_text);
         password_et=view.findViewById(R.id.password_text);
         log_in_btn=view.findViewById(R.id.log_in_btn);
+        forgot_pass=view.findViewById(R.id.forgot_pass);
 
         auth = FirebaseAuth.getInstance();
 
@@ -66,6 +68,9 @@ public class SignInFragment extends Fragment {
 
                                 Toast.makeText(getContext(), "Please Sign Up", Toast.LENGTH_SHORT).show();
                             }
+
+                            mail_et.setText("");
+                            password_et.setText("");
                         }
                     });
 
@@ -74,8 +79,45 @@ public class SignInFragment extends Fragment {
                     Toast.makeText(getContext(), "Please fill all the fields",
                                 Toast.LENGTH_SHORT).show();
                 }
+
+
+            }
+        });
+
+        forgot_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = mail_et.getText().toString();
+                String password = password_et.getText().toString();
+
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+
+                    Toast.makeText(getContext(), "Please fill all the fields",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+
+                    auth.sendPasswordResetEmail(email).addOnCompleteListener((Activity) getContext(), new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if (task.isSuccessful()) {
+
+                                Toast.makeText(getContext(),
+                                        "Check your email", Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                                Toast.makeText(getContext(),
+                                        "Unable to sent email", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                }
             }
         });
         return view;
+
     }
 }
