@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FDD835</color>
+    <color name="colorPrimaryDark">#FFB300</color>
+    <color name="colorAccent">#FDD835</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="editTextColor">#000000</color>
+    <color name="textColor">#242424</color>
+    <color name="colorSecondary">#E53935</color>
+    <color name="tabStyle">#FFFFFF</color>
+
+</resources>

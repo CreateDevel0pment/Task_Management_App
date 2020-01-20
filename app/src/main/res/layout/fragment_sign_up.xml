@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SignUpFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:textColor="@android:color/black"
+                android:id="@+id/person_email"
+                android:textColorHint="@android:color/darker_gray" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:textColor="@android:color/black"
+                android:id="@+id/person_name"
+                android:textColorHint="@android:color/darker_gray" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Surname"
+                android:textColor="@android:color/black"
+                android:id="@+id/person_sure_name"
+                android:textColorHint="@android:color/darker_gray" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textColor="@android:color/black"
+                android:id="@+id/person_password"
+                android:textColorHint="@android:color/darker_gray" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:textColor="#5A5A5A"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:text="Your role:"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/spinner_role"
+                android:entries="@array/Position"
+                android:spinnerMode="dropdown" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:textColor="#5A5A5A"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:text="Pick a group:"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:entries="@array/Group"
+                android:id="@+id/spinner_group"
+                android:spinnerMode="dropdown" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="25dp"
+            android:backgroundTint="#FDD835"
+            android:id="@+id/sign_up_btn"
+            android:hint="Sign Up"
+            android:textColorHint="#272727" />
+    </LinearLayout>
+</ScrollView>

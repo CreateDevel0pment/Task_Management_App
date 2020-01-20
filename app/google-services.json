@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "700508345832",
+    "firebase_url": "https://code-academy-app.firebaseio.com",
+    "project_id": "code-academy-app",
+    "storage_bucket": "code-academy-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700508345832:android:2493b7c2095fe0f1af005d",
+        "android_client_info": {
+          "package_name": "com.example.codeacademyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700508345832-vaih1fr09eu2h2djod1i591v5uumpo4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.codeacademyapp",
+            "certificate_hash": "cb59691dd8e3b37491351eeb0a90bc5236c8eaef"
+          }
+        },
+        {
+          "client_id": "700508345832-h565onrl5rbt06b1m31v3405vjdthlal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6Mw9tYGst7Fev7gTzZdiPOiXYLkeKkR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700508345832-h565onrl5rbt06b1m31v3405vjdthlal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Hellper</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Group">
+        <item>Android</item>
+        <item>Web Development</item>
+        <item>Ruby on rails</item>
+    </string-array>
+
+    <string-array name="Position">
+        <item>HR</item>
+        <item>Tutor</item>
+        <item>Student</item>
+    </string-array>
+
+</resources>
