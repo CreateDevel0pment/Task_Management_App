@@ -11,7 +11,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         app:cardBackgroundColor="@android:color/white">
 
         <EditText
@@ -24,10 +27,14 @@
             android:textColorHint="@android:color/darker_gray"
             />
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         app:cardBackgroundColor="@android:color/white">
 
     <EditText
@@ -46,17 +53,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:backgroundTint="#FDD835"
+        android:backgroundTint="#2f2e41"
         android:id="@+id/log_in_btn"
         android:hint="Log In"
-        android:textColorHint="#272727"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         />
 
     <TextView
         android:id="@+id/forgot_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="#2f2e41"
         android:text="Forgot your password"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"

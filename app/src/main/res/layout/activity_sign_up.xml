@@ -11,9 +11,11 @@
     tools:context=".SignUpActivity">
 
 
+
+
     <androidx.viewpager.widget.ViewPager
         android:layout_gravity="center"
-        android:layout_weight="1.6"
+        android:layout_weight="2"
         android:id="@+id/view_pager_imgs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -38,25 +40,46 @@
 <!--        android:layout_width="150dp"-->
 <!--        android:layout_height="0dp"/>-->
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_weight="0.5"
-        android:background="@android:color/white"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:tabTextColor="#383838"
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="#FDD835"
+        android:layout_weight="2.9"
+        app:cardCornerRadius="30dp"
+        android:layout_marginBottom="-18dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:tabMode="fixed"
-        app:tabIndicatorColor="@color/colorPrimary"
-        android:id="@+id/tab_layout"/>
+        android:layout_height="0dp">
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_weight="2.8"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <com.google.android.material.tabs.TabLayout
+                android:background="#00FFFFFF"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                app:tabTextColor="#383838"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="fixed"
+                app:tabIndicatorColor="#2f2e41"
+                android:id="@+id/tab_layout"/>
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_weight="3.2"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>
