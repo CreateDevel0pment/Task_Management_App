@@ -44,9 +44,9 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         landing_slika = new int[]{
-                R.drawable.comunicate,
-                R.drawable.task_manage,
-                R.drawable.team_work
+                R.drawable.comunicate_plava,
+                R.drawable.manage_plava,
+                R.drawable.teamwork_plava
         };
         ViewPager viewPagerImages = findViewById(R.id.view_pager_imgs);
         PagerAdapter pagerAdapter;

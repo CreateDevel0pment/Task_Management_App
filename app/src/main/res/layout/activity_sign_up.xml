@@ -8,9 +8,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:weightSum="5"
+    android:background="@color/colorPrimary"
     tools:context=".SignUpActivity">
-
-
 
 
     <androidx.viewpager.widget.ViewPager
@@ -24,7 +23,9 @@
 
     <com.viewpagerindicator.CirclePageIndicator
         android:outlineSpotShadowColor="#313131"
-        app:fillColor="#313131"
+        app:radius="4dp"
+        app:fillColor="@color/colorPrimaryDark"
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
         android:layout_margin="10dp"
         android:layout_weight="0.1"
         android:id="@+id/page_indicator"
@@ -41,7 +42,7 @@
 <!--        android:layout_height="0dp"/>-->
 
     <androidx.cardview.widget.CardView
-        app:cardBackgroundColor="#FDD835"
+        app:cardBackgroundColor="@color/white"
         android:layout_weight="2.9"
         app:cardCornerRadius="30dp"
         android:layout_marginBottom="-18dp"
@@ -58,11 +59,11 @@
                 android:background="#00FFFFFF"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
-                app:tabTextColor="#383838"
+                app:tabTextColor="@color/colorPrimaryDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"
-                app:tabIndicatorColor="#2f2e41"
+                app:tabIndicatorColor="@color/white"
                 android:id="@+id/tab_layout"/>
 
             <androidx.viewpager.widget.ViewPager
