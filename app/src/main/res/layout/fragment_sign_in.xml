@@ -59,7 +59,6 @@
         android:id="@+id/log_in_btn"
         android:hint="Log In"
         android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"
         />
 
     <TextView
