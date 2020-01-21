@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Hellper</string>
+    <string name="app_name">Code Academy App</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="academy_wall">Academy Wall</string>
 
     <string-array name="Group">
         <item>Android</item>

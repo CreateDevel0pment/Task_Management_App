@@ -20,6 +20,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+
         auth=FirebaseAuth.getInstance();
 
         log_out_view=findViewById(R.id.log_out_view);
@@ -29,11 +30,13 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 auth.signOut();
                 finish();
-
                 Intent intent=new Intent(StartActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
         });
+
+
+
 
     }
 

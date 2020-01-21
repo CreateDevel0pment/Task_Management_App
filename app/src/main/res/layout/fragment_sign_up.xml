@@ -88,7 +88,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:textColor="#5A5A5A"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -117,7 +117,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:textColor="#5A5A5A"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -153,7 +153,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_marginEnd="25dp"
-            android:backgroundTint="#2f2e41"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/sign_up_btn"
             android:hint="Sign Up"
             android:textColorHint="@android:color/white"
