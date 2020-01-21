@@ -16,8 +16,8 @@ import com.example.codeacademyapp.R;
 public class ViewPagerAdapter extends PagerAdapter {
 
 
-    int[] landing_sliki;
-    Context context;
+    private int[] landing_sliki;
+    private Context context;
 
     public ViewPagerAdapter(Context context, int[] landing_slika) {
         this.landing_sliki = landing_slika;
