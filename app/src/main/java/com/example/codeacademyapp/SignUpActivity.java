@@ -1,11 +1,16 @@
 package com.example.codeacademyapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.codeacademyapp.adapters.TabPagerAdapter;
 import com.example.codeacademyapp.adapters.ViewPagerAdapter;
@@ -43,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+
         landing_slika = new int[]{
                 R.drawable.comunicate_plava,
                 R.drawable.manage_plava,
@@ -54,6 +60,15 @@ public class SignUpActivity extends AppCompatActivity {
         CirclePageIndicator mIndicator = findViewById(R.id.page_indicator);
         viewPagerImages.setAdapter(pagerAdapter);
         mIndicator.setViewPager(viewPagerImages);
+
+        CardView cardView = findViewById(R.id.card_pager_view);
+//
+//        Keyboard keyboard = new Keb
+//
+//        InputMethodManager inputMethodManager =  (InputMethodManager)this.getApplicationContext().getSystemService(Context.In);
+//        if (inputMethodManager.isActive()){
+//            viewPagerImages.setVisibility(View.GONE);
+//        }else {viewPagerImages.setVisibility(View.VISIBLE);}
     }
 
 

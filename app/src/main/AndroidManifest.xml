@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StartActivity"></activity>
-        <activity android:name=".SignUpActivity">
+        <activity android:name=".SignUpActivity"
+            android:windowSoftInputMode="adjustPan"            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
