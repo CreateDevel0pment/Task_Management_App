@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.codeacademyapp.ui.academy_wall.AcademyWallFragment;
 import com.example.codeacademyapp.ui.group.GroupFragment;
 import com.example.codeacademyapp.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import static com.example.codeacademyapp.utils.Constants.USER;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -27,6 +30,10 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        Intent intent=getIntent();
+        String name = intent.getStringExtra(USER);
+        Toast.makeText(this,"Welcome" + name, Toast.LENGTH_SHORT).show();
 
 
         auth=FirebaseAuth.getInstance();

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.codeacademyapp.SignUpActivity;
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.StartActivity;
 import com.example.codeacademyapp.model.User;
 import com.example.codeacademyapp.viewmodel.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.codeacademyapp.utils.Constants.USER;
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
 /**
@@ -198,10 +200,8 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void onChanged(User user) {
 
-                        if(user.isCreated){
+                            goToMainActivity(user);
 
-                            toastMessage("Welcome" + user.getName());
-                        }
                     }
                 });
 //
@@ -271,5 +271,13 @@ public class SignUpFragment extends Fragment {
     private void toastMessage(String message){
 
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+    private void goToMainActivity(User user) {
+        Intent intent = new Intent(getContext(), StartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(USER, user.getName());
+        startActivity(intent);
+//        finish();
     }
 }

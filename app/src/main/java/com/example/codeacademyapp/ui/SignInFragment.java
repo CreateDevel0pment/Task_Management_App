@@ -21,6 +21,7 @@ import com.example.codeacademyapp.StartActivity;
 import com.example.codeacademyapp.model.User;
 import com.example.codeacademyapp.viewmodel.UserViewModel;
 
+import static com.example.codeacademyapp.utils.Constants.USER;
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
 /**
@@ -116,7 +117,7 @@ public class SignInFragment extends Fragment {
     private void goToMainActivity(User user) {
         Intent intent = new Intent(getContext(), StartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        intent.putExtra(USER, user);
+//        intent.putExtra(USER, user.getName());
         startActivity(intent);
 //        finish();
     }
