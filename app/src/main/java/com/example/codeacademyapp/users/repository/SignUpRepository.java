@@ -2,7 +2,7 @@ package com.example.codeacademyapp.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.users.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

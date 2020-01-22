@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.codeacademyapp.users.model.User;
 import com.example.codeacademyapp.users.repository.SigInRepository;
-import com.example.codeacademyapp.users.repository.SignUpRepository;
 
 public class UserViewModel extends AndroidViewModel {
 
