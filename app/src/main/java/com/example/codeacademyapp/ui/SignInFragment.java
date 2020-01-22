@@ -18,8 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.StartActivity;
-import com.example.codeacademyapp.model.User;
-import com.example.codeacademyapp.viewmodel.UserViewModel;
+import com.example.codeacademyapp.users.model.User;
+import com.example.codeacademyapp.users.viewmodel.UserViewModel;
 
 import static com.example.codeacademyapp.utils.Constants.USER;
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;

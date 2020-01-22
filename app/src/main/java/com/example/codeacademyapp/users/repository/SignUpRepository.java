@@ -1,12 +1,8 @@
 package com.example.codeacademyapp.repository;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.codeacademyapp.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -29,15 +25,7 @@ public class SignUpRepository {
     public MutableLiveData<User> signUpNewUser(User user) {
 
         if (user != null) {
-            mAuth.createUserWithEmailAndPassword(user.geteMail(), user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
-
-///TODO
-                }
-            });
+            mAuth.createUserWithEmailAndPassword(user.geteMail(), user.getPassword());
 
             if (!user.getName().equals("") && !user.getSurname().equals("") &&
                     !user.getRole_spinner().equals("") && !user.getGroup_spinner().equals("")) {
