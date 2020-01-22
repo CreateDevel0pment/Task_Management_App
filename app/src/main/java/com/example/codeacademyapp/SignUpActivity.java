@@ -14,7 +14,6 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 public class SignUpActivity extends AppCompatActivity {
 
-
     int [] landing_slika;
 
     @Override
@@ -55,9 +54,5 @@ public class SignUpActivity extends AppCompatActivity {
         viewPagerImages.setAdapter(pagerAdapter);
         mIndicator.setViewPager(viewPagerImages);
     }
-
-
-
-
 
 }

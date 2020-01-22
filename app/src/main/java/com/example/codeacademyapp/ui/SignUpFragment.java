@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 
 import com.example.codeacademyapp.SignUpActivity;
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.viewmodel.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,6 +35,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,8 +52,11 @@ public class SignUpFragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
-    private String position_string;
+    private String role_string;
     private String group_string;
+
+    private UserViewModel userViewModel;
+
 
     private static final String TAG = "StartActivity";
 
@@ -56,12 +65,17 @@ public class SignUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_sign_up, container, false);
 
+        userViewModel= ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
 
         name_et=view.findViewById(R.id.person_name);
+        setFocus(name_et);
         surename_et=view.findViewById(R.id.person_sure_name);
+        setFocus(surename_et);
         sign_up_btn=view.findViewById(R.id.sign_up_btn);
         mail_et=view.findViewById(R.id.person_email);
+        setFocus(mail_et);
         password_et=view.findViewById(R.id.person_password);
+        setFocus(password_et);
 
         position_spiner=view.findViewById(R.id.spinner_role);
         group_spiner=view.findViewById(R.id.spinner_group);
@@ -71,13 +85,13 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position_spiner.getSelectedItem().equals("HR")){
-                    position_string="HR";
+                    role_string="HR";
                 }
                 else if(position_spiner.getSelectedItem().equals("Tutor")){
-                    position_string="Tutor";
+                    role_string="Tutor";
                 }
                 else if(position_spiner.getSelectedItem().equals("Student")){
-                    position_string="Student";
+                    role_string="Student";
                 }
             }
 
@@ -171,62 +185,83 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                User user=new User();
+                user.seteMail(mail_et.getText().toString());
+                user.setPassword(password_et.getText().toString());
+                user.setName(name_et.getText().toString());
+                user.setSurname(surename_et.getText().toString());
+                user.setGroup_spinner(group_string);
+                user.setRole_spinner(role_string);
 
-                String email = mail_et.getText().toString();
-                String password = password_et.getText().toString();
+                userViewModel.signUpNewUser(user);
+                userViewModel.getSignUpNewUserLiveData().observe(SignUpFragment.this, new Observer<User>() {
+                    @Override
+                    public void onChanged(User user) {
 
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                        if(user.isCreated){
 
-                    Toast.makeText(getContext(), "Please fill all the fields",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-
-                    mAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener((Activity) getContext(),
-                                    new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                            if (task.isSuccessful()) {
-
-                                                Toast.makeText(getContext(),
-                                                        "Successful Registered",
-                                                        Toast.LENGTH_SHORT).show();
-
-                                                startActivity(new Intent(getContext(), SignUpActivity.class));
-                                            } else {
-
-                                                Toast.makeText(getContext(),
-                                                        "User name may already exist", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
-
-                    password_et.setText("");
-                }
+                            toastMessage("Welcome" + user.getName());
+                        }
+                    }
+                });
+//
 
 
-                Log.d(TAG, "onClick: Attempting to add object to database.");
 
-                String name=name_et.getText().toString();
-                String surename=surename_et.getText().toString();
-
-                if(!name.equals("") || !surename.equals("")){
-
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-
-                    myRef.child(userID).child("Profile Information").child("Name").setValue(name);
-                    myRef.child(userID).child("Profile Information").child("Surname").setValue(surename);
-                    myRef.child(userID).child("Profile Information").child("Group").setValue(group_string);
-                    myRef.child(userID).child("Profile Information").child("Position").setValue(position_string);
-
-                    toastMessage("Added new person to database");
-
-                    //reset the text
-                    name_et.setText("");
-                    surename_et.setText("");
-                }
+//                String email = mail_et.getText().toString();
+//                String password = password_et.getText().toString();
+//
+//                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+//
+//                    Toast.makeText(getContext(), "Please fill all the fields",
+//                            Toast.LENGTH_SHORT).show();
+//                } else {
+//
+//                    mAuth.createUserWithEmailAndPassword(email, password)
+//                            .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                                            if (task.isSuccessful()) {
+//
+//                                                Toast.makeText(getContext(),
+//                                                        "Successful Registered",
+//                                                        Toast.LENGTH_SHORT).show();
+//
+//                                                startActivity(new Intent(getContext(), SignUpActivity.class));
+//                                            } else {
+//
+//                                                Toast.makeText(getContext(),
+//                                                        "User name may already exist", Toast.LENGTH_LONG).show();
+//                                            }
+//                                        }
+//                                    });
+//
+//                    password_et.setText("");
+//                }
+//
+//
+//                Log.d(TAG, "onClick: Attempting to add object to database.");
+//
+//                String name=name_et.getText().toString();
+//                String surename=surename_et.getText().toString();
+//
+//                if(!name.equals("") || !surename.equals("")){
+//
+//                    FirebaseUser user = mAuth.getCurrentUser();
+//                    String userID = user.getUid();
+//
+//                    myRef.child(userID).child("Profile Information").child("Name").setValue(name);
+//                    myRef.child(userID).child("Profile Information").child("Surname").setValue(surename);
+//                    myRef.child(userID).child("Profile Information").child("Group").setValue(group_string);
+//                    myRef.child(userID).child("Profile Information").child("Position").setValue(role_string);
+//
+//                    toastMessage("Added new person to database");
+//
+//                    //reset the text
+//                    name_et.setText("");
+//                    surename_et.setText("");
+//                }
             }
 
         });
