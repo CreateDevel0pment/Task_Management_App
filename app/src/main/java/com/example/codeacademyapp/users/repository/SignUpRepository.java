@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.repository;
+package com.example.codeacademyapp.users.repository;
 
 import androidx.lifecycle.MutableLiveData;
 

@@ -1,16 +1,11 @@
 package com.example.codeacademyapp;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.content.Context;
-import android.inputmethodservice.Keyboard;
-import android.os.Bundle;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.example.codeacademyapp.adapters.TabPagerAdapter;
 import com.example.codeacademyapp.adapters.ViewPagerAdapter;
@@ -19,13 +14,12 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    int[] landing_slika;
+    int[] landing_pictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
@@ -50,14 +44,14 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
-        landing_slika = new int[]{
+        landing_pictures = new int[]{
                 R.drawable.comunicate_plava,
                 R.drawable.manage_plava,
                 R.drawable.teamwork_plava
         };
         ViewPager viewPagerImages = findViewById(R.id.view_pager_imgs);
         PagerAdapter pagerAdapter;
-        pagerAdapter = new ViewPagerAdapter(this, landing_slika);
+        pagerAdapter = new ViewPagerAdapter(this, landing_pictures);
         CirclePageIndicator mIndicator = findViewById(R.id.page_indicator);
         viewPagerImages.setAdapter(pagerAdapter);
         mIndicator.setViewPager(viewPagerImages);

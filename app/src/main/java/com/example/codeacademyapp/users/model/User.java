@@ -6,12 +6,17 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+    public String id_user;
     public String eMail;
     public String password;
     public String name;
     public String surname;
     public String role_spinner;
     public String group_spinner;
+
+
+    @Exclude
+    public boolean isAuthenticated;
 
     @Exclude
     public boolean isNew,isCreated;
@@ -22,6 +27,7 @@ public class User implements Serializable {
     public User(String eMail, String password, String user_id ) {
         this.eMail = eMail;
         this.password = password;
+        this.id_user=user_id;
     }
 
     public String geteMail() {
