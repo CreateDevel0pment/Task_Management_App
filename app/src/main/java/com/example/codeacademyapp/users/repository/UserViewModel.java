@@ -14,7 +14,7 @@ public class UserViewModel extends AndroidViewModel {
     private SigInRepository signInRepository;
     private LiveData<User> authenticatedUserLiveData;
 
-    private com.example.codeacademyapp.repository.SignUpRepository signUpRepository;
+    private SignUpRepository signUpRepository;
     private LiveData<User> signUpNewUserLiveData;
 
 
@@ -22,7 +22,7 @@ public class UserViewModel extends AndroidViewModel {
         super(application);
 
         signInRepository = new SigInRepository();
-        signUpRepository = new com.example.codeacademyapp.repository.SignUpRepository();
+        signUpRepository = new SignUpRepository();
     }
 
     public void signUpNewUser(User user){
