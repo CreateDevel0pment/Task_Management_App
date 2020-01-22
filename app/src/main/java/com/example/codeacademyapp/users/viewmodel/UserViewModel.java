@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.viewmodel;
+package com.example.codeacademyapp.users.viewmodel;
 
 import android.app.Application;
 
@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.codeacademyapp.model.User;
-import com.example.codeacademyapp.repository.SigInRepository;
-import com.example.codeacademyapp.repository.SignUpRepository;
+import com.example.codeacademyapp.users.model.User;
+import com.example.codeacademyapp.users.repository.SigInRepository;
+import com.example.codeacademyapp.users.repository.SignUpRepository;
 
 public class UserViewModel extends AndroidViewModel {
 

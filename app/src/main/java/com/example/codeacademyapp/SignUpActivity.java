@@ -19,7 +19,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    int [] landing_slika;
+    int[] landing_slika;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +39,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -60,14 +62,5 @@ public class SignUpActivity extends AppCompatActivity {
         viewPagerImages.setAdapter(pagerAdapter);
         mIndicator.setViewPager(viewPagerImages);
 
-        CardView cardView = findViewById(R.id.card_pager_view);
-//
-//        Keyboard keyboard = new Keb
-//
-//        InputMethodManager inputMethodManager =  (InputMethodManager)this.getApplicationContext().getSystemService(Context.In);
-//        if (inputMethodManager.isActive()){
-//            viewPagerImages.setVisibility(View.GONE);
-//        }else {viewPagerImages.setVisibility(View.VISIBLE);}
     }
-
 }

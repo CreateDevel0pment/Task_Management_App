@@ -1,9 +1,9 @@
-package com.example.codeacademyapp.repository;
+package com.example.codeacademyapp.users.repository;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.users.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

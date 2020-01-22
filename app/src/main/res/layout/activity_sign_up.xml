@@ -42,6 +42,8 @@
 <!--        android:layout_height="0dp"/>-->
 
     <androidx.cardview.widget.CardView
+        android:elevation="30dp"
+        app:cardElevation="60dp"
         android:id="@+id/card_pager_view"
         app:cardBackgroundColor="@color/white"
         android:layout_weight="2.9"

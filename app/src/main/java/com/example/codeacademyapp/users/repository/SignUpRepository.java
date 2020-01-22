@@ -1,8 +1,8 @@
-package com.example.codeacademyapp.repository;
+package com.example.codeacademyapp.users.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.users.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,20 +35,16 @@ public class SignUpRepository {
                 if (userFb != null) {
                     userID = userFb.getUid();
 
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID).child("Profile Information")
                             .child("Name")
                             .setValue(user.getName());
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID).child("Profile Information")
                             .child("Surname")
                             .setValue(user.getSurname());
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID).child("Profile Information")
                             .child("Group")
                             .setValue(user.getGroup_spinner());
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID).child("Profile Information")
                             .child("Role")
                             .setValue(user.getRole_spinner());
                 }

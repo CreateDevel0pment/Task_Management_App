@@ -1,5 +1,7 @@
 package com.example.codeacademyapp.tasks.model;
 
+import com.google.firebase.database.Exclude;
+
 public class Task {
 
     String name;
@@ -10,11 +12,23 @@ public class Task {
     String start_date;
     String due_date;
     String user_Id;
+    String id;
+
+
+    @Exclude
+    public boolean isNew,isCreated;
 
     public Task() {
     }
 
-    public Task(String name, String description, String note, int state, int importance, String start_date, String due_date, String user_Id) {
+    public Task(String name, String description, String note) {
+        this.name = name;
+        this.description = description;
+        this.note = note;
+    }
+
+    public Task(String name, String description, String note, int state, int importance, String start_date,
+                String due_date, String user_Id, String id) {
         this.name = name;
         this.description = description;
         this.note = note;
@@ -23,6 +37,7 @@ public class Task {
         this.start_date = start_date;
         this.due_date = due_date;
         this.user_Id = user_Id;
+        this.id = id;
     }
 
     public Task(String name, String description, String note, int state, int importance, String due_date, String user_Id) {
@@ -97,5 +112,22 @@ public class Task {
 
     public void setUser_Id(String user_Id) {
         this.user_Id = user_Id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 }
