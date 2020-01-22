@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.users.viewmodel;
+package com.example.codeacademyapp.users.repository;
 
 import android.app.Application;
 

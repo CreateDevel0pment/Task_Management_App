@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.users.model.User;
-import com.example.codeacademyapp.users.viewmodel.UserViewModel;
+import com.example.codeacademyapp.users.repository.UserViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

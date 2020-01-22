@@ -17,8 +17,6 @@ import android.widget.Toast;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.tasks.model.Task;
 import com.example.codeacademyapp.tasks.viewmodel.TaskViewModel;
-import com.example.codeacademyapp.ui.SignUpFragment;
-import com.example.codeacademyapp.users.viewmodel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,10 +73,9 @@ public class AddNewTaskFragment extends Fragment {
             }
         });
 
-
-
         return rootView;
     }
+
     private void toastMessage(String message){
 
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();

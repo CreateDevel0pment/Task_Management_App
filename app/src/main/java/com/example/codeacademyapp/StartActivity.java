@@ -35,7 +35,6 @@ public class StartActivity extends AppCompatActivity {
         String name = intent.getStringExtra(USER);
         Toast.makeText(this,"Welcome" + name, Toast.LENGTH_SHORT).show();
 
-
         auth=FirebaseAuth.getInstance();
 
         log_out_view=findViewById(R.id.log_out_view);
