@@ -57,7 +57,6 @@ public class StartActivity extends AppCompatActivity {
                         switchToFragment(new HomeFragment());
                         break;
                     case R.id.academy_wall:
-
                         switchToFragment(new AcademyWallFragment());
                         break;
                     case R.id.group:
@@ -68,7 +67,6 @@ public class StartActivity extends AppCompatActivity {
             }
         });
         bottomNav.setSelectedItemId(R.id.home);
-
     }
 
     public void switchToFragment(Fragment fragment) {

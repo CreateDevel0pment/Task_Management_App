@@ -55,6 +55,5 @@ public class SignUpActivity extends AppCompatActivity {
         CirclePageIndicator mIndicator = findViewById(R.id.page_indicator);
         viewPagerImages.setAdapter(pagerAdapter);
         mIndicator.setViewPager(viewPagerImages);
-
     }
 }

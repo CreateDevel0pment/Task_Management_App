@@ -88,8 +88,8 @@ public class SignInFragment extends Fragment {
         });
 
 
-//
-//        if (mail_et.getText().toString().equals("")&&password_et.getText().toString().equals("")){
+
+        //        if (mail_et.getText().toString().equals("")&&password_et.getText().toString().equals("")){
 //            log_in_btn.setClickable(false);
 //            log_in_btn.setHintTextColor(getResources().getColor(R.color.low_white));
 //        }
