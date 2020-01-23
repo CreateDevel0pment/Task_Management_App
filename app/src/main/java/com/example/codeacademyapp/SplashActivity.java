@@ -49,6 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void goToSugnUpActivity() {
         Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
