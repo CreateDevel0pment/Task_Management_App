@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.codeacademyapp.users.model.User;
-import com.example.codeacademyapp.users.repository.SigInRepository;
 
 public class UserViewModel extends AndroidViewModel {
 
@@ -25,11 +24,11 @@ public class UserViewModel extends AndroidViewModel {
         signUpRepository = new SignUpRepository();
     }
 
-    public void signUpNewUser(User user){
-        signUpNewUserLiveData=signUpRepository.signUpNewUser(user);
+    public void signUpNewUser(User user) {
+        signUpNewUserLiveData = signUpRepository.signUpNewUser(user);
     }
 
-    public void forgotPassword(String email){
+    public void forgotPassword(String email) {
         signInRepository.forgotPassword(email);
     }
 
