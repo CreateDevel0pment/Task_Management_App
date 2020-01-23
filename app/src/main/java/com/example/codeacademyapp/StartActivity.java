@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -32,8 +33,10 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         Intent intent=getIntent();
-        String name = intent.getStringExtra(USER);
-        Toast.makeText(this,"Welcome" + name, Toast.LENGTH_SHORT).show();
+//        String name = intent.getStringExtra(USER);
+        Toast toast=Toast.makeText(this,"WELCOME",Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
 
         auth=FirebaseAuth.getInstance();
 
