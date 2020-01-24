@@ -1,4 +1,4 @@
-package com.example.codeacademyapp;
+package com.example.codeacademyapp.splash;
 
 import android.app.Application;
 

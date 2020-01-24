@@ -56,35 +56,33 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_sign_up, container, false);
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
-        userViewModel= ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
+        userViewModel = ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
 
-        name_et=view.findViewById(R.id.person_name);
+        name_et = view.findViewById(R.id.person_name);
         setFocus(name_et);
-        surename_et=view.findViewById(R.id.person_sure_name);
+        surename_et = view.findViewById(R.id.person_sure_name);
         setFocus(surename_et);
-        sign_up_btn=view.findViewById(R.id.sign_up_btn);
-        mail_et=view.findViewById(R.id.person_email);
+        sign_up_btn = view.findViewById(R.id.sign_up_btn);
+        mail_et = view.findViewById(R.id.person_email);
         setFocus(mail_et);
-        password_et=view.findViewById(R.id.person_password);
+        password_et = view.findViewById(R.id.person_password);
         setFocus(password_et);
 
-        position_spiner=view.findViewById(R.id.spinner_role);
-        group_spiner=view.findViewById(R.id.spinner_group);
+        position_spiner = view.findViewById(R.id.spinner_role);
+        group_spiner = view.findViewById(R.id.spinner_group);
 
 
         position_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position_spiner.getSelectedItem().equals("HR")){
-                    role_string="HR";
-                }
-                else if(position_spiner.getSelectedItem().equals("Tutor")){
-                    role_string="Tutor";
-                }
-                else if(position_spiner.getSelectedItem().equals("Student")){
-                    role_string="Student";
+                if (position_spiner.getSelectedItem().equals("HR")) {
+                    role_string = "HR";
+                } else if (position_spiner.getSelectedItem().equals("Tutor")) {
+                    role_string = "Tutor";
+                } else if (position_spiner.getSelectedItem().equals("Student")) {
+                    role_string = "Student";
                 }
             }
 
@@ -97,14 +95,12 @@ public class SignUpFragment extends Fragment {
         group_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(group_spiner.getSelectedItem().equals("Android")){
-                    group_string="Android";
-                }
-                else if(group_spiner.getSelectedItem().equals("Web Development")){
-                    group_string="Web Development";
-                }
-                else if(group_spiner.getSelectedItem().equals("Ruby on rails")){
-                    group_string="Ruby on rails";
+                if (group_spiner.getSelectedItem().equals("Android")) {
+                    group_string = "Android";
+                } else if (group_spiner.getSelectedItem().equals("Web Development")) {
+                    group_string = "Web Development";
+                } else if (group_spiner.getSelectedItem().equals("Ruby on rails")) {
+                    group_string = "Ruby on rails";
                 }
             }
 
@@ -164,6 +160,7 @@ public class SignUpFragment extends Fragment {
 
                 Log.d(TAG, "Value is: " + value);
             }
+
             @Override
 
             public void onCancelled(DatabaseError error) {
@@ -174,95 +171,39 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+
+
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                User user=new User();
-                user.seteMail(mail_et.getText().toString());
-                user.setPassword(password_et.getText().toString());
-                user.setName(name_et.getText().toString());
-                user.setSurname(surename_et.getText().toString());
-                user.setGroup_spinner(group_string);
-                user.setRole_spinner(role_string);
 
-                userViewModel.signUpNewUser(user);
-                userViewModel.getSignUpNewUserLiveData().observe(SignUpFragment.this, new Observer<User>() {
-                    @Override
-                    public void onChanged(User user) {
 
-                        if(user.isCreated){
+                User user = new User();
 
-                            toastMessage("Welcome" + user.getName());
+                    user.seteMail(mail_et.getText().toString());
+                    user.setPassword(password_et.getText().toString());
+                    user.setName(name_et.getText().toString());
+                    user.setSurname(surename_et.getText().toString());
+                    userViewModel.signUpNewUser(user);
+
+                    userViewModel.getSignUpNewUserLiveData().observe(SignUpFragment.this, new Observer<User>() {
+                        @Override
+                        public void onChanged(User user) {
+                            if (user.isCreated) {
+
+                                toastMessage("Welcome" + user.getName());
+                            }
                         }
-                    }
-                });
-//
-
-
-
-//                String email = mail_et.getText().toString();
-//                String password = password_et.getText().toString();
-//
-//                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-//
-//                    Toast.makeText(getContext(), "Please fill all the fields",
-//                            Toast.LENGTH_SHORT).show();
-//                } else {
-//
-//                    mAuth.createUserWithEmailAndPassword(email, password)
-//                            .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<AuthResult> task) {
-//
-//                                            if (task.isSuccessful()) {
-//
-//                                                Toast.makeText(getContext(),
-//                                                        "Successful Registered",
-//                                                        Toast.LENGTH_SHORT).show();
-//
-//                                                startActivity(new Intent(getContext(), SignUpActivity.class));
-//                                            } else {
-//
-//                                                Toast.makeText(getContext(),
-//                                                        "User name may already exist", Toast.LENGTH_LONG).show();
-//                                            }
-//                                        }
-//                                    });
-//
-//                    password_et.setText("");
-//                }
-//
-//
-//                Log.d(TAG, "onClick: Attempting to add object to database.");
-//
-//                String name=name_et.getText().toString();
-//                String surename=surename_et.getText().toString();
-//
-//                if(!name.equals("") || !surename.equals("")){
-//
-//                    FirebaseUser user = mAuth.getCurrentUser();
-//                    String userID = user.getUid();
-//
-//                    myRef.child(userID).child("Profile Information").child("Name").setValue(name);
-//                    myRef.child(userID).child("Profile Information").child("Surname").setValue(surename);
-//                    myRef.child(userID).child("Profile Information").child("Group").setValue(group_string);
-//                    myRef.child(userID).child("Profile Information").child("Position").setValue(role_string);
-//
-//                    toastMessage("Added new person to database");
-//
-//                    //reset the text
-//                    name_et.setText("");
-//                    surename_et.setText("");
-//                }
-            }
-
+                    });
+                }
         });
 
         return view;
     }
-    private void toastMessage(String message){
 
-        Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+    private void toastMessage(String message) {
+
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
