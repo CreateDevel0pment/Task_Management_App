@@ -46,12 +46,11 @@ public class SplashRepository {
 
     MutableLiveData<User> getChil (){
        FirebaseDatabase database= FirebaseDatabase.getInstance();
+       getChild=new MutableLiveData<>();
 
         final DatabaseReference userRef = database.getReference();
 
-        Query query= userRef.child("Users").child(Objects.requireNonNull(firebaseAuth.getUid()))
-                .child("Profile Information")
-                .child("Users").orderByChild("Name").equalTo("");
+        Query query= userRef.child("Users").orderByChild("Name").equalTo("");
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

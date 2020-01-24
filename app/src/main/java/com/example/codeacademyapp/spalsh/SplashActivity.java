@@ -25,7 +25,6 @@ public class SplashActivity extends AppCompatActivity {
 
         SplashViewModel splashViewModel = ViewModelProviders.of(this).get(SplashViewModel.class);
         splashViewModel.checkIfUserIsAuthenticated();
-//        splashViewModel.getChildData();
 
         splashViewModel.getIsUserAuthenticatedLiveData().observe(this, new Observer<FirebaseUser>() {
             @Override
@@ -39,13 +38,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-//        splashViewModel.getGetChildData().observe(this, new Observer<User>() {
-//            @Override
-//            public void onChanged(User user) {
-//
-//                name= user.name;
-//            }
-//        });
     }
     private void goToSignUpActivity() {
         Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
