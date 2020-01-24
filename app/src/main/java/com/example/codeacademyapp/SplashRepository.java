@@ -67,8 +67,6 @@ public class SplashRepository {
             }
         });
 
-
-
         return getChild;
     }
 
