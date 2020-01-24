@@ -20,11 +20,9 @@ public class SignUpRepository {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-
     }
 
     public MutableLiveData<User> signUpNewUser(User user) {
-
 
         if (user != null) {
             mAuth.createUserWithEmailAndPassword(user.geteMail(), user.getPassword());
