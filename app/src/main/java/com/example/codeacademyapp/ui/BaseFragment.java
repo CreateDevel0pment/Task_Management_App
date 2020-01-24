@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentActivity;
 
 public abstract class BaseFragment extends Fragment {
 
+
+
     protected void setTitle(@StringRes int stringId) {
         setTitle(getString(stringId));
     }
