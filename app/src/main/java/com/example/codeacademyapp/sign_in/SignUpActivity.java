@@ -1,4 +1,4 @@
-package com.example.codeacademyapp;
+package com.example.codeacademyapp.sign_in;
 
 import android.os.Bundle;
 
@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.TabPagerAdapter;
 import com.example.codeacademyapp.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;

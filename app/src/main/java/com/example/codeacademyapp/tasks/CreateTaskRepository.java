@@ -1,8 +1,8 @@
-package com.example.codeacademyapp.tasks.repository;
+package com.example.codeacademyapp.tasks;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.codeacademyapp.tasks.model.Task;
+import com.example.codeacademyapp.model.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

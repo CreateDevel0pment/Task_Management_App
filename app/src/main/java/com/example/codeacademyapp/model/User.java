@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.users.model;
+package com.example.codeacademyapp.model;
 
 import com.google.firebase.database.Exclude;
 

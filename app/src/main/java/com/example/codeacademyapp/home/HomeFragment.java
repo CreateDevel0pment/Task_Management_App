@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.home;
+package com.example.codeacademyapp.home;
 
 
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.BaseFragment;
+import com.example.codeacademyapp.sign_in.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
