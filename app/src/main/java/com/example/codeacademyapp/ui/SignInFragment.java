@@ -87,40 +87,8 @@ public class SignInFragment extends Fragment {
             }
         });
 
-
-
-        //        if (mail_et.getText().toString().equals("")&&password_et.getText().toString().equals("")){
-//            log_in_btn.setClickable(false);
-//            log_in_btn.setHintTextColor(getResources().getColor(R.color.low_white));
-//        }
-//
-//        if (!mail_et.getText().toString().equals("")&&!password_et.getText().toString().equals("")){
-//            log_in_btn.setClickable(true);
-//            log_in_btn.setHintTextColor(getResources().getColor(R.color.white));
-//        }
-
         return view;
     }
-
-
-//    private void createNewUser(User authenticatedUser) {
-//        userViewModel.createUser(authenticatedUser);
-//        userViewModel.createUserLiveData.observe(this, new Observer<User>() {
-//            @Override
-//            public void onChanged(User user) {
-//
-//                if (user.isCreated) {
-//                    toastMessage(user.name);
-//                }
-//                goToMainActivity(user);
-//            }
-//        });
-//    }
-
-//    private void toastMessage(String name, String messsage) {
-//        Toast.makeText(getContext(),"Hi " + name + "!\n" + messsage, Toast.LENGTH_LONG).show();
-//
-//    }
 
     private void toastMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

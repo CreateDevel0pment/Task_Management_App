@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.StartActivity;
 import com.example.codeacademyapp.users.model.User;
 import com.example.codeacademyapp.users.repository.UserViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -192,69 +194,11 @@ public class SignUpFragment extends Fragment {
                     public void onChanged(User user) {
 
                         if(user.isCreated){
-
-                            toastMessage("Welcome" + user.getName());
+                            toastMessage("Welcome");
+                            goToMainActivity(user);
                         }
                     }
                 });
-//
-
-
-
-//                String email = mail_et.getText().toString();
-//                String password = password_et.getText().toString();
-//
-//                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-//
-//                    Toast.makeText(getContext(), "Please fill all the fields",
-//                            Toast.LENGTH_SHORT).show();
-//                } else {
-//
-//                    mAuth.createUserWithEmailAndPassword(email, password)
-//                            .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<AuthResult> task) {
-//
-//                                            if (task.isSuccessful()) {
-//
-//                                                Toast.makeText(getContext(),
-//                                                        "Successful Registered",
-//                                                        Toast.LENGTH_SHORT).show();
-//
-//                                                startActivity(new Intent(getContext(), SignUpActivity.class));
-//                                            } else {
-//
-//                                                Toast.makeText(getContext(),
-//                                                        "User name may already exist", Toast.LENGTH_LONG).show();
-//                                            }
-//                                        }
-//                                    });
-//
-//                    password_et.setText("");
-//                }
-//
-//
-//                Log.d(TAG, "onClick: Attempting to add object to database.");
-//
-//                String name=name_et.getText().toString();
-//                String surename=surename_et.getText().toString();
-//
-//                if(!name.equals("") || !surename.equals("")){
-//
-//                    FirebaseUser user = mAuth.getCurrentUser();
-//                    String userID = user.getUid();
-//
-//                    myRef.child(userID).child("Profile Information").child("Name").setValue(name);
-//                    myRef.child(userID).child("Profile Information").child("Surname").setValue(surename);
-//                    myRef.child(userID).child("Profile Information").child("Group").setValue(group_string);
-//                    myRef.child(userID).child("Profile Information").child("Position").setValue(role_string);
-//
-//                    toastMessage("Added new person to database");
-//
-//                    //reset the text
-//                    name_et.setText("");
-//                    surename_et.setText("");
-//                }
             }
 
         });
@@ -264,5 +208,13 @@ public class SignUpFragment extends Fragment {
     private void toastMessage(String message){
 
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+    }
+
+    private void goToMainActivity(User user) {
+        Intent intent = new Intent(getContext(), StartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent.putExtra(USER, user.getName());
+        startActivity(intent);
+//        finish();
     }
 }
