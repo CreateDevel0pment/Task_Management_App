@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.sign_in;
+package com.example.codeacademyapp.ui;
 
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;

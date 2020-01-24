@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.group;
+package com.example.codeacademyapp.ui.group;
 
 
 import android.os.Bundle;
@@ -11,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.sign_in.BaseFragment;
-import com.example.codeacademyapp.tasks.AddNewTaskFragment;
+import com.example.codeacademyapp.ui.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**

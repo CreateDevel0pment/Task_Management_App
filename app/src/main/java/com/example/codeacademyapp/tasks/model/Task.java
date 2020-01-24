@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.model;
+package com.example.codeacademyapp.tasks.model;
 
 import com.google.firebase.database.Exclude;
 

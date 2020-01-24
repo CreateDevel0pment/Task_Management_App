@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.sign_in;
+package com.example.codeacademyapp.ui;
 
 
 import android.content.Intent;
@@ -18,7 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.StartActivity;
-import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.users.model.User;
+import com.example.codeacademyapp.users.repository.UserViewModel;
 
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 

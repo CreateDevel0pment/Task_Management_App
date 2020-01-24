@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.sign_in;
+package com.example.codeacademyapp.ui;
 
 
 import android.content.Intent;
@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +24,8 @@ import android.widget.Toast;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.StartActivity;
-import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.users.model.User;
+import com.example.codeacademyapp.users.repository.UserViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

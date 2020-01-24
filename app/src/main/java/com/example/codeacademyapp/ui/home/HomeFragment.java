@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.wall;
+package com.example.codeacademyapp.ui.home;
 
 
 import android.os.Bundle;
@@ -10,20 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.sign_in.BaseFragment;
+import com.example.codeacademyapp.ui.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AcademyWallFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
+
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_academy_wall, container, false);
-        setTitle(R.string.academy_wall);
+        View view=inflater.inflate(R.layout.fragment_home, container, false);
+        setTitle(R.string.home);
 
         return view;
     }
+
 }

@@ -1,8 +1,8 @@
-package com.example.codeacademyapp.sign_in.repository;
+package com.example.codeacademyapp.users.repository;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.codeacademyapp.model.User;
+import com.example.codeacademyapp.users.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -20,9 +20,11 @@ public class SignUpRepository {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+
     }
 
     public MutableLiveData<User> signUpNewUser(User user) {
+
 
         if (user != null) {
             mAuth.createUserWithEmailAndPassword(user.geteMail(), user.getPassword());

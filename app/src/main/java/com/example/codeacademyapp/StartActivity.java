@@ -12,12 +12,14 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.codeacademyapp.sign_in.SignUpActivity;
-import com.example.codeacademyapp.wall.AcademyWallFragment;
-import com.example.codeacademyapp.group.GroupFragment;
-import com.example.codeacademyapp.home.HomeFragment;
+import com.example.codeacademyapp.ui.academy_wall.AcademyWallFragment;
+import com.example.codeacademyapp.ui.group.GroupFragment;
+import com.example.codeacademyapp.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,6 +27,7 @@ import static com.example.codeacademyapp.utils.Constants.USER;
 
 public class StartActivity extends AppCompatActivity {
 
+    TextView log_out_view;
     private FirebaseAuth auth;
     BottomNavigationView bottomNav;
     Toolbar toolbar;
@@ -37,9 +40,9 @@ public class StartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        Intent intent=getIntent();
-        String name = intent.getStringExtra(USER);
-        Toast toast=Toast.makeText(this,"WELCOME" + "\n" + name,Toast.LENGTH_LONG);
+//        Intent intent=getIntent();
+//        String name = intent.getStringExtra(USER);
+        Toast toast=Toast.makeText(this,"WELCOME",Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
 
