@@ -7,10 +7,7 @@
     android:layout_margin="8dp"
     android:gravity="top"
     android:orientation="vertical"
-    tools:context=".ui.group.AddNewTaskFragment">
-
-
-
+    tools:context=".tasks.AddNewTaskFragment">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -41,9 +38,11 @@
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
+                android:gravity="top|left"
                 android:id="@+id/task_desc"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:minLines="8"
                 android:hint="Describe the task.."
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray" />
@@ -108,6 +107,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <com.google.android.material.button.MaterialButton
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Assign to.."
+                    android:textAllCaps="false"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
               <androidx.appcompat.widget.AppCompatCheckBox
                   android:layout_width="0dp"
                   android:layout_height="wrap_content"
@@ -121,18 +134,6 @@
                   android:buttonTint="@color/colorPrimaryDark"
                   />
 
-                <com.google.android.material.button.MaterialButton
-                    android:backgroundTint="@color/white"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text="Assign to.."
-                    android:textAllCaps="false"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                   />
 
 
             </LinearLayout>
@@ -147,7 +148,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="30dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/green"
             android:hint="Create Task"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
