@@ -11,6 +11,7 @@
     android:background="@color/colorPrimary"
     tools:context=".SignUpActivity">
 
+
     <androidx.viewpager.widget.ViewPager
         android:layout_gravity="center"
         android:layout_weight="2"
@@ -32,7 +33,13 @@
         android:layout_height="10dp"
         android:layout_above="@+id/scannerbtn"
         />
-
+<!--    -->
+<!--    <ImageView-->
+<!--        android:layout_weight="1.5"-->
+<!--        android:layout_margin="30dp"-->
+<!--        android:src="@drawable/comunicate"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="0dp"/>-->
 
     <androidx.cardview.widget.CardView
         android:elevation="30dp"
@@ -59,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"
-                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorColor="@color/colorPrimaryDark"
                 android:id="@+id/tab_layout"/>
 
             <androidx.viewpager.widget.ViewPager
@@ -72,5 +79,10 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+        
     </androidx.cardview.widget.CardView>
+
+
+
 </LinearLayout>

@@ -4,7 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="academy_wall">Academy Wall</string>
-    <string name="home_fragment_title">Home</string>
+    <string name="home">Home</string>
+    <string name="my_group">My Group</string>
 
     <string-array name="Group">
         <item>Choose Group - </item>
