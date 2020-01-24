@@ -61,8 +61,7 @@ public class SignInFragment extends Fragment {
                     @Override
                     public void onChanged(User user) {
 
-                        if (user.isNew) {
-//                            createNewUser(user);
+                        if (!user.isNew) {
                             toastMessage("Please SignUp!");
                         } else {
                             goToMainActivity(user);

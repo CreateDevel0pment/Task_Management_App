@@ -10,6 +10,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static com.example.codeacademyapp.utils.HeplerError.logErrorMessage;
+
 public class SigInRepository {
 
     private MutableLiveData<User> userInformations;
@@ -40,7 +42,7 @@ public class SigInRepository {
                         }
 
                     } else {
-                            //TODO ERROR
+                        logErrorMessage("Please Sig Up!");
                     }
                 }
             });
