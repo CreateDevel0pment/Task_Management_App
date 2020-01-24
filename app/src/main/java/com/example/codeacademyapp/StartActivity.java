@@ -2,6 +2,7 @@ package com.example.codeacademyapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,11 +27,15 @@ public class StartActivity extends AppCompatActivity {
     TextView log_out_view;
     private FirebaseAuth auth;
     BottomNavigationView bottomNav;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        toolbar= findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         Intent intent=getIntent();
 //        String name = intent.getStringExtra(USER);

@@ -3,7 +3,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home_ic"
-        android:title="Home" />
+        android:title="@string/home" />
     <item
         android:id="@+id/academy_wall"
         android:icon="@drawable/group_people_ic"
@@ -11,6 +11,6 @@
     <item
         android:id="@+id/group"
         android:icon="@drawable/group_chat"
-        android:title="My Group" />
+        android:title="@string/my_group" />
 
 </menu>

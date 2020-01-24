@@ -4,16 +4,15 @@ import com.google.firebase.database.Exclude;
 
 public class Task {
 
-    String name;
-    String description;
-    String note;
-    int state;
-    int importance;
-    String start_date;
-    String due_date;
-    String user_Id;
-    String id;
-
+    private String name;
+    private String description;
+    private String note;
+    private int state;
+    private int importance;
+    private String start_date;
+    private String due_date;
+    private String user_Id;
+    private String id;
 
     @Exclude
     public boolean isNew,isCreated;

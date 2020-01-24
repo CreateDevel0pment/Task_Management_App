@@ -11,12 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.ui.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupFragment extends Fragment {
+public class GroupFragment extends BaseFragment {
 
 
     public GroupFragment() {
@@ -29,6 +30,7 @@ public class GroupFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group, container, false);
+        setTitle(R.string.my_group);
 
         FloatingActionButton addNewTaskButton = rootView.findViewById(R.id.add_new_task_floating_btn);
         addNewTaskButton.setOnClickListener(new View.OnClickListener() {

@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"
-                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorColor="@color/colorPrimaryDark"
                 android:id="@+id/tab_layout"/>
 
             <androidx.viewpager.widget.ViewPager
@@ -80,8 +80,7 @@
 
         </LinearLayout>
 
-
-
+        
     </androidx.cardview.widget.CardView>
 
 
