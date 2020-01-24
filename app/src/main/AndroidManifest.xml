@@ -14,7 +14,7 @@
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".StartActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".spalsh.SplashActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

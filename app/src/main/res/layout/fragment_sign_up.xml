@@ -155,6 +155,7 @@
             android:layout_marginEnd="25dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/sign_up_btn"
+            android:enabled="false"
             android:hint="Sign Up"
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"/>

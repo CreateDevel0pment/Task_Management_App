@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,13 +66,17 @@ public class SignUpFragment extends Fragment {
         userViewModel= ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
 
         name_et=view.findViewById(R.id.person_name);
+        name_et.addTextChangedListener(loginTextWatcher);
         setFocus(name_et);
         surename_et=view.findViewById(R.id.person_sure_name);
+        surename_et.addTextChangedListener(loginTextWatcher);
         setFocus(surename_et);
         sign_up_btn=view.findViewById(R.id.sign_up_btn);
         mail_et=view.findViewById(R.id.person_email);
+        mail_et.addTextChangedListener(loginTextWatcher);
         setFocus(mail_et);
         password_et=view.findViewById(R.id.person_password);
+        password_et.addTextChangedListener(loginTextWatcher);
         setFocus(password_et);
 
         position_spiner=view.findViewById(R.id.spinner_role);
@@ -81,12 +88,19 @@ public class SignUpFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position_spiner.getSelectedItem().equals("HR")){
                     role_string="HR";
+                    sign_up_btn.setEnabled(true);
+
                 }
                 else if(position_spiner.getSelectedItem().equals("Tutor")){
                     role_string="Tutor";
+                    sign_up_btn.setEnabled(true);
+
                 }
                 else if(position_spiner.getSelectedItem().equals("Student")){
                     role_string="Student";
+                    sign_up_btn.setEnabled(true);
+
+                }else {
                 }
             }
 
@@ -101,12 +115,19 @@ public class SignUpFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(group_spiner.getSelectedItem().equals("Android")){
                     group_string="Android";
+                    sign_up_btn.setEnabled(true);
+
                 }
                 else if(group_spiner.getSelectedItem().equals("Web Development")){
                     group_string="Web Development";
+                    sign_up_btn.setEnabled(true);
+
                 }
                 else if(group_spiner.getSelectedItem().equals("Ruby on rails")){
                     group_string="Ruby on rails";
+                    sign_up_btn.setEnabled(true);
+
+                }else {
                 }
             }
 
@@ -200,11 +221,33 @@ public class SignUpFragment extends Fragment {
                     }
                 });
             }
-
         });
 
         return view;
     }
+
+
+    private TextWatcher loginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String mailInput = mail_et.getText().toString().trim();
+            String nameInput = name_et.getText().toString().trim();
+            String passInput = password_et.getText().toString().trim();
+            String surNameInput = surename_et.getText().toString().trim();
+
+            sign_up_btn.setEnabled(!mailInput.isEmpty() && !nameInput.isEmpty()
+                                    && !passInput.isEmpty() && !surNameInput.isEmpty());
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
     private void toastMessage(String message){
 
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();

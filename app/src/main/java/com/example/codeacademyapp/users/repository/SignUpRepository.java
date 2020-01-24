@@ -49,6 +49,9 @@ public class SignUpRepository {
                             .child("Role")
                             .setValue(user.getRole_spinner());
                 }
+            }else {
+
+                setUserInformation.setValue(null);
             }
         }
         return setUserInformation;

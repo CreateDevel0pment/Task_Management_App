@@ -1,4 +1,4 @@
-package com.example.codeacademyapp;
+package com.example.codeacademyapp.spalsh;
 
 import android.os.Handler;
 

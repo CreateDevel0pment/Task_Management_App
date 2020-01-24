@@ -1,4 +1,4 @@
-package com.example.codeacademyapp;
+package com.example.codeacademyapp.spalsh;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.SignUpActivity;
+import com.example.codeacademyapp.StartActivity;
 import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.codeacademyapp.utils.Constants.USER;
