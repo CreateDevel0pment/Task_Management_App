@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.codeacademyapp.users.model.User;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.codeacademyapp.utils.Constants.USER;
@@ -33,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (firebaseUser != null) {
                     goToStartActivity();
                 } else {
-                    goToSugnUpActivity();
+                    goToSignUpActivity();
                 }
             }
         });
@@ -46,14 +44,15 @@ public class SplashActivity extends AppCompatActivity {
 //            }
 //        });
     }
-
-    private void goToSugnUpActivity() {
+    private void goToSignUpActivity() {
         Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     private void goToStartActivity() {
         Intent intent = new Intent(SplashActivity.this, StartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(USER,name);
         startActivity(intent);
     }
