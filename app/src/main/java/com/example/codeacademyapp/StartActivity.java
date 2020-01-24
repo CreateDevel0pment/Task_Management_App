@@ -9,8 +9,11 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,21 +40,13 @@ public class StartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        Intent intent=getIntent();
+//        Intent intent=getIntent();
 //        String name = intent.getStringExtra(USER);
         Toast toast=Toast.makeText(this,"WELCOME",Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
 
         auth=FirebaseAuth.getInstance();
-
-        log_out_view=findViewById(R.id.log_out_view);
-        log_out_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               signOut();
-            }
-        });
 
         bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,6 +66,7 @@ public class StartActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         bottomNav.setSelectedItemId(R.id.home);
     }
 
@@ -86,4 +82,23 @@ public class StartActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        new MenuInflater(this).inflate(R.menu.start_activity_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.log_out_btn:
+                signOut();
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
