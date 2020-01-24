@@ -35,20 +35,16 @@ public class SignUpRepository {
                 if (userFb != null) {
                     userID = userFb.getUid();
 
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID)
                             .child("Name")
                             .setValue(user.getName());
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID)
                             .child("Surname")
                             .setValue(user.getSurname());
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID)
                             .child("Group")
                             .setValue(user.getGroup_spinner());
-                    myRef.child(userID).child("Profile Information")
-                            .child("User")
+                    myRef.child("Users").child(userID)
                             .child("Role")
                             .setValue(user.getRole_spinner());
                 }
