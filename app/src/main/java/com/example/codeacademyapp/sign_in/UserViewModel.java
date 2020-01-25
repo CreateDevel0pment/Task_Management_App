@@ -9,15 +9,12 @@ import androidx.lifecycle.LiveData;
 import com.example.codeacademyapp.model.User;
 import com.example.codeacademyapp.sign_in.repository.SigInRepository;
 import com.example.codeacademyapp.sign_in.repository.SignUpRepository;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UserViewModel extends AndroidViewModel {
 
     private SigInRepository signInRepository;
-    private LiveData<User> authenticatedUserLiveData;
-
     private SignUpRepository signUpRepository;
-    private LiveData<User> signUpNewUserLiveData;
-
 
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -26,23 +23,17 @@ public class UserViewModel extends AndroidViewModel {
         signUpRepository = new SignUpRepository();
     }
 
-    public void signUpNewUser(User user) {
-        signUpNewUserLiveData = signUpRepository.signUpNewUser(user);
+    public LiveData<User> signUpNewUser(User user) {
+        return signUpRepository.signUpNewUser(user);
     }
 
     public void forgotPassword(String email) {
         signInRepository.forgotPassword(email);
     }
 
-    public void signInNewUser(String mail, String password) {
-        authenticatedUserLiveData = signInRepository.authUserInformation(mail, password);
+    public LiveData<FirebaseUser> signInNewUser(String mail, String password) {
+        return signInRepository.authUserInformation(mail, password);
     }
 
-    public LiveData<User> getAuthenticatedUserLiveData() {
-        return authenticatedUserLiveData;
-    }
-
-    public LiveData<User> getSignUpNewUserLiveData() {
-        return signUpNewUserLiveData;
-    }
 }
+

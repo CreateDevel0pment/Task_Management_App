@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.StartActivity;
 import com.example.codeacademyapp.model.User;
+import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
@@ -35,6 +37,7 @@ public class SignInFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
+
         //TODO splash
         userViewModel = ViewModelProviders.of(SignInFragment.this).get(UserViewModel.class);
 
@@ -56,16 +59,14 @@ public class SignInFragment extends Fragment {
                 user.seteMail(mail);
                 user.setPassword(password);
 
-                userViewModel.signInNewUser(mail, password);
-                userViewModel.getAuthenticatedUserLiveData().observe(SignInFragment.this, new Observer<User>() {
+                userViewModel.signInNewUser(mail, password).observe(SignInFragment.this, new Observer<FirebaseUser>() {
                     @Override
-                    public void onChanged(User user) {
+                    public void onChanged(FirebaseUser firebaseUser) {
 
-                        if (user.isNew) {
-//                            createNewUser(user);
-                            toastMessage("Please SignUp!");
+                        if (firebaseUser != null) {
+                            goToMainActivity();
                         } else {
-                            goToMainActivity(user);
+                            toastMessage("Please Sign Up");
                         }
                     }
                 });
@@ -93,11 +94,9 @@ public class SignInFragment extends Fragment {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void goToMainActivity(User user) {
+    private void goToMainActivity() {
         Intent intent = new Intent(getContext(), StartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        intent.putExtra(USER, user.getName());
         startActivity(intent);
-//        finish();
     }
 }

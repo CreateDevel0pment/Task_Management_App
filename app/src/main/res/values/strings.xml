@@ -6,6 +6,10 @@
     <string name="academy_wall">Academy Wall</string>
     <string name="home">Home</string>
     <string name="my_group">My Group</string>
+    <string name="find_friends">Find Friends</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log out</string>
+    <string name="username">username</string>
 
     <string-array name="Group">
         <item>Choose Group - </item>

@@ -1,11 +1,5 @@
 package com.example.codeacademyapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,10 +8,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.codeacademyapp.sign_in.SignUpActivity;
-import com.example.codeacademyapp.wall.AcademyWallFragment;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.codeacademyapp.group.GroupFragment;
 import com.example.codeacademyapp.home.HomeFragment;
+import com.example.codeacademyapp.settings.SettingsActivity;
+import com.example.codeacademyapp.sign_in.SignUpActivity;
+import com.example.codeacademyapp.wall.AcademyWallFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,17 +34,18 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        toolbar= findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        Intent intent=getIntent();
+        Intent intent = getIntent();
         String name = intent.getStringExtra(USER);
-        Toast toast=Toast.makeText(this,"WELCOME" + "\n" + name,Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER,0,0);
-        toast.show();
+        if (name != null) {
+            toastMessage("Welcome " + name);
+        } else {
+            toastMessage("Welcome");
+        }
 
-        auth=FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -72,17 +74,17 @@ public class StartActivity extends AppCompatActivity {
         manager.beginTransaction().replace(R.id.main_container, fragment).commit();
     }
 
-    private void signOut(){
+    private void logOut() {
         auth.signOut();
         finish();
-        Intent intent=new Intent(StartActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(StartActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        new MenuInflater(this).inflate(R.menu.start_activity_menu,menu);
+        new MenuInflater(this).inflate(R.menu.start_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -90,12 +92,33 @@ public class StartActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.log_out_btn:
-                signOut();
+                logOut();
+            case R.id.find_friends_options:
+                break;
+            case R.id.settings_options:
+                goToActivityMenu();
+                break;
+
+                default:
+                    return false;
+
 
         }
-        return super.onOptionsItemSelected(item);
+        return true;
+    }
+
+    private void toastMessage(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    private void goToActivityMenu (){
+
+        Intent intent=new Intent(StartActivity.this, SettingsActivity.class);
+        startActivity(intent);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.group;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +10,12 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.new_tasks.NewTaskActivity;
 import com.example.codeacademyapp.sign_in.BaseFragment;
-import com.example.codeacademyapp.tasks.AddNewTaskFragment;
+import com.example.codeacademyapp.add_tasks.AddNewTaskFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -20,10 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 public class GroupFragment extends BaseFragment {
 
-
-    public GroupFragment() {
-        // Required empty public constructor
-    }
+    Button new_task_btn;
 
 
     @Override
@@ -32,6 +32,14 @@ public class GroupFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_group, container, false);
         setTitle(R.string.my_group);
+        new_task_btn=rootView.findViewById(R.id.new_task_button);
+        new_task_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                newTaskActivity();
+            }
+        });
 
         FloatingActionButton addNewTaskButton = rootView.findViewById(R.id.add_new_task_floating_btn);
         addNewTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -49,4 +57,8 @@ public class GroupFragment extends BaseFragment {
 
     }
 
+    private void newTaskActivity() {
+        Intent intent= new Intent(getContext(), NewTaskActivity.class);
+        startActivity(intent);
+    }
 }

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.codeacademyapp.utils.Constants.USER;
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
 /**
@@ -59,7 +61,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_sign_up, container, false);
+        final View view=inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         userViewModel= ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
 
@@ -207,13 +209,11 @@ public class SignUpFragment extends Fragment {
                 user.setGroup_spinner(group_string);
                 user.setRole_spinner(role_string);
 
-                userViewModel.signUpNewUser(user);
-                userViewModel.getSignUpNewUserLiveData().observe(SignUpFragment.this, new Observer<User>() {
+                userViewModel.signUpNewUser(user).observe(SignUpFragment.this, new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
 
-                        if(user.isCreated){
-                            toastMessage("Welcome");
+                        if (user.isNew){
                             goToMainActivity(user);
                         }
                     }
@@ -254,7 +254,7 @@ public class SignUpFragment extends Fragment {
     private void goToMainActivity(User user) {
         Intent intent = new Intent(getContext(), StartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        intent.putExtra(USER, user.getName());
+        intent.putExtra(USER, user.getName());
         startActivity(intent);
 //        finish();
     }

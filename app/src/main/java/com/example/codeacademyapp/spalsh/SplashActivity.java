@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onChanged(FirebaseUser firebaseUser) {
 
                 if (firebaseUser != null) {
-                    goToStartActivity(firebaseUser.getEmail());
+                    goToStartActivity(firebaseUser.getDisplayName());
                 } else {
                     goToSignUpActivity();
                 }
@@ -38,9 +38,14 @@ public class SplashActivity extends AppCompatActivity {
         });
 
     }
+
+    private void VerifyUserExistance() {
+    }
+
     private void goToSignUpActivity() {
         Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("SIGNUP","signUp");
         startActivity(intent);
     }
 

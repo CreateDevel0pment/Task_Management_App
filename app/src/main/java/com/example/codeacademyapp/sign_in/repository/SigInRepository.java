@@ -12,15 +12,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SigInRepository {
 
-    private MutableLiveData<User> userInformations;
-    private FirebaseAuth firebaseAuth;
+    private MutableLiveData<FirebaseUser> userInformationsMutableLiveData;
+    private FirebaseAuth firebaseAuth= FirebaseAuth.getInstance();
 
-    public SigInRepository() {
-        firebaseAuth = FirebaseAuth.getInstance();
-        userInformations = new MutableLiveData<>();
-    }
-
-    public MutableLiveData<User> authUserInformation(String email, String password) {
+    public MutableLiveData<FirebaseUser> authUserInformation(String email, String password) {
+        userInformationsMutableLiveData = new MutableLiveData<>();
 
         if (!email.equals("") && !password.equals("")) {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -36,7 +32,7 @@ public class SigInRepository {
                             String email = firebaseUser.getEmail();
                             User user = new User(uid, name, email);
                             user.isNew = isNewUser;
-                            userInformations.setValue(user);
+                            userInformationsMutableLiveData.setValue(firebaseUser);
                         }
 
                     } else {
@@ -44,7 +40,7 @@ public class SigInRepository {
                 }
             });
         }
-        return userInformations;
+        return userInformationsMutableLiveData;
     }
 
     public void forgotPassword(String email) {

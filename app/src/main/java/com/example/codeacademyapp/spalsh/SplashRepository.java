@@ -24,6 +24,7 @@ public class SplashRepository {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 isUserAuthenticateInFirebaseMutableLiveData.setValue(firebaseUser);
             }
         }, 1500);

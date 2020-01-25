@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.tasks;
+package com.example.codeacademyapp.add_tasks;
 
 import android.app.Application;
 
@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.codeacademyapp.model.Task;
-import com.example.codeacademyapp.tasks.CreateTaskRepository;
 
 public class TaskViewModel extends AndroidViewModel {
 

@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.sign_in;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -12,6 +13,8 @@ import com.example.codeacademyapp.adapters.TabPagerAdapter;
 import com.example.codeacademyapp.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.viewpagerindicator.CirclePageIndicator;
+
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -54,5 +57,10 @@ public class SignUpActivity extends AppCompatActivity {
         CirclePageIndicator mIndicator = findViewById(R.id.page_indicator);
         viewPagerImages.setAdapter(pagerAdapter);
         mIndicator.setViewPager(viewPagerImages);
+
+        if(Objects.equals(getIntent().getStringExtra("SIGNUP"), "signUp")){
+            viewPager.setCurrentItem(1);
+            tabLayout.setupWithViewPager(viewPager);
+        }
     }
 }
