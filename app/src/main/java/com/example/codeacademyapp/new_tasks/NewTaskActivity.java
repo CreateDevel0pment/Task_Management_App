@@ -15,7 +15,6 @@ import com.google.android.material.tabs.TabLayout;
 public class NewTaskActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
-    ViewPagerAdapter viewPagerAdapter;
     ViewPager viewPager;
 
     @Override
