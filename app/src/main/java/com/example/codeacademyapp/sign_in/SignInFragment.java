@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui;
+package com.example.codeacademyapp.sign_in;
 
 
 import android.content.Intent;
@@ -18,8 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.StartActivity;
-import com.example.codeacademyapp.users.model.User;
-import com.example.codeacademyapp.users.repository.UserViewModel;
+import com.example.codeacademyapp.model.User;
 
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
@@ -62,7 +61,8 @@ public class SignInFragment extends Fragment {
                     @Override
                     public void onChanged(User user) {
 
-                        if (!user.isNew) {
+                        if (user.isNew) {
+//                            createNewUser(user);
                             toastMessage("Please SignUp!");
                         } else {
                             goToMainActivity(user);

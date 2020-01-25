@@ -1,16 +1,14 @@
-package com.example.codeacademyapp.users.repository;
+package com.example.codeacademyapp.sign_in.repository;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.codeacademyapp.users.model.User;
+import com.example.codeacademyapp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static com.example.codeacademyapp.utils.HeplerError.logErrorMessage;
 
 public class SigInRepository {
 
@@ -42,7 +40,7 @@ public class SigInRepository {
                         }
 
                     } else {
-                        logErrorMessage("Please Sig Up!");
+                            //TODO ERROR
                     }
                 }
             });

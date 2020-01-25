@@ -16,17 +16,17 @@ import com.example.codeacademyapp.R;
 public class ViewPagerAdapter extends PagerAdapter {
 
 
-    private int[] landing_images;
+    private int[] landing_sliki;
     private Context context;
 
     public ViewPagerAdapter(Context context, int[] landing_slika) {
-        this.landing_images = landing_slika;
+        this.landing_sliki = landing_slika;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return landing_images.length;
+        return landing_sliki.length;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         View itemView = layoutInflater.inflate(R.layout.landing_img_item, container, false);
 
         ImageView landing_img = itemView.findViewById(R.id.landing_img);
-        landing_img.setImageResource(landing_images[position]);
+        landing_img.setImageResource(landing_sliki[position]);
         container.addView(itemView);
 
         return itemView;

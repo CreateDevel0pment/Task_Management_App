@@ -9,5 +9,4 @@ public class HeplerError {
     public static void logErrorMessage(String errorMessage) {
         Log.d(TAG, errorMessage);
     }
-
 }

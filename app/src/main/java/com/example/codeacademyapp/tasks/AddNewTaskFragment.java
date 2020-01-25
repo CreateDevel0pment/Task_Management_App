@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.group;
+package com.example.codeacademyapp.tasks;
 
 
 import android.os.Bundle;
@@ -15,8 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.tasks.model.Task;
-import com.example.codeacademyapp.tasks.viewmodel.TaskViewModel;
+import com.example.codeacademyapp.model.Task;
 
 /**
  * A simple {@link Fragment} subclass.
