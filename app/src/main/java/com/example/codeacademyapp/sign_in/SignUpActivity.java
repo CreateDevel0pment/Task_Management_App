@@ -43,8 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
-
         landing_pictures = new int[]{
                 R.drawable.comunicate_plava,
                 R.drawable.manage_plava,
