@@ -88,17 +88,17 @@ public class SignUpFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position_spiner.getSelectedItem().equals("HR")){
                     role_string="HR";
-                    sign_up_btn.setEnabled(true);
+//                    sign_up_btn.setEnabled(true);
 
                 }
                 else if(position_spiner.getSelectedItem().equals("Tutor")){
                     role_string="Tutor";
-                    sign_up_btn.setEnabled(true);
+//                    sign_up_btn.setEnabled(true);
 
                 }
                 else if(position_spiner.getSelectedItem().equals("Student")){
                     role_string="Student";
-                    sign_up_btn.setEnabled(true);
+//                    sign_up_btn.setEnabled(true);
 
                 }else {
                 }
@@ -115,17 +115,17 @@ public class SignUpFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(group_spiner.getSelectedItem().equals("Android")){
                     group_string="Android";
-                    sign_up_btn.setEnabled(true);
+//                    sign_up_btn.setEnabled(true);
 
                 }
                 else if(group_spiner.getSelectedItem().equals("Web Development")){
                     group_string="Web Development";
-                    sign_up_btn.setEnabled(true);
+//                    sign_up_btn.setEnabled(true);
 
                 }
                 else if(group_spiner.getSelectedItem().equals("Ruby on rails")){
                     group_string="Ruby on rails";
-                    sign_up_btn.setEnabled(true);
+//                    sign_up_btn.setEnabled(true);
 
                 }else {
                 }

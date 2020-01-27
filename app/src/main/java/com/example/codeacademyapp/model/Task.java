@@ -13,6 +13,7 @@ public class Task {
     private String due_date;
     private String user_Id;
     private String id;
+    private String group;
 
     @Exclude
     public boolean isNew,isCreated;
@@ -47,6 +48,14 @@ public class Task {
         this.importance = importance;
         this.due_date = due_date;
         this.user_Id = user_Id;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getName() {
