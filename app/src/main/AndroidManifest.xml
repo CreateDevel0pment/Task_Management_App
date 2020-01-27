@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".new_tasks.NewTaskActivity"></activity>
-        <activity android:name=".settings.SettingsActivity" />
         <activity
             android:name=".sign_in.SignUpActivity"
             android:windowSoftInputMode="stateHidden" />
