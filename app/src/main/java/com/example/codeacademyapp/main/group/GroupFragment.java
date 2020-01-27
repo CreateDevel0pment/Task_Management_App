@@ -8,23 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.GroupNameAdapter;
+import com.example.codeacademyapp.main.GroupChatViewModel;
 import com.example.codeacademyapp.main.group.add_tasks.AddNewTaskFragment;
 import com.example.codeacademyapp.main.group.new_tasks.NewTaskActivity;
 import com.example.codeacademyapp.sign_in.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +39,7 @@ public class GroupFragment extends BaseFragment {
     private ArrayList<String> list_of_chat_groups;
     private GroupNameAdapter adapter;
 
-    private DatabaseReference group_ref;
+    private GroupChatViewModel groupChatViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +56,7 @@ public class GroupFragment extends BaseFragment {
             }
         });
 
-        group_ref = FirebaseDatabase.getInstance().getReference().child("Groups");
+        groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
 
         initializingViews(rootView);
         retrieveAndDisplayGroups();
@@ -81,31 +79,27 @@ public class GroupFragment extends BaseFragment {
     private void initializingViews(View view) {
         new_task_btn = view.findViewById(R.id.new_task_button);
         list_of_chat_groups = new ArrayList<>();
-        adapter=new GroupNameAdapter(list_of_chat_groups, getFragmentManager());
+        adapter = new GroupNameAdapter(list_of_chat_groups, getFragmentManager());
         recyclerView = view.findViewById(R.id.list_chat_groups);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void retrieveAndDisplayGroups() {
 
-        group_ref.addValueEventListener(new ValueEventListener() {
+        groupChatViewModel.getGroupNames().observe(this, new Observer<Iterator<DataSnapshot>>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChanged(Iterator<DataSnapshot> dataSnapshotIterator) {
+                final Set<String> set = new HashSet<>();
 
-                Set<String> set = new HashSet<>();
-                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                while (dataSnapshotIterator.hasNext()) {
 
-                while ((iterator.hasNext())) {
-
-                    set.add(iterator.next().getKey());
+                    set.add(dataSnapshotIterator.next().getKey());
                 }
+
                 list_of_chat_groups.clear();
                 list_of_chat_groups.addAll(set);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
     }

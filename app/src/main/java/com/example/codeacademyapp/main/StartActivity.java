@@ -20,18 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.main.group.GroupFragment;
 import com.example.codeacademyapp.main.home.HomeFragment;
-import com.example.codeacademyapp.sign_in.SignUpActivity;
 import com.example.codeacademyapp.main.wall.AcademyWallFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.codeacademyapp.sign_in.SignUpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.codeacademyapp.utils.Constants.USER;
 
@@ -41,8 +38,7 @@ public class StartActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
     Toolbar toolbar;
 
-    private FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = rootRef.getReference();
+    GroupChatViewModel groupChatViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +56,7 @@ public class StartActivity extends AppCompatActivity {
         }
 
         auth = FirebaseAuth.getInstance();
+        groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
 
         bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,13 +64,13 @@ public class StartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.home:
-                        switchToFragment(new HomeFragment(),R.id.home_container);
+                        switchToFragment(new HomeFragment(), R.id.home_container);
                         break;
                     case R.id.academy_wall:
-                        switchToFragment(new AcademyWallFragment(),R.id.wall_container);
+                        switchToFragment(new AcademyWallFragment(), R.id.wall_container);
                         break;
                     case R.id.group:
-                        switchToFragment(new GroupFragment(),R.id.group_container);
+                        switchToFragment(new GroupFragment(), R.id.group_container);
                         break;
                 }
                 return false;
@@ -83,85 +80,61 @@ public class StartActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.home);
     }
 
-    private void requestNewGroup() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(StartActivity.this,R.style.AlertDialog);
-                builder.setTitle("Create Group");
-
-                final EditText groupNameField= new EditText(StartActivity.this);
-                groupNameField.setHint("group name");
-                groupNameField.setHintTextColor(Color.GRAY);
-                groupNameField.setTextColor(Color.BLACK);
-
-                builder.setView(groupNameField);
-
-                builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        String groupName = groupNameField.getText().toString();
-
-                        if(TextUtils.isEmpty(groupName)){
-                            Toast.makeText(StartActivity.this,"Enter Group Name", Toast.LENGTH_SHORT).show();
-                        }else {
-                            createNewGroup(groupName);
-                        }
-                    }
-                });
-                builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                builder.show();
-    }
-
-    //ovoj metod treba da ide vo Repo //TODO
-    private void createNewGroup(final String groupName) {
-
-        myRef.child("Groups").child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    toastMessage(groupName + " is created successfully");
-                }
-            }
-        });
-    }
-
     public void switchToFragment(Fragment fragment, int container) {
-        Fragment topFragment= getSupportFragmentManager().findFragmentById(container);
-
-        if (topFragment==fragment) {
-            fragment=new Fragment();
-
-            fragment=topFragment;
+        Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
+        if (topFragment == fragment) {
+            fragment = new Fragment();
+            fragment = topFragment;
         }
-
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(container, fragment)
                 .commit();
 
-        FrameLayout home=findViewById(R.id.home_container);
+        FrameLayout home = findViewById(R.id.home_container);
         home.setVisibility(View.GONE);
-        FrameLayout wall=findViewById(R.id.wall_container);
+        FrameLayout wall = findViewById(R.id.wall_container);
         wall.setVisibility(View.GONE);
-        FrameLayout group=findViewById(R.id.group_container);
+        FrameLayout group = findViewById(R.id.group_container);
         group.setVisibility(View.GONE);
         findViewById(container).setVisibility(View.VISIBLE);
     }
 
-    private void logOut() {
-        auth.signOut();
-        finish();
-        Intent intent = new Intent(StartActivity.this, SignUpActivity.class);
-        startActivity(intent);
+    private void requestNewGroup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this, R.style.AlertDialog);
+        builder.setTitle("Create Group");
+
+        final EditText groupNameField = new EditText(StartActivity.this);
+        groupNameField.setHint("group name");
+        groupNameField.setHintTextColor(Color.GRAY);
+        groupNameField.setTextColor(Color.BLACK);
+
+        builder.setView(groupNameField);
+
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String groupName = groupNameField.getText().toString();
+
+                if (TextUtils.isEmpty(groupName)) {
+                    Toast.makeText(StartActivity.this, "Enter Group Name", Toast.LENGTH_SHORT).show();
+                } else {
+                    groupChatViewModel.setGroupNameOnFirebase(groupName);
+                }
+            }
+        });
+        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         new MenuInflater(this).inflate(R.menu.start_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -178,21 +151,22 @@ public class StartActivity extends AppCompatActivity {
             case R.id.main_create_group:
                 requestNewGroup();
                 break;
-                default:
-                    return false;
+            default:
+                return false;
         }
         return true;
+    }
+
+    private void logOut() {
+        auth.signOut();
+        finish();
+        Intent intent = new Intent(StartActivity.this, SignUpActivity.class);
+        startActivity(intent);
     }
 
     private void toastMessage(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-    }
-
-    private void goToActivityMenu (){
-
-//        Intent intent=new Intent(StartActivity.this, SettingsActivity.class);
-//        startActivity(intent);
     }
 }
