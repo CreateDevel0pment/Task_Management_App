@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".new_tasks.PersonalTaskFragment">
+    tools:context=".main.group.new_tasks.PersonalTaskFragment">
 
     <TextView
         android:layout_width="match_parent"

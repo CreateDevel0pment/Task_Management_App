@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.add_tasks;
+package com.example.codeacademyapp.main.group.add_tasks;
 
 import android.app.Application;
 

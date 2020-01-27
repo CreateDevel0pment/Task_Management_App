@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.home;
+package com.example.codeacademyapp.main.group.new_tasks;
 
 
 import android.os.Bundle;
@@ -10,15 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.sign_in.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment {
+public class ViewAllTaskFragment extends Fragment {
 
 
-    public HomeFragment() {
+    public ViewAllTaskFragment() {
         // Required empty public constructor
     }
 
@@ -26,11 +25,8 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view=inflater.inflate(R.layout.fragment_home, container, false);
-        setTitle(R.string.home);
-
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_view_all_task, container, false);
     }
 
 }

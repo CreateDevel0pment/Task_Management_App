@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.group;
+package com.example.codeacademyapp.main.group;
 
 
 import android.content.Intent;
@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.GroupNameAdapter;
-import com.example.codeacademyapp.add_tasks.AddNewTaskFragment;
-import com.example.codeacademyapp.new_tasks.NewTaskActivity;
+import com.example.codeacademyapp.main.group.add_tasks.AddNewTaskFragment;
+import com.example.codeacademyapp.main.group.new_tasks.NewTaskActivity;
 import com.example.codeacademyapp.sign_in.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;

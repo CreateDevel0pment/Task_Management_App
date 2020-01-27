@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.new_tasks;
+package com.example.codeacademyapp.main.group.new_tasks;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -8,8 +8,6 @@ import android.os.Bundle;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
-import com.example.codeacademyapp.adapters.TabPagerAdapter;
-import com.example.codeacademyapp.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class NewTaskActivity extends AppCompatActivity {

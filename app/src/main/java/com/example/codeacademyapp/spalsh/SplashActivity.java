@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.sign_in.SignUpActivity;
-import com.example.codeacademyapp.StartActivity;
+import com.example.codeacademyapp.main.StartActivity;
 import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.codeacademyapp.utils.Constants.USER;

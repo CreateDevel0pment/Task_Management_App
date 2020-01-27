@@ -1,10 +1,8 @@
-package com.example.codeacademyapp.add_tasks;
+package com.example.codeacademyapp.main.group.add_tasks;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.codeacademyapp.model.Task;
-import com.example.codeacademyapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

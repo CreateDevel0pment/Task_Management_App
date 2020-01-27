@@ -12,15 +12,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.group.ChatFragment;
+import com.example.codeacademyapp.main.group.ChatFragment;
 
 import java.util.List;
 
 public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameAdapter.MyHoder> {
 
-    List<String> groupNameList;
-    FragmentManager fragmentManager;
-
+    private List<String> groupNameList;
+    private FragmentManager fragmentManager;
 
     public GroupNameAdapter(List<String> groupNameList, FragmentManager fragmentManager) {
         this.groupNameList = groupNameList;
@@ -32,7 +31,6 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameAdapter.MyHo
     public GroupNameAdapter.MyHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.group_name_item, parent, false);
-
         return new MyHoder(view);
     }
 
@@ -45,9 +43,9 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameAdapter.MyHo
             @Override
             public void onClick(View v) {
 
-                Fragment fragment= new ChatFragment();
-                Bundle bundle= new Bundle();
-                bundle.putString("TITLE",holder.textView.getText().toString());
+                Fragment fragment = new ChatFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("TITLE", holder.textView.getText().toString());
                 fragment.setArguments(bundle);
 
                 fragmentManager.beginTransaction()
@@ -63,7 +61,7 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameAdapter.MyHo
         return groupNameList.size();
     }
 
-    public class MyHoder extends RecyclerView.ViewHolder {
+    class MyHoder extends RecyclerView.ViewHolder {
 
         TextView textView;
 

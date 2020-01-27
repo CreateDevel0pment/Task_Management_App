@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.add_tasks;
+package com.example.codeacademyapp.main.group.add_tasks;
 
 
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.example.UserInformation;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.model.Task;
-import com.example.codeacademyapp.sign_in.SignUpFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

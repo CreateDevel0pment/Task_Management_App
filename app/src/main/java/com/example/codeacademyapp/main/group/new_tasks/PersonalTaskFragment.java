@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.new_tasks;
+package com.example.codeacademyapp.main.group.new_tasks;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.example.codeacademyapp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewAllTaskFragment extends Fragment {
+public class PersonalTaskFragment extends Fragment {
 
 
-    public ViewAllTaskFragment() {
+    public PersonalTaskFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class ViewAllTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_all_task, container, false);
+        return inflater.inflate(R.layout.fragment_personal_task, container, false);
     }
 
 }

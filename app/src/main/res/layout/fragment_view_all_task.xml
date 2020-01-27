@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".new_tasks.ViewAllTaskFragment">
+    tools:context=".main.group.new_tasks.ViewAllTaskFragment">
 
     <TextView
         android:layout_width="match_parent"

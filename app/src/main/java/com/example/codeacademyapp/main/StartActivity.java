@@ -1,4 +1,4 @@
-package com.example.codeacademyapp;
+package com.example.codeacademyapp.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,11 +21,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.codeacademyapp.group.GroupFragment;
-import com.example.codeacademyapp.home.HomeFragment;
-import com.example.codeacademyapp.sign_in.BaseFragment;
+import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.main.group.GroupFragment;
+import com.example.codeacademyapp.main.home.HomeFragment;
 import com.example.codeacademyapp.sign_in.SignUpActivity;
-import com.example.codeacademyapp.wall.AcademyWallFragment;
+import com.example.codeacademyapp.main.wall.AcademyWallFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -185,7 +185,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void toastMessage(String message) {
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

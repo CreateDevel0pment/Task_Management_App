@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.group;
+package com.example.codeacademyapp.main.group;
 
 
 import android.os.Bundle;
@@ -34,7 +34,8 @@ public class ChatFragment extends BaseFragment {
         View view=inflater.inflate(R.layout.fragment_chat, container, false);
 
         if(getArguments()!=null){
-            setTitle(getArguments().getString("TITLE"));
+            String nameOfTHeGroup=getArguments().getString("TITLE");
+            setTitle(nameOfTHeGroup + " Group");
         }
         initialisedFields(view);
 
@@ -46,4 +47,5 @@ public class ChatFragment extends BaseFragment {
         display_text_messages=view.findViewById(R.id.group_chat_display);
         scrollView=view.findViewById(R.id.scroll_view);
     }
+
 }
