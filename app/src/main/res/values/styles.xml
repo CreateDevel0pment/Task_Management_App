@@ -12,4 +12,10 @@
         <item name="materialCardViewStyle">@color/tabStyle</item>
 
     </style>
+
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog">
+
+
+
+    </style>
 </resources>

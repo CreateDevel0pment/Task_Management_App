@@ -23,8 +23,6 @@ public class AcademyWallFragment extends BaseFragment {
         View view=inflater.inflate(R.layout.fragment_academy_wall, container, false);
         setTitle(R.string.academy_wall);
 
-
-
         return view;
     }
 }

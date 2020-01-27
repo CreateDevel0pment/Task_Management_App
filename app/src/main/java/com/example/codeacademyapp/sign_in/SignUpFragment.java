@@ -45,10 +45,10 @@ public class SignUpFragment extends Fragment {
     private EditText mail_et, password_et;
     private Spinner position_spiner, group_spiner;
     private Button sign_up_btn;
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
+//    private FirebaseDatabase mFirebaseDatabase;
+//    private FirebaseAuth mAuth;
+//    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private DatabaseReference myRef;
 
     private String role_string;
     private String group_string;
@@ -137,65 +137,65 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-
-            @Override
-
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if (user != null) {
-
-                    // User is signed in
-
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-
-                    toastMessage("Successfully signed in with: " + user.getEmail());
-
-                } else {
-
-                    // User is signed out
-
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-
-                    toastMessage("Successfully signed out.");
-
-                }
-
-                // ...
-
-            }
-
-        };
-
-        // Read from the database
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                // This method is called once with the initial value and again
-
-                // whenever data at this location is updated.
-
-                Object value = dataSnapshot.getValue();
-
-                Log.d(TAG, "Value is: " + value);
-            }
-            @Override
-
-            public void onCancelled(DatabaseError error) {
-
-                // Failed to read value
-
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
+//        mAuth = FirebaseAuth.getInstance();
+//        mFirebaseDatabase = FirebaseDatabase.getInstance();
+//        myRef = mFirebaseDatabase.getReference();
+//
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//
+//            @Override
+//
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//
+//                if (user != null) {
+//
+//                    // User is signed in
+//
+//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+//
+//                    toastMessage("Successfully signed in with: " + user.getEmail());
+//
+//                } else {
+//
+//                    // User is signed out
+//
+//                    Log.d(TAG, "onAuthStateChanged:signed_out");
+//
+//                    toastMessage("Successfully signed out.");
+//
+//                }
+//
+//                // ...
+//
+//            }
+//
+//        };
+//
+//        // Read from the database
+//
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                // This method is called once with the initial value and again
+//
+//                // whenever data at this location is updated.
+//
+//                Object value = dataSnapshot.getValue();
+//
+//                Log.d(TAG, "Value is: " + value);
+//            }
+//            @Override
+//
+//            public void onCancelled(DatabaseError error) {
+//
+//                // Failed to read value
+//
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
 
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +215,8 @@ public class SignUpFragment extends Fragment {
 
                         if (user.isNew){
                             goToMainActivity(user);
+                        }else {
+                            toastMessage("User exist");
                         }
                     }
                 });
