@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.group;
+package com.example.codeacademyapp.adapters;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.group.ChatFragment;
 
 import java.util.List;
 
@@ -53,10 +54,8 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameAdapter.MyHo
                         .replace(R.id.group_container, fragment)
                         .addToBackStack(ChatFragment.TAG)
                         .commit();
-
             }
         });
-
     }
 
     @Override

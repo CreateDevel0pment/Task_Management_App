@@ -36,7 +36,6 @@ public class ChatFragment extends BaseFragment {
         if(getArguments()!=null){
             setTitle(getArguments().getString("TITLE"));
         }
-
         initialisedFields(view);
 
         return view;
@@ -47,5 +46,4 @@ public class ChatFragment extends BaseFragment {
         display_text_messages=view.findViewById(R.id.group_chat_display);
         scrollView=view.findViewById(R.id.scroll_view);
     }
-
 }

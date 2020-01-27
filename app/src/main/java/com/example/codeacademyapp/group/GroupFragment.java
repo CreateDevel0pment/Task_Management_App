@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.adapters.GroupNameAdapter;
 import com.example.codeacademyapp.add_tasks.AddNewTaskFragment;
 import com.example.codeacademyapp.new_tasks.NewTaskActivity;
 import com.example.codeacademyapp.sign_in.BaseFragment;
