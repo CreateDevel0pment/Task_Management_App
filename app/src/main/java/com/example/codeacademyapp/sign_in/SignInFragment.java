@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.main.GroupChatViewModel;
 import com.example.codeacademyapp.main.StartActivity;
 import com.example.codeacademyapp.model.User;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,7 +64,7 @@ public class SignInFragment extends Fragment {
                     public void onChanged(FirebaseUser firebaseUser) {
 
                         if (firebaseUser != null) {
-                            goToMainActivity();
+                            getReferencesForUserGroup();
                         } else {
                             toastMessage("Please Sign Up");
                         }
@@ -89,13 +90,26 @@ public class SignInFragment extends Fragment {
         return view;
     }
 
+    public void getReferencesForUserGroup() {
+
+        GroupChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        groupChatViewModel.getReferencesForUsersGroup().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                goToStartActivity(s);
+            }
+        });
+    }
+
     private void toastMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void goToMainActivity() {
+    private void goToStartActivity(String userGroup) {
         Intent intent = new Intent(getContext(), StartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("TITLE", userGroup);
         startActivity(intent);
     }
 }

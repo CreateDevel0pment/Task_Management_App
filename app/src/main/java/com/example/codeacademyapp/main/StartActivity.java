@@ -1,21 +1,16 @@
 package com.example.codeacademyapp.main;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -49,11 +44,13 @@ public class StartActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra(USER);
+        final String title = intent.getStringExtra("TITLE");
         if (name != null) {
             toastMessage("Welcome " + name);
         } else {
             toastMessage("Welcome");
         }
+
 
         auth = FirebaseAuth.getInstance();
         groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
@@ -70,7 +67,18 @@ public class StartActivity extends AppCompatActivity {
                         switchToFragment(new AcademyWallFragment(), R.id.wall_container);
                         break;
                     case R.id.group:
-                        switchToFragment(new GroupFragment(), R.id.group_container);
+
+                        if (title != null) {
+
+                            Fragment fragment=new GroupFragment();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("TITLE", title);
+                            fragment.setArguments(bundle);
+
+                            switchToFragment(fragment, R.id.group_container);
+                        }
+
                         break;
                 }
                 return false;
@@ -84,7 +92,7 @@ public class StartActivity extends AppCompatActivity {
         Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
         if (topFragment == fragment) {
             fragment = new Fragment();
-            fragment = topFragment;
+//            fragment = topFragment;
         }
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -98,39 +106,6 @@ public class StartActivity extends AppCompatActivity {
         FrameLayout group = findViewById(R.id.group_container);
         group.setVisibility(View.GONE);
         findViewById(container).setVisibility(View.VISIBLE);
-    }
-
-    private void requestNewGroup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this, R.style.AlertDialog);
-        builder.setTitle("Create Group");
-
-        final EditText groupNameField = new EditText(StartActivity.this);
-        groupNameField.setHint("group name");
-        groupNameField.setHintTextColor(Color.GRAY);
-        groupNameField.setTextColor(Color.BLACK);
-
-        builder.setView(groupNameField);
-
-        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                String groupName = groupNameField.getText().toString();
-
-                if (TextUtils.isEmpty(groupName)) {
-                    Toast.makeText(StartActivity.this, "Enter Group Name", Toast.LENGTH_SHORT).show();
-                } else {
-                    groupChatViewModel.setGroupNameOnFirebase(groupName);
-                }
-            }
-        });
-        builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
     }
 
     @Override
@@ -149,7 +124,7 @@ public class StartActivity extends AppCompatActivity {
             case R.id.find_friends_options:
                 break;
             case R.id.main_create_group:
-                requestNewGroup();
+                //TODO
                 break;
             default:
                 return false;

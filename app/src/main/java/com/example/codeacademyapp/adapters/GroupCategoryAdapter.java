@@ -16,26 +16,26 @@ import com.example.codeacademyapp.main.group.ChatFragment;
 
 import java.util.List;
 
-public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameAdapter.MyHoder> {
+public class GroupCategoryAdapter extends RecyclerView.Adapter<GroupCategoryAdapter.MyHoder> {
 
     private List<String> groupNameList;
     private FragmentManager fragmentManager;
 
-    public GroupNameAdapter(List<String> groupNameList, FragmentManager fragmentManager) {
+    public GroupCategoryAdapter(List<String> groupNameList, FragmentManager fragmentManager) {
         this.groupNameList = groupNameList;
         this.fragmentManager = fragmentManager;
     }
 
     @NonNull
     @Override
-    public GroupNameAdapter.MyHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public GroupCategoryAdapter.MyHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.group_name_item, parent, false);
         return new MyHoder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final GroupNameAdapter.MyHoder holder, int position) {
+    public void onBindViewHolder(@NonNull final GroupCategoryAdapter.MyHoder holder, int position) {
 
         holder.textView.setText(groupNameList.get(holder.getAdapterPosition()));
 

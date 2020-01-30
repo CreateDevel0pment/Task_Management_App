@@ -8,14 +8,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.sign_in.SignUpActivity;
+import com.example.codeacademyapp.main.GroupChatViewModel;
 import com.example.codeacademyapp.main.StartActivity;
+import com.example.codeacademyapp.sign_in.SignUpActivity;
 import com.google.firebase.auth.FirebaseUser;
 
-import static com.example.codeacademyapp.utils.Constants.USER;
-
 public class SplashActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,29 +28,37 @@ public class SplashActivity extends AppCompatActivity {
             public void onChanged(FirebaseUser firebaseUser) {
 
                 if (firebaseUser != null) {
-                    goToStartActivity(firebaseUser.getDisplayName());
+                    getReferencesForUserGroup();
                 } else {
                     goToSignUpActivity();
                 }
             }
         });
-
     }
 
-    private void VerifyUserExistance() {
+    public void getReferencesForUserGroup() {
+
+        GroupChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        groupChatViewModel.getReferencesForUsersGroup().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                goToStartActivity(s);
+            }
+        });
     }
 
     private void goToSignUpActivity() {
         Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra("SIGNUP","signUp");
+        intent.putExtra("SIGNUP", "signUp");
         startActivity(intent);
     }
 
-    private void goToStartActivity(String name) {
+    private void goToStartActivity(String userGroup) {
         Intent intent = new Intent(SplashActivity.this, StartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra(USER,name);
+        intent.putExtra("TITLE", userGroup);
         startActivity(intent);
     }
 }

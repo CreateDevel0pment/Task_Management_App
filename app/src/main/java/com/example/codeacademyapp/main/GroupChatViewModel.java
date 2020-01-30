@@ -28,4 +28,8 @@ public class GroupChatViewModel extends AndroidViewModel {
     public LiveData<Iterator<DataSnapshot>> getGroupNames(){
         return chatRepository.getGroupNamesFromFirebase();
     }
+
+    public LiveData<String> getReferencesForUsersGroup(){
+        return chatRepository.getReferencesForUsersGroup();
+    }
 }
