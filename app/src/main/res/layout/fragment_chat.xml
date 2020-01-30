@@ -5,10 +5,42 @@
     android:layout_height="match_parent"
     tools:context=".main.group.ChatFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/layout_btn_tasks">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="new tasks"
+            android:textSize="11sp"
+            android:textColor="@color/colorSecondary"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:id="@+id/new_task_button"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="add task"
+            android:textSize="11sp"
+            android:textColor="@color/colorSecondary"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:id="@+id/add_task_button"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/layout_btn_tasks"
         android:layout_above="@+id/my_linear_layout"
         android:id="@+id/scroll_view">
 
@@ -37,7 +69,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@android:color/darker_gray"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:id="@+id/my_linear_layout">

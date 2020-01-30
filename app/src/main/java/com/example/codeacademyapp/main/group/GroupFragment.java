@@ -3,11 +3,13 @@ package com.example.codeacademyapp.main.group;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -17,8 +19,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.main.group.add_tasks.AddNewTaskFragment;
+import com.example.codeacademyapp.main.group.new_tasks.NewTaskActivity;
 import com.example.codeacademyapp.sign_in.BaseFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -44,7 +49,7 @@ public class GroupFragment extends BaseFragment {
     private ScrollView scrollView;
     private TextView display_text_messages;
 
-    private String currentGroupNAme;
+
     private String currentUserId;
     private String currentUserName;
 
@@ -56,7 +61,7 @@ public class GroupFragment extends BaseFragment {
         super.onAttach(context);
 
         if (getArguments() != null) {
-            currentGroupNAme = getArguments().getString("TITLE");
+            String currentGroupNAme = getArguments().getString("TITLE");
             setTitle(currentGroupNAme + " Group");
 
             groupNameRef = FirebaseDatabase.getInstance().getReference().child("Groups").child(currentGroupNAme);
@@ -105,6 +110,27 @@ public class GroupFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        Button new_task_btn = view.findViewById(R.id.new_task_button);
+        new_task_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewTaskActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button add_task_btn = view.findViewById(R.id.add_task_button);
+        add_task_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
+                FragmentManager manager = getFragmentManager();
+                if (manager != null) {
+                    manager.beginTransaction().replace(R.id.main_container, addNewTaskFragment).commit();
+                }
+            }
+        });
 
         auth = FirebaseAuth.getInstance();
         currentUserId = auth.getCurrentUser().getUid();
