@@ -17,8 +17,6 @@
             android:id="@+id/set_circular_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="42dp"
             android:src="@drawable/profile_image"
             app:civ_border_color="@color/colorPrimaryDark"
@@ -110,7 +108,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            android:text="Your role:"
+            android:text=" On Position:"
             />
 
         <androidx.cardview.widget.CardView
@@ -170,7 +168,6 @@
             android:layout_marginEnd="25dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/sign_up_btn"
-            android:enabled="false"
             android:hint="Sign Up"
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"/>
