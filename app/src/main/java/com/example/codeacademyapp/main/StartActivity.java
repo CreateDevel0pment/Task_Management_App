@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.main.group.GroupFragment;
+import com.example.codeacademyapp.main.group.GroupChatFragment;
 import com.example.codeacademyapp.main.home.HomeFragment;
 import com.example.codeacademyapp.main.wall.AcademyWallFragment;
 import com.example.codeacademyapp.sign_in.SignUpActivity;
@@ -70,7 +70,7 @@ public class StartActivity extends AppCompatActivity {
 
                         if (title != null) {
 
-                            Fragment fragment=new GroupFragment();
+                            Fragment fragment=new GroupChatFragment();
 
                             Bundle bundle = new Bundle();
                             bundle.putString("TITLE", title);

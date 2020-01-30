@@ -103,7 +103,7 @@ public class ChatFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_group_chat, container, false);
 //        if (getArguments() != null) {
 //            currentGroupNAme = getArguments().getString("TITLE");
 //            setTitle(currentGroupNAme + " Group");

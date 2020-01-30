@@ -41,14 +41,13 @@ import java.util.Iterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GroupFragment extends BaseFragment {
+public class GroupChatFragment extends BaseFragment {
 
     public static final String TAG = "CHAT_TAG";
     private ImageButton sentMessage_btn;
     private EditText userMessage_input;
     private ScrollView scrollView;
     private TextView display_text_messages;
-
 
     private String currentUserId;
     private String currentUserName;
@@ -99,17 +98,14 @@ public class GroupFragment extends BaseFragment {
 
                 }
             });
-
         }
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_group_chat, container, false);
 
         Button new_task_btn = view.findViewById(R.id.new_task_button);
         new_task_btn.setOnClickListener(new View.OnClickListener() {

@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".main.StartActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:background="@color/colorPrimary"
         android:id="@+id/toolbar"
