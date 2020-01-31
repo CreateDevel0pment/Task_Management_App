@@ -123,7 +123,7 @@ public class GroupChatFragment extends BaseFragment {
                 AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
                 FragmentManager manager = getFragmentManager();
                 if (manager != null) {
-                    manager.beginTransaction().replace(R.id.main_container, addNewTaskFragment).commit();
+                    manager.beginTransaction().replace(R.id.group_container, addNewTaskFragment).commit();
                 }
             }
         });

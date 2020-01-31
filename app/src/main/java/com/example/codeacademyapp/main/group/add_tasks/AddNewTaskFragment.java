@@ -42,7 +42,7 @@ public class AddNewTaskFragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     FirebaseUser userFb;
-    String userID;
+    String userID, userGroup;
     TaskViewModel taskViewModel;
     UserInformation uInfo = new UserInformation();
 
@@ -62,20 +62,24 @@ public class AddNewTaskFragment extends Fragment {
         create_task = rootView.findViewById(R.id.create_task_btn);
 
         taskViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskViewModel.class);
-
-
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
-
         userFb = mAuth.getCurrentUser();
         if (userFb != null) {
-            userID = userFb.getUid();}
+            userID = userFb.getUid();
+        }
+
+            mFirebaseDatabase = FirebaseDatabase.getInstance();
+            myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                getUserData(dataSnapshot);
+
+                if (dataSnapshot.exists()) {
+                    userGroup = dataSnapshot.child("Group").getValue().toString();
+                }
+
             }
 
             @Override
@@ -124,20 +128,15 @@ public class AddNewTaskFragment extends Fragment {
         // Read from the database
 
 
-
-
-
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                 Task task = new Task();
                 task.setName(task_name.getText().toString());
                 task.setDescription(task_description.getText().toString());
                 task.setNote(task_note.getText().toString());
-                task.setGroup(uInfo.getGroup());
+                task.setGroup(userGroup);
 
                 taskViewModel.createNewTask(task);
                 taskViewModel.getCreateNewTaskLiveData().observe(AddNewTaskFragment.this, new Observer<Task>() {
@@ -155,26 +154,6 @@ public class AddNewTaskFragment extends Fragment {
         return rootView;
     }
 
-
-
-
-
-    private void getUserData(DataSnapshot dataSnapshot) {
-        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-            uInfo.setName(ds.child(userID).getValue(UserInformation.class).getName());
-            uInfo.setGroup(ds.child(userID).getValue(UserInformation.class).getGroup());
-            uInfo.setRole(ds.child(userID).getValue(UserInformation.class).getRole());
-            uInfo.setSurname(ds.child(userID).getValue(UserInformation.class).getSurname());
-        }
-
-
-//        for(ds : dataSnapshot.getChildren()){
-//            uInfo.setName(ds.child("Users").child(userID).getValue(UserInformation.class).getName());
-//            uInfo.setName(ds.child("Users").child(userID).getValue(UserInformation.class).getSurname());
-//            uInfo.setName(ds.child("Users").child(userID).getValue(UserInformation.class).getGroup());
-//            uInfo.setName(ds.child("Users").child(userID).getValue(UserInformation.class).getRole());
-//        }
-    }
 
     private void toastMessage(String message) {
 

@@ -13,14 +13,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:text="Title : "
-            android:textAlignment="textStart"
-            android:textSize="18sp" />
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -35,7 +27,7 @@
                 android:id="@+id/task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Task Name"
+                android:hint="the task name.."
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray" />
 
@@ -51,6 +43,10 @@
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
+                android:hint="add description.."
+                android:minLines="8"
+                android:maxLines="10"
+                android:gravity="top|start"
                 android:id="@+id/task_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,6 +65,7 @@
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
+                android:hint="add notes.."
                 android:id="@+id/task_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
