@@ -1,7 +1,6 @@
 package com.example.codeacademyapp.sign_in;
 
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;

@@ -43,7 +43,6 @@ import java.util.Iterator;
  */
 public class GroupChatFragment extends BaseFragment {
 
-    public static final String TAG = "CHAT_TAG";
     private ImageButton sentMessage_btn;
     private EditText userMessage_input;
     private ScrollView scrollView;
@@ -142,6 +141,9 @@ public class GroupChatFragment extends BaseFragment {
                 SaveMessageToDataBase();
 
                 userMessage_input.setText("");
+
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+
             }
         });
 
@@ -227,6 +229,8 @@ public class GroupChatFragment extends BaseFragment {
                     + "message: " + chatMessage + " \n"
                     + chatTime
                     + "           " + chatDate + "\n\n\n");
+
+            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
     }
 

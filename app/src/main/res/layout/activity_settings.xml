@@ -4,30 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.SettingsActivity">
+    tools:context=".main.edit_profile.EditProfileActivity">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/set_circular_image"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:src="@drawable/profile_image"
-        app:civ_border_color="@color/colorPrimaryDark"
-        app:civ_border_width="2dp" />
-
-    <EditText
-        android:id="@+id/set_user_name"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/set_circular_image"
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/edit_profile_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="42dp"
+            android:src="@drawable/profile_image"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="2dp" />
+
+
+
+
+    <TextView
+        android:id="@+id/edit_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_profile_image"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/edit_profile"
-        android:hint="@string/username"
+        android:drawableStart="@drawable/ic_person_"
+        android:text="username"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@android:color/darker_gray"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_user_name"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:drawableStart="@drawable/ic_warning"
+        android:text="@string/warning_text"
         android:inputType="textMultiLine"
         android:padding="8dp"
         android:textAlignment="center"
@@ -36,39 +68,95 @@
         android:textStyle="bold" />
 
 
-    <EditText
-        android:id="@+id/set_profile_status"
+    <TextView
+        android:id="@+id/position_text"
+        android:layout_below="@+id/warning"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/set_user_name"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:drawableStart="@drawable/edit_status"
-        android:hint="Status/online/offline"
-        android:inputType="textMultiLine"
-        android:padding="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@android:color/darker_gray"
-        android:textStyle="bold" />
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="5dp"
+        android:text="Change Position:"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_position"
+        app:cardElevation="@dimen/default_circle_indicator_radius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/position_text"
+        app:cardBackgroundColor="@android:color/white">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edit_spinner_role"
+            android:entries="@array/Position"
+            android:spinnerMode="dropdown" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/group_text"
+        android:layout_below="@id/card_position"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="5dp"
+        android:text="Change Group"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_group"
+        app:cardElevation="@dimen/default_circle_indicator_radius"
+        android:layout_below="@id/group_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/Group"
+            android:id="@+id/edit_spinner_group"
+            android:spinnerMode="dropdown" />
+
+
+    </androidx.cardview.widget.CardView>
 
 
     <Button
-        android:id="@+id/update_settings_button"
+        android:id="@+id/edit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/set_profile_status"
+        android:layout_below="@+id/card_group"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:background="@color/colorPrimaryDark"
         android:padding="8dp"
-        android:text="Update"
+        android:text="Edit"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    </ScrollView>
 
 
 </RelativeLayout>

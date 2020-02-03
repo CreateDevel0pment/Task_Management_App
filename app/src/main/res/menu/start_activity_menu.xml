@@ -8,8 +8,8 @@
         app:showAsAction="never"/>
 
     <item
-        android:title="@string/creategroup"
-        android:id="@+id/main_create_group"
+        android:title="@string/edit_profile"
+        android:id="@+id/edit_profile"
         app:showAsAction="never"/>
 
     <item

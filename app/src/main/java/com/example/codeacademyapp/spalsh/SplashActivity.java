@@ -8,10 +8,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.main.GroupChatViewModel;
+import com.example.codeacademyapp.main.group.GroupChatViewModel;
 import com.example.codeacademyapp.main.StartActivity;
 import com.example.codeacademyapp.sign_in.SignUpActivity;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+
+import java.util.Objects;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -39,11 +42,14 @@ public class SplashActivity extends AppCompatActivity {
     public void getReferencesForUserGroup() {
 
         GroupChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
-        groupChatViewModel.getReferencesForUsersGroup().observe(this, new Observer<String>() {
+        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
-            public void onChanged(String s) {
+            public void onChanged(DataSnapshot dataSnapshot) {
 
-                goToStartActivity(s);
+                if(dataSnapshot.exists()) {
+                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Group").getValue()).toString();
+                    goToStartActivity(userGroup);
+                }
             }
         });
     }

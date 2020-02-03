@@ -18,7 +18,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.main.edit_profile.EditProfileActivity;
+import com.example.codeacademyapp.main.find_friends.FindFriendsActivity;
 import com.example.codeacademyapp.main.group.GroupChatFragment;
+import com.example.codeacademyapp.main.group.GroupChatViewModel;
 import com.example.codeacademyapp.main.home.HomeFragment;
 import com.example.codeacademyapp.main.wall.AcademyWallFragment;
 import com.example.codeacademyapp.sign_in.SignUpActivity;
@@ -50,7 +53,6 @@ public class StartActivity extends AppCompatActivity {
         } else {
             toastMessage("Welcome");
         }
-
 
         auth = FirebaseAuth.getInstance();
         groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
@@ -121,10 +123,14 @@ public class StartActivity extends AppCompatActivity {
 
             case R.id.log_out_btn:
                 logOut();
-            case R.id.find_friends_options:
                 break;
-            case R.id.main_create_group:
-                //TODO
+            case R.id.find_friends_options:
+                Intent intentFindFriends = new Intent(StartActivity.this, FindFriendsActivity.class);
+                startActivity(intentFindFriends);
+                break;
+            case R.id.edit_profile:
+                Intent intentEditProfile = new Intent(StartActivity.this, EditProfileActivity.class);
+                startActivity(intentEditProfile);
                 break;
             default:
                 return false;
@@ -137,6 +143,7 @@ public class StartActivity extends AppCompatActivity {
         finish();
         Intent intent = new Intent(StartActivity.this, SignUpActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void toastMessage(String message) {

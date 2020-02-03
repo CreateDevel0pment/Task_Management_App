@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.sign_in;
 
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,9 +18,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.main.GroupChatViewModel;
+import com.example.codeacademyapp.main.group.GroupChatViewModel;
 import com.example.codeacademyapp.main.StartActivity;
 import com.example.codeacademyapp.model.User;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.codeacademyapp.utils.Constants.USER;
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
@@ -32,6 +35,9 @@ public class SignUpFragment extends Fragment {
     private EditText name_et, surename_et;
     private EditText mail_et, password_et;
     private Spinner position_spiner, group_spiner;
+    private CircleImageView userImageView;
+
+    public static final int GALLERY_PICK = 1;
 
     private String role_string;
     private String group_string;
@@ -43,21 +49,27 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        initializedView(view);
 
         userViewModel = ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
         groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
 
-        name_et = view.findViewById(R.id.person_name);
-        setFocus(name_et);
-        surename_et = view.findViewById(R.id.person_sure_name);
-        setFocus(surename_et);
-        mail_et = view.findViewById(R.id.person_email);
-        setFocus(mail_et);
-        password_et = view.findViewById(R.id.person_password);
-        setFocus(password_et);
+        userImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        position_spiner = view.findViewById(R.id.spinner_role);
-        group_spiner = view.findViewById(R.id.spinner_group);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                alertDialogBuilder.setTitle("Set Your Profile Image?");
+                alertDialogBuilder.setMessage("Set your image in edit profile, after you Sign Up");
+                alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogBuilder.show();
+            }
+        });
 
         position_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,7 +148,7 @@ public class SignUpFragment extends Fragment {
                         }
                     });
 
-                    groupChatViewModel.setGroupNameOnFirebase(group_string);
+                    groupChatViewModel.setGroupNameToFirebase(group_string);
                     Intent intent = new Intent(getContext(), StartActivity.class);
                     intent.putExtra("TITLE", group_string);
                     startActivity(intent);
@@ -147,6 +159,7 @@ public class SignUpFragment extends Fragment {
         return view;
     }
 
+
     private void toastMessage() {
         Toast.makeText(getContext(), "User exist", Toast.LENGTH_SHORT).show();
     }
@@ -156,5 +169,22 @@ public class SignUpFragment extends Fragment {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(USER, user.getName());
         startActivity(intent);
+    }
+
+    private void initializedView(View view){
+
+        name_et = view.findViewById(R.id.person_name);
+        setFocus(name_et);
+        surename_et = view.findViewById(R.id.person_sure_name);
+        setFocus(surename_et);
+        mail_et = view.findViewById(R.id.person_email);
+        setFocus(mail_et);
+        password_et = view.findViewById(R.id.person_password);
+        setFocus(password_et);
+
+        position_spiner = view.findViewById(R.id.edit_spinner_role);
+        group_spiner = view.findViewById(R.id.edit_spinner_group);
+
+        userImageView = view.findViewById(R.id.edit_circular_image);
     }
 }

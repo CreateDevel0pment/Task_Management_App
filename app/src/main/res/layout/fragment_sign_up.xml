@@ -14,7 +14,7 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/set_circular_image"
+            android:id="@+id/edit_circular_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="42dp"
@@ -123,7 +123,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:id="@+id/spinner_role"
+                android:id="@+id/edit_spinner_role"
                 android:entries="@array/Position"
                 android:spinnerMode="dropdown" />
 
@@ -153,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:entries="@array/Group"
-                android:id="@+id/spinner_group"
+                android:id="@+id/edit_spinner_group"
                 android:spinnerMode="dropdown" />
 
 

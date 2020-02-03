@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.main.repository;
+package com.example.codeacademyapp.main.group.repository;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Iterator;
+import java.util.Objects;
 
 public class GroupChatRepository {
 
@@ -20,62 +20,40 @@ public class GroupChatRepository {
     private DatabaseReference myRef;
     private FirebaseAuth auth;
 
-    private MutableLiveData<Iterator<DataSnapshot>> getGroupNamesFromFirebase;
-
-    public void setGroupNameToFirebase(String groupName){
+    public void setGroupNameToFirebase(String groupName) {
 
         myRef = rootRef.getReference();
         myRef.child("Groups").child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     //TODO
                 }
             }
         });
     }
 
-    public MutableLiveData<Iterator<DataSnapshot>> getGroupNamesFromFirebase(){
-        getGroupNamesFromFirebase=new MutableLiveData<>();
-
-        myRef = FirebaseDatabase.getInstance().getReference().child("Groups");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                getGroupNamesFromFirebase.setValue(dataSnapshot.getChildren().iterator());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return getGroupNamesFromFirebase;
-    }
-
-    public MutableLiveData<String> getReferencesForUsersGroup(){
-        final MutableLiveData<String> getGroupName = new MutableLiveData<>();
+    public MutableLiveData<DataSnapshot> getUserInformation() {
+        final MutableLiveData<DataSnapshot> getUserInformations = new MutableLiveData<>();
 
         auth = FirebaseAuth.getInstance();
-        final String currentUserId = auth.getCurrentUser().getUid();
+        String currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         myRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.exists()){
-
-                    getGroupName.setValue(dataSnapshot.child("Group").getValue().toString());
+                if (dataSnapshot.exists()) {
+                    getUserInformations.setValue(dataSnapshot);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-
-        return getGroupName;
+        return getUserInformations;
     }
 }

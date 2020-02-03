@@ -1,6 +1,5 @@
 package com.example.codeacademyapp.sign_in;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,10 +16,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.main.GroupChatViewModel;
+import com.example.codeacademyapp.main.group.GroupChatViewModel;
 import com.example.codeacademyapp.main.StartActivity;
 import com.example.codeacademyapp.model.User;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+
+import java.util.Objects;
 
 import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 
@@ -55,21 +57,26 @@ public class SignInFragment extends Fragment {
                 String mail = mail_et.getText().toString();
                 String password = password_et.getText().toString();
 
-                User user = new User();
-                user.seteMail(mail);
-                user.setPassword(password);
+                if(TextUtils.isEmpty(mail) || TextUtils.isEmpty(password)){
+                    Toast.makeText(getContext(), "Empty field error!", Toast.LENGTH_SHORT).show();
+                }else {
 
-                userViewModel.signInNewUser(mail, password).observe(SignInFragment.this, new Observer<FirebaseUser>() {
-                    @Override
-                    public void onChanged(FirebaseUser firebaseUser) {
+                    User user = new User();
+                    user.seteMail(mail);
+                    user.setPassword(password);
 
-                        if (firebaseUser != null) {
-                            getReferencesForUserGroup();
-                        } else {
-                            toastMessage("Please Sign Up");
+                    userViewModel.signInNewUser(mail, password).observe(SignInFragment.this, new Observer<FirebaseUser>() {
+                        @Override
+                        public void onChanged(FirebaseUser firebaseUser) {
+
+                            if (firebaseUser != null) {
+                                getReferencesForUserGroup();
+                            } else {
+                                toastMessage("Please Sign Up");
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
 
@@ -93,11 +100,14 @@ public class SignInFragment extends Fragment {
     public void getReferencesForUserGroup() {
 
         GroupChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
-        groupChatViewModel.getReferencesForUsersGroup().observe(this, new Observer<String>() {
+        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
-            public void onChanged(String s) {
+            public void onChanged(DataSnapshot dataSnapshot) {
 
-                goToStartActivity(s);
+                if(dataSnapshot.exists()) {
+                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Group").getValue()).toString();
+                    goToStartActivity(userGroup);
+                }
             }
         });
     }
