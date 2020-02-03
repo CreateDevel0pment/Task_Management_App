@@ -9,7 +9,7 @@
     android:gravity="top"
     android:weightSum="5"
     android:background="@color/colorPrimary"
-    tools:context=".sign_in.SignUpActivity">
+    tools:context=".ui.sign_in_up.SignUpActivity">
 
 
     <androidx.viewpager.widget.ViewPager

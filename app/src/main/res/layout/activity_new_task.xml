@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".main.group.new_tasks.NewTaskActivity">
+    tools:context=".ui.main.group.task.NewTaskActivity">
 
 
     <com.google.android.material.tabs.TabLayout

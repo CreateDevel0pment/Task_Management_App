@@ -13,18 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.find_friends.FindFriendsActivity"
-            android:parentActivityName=".main.StartActivity">
+        <activity android:name=".ui.main.edit_find.find_friends.FindFriendsActivity"
+            android:parentActivityName=".ui.main.MainActivity">
 
         </activity>
-        <activity android:name=".main.edit_profile.EditProfileActivity" />
-        <activity android:name=".main.group.new_tasks.NewTaskActivity" />
+        <activity android:name=".ui.main.edit_find.edit.EditProfileActivity" />
+        <activity android:name=".ui.main.group.task.NewTaskActivity" />
         <activity
-            android:name=".sign_in.SignUpActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".main.StartActivity" />
+            android:name=".ui.sign_in_up.SignUpActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".spalsh.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

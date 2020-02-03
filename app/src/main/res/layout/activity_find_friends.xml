@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".main.find_friends.FindFriendsActivity">
+    tools:context=".ui.main.edit_find.find_friends.FindFriendsActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

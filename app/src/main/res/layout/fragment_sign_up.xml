@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sign_in.SignUpFragment">
+    tools:context=".ui.sign_in_up.fragments.SignUpFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

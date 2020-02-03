@@ -31,13 +31,13 @@
         android:textStyle="bold"
         android:layout_marginStart="8dp"/>
 
-    <ImageView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/online"
-        android:id="@+id/user_online_status"
-        android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/user_online_status"
+            android:layout_width="11dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/online"
+            android:visibility="invisible" />
 
 </LinearLayout>
 

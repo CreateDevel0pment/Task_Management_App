@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.codeacademyapp.sign_in.SignInFragment;
-import com.example.codeacademyapp.sign_in.SignUpFragment;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.SignInFragment;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.SignUpFragment;
 
 public class TabPagerAdapter extends FragmentPagerAdapter {
 
