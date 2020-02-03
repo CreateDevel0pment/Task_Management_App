@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.main.group.add_tasks;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -59,6 +63,7 @@ public class AddNewTaskFragment extends Fragment {
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
         task_note = rootView.findViewById(R.id.task_note);
+
         create_task = rootView.findViewById(R.id.create_task_btn);
 
         taskViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskViewModel.class);
@@ -125,8 +130,11 @@ public class AddNewTaskFragment extends Fragment {
 
         };
 
-        // Read from the database
+        Calendar calForDate = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
 
+        final String currentDate = currentDateFormat.format(calForDate.getTime());
 
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +144,7 @@ public class AddNewTaskFragment extends Fragment {
                 task.setName(task_name.getText().toString());
                 task.setDescription(task_description.getText().toString());
                 task.setNote(task_note.getText().toString());
+                task.setStart_date(currentDate);
                 task.setGroup(userGroup);
 
                 taskViewModel.createNewTask(task);

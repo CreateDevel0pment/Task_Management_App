@@ -19,12 +19,9 @@ public class CreateTaskRepository {
     public CreateTaskRepository() {
         setTaskInformation = new MutableLiveData<>();
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     public MutableLiveData<Task> createNewTask(Task task) {
-
-
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference();
@@ -38,27 +35,26 @@ public class CreateTaskRepository {
         if (userFb != null) {
             userID = userFb.getUid();
 
-            myRef.child("TaskGroups").child(task.getGroup()).child(task.getName())
+            myRef.child("Tasks").child(task.getName())
                     .child("Description")
                     .setValue(task.getDescription());
-            myRef.child("TaskGroups").child(task.getGroup()).child(task.getName())
-                    .child("Task Note")
+
+               myRef.child("Tasks").child(task.getName())
+                    .child("Name")
+                    .setValue(task.getName());
+
+            myRef.child("Tasks").child(task.getName())
+                    .child("Note")
                     .setValue(task.getNote());
-//            myRef.child("Tasks").child(task.getId()).child("Task Information")
-//                    .child("Task State")
-//                    .setValue(task.getState());
-//            myRef.child("Tasks").child(task.getId()).child("Task Information")
-//                    .child("Task Importance")
-//                    .setValue(task.getImportance());
-//            myRef.child("Tasks").child(task.getId()).child("Task Information")
-//                    .child("Task Due Date")
-//                    .setValue(task.getDue_date());
-//            myRef.child("Tasks").child(task.getId()).child("Task Information")
-//                    .child("Task Start Date")
-//                    .setValue(task.getStart_date());
-//            myRef.child("Tasks").child("Task Information")
-//                    .child("Creator")
-//                    .setValue(userID);
+
+            myRef.child("Tasks").child(task.getName())
+                    .child("Group")
+                    .setValue(task.getGroup());
+
+            myRef.child("Tasks").child(task.getName())
+                    .child("TimeCreated")
+                    .setValue(task.getStart_date());
+
         }
         }
         return setTaskInformation;

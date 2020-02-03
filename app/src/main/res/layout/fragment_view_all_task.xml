@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".main.group.new_tasks.ViewAllTaskFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="8dp"
+        android:id="@+id/task_list_RV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="all tasks view" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

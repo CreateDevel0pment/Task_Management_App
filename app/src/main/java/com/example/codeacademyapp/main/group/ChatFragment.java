@@ -126,7 +126,6 @@ public class ChatFragment extends BaseFragment {
             }
         });
 
-
         return view;
     }
 
@@ -153,8 +152,8 @@ public class ChatFragment extends BaseFragment {
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
 
-            HashMap<String, Object> groipMessageKey = new HashMap<>();
-            groupNameRef.updateChildren(groipMessageKey);
+            HashMap<String, Object> groupMessageKe = new HashMap<>();
+            groupNameRef.updateChildren(groupMessageKe);
 
             groupMessageKeyRef = groupNameRef.child(messageKey);
 
