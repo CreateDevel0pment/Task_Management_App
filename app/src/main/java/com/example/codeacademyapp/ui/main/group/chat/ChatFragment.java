@@ -26,6 +26,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.group.task.NewTaskActivity;
 import com.example.codeacademyapp.ui.main.group.task.fragment.AddNewTaskFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 
 import java.text.SimpleDateFormat;
@@ -85,7 +86,7 @@ public class ChatFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_group_chat, container, false);
 
-        Button new_task_btn = view.findViewById(R.id.new_task_button);
+        FloatingActionButton new_task_btn = view.findViewById(R.id.new_task_button);
         new_task_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,18 +94,18 @@ public class ChatFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        Button add_task_btn = view.findViewById(R.id.add_task_button);
-        add_task_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
-                FragmentManager manager = getFragmentManager();
-                if (manager != null) {
-                    manager.beginTransaction().replace(R.id.group_container, addNewTaskFragment).commit();
-                }
-            }
-        });
+//        Button add_task_btn = view.findViewById(R.id.add_task_button);
+//        add_task_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
+//                FragmentManager manager = getFragmentManager();
+//                if (manager != null) {
+//                    manager.beginTransaction().replace(R.id.group_container, addNewTaskFragment).commit();
+//                }
+//            }
+//        });
 
 //        auth = FirebaseAuth.getInstance();
 //        currentUserId = auth.getCurrentUser().getUid();
