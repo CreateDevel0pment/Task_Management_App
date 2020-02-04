@@ -35,8 +35,8 @@ public class SignUpRepository {
                     if(task.isSuccessful()){
                         boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
 
-                        if (!user.getName().equals("") && !user.getSurname().equals("") &&
-                                !user.getRole_spinner().equals("") && !user.getGroup_spinner().equals("")) {
+                        if (!user.getName().equals("") || !user.getPosition_spinner().equals("") ||
+                                !user.getSector_spinner().equals("")) {
 
                             FirebaseUser userFb = mAuth.getCurrentUser();
 
@@ -47,21 +47,17 @@ public class SignUpRepository {
                                         .child("Name")
                                         .setValue(user.getName());
                                 myRef.child("Users").child(userID)
-                                        .child("Surname")
-                                        .setValue(user.getSurname());
+                                        .child("Sector")
+                                        .setValue(user.getSector_spinner());
                                 myRef.child("Users").child(userID)
-                                        .child("Group")
-                                        .setValue(user.getGroup_spinner());
-                                myRef.child("Users").child(userID)
-                                        .child("Role")
-                                        .setValue(user.getRole_spinner());
+                                        .child("Position")
+                                        .setValue(user.getPosition_spinner());
 
                                 User setUser = new User();
                                 setUser.isNew = isNewUser;
                                 setUser.setName(user.getName());
-                                setUser.setSurname(user.getSurname());
-                                setUser.setRole_spinner(user.getRole_spinner());
-                                setUser.setGroup_spinner(user.getGroup_spinner());
+                                setUser.setPosition_spinner(user.getPosition_spinner());
+                                setUser.setSector_spinner(user.getSector_spinner());
                                 setUserInformation.setValue(setUser);
 
 
@@ -70,15 +66,15 @@ public class SignUpRepository {
 //                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //
 //                                        if((dataSnapshot.exists())&& (dataSnapshot.hasChild("Name"))
-//                                                &&(dataSnapshot.hasChild("Surname"))&& (dataSnapshot.hasChild("Group"))
+//                                                &&(dataSnapshot.hasChild("Surname"))&& (dataSnapshot.hasChild("Sector"))
 //                                                && (dataSnapshot.hasChild("Role"))){
 //
 //
 //                                            User setUser = new User();
 //                                            setUser.setName(dataSnapshot.child("Name").getValue().toString());
 //                                            setUser.setSurname(user.getSurname());
-//                                            setUser.setRole_spinner(user.getRole_spinner());
-//                                            setUser.setGroup_spinner(user.getGroup_spinner());
+//                                            setUser.setPosition_spinner(user.getPosition_spinner());
+//                                            setUser.setSector_spinner(user.getSector_spinner());
 //                                            setUserInformation.setValue(setUser);
 //
 //                                        }
@@ -103,7 +99,7 @@ public class SignUpRepository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if((dataSnapshot.exists())&& (dataSnapshot.hasChild("ema"))){
+                if(dataSnapshot.exists()){
 
                 }
 

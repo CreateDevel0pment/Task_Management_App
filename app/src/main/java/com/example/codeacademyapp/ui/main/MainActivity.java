@@ -20,8 +20,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
-import com.example.codeacademyapp.ui.main.group.chat.GroupChatFragment;
-import com.example.codeacademyapp.ui.main.group.chat.GroupChatViewModel;
+import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.main.group.chat.ChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
 import com.example.codeacademyapp.ui.main.wall.AcademyWallFragment;
 import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
@@ -32,11 +32,10 @@ import static com.example.codeacademyapp.utils.Constants.USER;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
     BottomNavigationView bottomNav;
     Toolbar toolbar;
 
-    GroupChatViewModel groupChatViewModel;
+    ChatViewModel groupChatViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra(USER);
-        final String title = intent.getStringExtra("TITLE");
         if (name != null) {
             toastMessage("Welcome " + name);
-        } else {
-            toastMessage("Welcome");
         }
 
-        auth = FirebaseAuth.getInstance();
-        groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
         bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -68,19 +63,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.academy_wall:
                         switchToFragment(new AcademyWallFragment(), R.id.wall_container);
                         break;
-                    case R.id.group:
-
-                        if (title != null) {
-
-                            Fragment fragment=new GroupChatFragment();
-
-                            Bundle bundle = new Bundle();
-                            bundle.putString("TITLE", title);
-                            fragment.setArguments(bundle);
-
-                            switchToFragment(fragment, R.id.group_container);
-                        }
-
+                    case R.id.sector:
+                        switchToFragment(new ChatFragment(), R.id.group_container);
                         break;
                 }
                 return false;
@@ -94,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
         if (topFragment == fragment) {
             fragment = new Fragment();
-//            fragment = topFragment;
         }
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
@@ -139,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logOut() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
         finish();
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);

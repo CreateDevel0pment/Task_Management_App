@@ -2,14 +2,14 @@ package com.example.codeacademyapp.data.model;
 
 public class ModelFirebase {
 
-    public String Name,Group,image;
+    public String Name,Sector,image;
 
     public ModelFirebase() {
     }
 
     public ModelFirebase(String name, String group, String image) {
         Name = name;
-        Group = group;
+        Sector = group;
         this.image = image;
     }
 }

@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.group.chat.GroupChatViewModel;
+import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.ui.sign_in_up.UserViewModel;
@@ -100,13 +100,13 @@ public class SignInFragment extends Fragment {
 
     public void getReferencesForUserGroup() {
 
-        GroupChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
-                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Group").getValue()).toString();
+                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                     goToStartActivity(userGroup);
                 }
             }

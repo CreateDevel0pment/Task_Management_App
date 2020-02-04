@@ -15,8 +15,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/edit_circular_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="42dp"
             android:src="@drawable/profile_image"
             app:civ_border_color="@color/colorPrimaryDark"
@@ -34,7 +34,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint=" Email"
+                android:drawableStart="@drawable/mail_ic"
                 android:textColor="@android:color/black"
                 android:id="@+id/person_email"
                 android:textColorHint="@android:color/darker_gray" />
@@ -53,7 +54,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint=" Password"
+                android:drawableStart="@drawable/pass_ic"
                 android:textColor="@android:color/black"
                 android:id="@+id/person_password"
                 android:textColorHint="@android:color/darker_gray" />
@@ -72,33 +74,12 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint=" Full Name"
+                android:drawableStart="@drawable/ic_person_"
                 android:textColor="@android:color/black"
                 android:id="@+id/person_name"
                 android:textColorHint="@android:color/darker_gray" />
         </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@android:color/white">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Surname"
-                android:textColor="@android:color/black"
-                android:id="@+id/person_sure_name"
-                android:textColorHint="@android:color/darker_gray" />
-        </androidx.cardview.widget.CardView>
-
-
-
 
         <TextView
             android:textColor="@color/colorPrimaryDark"
@@ -137,7 +118,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            android:text="Pick a group:"
+            android:text="In Sector:"
             />
 
         <androidx.cardview.widget.CardView
@@ -152,7 +133,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:entries="@array/Group"
+                android:entries="@array/Sector"
                 android:id="@+id/edit_spinner_group"
                 android:spinnerMode="dropdown" />
 

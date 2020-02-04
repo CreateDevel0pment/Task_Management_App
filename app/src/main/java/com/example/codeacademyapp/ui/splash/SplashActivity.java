@@ -8,13 +8,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.group.chat.GroupChatViewModel;
 import com.example.codeacademyapp.ui.main.MainActivity;
+import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
-
-import java.util.Objects;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -32,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (firebaseUser != null) {
                     getReferencesForUserGroup();
+                    goToSignUpActivity();
                 } else {
                     goToSignUpActivity();
                 }
@@ -40,31 +39,25 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void getReferencesForUserGroup() {
-
-        GroupChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists()) {
-                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Group").getValue()).toString();
-                    goToStartActivity(userGroup);
+                if (dataSnapshot.exists()) {
+                    goToStartActivity();
                 }
             }
         });
     }
-
     private void goToSignUpActivity() {
         Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("SIGNUP", "signUp");
         startActivity(intent);
     }
-
-    private void goToStartActivity(String userGroup) {
+    private void goToStartActivity() {
         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra("TITLE", userGroup);
         startActivity(intent);
     }
 }

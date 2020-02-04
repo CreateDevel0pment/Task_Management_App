@@ -130,7 +130,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:entries="@array/Group"
+            android:entries="@array/Sector"
             android:id="@+id/edit_spinner_group"
             android:spinnerMode="dropdown" />
 

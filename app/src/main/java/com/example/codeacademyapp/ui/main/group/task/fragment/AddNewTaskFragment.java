@@ -83,7 +83,7 @@ public class AddNewTaskFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    userGroup = dataSnapshot.child("Group").getValue().toString();
+                    userGroup = dataSnapshot.child("Sector").getValue().toString();
                 }
 
             }

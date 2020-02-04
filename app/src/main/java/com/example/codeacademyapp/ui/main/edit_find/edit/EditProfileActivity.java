@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.group.chat.GroupChatViewModel;
+import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.edit_find.CloudStorageViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.squareup.picasso.Picasso;
@@ -33,7 +33,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Spinner group, position;
     Button edit_btn;
 
-    GroupChatViewModel viewModel;
+    ChatViewModel viewModel;
     CloudStorageViewModel cloudStorageViewModel;
 
     ProgressDialog loadingBar;
@@ -93,7 +93,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void userInformationViewModel(){
-        viewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         viewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {

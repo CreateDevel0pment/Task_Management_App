@@ -30,7 +30,6 @@ public class FindFriendsActivity extends AppCompatActivity {
     FrameLayout layout;
     private DatabaseReference usersRef;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +62,7 @@ public class FindFriendsActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull final FindFriendsViewHolder holder, final int position, @NonNull ModelFirebase model) {
 
                 holder.userNAme.setText(model.Name);
-                holder.userGroup.setText(model.Group);
+                holder.userGroup.setText(model.Sector);
                 Picasso.get().load(model.image)
                         .placeholder(R.drawable.profile_image)
                         .into(holder.profileImage);

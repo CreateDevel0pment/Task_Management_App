@@ -10,9 +10,8 @@ public class User implements Serializable {
     public String eMail;
     public String password;
     public String name;
-    public String surname;
-    public String role_spinner;
-    public String group_spinner;
+    public String position_spinner;
+    public String sector_spinner;
 
 
     @Exclude
@@ -54,28 +53,20 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getPosition_spinner() {
+        return position_spinner;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPosition_spinner(String position_spinner) {
+        this.position_spinner = position_spinner;
     }
 
-    public String getRole_spinner() {
-        return role_spinner;
+    public String getSector_spinner() {
+        return sector_spinner;
     }
 
-    public void setRole_spinner(String role_spinner) {
-        this.role_spinner = role_spinner;
-    }
-
-    public String getGroup_spinner() {
-        return group_spinner;
-    }
-
-    public void setGroup_spinner(String group_spinner) {
-        this.group_spinner = group_spinner;
+    public void setSector_spinner(String sector_spinner) {
+        this.sector_spinner = sector_spinner;
     }
 
     public boolean isNew() {

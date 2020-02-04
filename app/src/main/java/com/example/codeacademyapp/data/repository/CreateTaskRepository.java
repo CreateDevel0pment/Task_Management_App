@@ -48,7 +48,7 @@ public class CreateTaskRepository {
                     .setValue(task.getNote());
 
             myRef.child("Tasks").child(task.getName())
-                    .child("Group")
+                    .child("Sector")
                     .setValue(task.getGroup());
 
             myRef.child("Tasks").child(task.getName())
