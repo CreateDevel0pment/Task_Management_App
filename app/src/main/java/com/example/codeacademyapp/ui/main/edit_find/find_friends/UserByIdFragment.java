@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class UserByIdFragment extends Fragment {
 
-    String reciver_user_id, sender_user_id, current_State;
+    private String receiver_user_id, sender_user_id, current_State;
 
     private CircleImageView userProfileImage;
     private TextView userProfileName, userProfileGroup;
@@ -55,7 +55,7 @@ public class UserByIdFragment extends Fragment {
 
 
         if (getArguments() != null) {
-            reciver_user_id = getArguments().getString("user_by_id");
+            receiver_user_id = getArguments().getString("user_by_id");
         }
 
         retreiveUserInformations();
@@ -65,14 +65,14 @@ public class UserByIdFragment extends Fragment {
 
     private void retreiveUserInformations() {
 
-        userRef.child(reciver_user_id).addValueEventListener(new ValueEventListener() {
+        userRef.child(receiver_user_id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists() && (dataSnapshot.hasChild("image"))) {
                     String userImage = dataSnapshot.child("image").getValue().toString();
                     String userName = dataSnapshot.child("Name").getValue().toString();
-                    String userGroup = dataSnapshot.child("Group").getValue().toString();
+                    String userGroup = dataSnapshot.child("Sector").getValue().toString();
 
                     Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(userProfileImage);
                     userProfileName.setText(userName);
@@ -83,7 +83,7 @@ public class UserByIdFragment extends Fragment {
                 } else {
 
                     String userName = dataSnapshot.child("Name").getValue().toString();
-                    String userGroup = dataSnapshot.child("Group").getValue().toString();
+                    String userGroup = dataSnapshot.child("Sector").getValue().toString();
                     userProfileName.setText(userName);
                     userProfileGroup.setText(userGroup);
 
@@ -106,9 +106,9 @@ public class UserByIdFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.hasChild(reciver_user_id)) {
+                if (dataSnapshot.hasChild(receiver_user_id)) {
 
-                    String request_type = dataSnapshot.child(reciver_user_id).child("request_type").getValue().toString();
+                    String request_type = dataSnapshot.child(receiver_user_id).child("request_type").getValue().toString();
 
                     if (request_type.equals("send")) {
 
@@ -129,7 +129,7 @@ public class UserByIdFragment extends Fragment {
             }
         });
 
-        if (!sender_user_id.equals(reciver_user_id)) {
+        if (!sender_user_id.equals(receiver_user_id)) {
 
             send_message_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -169,7 +169,7 @@ public class UserByIdFragment extends Fragment {
 
     private void cancelChatRequest() {
 
-        chatRequestRef.child(sender_user_id).child(reciver_user_id)
+        chatRequestRef.child(sender_user_id).child(receiver_user_id)
                 .removeValue()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -178,7 +178,7 @@ public class UserByIdFragment extends Fragment {
                         if (task.isSuccessful()) {
 
 
-                            chatRequestRef.child(reciver_user_id).child(sender_user_id)
+                            chatRequestRef.child(receiver_user_id).child(sender_user_id)
                                     .removeValue()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -202,12 +202,12 @@ public class UserByIdFragment extends Fragment {
 
     private void sendChatRequest() {
 
-        chatRequestRef.child(sender_user_id).child(reciver_user_id)
+        chatRequestRef.child(sender_user_id).child(receiver_user_id)
                 .child("request_type").setValue("send").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
-                chatRequestRef.child(reciver_user_id).child(sender_user_id)
+                chatRequestRef.child(receiver_user_id).child(sender_user_id)
                         .child("request_type").setValue("received")
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

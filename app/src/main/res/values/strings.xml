@@ -11,22 +11,21 @@
     <string name="log_out">Log out</string>
     <string name="username">username</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="warning_text">Change position or group only in case,
-        \n if you are promoted or switched to another group</string>
+    <string name="warning_text">Change position or sector only in case,
+        \n if you are promoted or switched to another sector</string>
     <string name="set_profile_image">Edit</string>
 
-    <string-array name="Group">
-        <item>Choose Group - </item>
+    <string-array name="Sector">
+        <item>Choose Sector - </item>
         <item>Android</item>
         <item>Web Development</item>
         <item>Ruby on rails</item>
     </string-array>
 
     <string-array name="Position">
-        <item>Choose Role - </item>
-        <item>HR</item>
-        <item>Tutor</item>
-        <item>Student</item>
+        <item>Choose Position - </item>
+        <item>Manager</item>
+        <item>Staff</item>
     </string-array>
 
     <string-array name="Priority">

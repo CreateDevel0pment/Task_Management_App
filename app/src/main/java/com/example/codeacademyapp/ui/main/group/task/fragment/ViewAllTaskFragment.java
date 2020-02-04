@@ -99,10 +99,10 @@ public class ViewAllTaskFragment extends Fragment {
 //
 //                taskViewHolder.description.setText(taskInformation.getDescription());
 //                taskViewHolder.note.setText(taskInformation.getNote());
-//                taskViewHolder.group.setText(taskInformation.getGroup());
+//                taskViewHolder.group.setText(taskInformation.getSector());
 //
 ////                        holder.userNAme.setText(model.Name);
-////                holder.userGroup.setText(model.Group);
+////                holder.userGroup.setText(model.Sector);
 ////                Picasso.get().load(model.image)
 ////                        .placeholder(R.drawable.profile_image)
 ////                        .into(holder.profileImage);

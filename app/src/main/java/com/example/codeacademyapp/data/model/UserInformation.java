@@ -4,8 +4,8 @@ public class UserInformation {
 
     private String Name;
     private String Surname;
-    private String Role;
-    private String Group;
+    private String Position;
+    private String Sector;
 
     public UserInformation() {
     }
@@ -26,19 +26,19 @@ public class UserInformation {
         Surname = surname;
     }
 
-    public String getRole() {
-        return Role;
+    public String getPosition() {
+        return Position;
     }
 
-    public void setRole(String role) {
-        Role = role;
+    public void setPosition(String position) {
+        Position = position;
     }
 
-    public String getGroup() {
-        return Group;
+    public String getSector() {
+        return Sector;
     }
 
-    public void setGroup(String group) {
-        Group = group;
+    public void setSector(String sector) {
+        Sector = sector;
     }
 }

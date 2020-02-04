@@ -18,9 +18,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.group.chat.GroupChatViewModel;
-import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.data.model.User;
+import com.example.codeacademyapp.ui.main.MainActivity;
+import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.UserViewModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,18 +33,18 @@ import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
  */
 public class SignUpFragment extends Fragment {
 
-    private EditText name_et, surename_et;
+    private EditText name_et;
     private EditText mail_et, password_et;
-    private Spinner position_spiner, group_spiner;
+    private Spinner position_spiner, sector_spiner;
     private CircleImageView userImageView;
 
     public static final int GALLERY_PICK = 1;
 
-    private String role_string;
-    private String group_string;
+    private String position_string;
+    private String sector_string;
 
     private UserViewModel userViewModel;
-    private GroupChatViewModel groupChatViewModel;
+    private ChatViewModel groupChatViewModel;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -53,7 +53,7 @@ public class SignUpFragment extends Fragment {
         initializedView(view);
 
         userViewModel = ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
-        groupChatViewModel = ViewModelProviders.of(this).get(GroupChatViewModel.class);
+        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
         userImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +75,12 @@ public class SignUpFragment extends Fragment {
         position_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position_spiner.getSelectedItem().equals("HR")) {
-                    role_string = "HR";
-                } else if (position_spiner.getSelectedItem().equals("Tutor")) {
-                    role_string = "Tutor";
-                } else if (position_spiner.getSelectedItem().equals("Student")) {
-                    role_string = "Student";
+                if (position_spiner.getSelectedItem().equals("Manager")) {
+                    position_string = "Manager";
+                } else if (position_spiner.getSelectedItem().equals("Staff")) {
+                    position_string = "Staff";
                 } else {
-                    role_string = "";
+                    position_string = "";
                 }
             }
 
@@ -91,17 +89,17 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        group_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        sector_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (group_spiner.getSelectedItem().equals("Android")) {
-                    group_string = "Android";
-                } else if (group_spiner.getSelectedItem().equals("Web Development")) {
-                    group_string = "Web Development";
-                } else if (group_spiner.getSelectedItem().equals("Ruby on rails")) {
-                    group_string = "Ruby on rails";
+                if (sector_spiner.getSelectedItem().equals("Android")) {
+                    sector_string = "Android";
+                } else if (sector_spiner.getSelectedItem().equals("Web Development")) {
+                    sector_string = "Web Development";
+                } else if (sector_spiner.getSelectedItem().equals("Ruby on rails")) {
+                    sector_string = "Ruby on rails";
                 } else {
-                    group_string = "";
+                    sector_string = "";
                 }
             }
 
@@ -121,11 +119,9 @@ public class SignUpFragment extends Fragment {
                     password_et.setError("Enter password");
                 } else if (name_et.getText().toString().isEmpty()) {
                     name_et.setError("Enter name");
-                } else if (surename_et.getText().toString().isEmpty()) {
-                    surename_et.setError("Enter surname");
-                } else if (role_string.isEmpty()) {
+                } else if (position_string.isEmpty()) {
                     Toast.makeText(getContext(), "Choose position!", Toast.LENGTH_SHORT).show();
-                } else if (group_string.isEmpty()) {
+                } else if (sector_string.isEmpty()) {
                     Toast.makeText(getContext(), "Choose group!", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -133,9 +129,8 @@ public class SignUpFragment extends Fragment {
                     user.seteMail(mail_et.getText().toString());
                     user.setPassword(password_et.getText().toString());
                     user.setName(name_et.getText().toString());
-                    user.setSurname(surename_et.getText().toString());
-                    user.setGroup_spinner(group_string);
-                    user.setRole_spinner(role_string);
+                    user.setSector_spinner(sector_string);
+                    user.setPosition_spinner(position_string);
 
                     userViewModel.signUpNewUser(user).observe(SignUpFragment.this, new Observer<User>() {
                         @Override
@@ -149,9 +144,9 @@ public class SignUpFragment extends Fragment {
                         }
                     });
 
-                    groupChatViewModel.setGroupNameToFirebase(group_string);
+                    groupChatViewModel.setGroupNameToFirebase(sector_string);
                     Intent intent = new Intent(getContext(), MainActivity.class);
-                    intent.putExtra("TITLE", group_string);
+                    intent.putExtra("TITLE", sector_string);
                     startActivity(intent);
                 }
             }
@@ -172,19 +167,17 @@ public class SignUpFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void initializedView(View view){
+    private void initializedView(View view) {
 
         name_et = view.findViewById(R.id.person_name);
         setFocus(name_et);
-        surename_et = view.findViewById(R.id.person_sure_name);
-        setFocus(surename_et);
         mail_et = view.findViewById(R.id.person_email);
         setFocus(mail_et);
         password_et = view.findViewById(R.id.person_password);
         setFocus(password_et);
 
         position_spiner = view.findViewById(R.id.edit_spinner_role);
-        group_spiner = view.findViewById(R.id.edit_spinner_group);
+        sector_spiner = view.findViewById(R.id.edit_spinner_group);
 
         userImageView = view.findViewById(R.id.edit_circular_image);
     }

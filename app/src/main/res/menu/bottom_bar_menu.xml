@@ -9,7 +9,7 @@
         android:icon="@drawable/group_people_ic"
         android:title="@string/academy_wall" />
     <item
-        android:id="@+id/group"
+        android:id="@+id/sector"
         android:icon="@drawable/group_chat"
         android:title="@string/my_group" />
 
