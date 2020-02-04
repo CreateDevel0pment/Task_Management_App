@@ -4,22 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.group.task.NewTaskActivity">
+    tools:context=".ui.main.group.task.TaskActivity">
 
-
-    <com.google.android.material.tabs.TabLayout
-        android:background="#00FFFFFF"
-        app:tabTextColor="@color/colorPrimaryDark"
+    <FrameLayout
+        android:id="@+id/task_fragments_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabIndicatorColor="@color/colorPrimaryDark"
-        android:id="@+id/tab_layout_new_tasks"/>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_new_tasks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
