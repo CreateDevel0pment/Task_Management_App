@@ -7,19 +7,29 @@ public class TaskInformation {
     private String Group;
     private String Name;
     private String TimeCreated;
+    private String TaskPriority;
 
     public TaskInformation() {
     }
 
-    public TaskInformation(String name, String description, String note,  String group, String timeCreated) {
+    public TaskInformation(String name, String description, String note,  String group, String timeCreated, String taskPriority) {
         this.Name = name;
         this.Description = description;
         this.Note = note;
         this.Group = group;
         this.TimeCreated = timeCreated;
+        this.TaskPriority = taskPriority;
     }
 
-        public String getName() {
+    public String getTaskPriority() {
+        return TaskPriority;
+    }
+
+    public void setTaskPriority(String taskPriority) {
+        TaskPriority = taskPriority;
+    }
+
+    public String getName() {
         return Name;
     }
 

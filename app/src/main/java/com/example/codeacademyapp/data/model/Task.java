@@ -8,7 +8,7 @@ public class Task {
     private String description;
     private String note;
     private int state;
-    private int importance;
+    private String importance;
     private String start_date;
     private String due_date;
     private String user_Id;
@@ -27,7 +27,7 @@ public class Task {
         this.note = note;
     }
 
-    public Task(String name, String description, String note, int state, int importance, String start_date,
+    public Task(String name, String description, String note, int state, String importance, String start_date,
                 String due_date, String user_Id, String id) {
         this.name = name;
         this.description = description;
@@ -40,7 +40,7 @@ public class Task {
         this.id = id;
     }
 
-    public Task(String name, String description, String note, int state, int importance, String due_date, String user_Id) {
+    public Task(String name, String description, String note, int state, String importance, String due_date, String user_Id) {
         this.name = name;
         this.description = description;
         this.note = note;
@@ -90,11 +90,11 @@ public class Task {
         this.state = state;
     }
 
-    public int getImportance() {
+    public String getImportance() {
         return importance;
     }
 
-    public void setImportance(int importance) {
+    public void setImportance(String importance) {
         this.importance = importance;
     }
 

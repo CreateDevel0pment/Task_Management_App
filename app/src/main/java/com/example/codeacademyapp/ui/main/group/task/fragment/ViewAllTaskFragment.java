@@ -69,8 +69,9 @@ public class ViewAllTaskFragment extends Fragment {
                     String note  = taskDataSnapshot.getValue(TaskInformation.class).getNote();
                     String name  = taskDataSnapshot.getValue(TaskInformation.class).getName();
                     String timeCreated  = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
+                    String taskPriority  = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
 
-                    TaskInformation task = new TaskInformation(name, description, note,  group, timeCreated);
+                    TaskInformation task = new TaskInformation(name, description, note,  group, timeCreated, taskPriority);
 
                     tasks.add(task);
                 }

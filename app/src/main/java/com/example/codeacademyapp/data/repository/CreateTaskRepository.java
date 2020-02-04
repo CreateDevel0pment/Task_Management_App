@@ -55,6 +55,10 @@ public class CreateTaskRepository {
                     .child("TimeCreated")
                     .setValue(task.getStart_date());
 
+            myRef.child("Tasks").child(task.getName())
+                    .child("TaskPriority")
+                    .setValue(task.getImportance());
+
         }
         }
         return setTaskInformation;

@@ -42,8 +42,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.name.setText(task.getName());
         holder.timeCreated.setText(task.getTimeCreated());
 
+        if(task.getTaskPriority().equals("High")){
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.red));
+        } else if(task.getTaskPriority().equals("Medium")){
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.orange));
+        } else {
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.green));
+        }
 
-        holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
+
 
     }
 

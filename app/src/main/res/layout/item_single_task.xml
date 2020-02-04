@@ -7,6 +7,8 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:elevation="10dp"
+        app:cardCornerRadius="15dp"
         android:id="@+id/cardview_item_task"
         app:cardBackgroundColor="@color/white"
         android:layout_width="match_parent"
@@ -19,12 +21,15 @@
             >
 
             <TextView
+                android:textColor="@color/white"
+                android:textSize="21sp"
                 android:id="@+id/task_name_item"
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:textColor="@color/white"
                 android:id="@+id/task_desc_item"
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"

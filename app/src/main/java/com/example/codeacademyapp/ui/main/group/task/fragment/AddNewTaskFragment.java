@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.codeacademyapp.data.model.UserInformation;
@@ -47,12 +49,13 @@ public class AddNewTaskFragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
     FirebaseUser userFb;
-    String userID, userGroup;
+    String userID, userGroup, taskPriority;
     TaskViewModel taskViewModel;
     UserInformation uInfo = new UserInformation();
+    Spinner taskPrioritySpinner;
 
     public AddNewTaskFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -85,15 +88,11 @@ public class AddNewTaskFragment extends Fragment {
                 if (dataSnapshot.exists()) {
                     userGroup = dataSnapshot.child("Group").getValue().toString();
                 }
-
             }
 
             @Override
 
             public void onCancelled(@NonNull DatabaseError error) {
-
-                // Failed to read value
-
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
@@ -102,34 +101,43 @@ public class AddNewTaskFragment extends Fragment {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
-
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
                 if (user != null) {
-
-                    // User is signed in
 
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
                     toastMessage("Successfully signed in with: " + user.getEmail());
 
                 } else {
-
-                    // User is signed out
-
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-
                     toastMessage("Successfully signed out.");
-
                 }
+            }
+        };
 
-                // ...
+        taskPrioritySpinner = rootView.findViewById(R.id.priorty_spinner);
 
+        taskPrioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (taskPrioritySpinner.getSelectedItem().equals("High")) {
+                    taskPriority = "High";
+                } else if (taskPrioritySpinner.getSelectedItem().equals("Medium")) {
+                    taskPriority = "Medium";
+                } else if (taskPrioritySpinner.getSelectedItem().equals("Low")) {
+                    taskPriority = "Low";
+                } else {
+                    taskPriority = "";
+                }
             }
 
-        };
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         Calendar calForDate = Calendar.getInstance();
         @SuppressLint("SimpleDateFormat")
@@ -146,6 +154,7 @@ public class AddNewTaskFragment extends Fragment {
                 task.setDescription(task_description.getText().toString());
                 task.setNote(task_note.getText().toString());
                 task.setStart_date(currentDate);
+                task.setImportance(taskPriority);
                 task.setGroup(userGroup);
 
                 taskViewModel.createNewTask(task);
