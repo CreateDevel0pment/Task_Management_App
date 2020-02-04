@@ -31,7 +31,8 @@ public class SplashActivity extends AppCompatActivity {
                 if (firebaseUser != null) {
                     getReferencesForUserGroup();
                     goToStartActivity();
-                } else {
+                } else
+                    {
                     goToSignUpActivity();
                 }
             }
