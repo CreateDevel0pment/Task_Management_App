@@ -1,12 +1,14 @@
 package com.example.codeacademyapp.ui.main.group.task.fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,8 +54,10 @@ public class TaskDetailsFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TaskActivity.class);
-                startActivity(intent);
+                Activity activity = getActivity();
+                if (activity != null) {
+                    activity.onBackPressed();
+                }
             }
         });
 

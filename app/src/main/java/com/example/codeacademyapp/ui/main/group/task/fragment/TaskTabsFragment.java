@@ -49,9 +49,11 @@ public class TaskTabsFragment extends Fragment {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                intent.putExtra("inflateGroupChat", "inflateGroupChat");
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), MainActivity.class);
+//                intent.putExtra("inflateGroupChat", "inflateGroupChat");
+//                startActivity(intent);
+
+                getActivity().onBackPressed();
             }
         });
 

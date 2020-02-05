@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".ui.main.group.task.fragment.TaskDetailsFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -60,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardBackgroundColor="@color/colorPrimaryDark"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="5dp">
 
@@ -105,7 +104,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="8dp"
                     android:text="Note:"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/task_note_details"
@@ -133,7 +132,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="8dp"
                     android:text="Task created:"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/task_dateCreated_details"

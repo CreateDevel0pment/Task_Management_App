@@ -58,6 +58,64 @@ public class MyContactsFragment extends Fragment {
         contactsRef= FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserId);
         usersRef=FirebaseDatabase.getInstance().getReference().child("Users");
 
+        FirebaseRecyclerOptions options=
+                new FirebaseRecyclerOptions.Builder<ModelFirebase>()
+                        .setQuery(contactsRef,ModelFirebase.class)
+                        .build();
+
+        FirebaseRecyclerAdapter<ModelFirebase,MyContactsHolder> adapter=
+                new FirebaseRecyclerAdapter<ModelFirebase, MyContactsHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final MyContactsHolder holder, int position, @NonNull ModelFirebase model) {
+
+                        final String usersIds=getRef(position).getKey();
+
+                        usersRef.child(usersIds).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                if(dataSnapshot.hasChild("image")){
+
+                                    String profileImage= dataSnapshot.child("image").getValue().toString();
+                                    String userName= dataSnapshot.child("Name").getValue().toString();
+                                    String userSector= dataSnapshot.child("Sector").getValue().toString();
+
+                                    holder.userNAme.setText(userName);
+                                    holder.userSector.setText(userSector);
+                                    Picasso.get().load(profileImage).into(holder.image);
+                                }else {
+                                    String userName= dataSnapshot.child("Name").getValue().toString();
+                                    String userSector= dataSnapshot.child("Sector").getValue().toString();
+
+                                    holder.userNAme.setText(userName);
+                                    holder.userSector.setText(userSector);
+
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public MyContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_desplay_layout,parent,false);
+
+                        return new MyContactsHolder(view);
+                    }
+                };
+
+        my_contact_list.setAdapter(adapter);
+        adapter.startListening();
+
         return view;
     }
 
@@ -65,63 +123,7 @@ public class MyContactsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions options=
-                new FirebaseRecyclerOptions.Builder<ModelFirebase>()
-                .setQuery(contactsRef,ModelFirebase.class)
-                .build();
 
-        FirebaseRecyclerAdapter<ModelFirebase,MyContactsHolder> adapter=
-                new FirebaseRecyclerAdapter<ModelFirebase, MyContactsHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull final MyContactsHolder holder, int position, @NonNull ModelFirebase model) {
-
-                final String usersIds=getRef(position).getKey();
-
-                usersRef.child(usersIds).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        if(dataSnapshot.hasChild("image")){
-
-                            String profileImage= dataSnapshot.child("image").getValue().toString();
-                            String userName= dataSnapshot.child("Name").getValue().toString();
-                            String userSector= dataSnapshot.child("Sector").getValue().toString();
-
-                            holder.userNAme.setText(userName);
-                            holder.userSector.setText(userSector);
-                            Picasso.get().load(profileImage).into(holder.image);
-                        }else {
-                            String userName= dataSnapshot.child("Name").getValue().toString();
-                            String userSector= dataSnapshot.child("Sector").getValue().toString();
-
-                            holder.userNAme.setText(userName);
-                            holder.userSector.setText(userSector);
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-
-            }
-
-            @NonNull
-            @Override
-            public MyContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_desplay_layout,parent,false);
-
-                return new MyContactsHolder(view);
-            }
-        };
-
-        my_contact_list.setAdapter(adapter);
-        adapter.startListening();
     }
 
     public static class MyContactsHolder extends RecyclerView.ViewHolder{

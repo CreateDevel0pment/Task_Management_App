@@ -14,7 +14,7 @@
         android:layout_above="@+id/my_linear_layout"
         android:id="@+id/scroll_view">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -30,18 +30,24 @@
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="50dp"/>
-        </LinearLayout>
+
+
+        </RelativeLayout>
+
+
     </ScrollView>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="@color/colorPrimary"
         android:weightSum="10"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/new_task_button"
         android:id="@+id/my_linear_layout">
 
         <androidx.cardview.widget.CardView
@@ -52,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@android:color/white">
+          >
 
         <EditText
             android:layout_width="match_parent"
@@ -76,17 +82,18 @@
             android:src="@drawable/ic_send"
             android:background="@android:color/transparent"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/new_task_button"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/assignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/new_task_button"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_weight="1"
-        android:src="@drawable/assignment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

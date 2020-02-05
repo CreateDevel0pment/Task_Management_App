@@ -24,6 +24,7 @@ import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.group.chat.ChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
 import com.example.codeacademyapp.ui.main.wall.AcademyWallFragment;
+import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,87 +45,26 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-        String checkingForFragmentInflate = intent.getStringExtra("inflateGroupChat");
-        if(checkingForFragmentInflate!= null){
+        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
-            if(checkingForFragmentInflate.equals("inflateGroupChat")){
-                groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-
-                bottomNav = findViewById(R.id.bottom_bar);
-                bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.home:
-                                switchToFragment(new HomeFragment(), R.id.home_container);
-                                break;
-                            case R.id.academy_wall:
-                                switchToFragment(new AcademyWallFragment(), R.id.wall_container);
-                                break;
-                            case R.id.sector:
-                                switchToFragment(new ChatFragment(), R.id.group_container);
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                bottomNav.setSelectedItemId(R.id.sector);}
-
-        } else {
-
-            groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-
-            bottomNav = findViewById(R.id.bottom_bar);
-            bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        case R.id.home:
-                            switchToFragment(new HomeFragment(), R.id.home_container);
-                            break;
-                        case R.id.academy_wall:
-                            switchToFragment(new AcademyWallFragment(), R.id.wall_container);
-                            break;
-                        case R.id.sector:
-                            switchToFragment(new ChatFragment(), R.id.group_container);
-                            break;
-                    }
-                    return false;
+        bottomNav = findViewById(R.id.bottom_bar);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.home:
+                        switchToFragment(new HomeFragment(), R.id.home_container);
+                        break;
+                    case R.id.academy_wall:
+                        switchToFragment(new WallTabFragment(), R.id.wall_container);
+                        break;
+                    case R.id.sector:
+                        switchToFragment(new ChatFragment(), R.id.group_container);
+                        break;
                 }
-            });
-            bottomNav.setSelectedItemId(R.id.home);
-        }
-
-
-//        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-//
-//        bottomNav = findViewById(R.id.bottom_bar);
-//        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                switch (menuItem.getItemId()) {
-//                    case R.id.home:
-//                        switchToFragment(new HomeFragment(), R.id.home_container);
-//                        break;
-//                    case R.id.academy_wall:
-//                        switchToFragment(new AcademyWallFragment(), R.id.wall_container);
-//                        break;
-//                    case R.id.sector:
-//                        switchToFragment(new ChatFragment(), R.id.group_container);
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
-//        bottomNav.setSelectedItemId(R.id.home);
-
-//        String name = intent.getStringExtra(USER);
-//        if (name != null) {
-//            toastMessage("Welcome " + name);
-//        }
-
-
+                return false;
+            }
+        });
 
         bottomNav.setSelectedItemId(R.id.home);
     }

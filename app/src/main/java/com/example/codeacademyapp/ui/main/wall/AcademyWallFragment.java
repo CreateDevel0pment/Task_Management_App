@@ -53,11 +53,12 @@ public class AcademyWallFragment extends BaseFragment {
     private ScrollView scrollView;
     private TextView display_text_messages;
 
-//    private String currentUserId;
+    //    private String currentUserId;
     private String currentUserName;
     private String userGroup;
 
-//    private FirebaseAuth auth;
+    //    private FirebaseAuth auth;
+    View view;
 
     ChatViewModel wallChatViewModel;
 
@@ -70,7 +71,7 @@ public class AcademyWallFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
 
                     wallChatViewModel.displayMessageToWall().observe(AcademyWallFragment.this, new Observer<DataSnapshot>() {
                         @Override
@@ -90,7 +91,12 @@ public class AcademyWallFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_academy_wall, container, false);
+
+        if (view != null) {
+            return view;
+        }
+
+        view = inflater.inflate(R.layout.fragment_academy_wall, container, false);
 
         setTitle(R.string.academy_wall);
         initialisedFields(view);
@@ -136,7 +142,7 @@ public class AcademyWallFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            wallChatViewModel.saveMessageFromWallChat(currentUserName,userGroup,message,currentDate,currentTime);
+            wallChatViewModel.saveMessageFromWallChat(currentUserName, userGroup, message, currentDate, currentTime);
 
         }
     }
@@ -162,10 +168,10 @@ public class AcademyWallFragment extends BaseFragment {
 
             display_text_messages.append(
                     "_______________________________" + "\n" +
-                    chatName + " from " + chatDate + "\n"
-                    + "on " + userGroup + " at " + chatTime + "\n"
-                    + "-------------------------------" + "\n" +
-                        "# "    + chatMessage + "\n\n");
+                            chatName + " from " + chatDate + "\n"
+                            + "on " + userGroup + " at " + chatTime + "\n"
+                            + "-------------------------------" + "\n" +
+                            "# " + chatMessage + "\n\n");
 
             scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
@@ -177,7 +183,7 @@ public class AcademyWallFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                currentUserName=dataSnapshot.child("Name").getValue().toString();
+                currentUserName = dataSnapshot.child("Name").getValue().toString();
                 userGroup = dataSnapshot.child("Sector").getValue().toString();
             }
         });

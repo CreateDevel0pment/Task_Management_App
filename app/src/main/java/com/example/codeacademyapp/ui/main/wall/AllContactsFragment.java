@@ -22,6 +22,7 @@ import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActi
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.UserByIdFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -34,7 +35,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AllContactsFragment extends Fragment {
 
     RecyclerView find_friends_recycler_list;
-    FrameLayout layout;
     private DatabaseReference usersRef;
 
     @Override
@@ -46,8 +46,6 @@ public class AllContactsFragment extends Fragment {
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
         find_friends_recycler_list=view.findViewById(R.id.find_friends_recycler);
         find_friends_recycler_list.setLayoutManager(new LinearLayoutManager(getContext()));
-        layout=view.findViewById(R.id.user_byId_container);
-
 
         FirebaseRecyclerOptions<ModelFirebase> options =
                 new FirebaseRecyclerOptions.Builder<ModelFirebase>()
@@ -68,8 +66,6 @@ public class AllContactsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        layout.setVisibility(View.VISIBLE);
-
                         String visit_user_id = getRef(holder.getAdapterPosition()).getKey();
 
                         UserByIdFragment fragment=new UserByIdFragment();
@@ -78,9 +74,10 @@ public class AllContactsFragment extends Fragment {
                         bundle.putString("user_by_id",visit_user_id);
                         fragment.setArguments(bundle);
 
-                        if (getFragmentManager() != null) {
-                            getFragmentManager().beginTransaction()
-                                    .replace(R.id.user_byId_container, fragment)
+                        if (getActivity() != null) {
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.wall_container, fragment)
+                                    .addToBackStack(null)
                                     .commit();
                         }
 
@@ -97,6 +94,11 @@ public class AllContactsFragment extends Fragment {
                 AllContactsFragment.FindFriendsViewHolder viewHolder = new AllContactsFragment.FindFriendsViewHolder(view);
                 return viewHolder;
 
+            }
+
+            @Override
+            public void onError(@NonNull DatabaseError error) {
+                super.onError(error);
             }
         };
 
