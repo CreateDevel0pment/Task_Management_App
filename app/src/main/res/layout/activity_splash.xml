@@ -6,13 +6,12 @@
     android:background="@color/white"
     tools:context=".ui.splash.SplashActivity">
 
-   <ImageView
-       android:layout_margin="32dp"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:src="@drawable/logo_code_academy"
-       android:layout_centerInParent="true"
-       />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="32dp"
+        android:src="@drawable/logo_code_academy" />
 
     <ImageView
         android:layout_width="150dp"

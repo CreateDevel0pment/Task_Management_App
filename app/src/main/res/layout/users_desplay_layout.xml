@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:background="@color/white"
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -49,9 +52,33 @@
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/user_group"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/request_accept_btn"
+                android:text="accept"
+                android:textAllCaps="false"
+                android:visibility="invisible"
+                android:background="@android:color/holo_green_light"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/request_cancel_btn"
+                android:layout_marginStart="8dp"
+                android:text="cancel"
+                android:textAllCaps="false"
+                android:visibility="invisible"
+                android:background="@android:color/holo_red_dark"/>
+
+        </LinearLayout>
+
     </LinearLayout>
-
-
-
 
 </LinearLayout>

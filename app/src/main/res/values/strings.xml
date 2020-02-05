@@ -15,6 +15,19 @@
         \n if you are promoted or switched to another sector</string>
     <string name="set_profile_image">Edit</string>
     <string name="back_to_task_list">Back to task list</string>
+    <string name="change_position">Change Position:</string>
+    <string name="change_group">Change Group</string>
+    <string name="edit">Edit</string>
+    <string name="write_message">write message...</string>
+    <string name="info_page">Info Page</string>
+    <string name="new_task_view">new task view</string>
+    <string name="log_in">Log In</string>
+    <string name="forgot_your_password">Forgot your password</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="on_position">On Position:</string>
+    <string name="in_sector">In Sector:</string>
 
     <string-array name="Sector">
         <item>Choose Sector - </item>

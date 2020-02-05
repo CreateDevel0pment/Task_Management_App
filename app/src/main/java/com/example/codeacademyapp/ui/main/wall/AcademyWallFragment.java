@@ -6,9 +6,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -21,8 +26,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
+import com.example.codeacademyapp.adapters.WallPagerAdapter;
 import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -72,7 +80,6 @@ public class AcademyWallFragment extends BaseFragment {
 
                                 displayMessages(dataSnapshot);
                             }
-
                         }
                     });
                 }
@@ -84,6 +91,7 @@ public class AcademyWallFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_academy_wall, container, false);
+
         setTitle(R.string.academy_wall);
         initialisedFields(view);
 

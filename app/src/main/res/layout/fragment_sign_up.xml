@@ -34,7 +34,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint=" Email"
+                android:hint="@string/email"
                 android:drawableStart="@drawable/mail_ic"
                 android:textColor="@android:color/black"
                 android:id="@+id/person_email"
@@ -54,7 +54,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint=" Password"
+                android:hint="@string/password"
                 android:drawableStart="@drawable/pass_ic"
                 android:textColor="@android:color/black"
                 android:id="@+id/person_password"
@@ -74,7 +74,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint=" Full Name"
+                android:hint="@string/full_name"
                 android:drawableStart="@drawable/ic_person_"
                 android:textColor="@android:color/black"
                 android:id="@+id/person_name"
@@ -89,7 +89,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            android:text=" On Position:"
+            android:text="@string/on_position"
             />
 
         <androidx.cardview.widget.CardView
@@ -118,7 +118,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            android:text="In Sector:"
+            android:text="@string/in_sector"
             />
 
         <androidx.cardview.widget.CardView

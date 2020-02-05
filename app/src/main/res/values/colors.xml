@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196f3</color>
-    <color name="colorPrimaryDark">#1976d2</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#37474F</color>
     <color name="colorAccent">#EAEAE0</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="editTextColor">#000000</color>
     <color name="textColor">#242424</color>
-    <color name="colorSecondary">#0277bd</color>
+    <color name="colorSecondary">#424242</color>
     <color name="tabStyle">#FFFFFF</color>
     <color name="darkblue">#2f2e41</color>
     <color name="white">#FFFFFF</color>

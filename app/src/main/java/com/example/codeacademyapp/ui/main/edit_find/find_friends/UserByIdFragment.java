@@ -34,13 +34,11 @@ public class UserByIdFragment extends Fragment {
     private TextView userProfileName, userProfileGroup;
     private Button send_message_btn;
 
-    DatabaseReference userRef, chatRequestRef;
-    FirebaseAuth auth;
+    private DatabaseReference userRef, chatRequestRef, contactRef;
+    private FirebaseAuth auth;
 
     public UserByIdFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +48,8 @@ public class UserByIdFragment extends Fragment {
 
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
+        contactRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
+
         auth = FirebaseAuth.getInstance();
         sender_user_id = auth.getCurrentUser().getUid();
 
@@ -58,6 +58,7 @@ public class UserByIdFragment extends Fragment {
             receiver_user_id = getArguments().getString("user_by_id");
         }
 
+        current_State="new";
         retreiveUserInformations();
 
         return view;
@@ -90,9 +91,7 @@ public class UserByIdFragment extends Fragment {
                     menageChatRequest();
 
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -111,14 +110,32 @@ public class UserByIdFragment extends Fragment {
                     String request_type = dataSnapshot.child(receiver_user_id).child("request_type").getValue().toString();
 
                     if (request_type.equals("send")) {
-
                         current_State = "request send";
                         send_message_btn.setText("Cancel Chat Request");
-                    } else if (request_type.equals("received")) {
 
-                        current_State = "request send_received";
+                    } else if (request_type.equals("received")) {
+                        current_State = "request_received";
                         send_message_btn.setText("Accept Chat Request");
+
                     }
+                }else {
+
+                    contactRef.child(sender_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            if(dataSnapshot.hasChild(receiver_user_id)){
+                                current_State = "friends";
+                                send_message_btn.setText("remove this contact");
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
 
             }
@@ -141,7 +158,6 @@ public class UserByIdFragment extends Fragment {
 
                         sendChatRequest();
                     }
-
                     if (current_State.equals("request send")) {
 
                         cancelChatRequest();
@@ -149,7 +165,11 @@ public class UserByIdFragment extends Fragment {
                     if (current_State.equals("request_received")) {
 
                         acceptChatRequest();
+                    }if(current_State.equals("friends")){
+
+                        removeSpecificContact();
                     }
+
                 }
             });
 
@@ -162,8 +182,84 @@ public class UserByIdFragment extends Fragment {
 
     }
 
+    private void removeSpecificContact() {
+
+        contactRef.child(sender_user_id).child(receiver_user_id)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+
+                            send_message_btn.setText("Send Message");
+
+                            contactRef.child(receiver_user_id).child(sender_user_id)
+                                    .removeValue()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+
+                                                send_message_btn.setEnabled(true);
+                                                current_State = "new";
+                                                send_message_btn.setText("Send Message");
+
+                                            }
+
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+    }
+
     private void acceptChatRequest() {
 
+        contactRef.child(sender_user_id).child(receiver_user_id).child("Contacts").setValue("Saved")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if(task.isSuccessful()){
+
+                            contactRef.child(receiver_user_id).child(sender_user_id).child("Contacts").setValue("Saved")
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if(task.isSuccessful()){
+
+                                                chatRequestRef.child(sender_user_id).child(receiver_user_id)
+                                                        .removeValue()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                                if(task.isSuccessful()){
+
+                                                                    chatRequestRef.child(receiver_user_id).child(sender_user_id)
+                                                                            .removeValue()
+                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                                                    send_message_btn.setEnabled(true);
+                                                                                    current_State = "Friends";
+                                                                                    send_message_btn.setText("Remove this Contact");
+                                                                                }
+                                                                            });
+                                                                }
+                                                            }
+                                                        });
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
 
     }
 
@@ -177,6 +273,7 @@ public class UserByIdFragment extends Fragment {
 
                         if (task.isSuccessful()) {
 
+                            send_message_btn.setText("Send Message");
 
                             chatRequestRef.child(receiver_user_id).child(sender_user_id)
                                     .removeValue()
@@ -195,7 +292,6 @@ public class UserByIdFragment extends Fragment {
                                         }
                                     });
                         }
-
                     }
                 });
     }
@@ -227,7 +323,6 @@ public class UserByIdFragment extends Fragment {
         });
 
     }
-
 
     private void initializedView(View view) {
 
