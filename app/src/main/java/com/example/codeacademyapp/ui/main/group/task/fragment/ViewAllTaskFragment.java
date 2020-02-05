@@ -78,7 +78,7 @@ public class ViewAllTaskFragment extends Fragment {
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                 rvTasks.setLayoutManager(layoutManager);
-                TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks);
+                TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
                 rvTasks.setAdapter(taskAdapter);
             }
 

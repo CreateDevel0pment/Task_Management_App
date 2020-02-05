@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
@@ -29,6 +30,10 @@ public class HomeFragment extends BaseFragment {
 
         View view=inflater.inflate(R.layout.fragment_home, container, false);
         setTitle(R.string.home);
+
+        WebView browser = view.findViewById(R.id.home_web_view);
+        browser.loadUrl("https://codeacademy.mk");
+
 
         return view;
     }

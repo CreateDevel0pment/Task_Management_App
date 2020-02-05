@@ -59,5 +59,6 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
+    implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
 
 }

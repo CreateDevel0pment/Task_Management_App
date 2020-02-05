@@ -35,7 +35,7 @@ public class NewTaskPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Task";
+                return "My Tasks";
             case 1:
                 return "All Tasks";
             default:

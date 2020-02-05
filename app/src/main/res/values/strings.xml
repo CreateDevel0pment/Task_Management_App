@@ -14,6 +14,7 @@
     <string name="warning_text">Change position or sector only in case,
         \n if you are promoted or switched to another sector</string>
     <string name="set_profile_image">Edit</string>
+    <string name="back_to_task_list">Back to task list</string>
 
     <string-array name="Sector">
         <item>Choose Sector - </item>

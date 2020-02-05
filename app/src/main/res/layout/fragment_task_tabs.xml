@@ -8,9 +8,17 @@
     tools:context=".ui.main.group.task.fragment.TaskTabsFragment">
 
 
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/text_dark_grey"
+        android:id="@+id/toolbar_tasks_tab_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <com.google.android.material.tabs.TabLayout
         android:background="#00FFFFFF"
-        app:tabTextColor="@color/colorPrimaryDark"
+        app:tabTextColor="@color/text_dark_grey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
