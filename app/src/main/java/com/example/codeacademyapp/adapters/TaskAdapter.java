@@ -41,8 +41,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder holder, int position) {
         final TaskInformation task = tasks.get(holder.getAdapterPosition());
 
-//        holder.description.setText(task.getDescription());
-//        holder.note.setText(task.getNote());
+
         holder.name.setText(task.getName());
         holder.priority.setText(task.getTaskPriority());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +54,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                         .commit();
             }
         });
-
-
-//        holder.timeCreated.setText(task.getTimeCreated());
-
 
 
         if(task.getTaskPriority().equals("High")){
