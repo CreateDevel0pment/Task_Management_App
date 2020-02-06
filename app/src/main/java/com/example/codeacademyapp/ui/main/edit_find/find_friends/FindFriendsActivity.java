@@ -94,7 +94,7 @@ public class FindFriendsActivity extends AppCompatActivity {
             @Override
             public FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_desplay_layout, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout, parent, false);
                 FindFriendsViewHolder viewHolder = new FindFriendsViewHolder(view);
                 return viewHolder;
 

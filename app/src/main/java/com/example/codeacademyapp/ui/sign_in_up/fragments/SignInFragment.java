@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.ui.sign_in_up.UserViewModel;

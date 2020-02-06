@@ -1,11 +1,15 @@
-package com.example.codeacademyapp.ui.main.group.task.fragment;
+package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -16,13 +20,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.UserInformation;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.Task;
-import com.example.codeacademyapp.ui.main.group.task.TaskViewModel;
+import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,14 +38,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddNewTaskFragment extends Fragment {
+public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener{
 
 
     private EditText task_name, task_description, task_note;
@@ -48,25 +56,42 @@ public class AddNewTaskFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
-    FirebaseUser userFb;
-    String userID, userGroup, taskPriority;
-    TaskViewModel taskViewModel;
-    UserInformation uInfo = new UserInformation();
-    Spinner taskPrioritySpinner;
+    private FirebaseUser userFb;
+    private String userID, userGroup, taskPriority;
+    private TaskViewModel taskViewModel;
+    private Spinner taskPrioritySpinner;
+    private Task task;
+    private View rootView;
+
+    private List<AssignedUsers> assignedUsersList;
 
     public AddNewTaskFragment() {
-
     }
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_add_new_task, container, false);
+
+        if (rootView != null) {
+            return rootView;
+        }
+
+        rootView = inflater.inflate(R.layout.fragment_add_new_task, container, false);
 
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
         task_note = rootView.findViewById(R.id.task_note);
+        ImageView assignToUsersImg = rootView.findViewById(R.id.assign_to_img);
+
+
+        assignToUsersImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showUsersListDialog();
+            }
+        });
 
         create_task = rootView.findViewById(R.id.create_task_btn);
 
@@ -77,8 +102,8 @@ public class AddNewTaskFragment extends Fragment {
             userID = userFb.getUid();
         }
 
-            mFirebaseDatabase = FirebaseDatabase.getInstance();
-            myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
 
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -138,7 +163,6 @@ public class AddNewTaskFragment extends Fragment {
             }
         });
 
-
         Calendar calForDate = Calendar.getInstance();
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
@@ -149,23 +173,23 @@ public class AddNewTaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Task task = new Task();
+                task = new Task();
                 task.setName(task_name.getText().toString());
                 task.setDescription(task_description.getText().toString());
                 task.setNote(task_note.getText().toString());
                 task.setStart_date(currentDate);
                 task.setImportance(taskPriority);
                 task.setGroup(userGroup);
+                task.setAssignedUsers(assignedUsersList);
 
                 taskViewModel.createNewTask(task);
-                taskViewModel.getCreateNewTaskLiveData().observe(AddNewTaskFragment.this, new Observer<Task>() {
-                    @Override
-                    public void onChanged(Task task) {
-                        if (task.isCreated) {
-                            toastMessage("Your task is added");
-                        }
-                    }
-                });
+
+                TaskTabsFragment tabsFragment = new TaskTabsFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.task_fragments_container, tabsFragment)
+                        .commit();
+
+                toastMessage("Task created");
 
             }
         });
@@ -174,8 +198,21 @@ public class AddNewTaskFragment extends Fragment {
     }
 
 
+    private void showUsersListDialog() {
+
+        UsersToAssignTaskFragment usersToAssignTaskFragment = new UsersToAssignTaskFragment();
+        usersToAssignTaskFragment.show(getFragmentManager(), "fragment_alert");
+        usersToAssignTaskFragment.onDestroy();
+        usersToAssignTaskFragment.setTargetFragment(AddNewTaskFragment.this, 300);
+    }
+
     private void toastMessage(String message) {
 
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void passListOfUsersToAddNewTaskFragment(List<AssignedUsers> list) {
+        this.assignedUsersList = list;
     }
 }

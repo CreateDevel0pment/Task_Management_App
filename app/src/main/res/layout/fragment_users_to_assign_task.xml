@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.main.sector.task.fragment.UsersToAssignTaskFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_users_list_assignTo_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/text_dark_grey" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/users_list_task_toAssign_RV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/assign_users_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Assign Users"
+        android:textColor="@color/white" />
+
+</LinearLayout>

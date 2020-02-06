@@ -35,9 +35,9 @@ public class RequestsFragment extends Fragment {
 
     private RecyclerView requestList;
 
-    String currentUserId;
-    DatabaseReference chat_request_ref, usersRef;
-    FirebaseAuth auth;
+    private String currentUserId;
+    private DatabaseReference chat_request_ref, usersRef;
+    private FirebaseAuth auth;
 
 
     public RequestsFragment() {
@@ -140,7 +140,7 @@ public class RequestsFragment extends Fragment {
             @Override
             public RequestsContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.users_desplay_layout,parent,false);
+                View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout,parent,false);
 
                 return new RequestsContactsHolder(view);
             }

@@ -2,6 +2,8 @@ package com.example.codeacademyapp.data.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.List;
+
 public class Task {
 
     private String name;
@@ -14,9 +16,8 @@ public class Task {
     private String user_Id;
     private String id;
     private String group;
+    private List<AssignedUsers> assignedUsers;
 
-    @Exclude
-    public boolean isNew,isCreated;
 
     public Task() {
     }
@@ -48,6 +49,14 @@ public class Task {
         this.importance = importance;
         this.due_date = due_date;
         this.user_Id = user_Id;
+    }
+
+    public List<AssignedUsers> getAssignedUsers() {
+        return assignedUsers;
+    }
+
+    public void setAssignedUsers(List<AssignedUsers> assignedUsers) {
+        this.assignedUsers = assignedUsers;
     }
 
     public String getGroup() {
@@ -130,12 +139,4 @@ public class Task {
         this.id = id;
     }
 
-
-    public boolean isNew() {
-        return isNew;
-    }
-
-    public void setNew(boolean aNew) {
-        isNew = aNew;
-    }
 }

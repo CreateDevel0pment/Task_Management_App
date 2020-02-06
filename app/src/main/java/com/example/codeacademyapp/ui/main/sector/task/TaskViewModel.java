@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.group.task;
+package com.example.codeacademyapp.ui.main.sector.task;
 
 import android.app.Application;
 

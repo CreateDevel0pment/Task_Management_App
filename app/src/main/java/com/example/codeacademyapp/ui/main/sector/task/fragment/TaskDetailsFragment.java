@@ -1,14 +1,12 @@
-package com.example.codeacademyapp.ui.main.group.task.fragment;
+package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +16,6 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.TaskInformation;
-import com.example.codeacademyapp.ui.main.group.task.TaskActivity;
-import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.

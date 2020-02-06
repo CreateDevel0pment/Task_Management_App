@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.TaskInformation;
-import com.example.codeacademyapp.ui.main.group.task.fragment.TaskDetailsFragment;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.TaskDetailsFragment;
 
 import java.util.List;
 
@@ -41,7 +41,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder holder, int position) {
         final TaskInformation task = tasks.get(holder.getAdapterPosition());
 
-
         holder.name.setText(task.getName());
         holder.priority.setText(task.getTaskPriority());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -63,9 +62,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         } else {
             holder.priority.setTextColor(ContextCompat.getColor(context, R.color.green));
         }
-
-
-
     }
 
     @Override
@@ -82,12 +78,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             super(itemView);
 
             cardView = itemView.findViewById(R.id.cardview_item_task);
-//
-//            description = itemView.findViewById(R.id.task_desc_item);
-//            note = itemView.findViewById(R.id.task_note_item);
             priority = itemView.findViewById(R.id.task_priority);
             name = itemView.findViewById(R.id.task_name_item);
-//            timeCreated = itemView.findViewById(R.id.task_timeCreated_item);
 
         }
     }

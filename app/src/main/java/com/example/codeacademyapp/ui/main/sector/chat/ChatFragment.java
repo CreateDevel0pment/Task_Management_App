@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.group.chat;
+package com.example.codeacademyapp.ui.main.sector.chat;
 
 
 import android.annotation.SuppressLint;
@@ -21,7 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.group.task.TaskActivity;
+import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;

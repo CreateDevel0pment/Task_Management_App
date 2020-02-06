@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.codeacademyapp.ui.main.group.task.fragment.PersonalTaskFragment;
-import com.example.codeacademyapp.ui.main.group.task.fragment.ViewAllTaskFragment;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.PersonalTaskFragment;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.ViewAllTaskFragment;
 
 public class NewTaskPagerAdapter extends FragmentPagerAdapter {
 

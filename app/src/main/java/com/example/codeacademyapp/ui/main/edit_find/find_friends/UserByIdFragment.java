@@ -58,7 +58,7 @@ public class UserByIdFragment extends Fragment {
             receiver_user_id = getArguments().getString("user_by_id");
         }
 
-        current_State="new";
+        current_State = "new";
         retreiveUserInformations();
 
         return view;
@@ -92,6 +92,7 @@ public class UserByIdFragment extends Fragment {
 
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -118,16 +119,15 @@ public class UserByIdFragment extends Fragment {
                         send_message_btn.setText("Accept Chat Request");
 
                     }
-                }else {
+                } else {
 
                     contactRef.child(sender_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if(dataSnapshot.hasChild(receiver_user_id)){
+                            if (dataSnapshot.hasChild(receiver_user_id)) {
                                 current_State = "friends";
                                 send_message_btn.setText("remove this contact");
-
                             }
                         }
 
@@ -137,7 +137,6 @@ public class UserByIdFragment extends Fragment {
                         }
                     });
                 }
-
             }
 
             @Override
@@ -165,21 +164,17 @@ public class UserByIdFragment extends Fragment {
                     if (current_State.equals("request_received")) {
 
                         acceptChatRequest();
-                    }if(current_State.equals("friends")){
+                    }
+                    if (current_State.equals("friends")) {
 
                         removeSpecificContact();
                     }
-
                 }
             });
-
-
         } else {
 
             send_message_btn.setVisibility(View.INVISIBLE);
         }
-
-
     }
 
     private void removeSpecificContact() {
@@ -223,14 +218,14 @@ public class UserByIdFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             contactRef.child(receiver_user_id).child(sender_user_id).child("Contacts").setValue("Saved")
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
 
                                                 chatRequestRef.child(sender_user_id).child(receiver_user_id)
                                                         .removeValue()
@@ -238,7 +233,7 @@ public class UserByIdFragment extends Fragment {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
 
-                                                                if(task.isSuccessful()){
+                                                                if (task.isSuccessful()) {
 
                                                                     chatRequestRef.child(receiver_user_id).child(sender_user_id)
                                                                             .removeValue()

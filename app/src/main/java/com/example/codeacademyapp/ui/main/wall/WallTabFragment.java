@@ -19,7 +19,6 @@ import com.google.android.material.tabs.TabLayout;
  */
 public class WallTabFragment extends Fragment {
 
-    private TabLayout tabLayout;
     private ViewPager viewPager;
 
     View view;
@@ -33,7 +32,7 @@ public class WallTabFragment extends Fragment {
         }
         view = inflater.inflate(R.layout.fragment_wall_pager, container, false);
 
-        tabLayout = view.findViewById(R.id.tab_layout_public_wall);
+        TabLayout tabLayout = view.findViewById(R.id.tab_layout_public_wall);
         viewPager = view.findViewById(R.id.view_pager_public_wall);
         WallPagerAdapter adapter = new WallPagerAdapter(getChildFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

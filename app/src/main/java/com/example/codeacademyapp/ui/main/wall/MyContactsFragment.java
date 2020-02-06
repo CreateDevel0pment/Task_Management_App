@@ -32,11 +32,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class MyContactsFragment extends Fragment {
 
-    private RecyclerView my_contact_list;
-
-    DatabaseReference contactsRef,usersRef;
-    FirebaseAuth auth;
-    String currentUserId;
+    private DatabaseReference contactsRef,usersRef;
+    private FirebaseAuth auth;
+    private String currentUserId;
 
 
     public MyContactsFragment() {
@@ -49,8 +47,7 @@ public class MyContactsFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_my_contacts, container, false);
 
 
-
-        my_contact_list=view.findViewById(R.id.my_contact_list);
+        RecyclerView my_contact_list = view.findViewById(R.id.my_contact_list);
         my_contact_list.setLayoutManager(new LinearLayoutManager(getContext()));
 
         auth=FirebaseAuth.getInstance();
@@ -107,7 +104,7 @@ public class MyContactsFragment extends Fragment {
                     @Override
                     public MyContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_desplay_layout,parent,false);
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout,parent,false);
 
                         return new MyContactsHolder(view);
                     }

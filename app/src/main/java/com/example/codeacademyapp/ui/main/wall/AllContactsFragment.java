@@ -4,21 +4,17 @@ package com.example.codeacademyapp.ui.main.wall;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.ModelFirebase;
-import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.UserByIdFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -34,17 +30,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class AllContactsFragment extends Fragment {
 
-    RecyclerView find_friends_recycler_list;
-    private DatabaseReference usersRef;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_all_contacts, container, false);
 
-        usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
-        find_friends_recycler_list=view.findViewById(R.id.find_friends_recycler);
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        RecyclerView find_friends_recycler_list = view.findViewById(R.id.find_friends_recycler);
         find_friends_recycler_list.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseRecyclerOptions<ModelFirebase> options =
@@ -90,7 +83,7 @@ public class AllContactsFragment extends Fragment {
             @Override
             public AllContactsFragment.FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_desplay_layout, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout, parent, false);
                 AllContactsFragment.FindFriendsViewHolder viewHolder = new AllContactsFragment.FindFriendsViewHolder(view);
                 return viewHolder;
 

@@ -1,7 +1,6 @@
-package com.example.codeacademyapp.ui.main.group.task.fragment;
+package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -17,8 +16,6 @@ import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
-import com.example.codeacademyapp.ui.main.MainActivity;
-import com.example.codeacademyapp.ui.main.group.task.TaskActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -29,12 +26,12 @@ public class TaskTabsFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private FragmentManager fragmentManager;
 
-    FloatingActionButton addNewTaskFloatbtn;
 
-    public TaskTabsFragment(FragmentManager supportFragmentManager) {
-        this.fragmentManager = supportFragmentManager;
+    private FloatingActionButton addNewTaskFloatbtn;
+
+    public TaskTabsFragment() {
+
     }
 
 
@@ -59,17 +56,21 @@ public class TaskTabsFragment extends Fragment {
         });
 
         addNewTaskFloatbtn = rootView.findViewById(R.id.add_new_task_floating_btn);
+
         addNewTaskFloatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
-                getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, addNewTaskFragment).commit();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.task_fragments_container, addNewTaskFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
         tabLayout = rootView.findViewById(R.id.tab_layout_new_tasks);
         viewPager = rootView.findViewById(R.id.view_pager_new_tasks);
-        NewTaskPagerAdapter adapter = new NewTaskPagerAdapter(fragmentManager,
+        NewTaskPagerAdapter adapter = new NewTaskPagerAdapter(getFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         viewPager.setAdapter(adapter);

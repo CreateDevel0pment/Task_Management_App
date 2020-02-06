@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.group.chat;
+package com.example.codeacademyapp.ui.main.sector.chat;
 
 import android.app.Application;
 

@@ -29,11 +29,10 @@ public class CreateTaskRepository {
         if (!task.getName().equals("") && !task.getDescription().equals("") &&
                 !task.getNote().equals("")) {
 
-
-        FirebaseUser userFb = mAuth.getCurrentUser();
-        String userID;
-        if (userFb != null) {
-            userID = userFb.getUid();
+//        FirebaseUser userFb = mAuth.getCurrentUser();
+//        String userID;
+//        if (userFb != null) {
+//            userID = userFb.getUid();}
 
             myRef.child("Tasks").child(task.getName())
                     .child("Description")
@@ -59,7 +58,11 @@ public class CreateTaskRepository {
                     .child("TaskPriority")
                     .setValue(task.getImportance());
 
-        }
+            myRef.child("Tasks").child(task.getName())
+                    .child("AssignedUsers")
+                    .setValue(task.getAssignedUsers());
+
+
         }
         return setTaskInformation;
     }

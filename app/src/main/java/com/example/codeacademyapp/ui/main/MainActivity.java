@@ -20,16 +20,13 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
-import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
-import com.example.codeacademyapp.ui.main.group.chat.ChatFragment;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
-import com.example.codeacademyapp.ui.main.wall.AcademyWallFragment;
 import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import static com.example.codeacademyapp.utils.Constants.USER;
 
 public class MainActivity extends AppCompatActivity {
 

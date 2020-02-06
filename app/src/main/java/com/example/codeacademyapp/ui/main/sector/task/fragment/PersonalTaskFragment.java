@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.group.task.fragment;
+package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.os.Bundle;
