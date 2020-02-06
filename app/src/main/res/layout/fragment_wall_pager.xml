@@ -7,12 +7,14 @@
     tools:context=".ui.main.wall.WallTabFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:background="@color/colorPrimary"
-        android:layout_margin="2dp"
-        app:tabTextColor="@color/white"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        app:tabTextColor="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        app:tabMode="scrollable"
+        android:layout_height="25dp"
+        app:tabMode="fixed"
         app:tabIndicatorColor="@color/colorSecondary"
         android:id="@+id/tab_layout_public_wall"/>
 

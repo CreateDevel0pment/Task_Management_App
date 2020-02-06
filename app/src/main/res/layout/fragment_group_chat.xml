@@ -37,6 +37,16 @@
 
     </ScrollView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_task_button"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/my_linear_layout"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/assignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
 
     <LinearLayout
@@ -44,8 +54,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:weightSum="10"
+        android:padding="8dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:id="@+id/my_linear_layout">
@@ -53,17 +64,15 @@
         <androidx.cardview.widget.CardView
             app:cardElevation="10dp"
             android:layout_weight="8"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
           >
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="8dp"
             android:hint="@string/write_message"
             android:textColor="@android:color/black"
             android:background="@android:color/white"
@@ -82,15 +91,15 @@
             android:src="@drawable/ic_send"
             android:background="@android:color/transparent"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/new_task_button"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="8dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:src="@drawable/assignment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/new_task_button"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:backgroundTint="@color/colorPrimaryDark"-->
+<!--            android:src="@drawable/assignment"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
 
 
     </LinearLayout>

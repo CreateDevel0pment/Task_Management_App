@@ -166,12 +166,9 @@ public class AcademyWallFragment extends BaseFragment {
             String chatName = (String) iterator.next().getValue();
             String chatTime = (String) iterator.next().getValue();
 
-            display_text_messages.append(
-                    "_______________________________" + "\n" +
-                            chatName + " from " + chatDate + "\n"
-                            + "on " + userGroup + " at " + chatTime + "\n"
-                            + "-------------------------------" + "\n" +
-                            "# " + chatMessage + "\n\n");
+            display_text_messages.append(chatName + " from " + chatDate + "\n"
+                            + "#message: " + chatMessage + "\n" +
+                            userGroup + " at " + chatTime + "\n\n");
 
             scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }

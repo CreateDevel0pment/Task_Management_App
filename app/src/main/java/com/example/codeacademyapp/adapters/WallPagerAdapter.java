@@ -21,7 +21,7 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         AcademyWallFragment academyWallFragment = new AcademyWallFragment();
-        AllContactsFragment allContactsFragment = new AllContactsFragment();
+//        AllContactsFragment allContactsFragment = new AllContactsFragment();
         MyContactsFragment myContactsFragment = new MyContactsFragment();
         RequestsFragment requestsFragment = new RequestsFragment();
 
@@ -29,9 +29,11 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
             return academyWallFragment;
         } else if (position == 1) {
             return myContactsFragment;
-        }else if (position == 2) {
-            return allContactsFragment;
-        }else {
+        }
+//        else if (position == 2) {
+//            return allContactsFragment;
+//        }
+        else {
             return requestsFragment;
         }
 
@@ -39,7 +41,7 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     public CharSequence getPageTitle(int position) {
@@ -48,9 +50,9 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
                 return "Wall";
             case 1:
                 return "My Contacts";
+//            case 1:
+//                return "Find Contact";
             case 2:
-                return "Find Contact";
-            case 3:
                 return "Requests";
             default:
                 return null;

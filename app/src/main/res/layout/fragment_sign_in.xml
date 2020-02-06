@@ -9,6 +9,7 @@
     tools:context=".ui.sign_in_up.fragments.SignInFragment">
 
     <androidx.cardview.widget.CardView
+        app:cardCornerRadius="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -30,6 +31,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        app:cardCornerRadius="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -56,10 +58,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/white"
+        android:layout_marginTop="16dp"
         android:id="@+id/log_in_btn"
+        android:textSize="18sp"
         android:hint="@string/log_in"
-        android:textColorHint="@android:color/white"
+        android:textColorHint="@color/colorPrimary"
         />
 
     <TextView

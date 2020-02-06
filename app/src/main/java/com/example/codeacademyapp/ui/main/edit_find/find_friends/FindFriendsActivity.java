@@ -71,7 +71,7 @@ public class FindFriendsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        layout.setVisibility(View.VISIBLE);
+//                        layout.setVisibility(View.VISIBLE);
 
                         String visit_user_id = getRef(holder.getAdapterPosition()).getKey();
 

@@ -17,7 +17,7 @@
             android:id="@+id/edit_circular_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/profile_image"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="2dp" />
@@ -29,6 +29,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
+            app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
@@ -49,6 +50,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
+            app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
@@ -63,6 +65,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            app:cardCornerRadius="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -84,6 +87,7 @@
         <TextView
             android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
+            android:textSize="16sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="10dp"
@@ -93,6 +97,7 @@
             />
 
         <androidx.cardview.widget.CardView
+            app:cardCornerRadius="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -112,6 +117,7 @@
 
         <TextView
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -122,6 +128,7 @@
             />
 
         <androidx.cardview.widget.CardView
+            app:cardCornerRadius="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -147,10 +154,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_marginEnd="25dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/white"
             android:id="@+id/sign_up_btn"
             android:hint="Sign Up"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"/>
+            android:textSize="18sp"
+            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 </ScrollView>
