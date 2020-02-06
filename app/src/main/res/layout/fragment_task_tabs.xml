@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.group.task.fragment.TaskTabsFragment">
+    tools:context=".ui.main.sector.task.fragment.TaskTabsFragment">
 
 
     <androidx.appcompat.widget.Toolbar
+        android:layout_alignParentTop="true"
         app:titleTextColor="@color/text_dark_grey"
         android:id="@+id/toolbar_tasks_tab_fragment"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_below="@+id/toolbar_tasks_tab_fragment"
         android:background="#00FFFFFF"
         app:tabTextColor="@color/text_dark_grey"
         android:layout_width="match_parent"
@@ -26,8 +28,19 @@
         android:id="@+id/tab_layout_new_tasks"/>
 
     <androidx.viewpager.widget.ViewPager
+        android:layout_below="@+id/tab_layout_new_tasks"
         android:id="@+id/view_pager_new_tasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_new_task_floating_btn"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/add_new"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

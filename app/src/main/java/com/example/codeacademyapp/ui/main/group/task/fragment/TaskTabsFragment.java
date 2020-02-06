@@ -19,6 +19,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.main.group.task.TaskActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -29,6 +30,8 @@ public class TaskTabsFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FragmentManager fragmentManager;
+
+    FloatingActionButton addNewTaskFloatbtn;
 
     public TaskTabsFragment(FragmentManager supportFragmentManager) {
         this.fragmentManager = supportFragmentManager;
@@ -46,14 +49,21 @@ public class TaskTabsFragment extends Fragment {
         toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.white)));
 
         toolbar.setNavigationIcon(R.drawable.ic_back_button_white);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), MainActivity.class);
-//                intent.putExtra("inflateGroupChat", "inflateGroupChat");
-//                startActivity(intent);
 
                 getActivity().onBackPressed();
+            }
+        });
+
+        addNewTaskFloatbtn = rootView.findViewById(R.id.add_new_task_floating_btn);
+        addNewTaskFloatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
+                getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, addNewTaskFragment).commit();
             }
         });
 

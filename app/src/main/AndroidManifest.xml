@@ -17,7 +17,7 @@
             android:name=".ui.main.edit_find.find_friends.FindFriendsActivity"
             android:parentActivityName=".ui.main.MainActivity"></activity>
         <activity android:name=".ui.main.edit_find.edit.EditProfileActivity" />
-        <activity android:name=".ui.main.group.task.TaskActivity" />
+        <activity android:name=".ui.main.sector.task.TaskActivity" />
         <activity
             android:name=".ui.sign_in_up.SignUpActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -36,6 +36,7 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name=".ui.main.group.task.TaskActivity" />
     </application>
 
 </manifest>

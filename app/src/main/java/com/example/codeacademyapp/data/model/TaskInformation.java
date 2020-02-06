@@ -4,7 +4,7 @@ public class TaskInformation {
 
     private String Note;
     private String Description;
-    private String Group;
+    private String Sector;
     private String Name;
     private String TimeCreated;
     private String TaskPriority;
@@ -16,7 +16,7 @@ public class TaskInformation {
         this.Name = name;
         this.Description = description;
         this.Note = note;
-        this.Group = group;
+        this.Sector = group;
         this.TimeCreated = timeCreated;
         this.TaskPriority = taskPriority;
     }
@@ -53,12 +53,12 @@ public class TaskInformation {
         this.Description = description;
     }
 
-    public String getGroup() {
-        return Group;
+    public String getSector() {
+        return Sector;
     }
 
-    public void setGroup(String group) {
-        this.Group = group;
+    public void setSector(String sector) {
+        this.Sector = sector;
     }
 
     public String getTimeCreated() {

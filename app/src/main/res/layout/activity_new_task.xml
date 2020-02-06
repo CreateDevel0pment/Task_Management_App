@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main.group.task.TaskActivity">
+    tools:context=".ui.main.sector.task.TaskActivity">
 
     <FrameLayout
         android:id="@+id/task_fragments_container"

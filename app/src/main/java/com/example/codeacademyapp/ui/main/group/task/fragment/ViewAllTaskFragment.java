@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.adapters.TaskAdapter;
+import com.example.codeacademyapp.ui.main.group.chat.ChatViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,8 +42,10 @@ public class ViewAllTaskFragment extends Fragment {
     private DatabaseReference myRef;
     FirebaseUser userFb;
 
+    private ChatViewModel groupChatViewModel;
+
     RecyclerView rvTasks;
-//    FirebaseRecyclerAdapter<TaskInformation, TaskViewHolder> adapter;
+    String userSector;
 
     public ViewAllTaskFragment() {
         // Required empty public constructor
@@ -51,6 +57,16 @@ public class ViewAllTaskFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_view_all_task, container, false);
 
+        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    userSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                }
+            }
+        });
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
@@ -65,15 +81,19 @@ public class ViewAllTaskFragment extends Fragment {
 
 
                     String description  = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
-                    String group  = taskDataSnapshot.getValue(TaskInformation.class).getGroup();
+                    String group  = taskDataSnapshot.getValue(TaskInformation.class).getSector();
                     String note  = taskDataSnapshot.getValue(TaskInformation.class).getNote();
                     String name  = taskDataSnapshot.getValue(TaskInformation.class).getName();
                     String timeCreated  = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
                     String taskPriority  = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
 
-                    TaskInformation task = new TaskInformation(name, description, note,  group, timeCreated, taskPriority);
+                    if(group.equals(userSector)){
+                        TaskInformation task = new TaskInformation(name, description, note,  group, timeCreated, taskPriority);
 
-                    tasks.add(task);
+                        tasks.add(task);
+                    }
+
+
                 }
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);

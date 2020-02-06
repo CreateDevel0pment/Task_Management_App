@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.main.group.task.fragment.ViewAllTaskFragment">
+    tools:context=".ui.main.sector.task.fragment.ViewAllTaskFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_margin="8dp"
