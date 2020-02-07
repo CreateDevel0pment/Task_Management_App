@@ -67,15 +67,14 @@ public class PersonalTaskFragment extends Fragment {
             }
         });
 
+        tasks = new ArrayList<>();
+        assignedUsersList = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
-
-                    assignedUsersList = new ArrayList<>();
-                    tasks = new ArrayList<>();
 
                     assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
                     description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
@@ -87,16 +86,15 @@ public class PersonalTaskFragment extends Fragment {
 
                     if (assignedUsersList != null) {
                         for (int i = 0; i <assignedUsersList.size(); i++) {
-
                             AssignedUsers assignedUser;
                             assignedUser = assignedUsersList.get(i);
-                            String id = assignedUser.getUserId();
+                            id = assignedUser.getUserId();
+                        }
 
-                            if (id.equals(userId)) {
-                                TaskInformation task =
-                                        new TaskInformation(name, description, note, group, timeCreated, taskPriority);
-                                tasks.add(task);
-                            }
+                        if (id.equals(userId)) {
+                            TaskInformation task =
+                                    new TaskInformation(name, description, note, group, timeCreated, taskPriority);
+                            tasks.add(task);
                         }
                     }
 
