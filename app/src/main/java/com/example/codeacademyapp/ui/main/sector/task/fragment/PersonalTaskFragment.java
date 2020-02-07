@@ -85,15 +85,21 @@ public class PersonalTaskFragment extends Fragment {
                     timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
                     taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
 
-                    for (int i = 0; i <= assignedUsersList.size(); i++) {
-                        id = assignedUsersList.iterator().next().getUserId();
-                        boolean personalTask = id.equals(userId);
+                    if (assignedUsersList != null) {
+                        for (int i = 0; i <assignedUsersList.size(); i++) {
 
-                        if (personalTask) {
-                            TaskInformation task = new TaskInformation(name, description, note, group, timeCreated, taskPriority);
-                            tasks.add(task);
+                            AssignedUsers assignedUser;
+                            assignedUser = assignedUsersList.get(i);
+                            String id = assignedUser.getUserId();
+
+                            if (id.equals(userId)) {
+                                TaskInformation task =
+                                        new TaskInformation(name, description, note, group, timeCreated, taskPriority);
+                                tasks.add(task);
+                            }
                         }
                     }
+
                 }
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
