@@ -3,30 +3,113 @@ package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.adapters.TaskAdapter;
+import com.example.codeacademyapp.data.model.AssignedUsers;
+import com.example.codeacademyapp.data.model.TaskInformation;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PersonalTaskFragment extends Fragment {
 
+    private List<TaskInformation> tasks;
+    private DatabaseReference myRef;
+    private DatabaseReference myRefList;
+
+    private RecyclerView rvPersonalTasks;
+    private String userId;
+    private String name, group, note, timeCreated, taskPriority, description;
+    private String id;
+
+
+    private List<AssignedUsers> assignedUsersList;
 
     public PersonalTaskFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal_task, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_personal_task, container, false);
+
+        rvPersonalTasks = rootView.findViewById(R.id.personal_task_list_RV);
+
+        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+
+        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(DataSnapshot dataSnapshot) {
+
+                userId = dataSnapshot.getKey();
+            }
+        });
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
+
+                    assignedUsersList = new ArrayList<>();
+                    tasks = new ArrayList<>();
+
+                    assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
+                    description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
+                    group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
+                    note = taskDataSnapshot.getValue(TaskInformation.class).getNote();
+                    name = taskDataSnapshot.getValue(TaskInformation.class).getName();
+                    timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
+                    taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
+
+                    for (int i = 0; i <= assignedUsersList.size(); i++) {
+                        id = assignedUsersList.iterator().next().getUserId();
+                        boolean personalTask = id.equals(userId);
+
+                        if (personalTask) {
+                            TaskInformation task = new TaskInformation(name, description, note, group, timeCreated, taskPriority);
+                            tasks.add(task);
+                        }
+                    }
+                }
+
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                rvPersonalTasks.setLayoutManager(layoutManager);
+                TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
+                rvPersonalTasks.setAdapter(taskAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return rootView;
     }
 
 }

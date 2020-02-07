@@ -72,8 +72,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
                 if(getDialog()!=null){
                     getDialog().dismiss();}
             }
-
-
         });
 
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");

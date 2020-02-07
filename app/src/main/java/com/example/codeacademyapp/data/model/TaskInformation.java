@@ -1,5 +1,7 @@
 package com.example.codeacademyapp.data.model;
 
+import java.util.List;
+
 public class TaskInformation {
 
     private String Note;
@@ -8,6 +10,8 @@ public class TaskInformation {
     private String Name;
     private String TimeCreated;
     private String TaskPriority;
+    private List<AssignedUsers> AssignedUsers;
+
 
     public TaskInformation() {
     }
@@ -68,4 +72,13 @@ public class TaskInformation {
     public void setTimeCreated(String timeCreated) {
         TimeCreated = timeCreated;
     }
+
+    public List<AssignedUsers> getAssignedUsers() {
+        return AssignedUsers;
+    }
+
+    public void setAssignedUsers(List<AssignedUsers> assignedUsers) {
+        this.AssignedUsers = assignedUsers;
+    }
+
 }

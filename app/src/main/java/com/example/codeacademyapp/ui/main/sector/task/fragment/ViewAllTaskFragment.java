@@ -46,7 +46,6 @@ public class ViewAllTaskFragment extends Fragment {
     public ViewAllTaskFragment() {
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +56,7 @@ public class ViewAllTaskFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_view_all_task, container, false);
 
         ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
@@ -84,7 +84,6 @@ public class ViewAllTaskFragment extends Fragment {
                     String name = taskDataSnapshot.getValue(TaskInformation.class).getName();
                     String timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
                     String taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
-
 
                     if (group != null) {
                         if (group.equals(userSector)) {
