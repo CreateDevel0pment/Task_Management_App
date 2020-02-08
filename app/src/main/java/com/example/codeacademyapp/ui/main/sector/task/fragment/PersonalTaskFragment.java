@@ -35,11 +35,10 @@ public class PersonalTaskFragment extends Fragment {
 
     private List<TaskInformation> tasks;
     private DatabaseReference myRef;
-    private DatabaseReference myRefList;
 
     private RecyclerView rvPersonalTasks;
     private String userId;
-    private String name, group, note, timeCreated, taskPriority, description;
+    private String name, group, note, timeCreated, taskPriority, description, endDate;
     private String id;
 
 
@@ -83,6 +82,7 @@ public class PersonalTaskFragment extends Fragment {
                     name = taskDataSnapshot.getValue(TaskInformation.class).getName();
                     timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
                     taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
+                    endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
 
                     if (assignedUsersList != null) {
                         for (int i = 0; i <assignedUsersList.size(); i++) {
@@ -93,7 +93,7 @@ public class PersonalTaskFragment extends Fragment {
 
                         if (id.equals(userId)) {
                             TaskInformation task =
-                                    new TaskInformation(name, description, note, group, timeCreated, taskPriority);
+                                    new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
                             tasks.add(task);
                         }
                     }

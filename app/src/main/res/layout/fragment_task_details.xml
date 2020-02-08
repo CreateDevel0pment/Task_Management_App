@@ -5,31 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#D5D5D5"
     tools:context=".ui.main.sector.task.fragment.TaskDetailsFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        app:titleTextColor="@color/text_dark_grey"
-        android:id="@+id/toolbar_task_details"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent">
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:text="Back to all tasks"-->
-<!--            android:textColor="@color/text_dark_grey"-->
-<!--            android:textSize="14sp" />-->
-
-    </androidx.appcompat.widget.Toolbar>
-
     <androidx.cardview.widget.CardView
-        android:layout_below="@+id/toolbar_task_details"
+        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
         app:cardBackgroundColor="@color/white"
@@ -40,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
-            android:gravity="center"
+            android:gravity="top"
             android:orientation="vertical">
 
 
@@ -51,8 +33,6 @@
                 android:layout_margin="16dp"
                 android:textColor="@color/text_dark_grey"
                 android:textSize="42sp" />
-
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview_item_task"
@@ -137,6 +117,34 @@
                 <TextView
                     android:id="@+id/task_dateCreated_details"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/text_dark_grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Task should be finished by:"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/task_endDate_details"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/datePicker_dialog_main_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.sector.task.fragment.DatePickerDialogFragment">
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+                <DatePicker
+                    android:id="@+id/datePicker"
+                    android:headerBackground="@color/colorPrimaryDark"
+                    android:calendarTextColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/pick_a_date_btn"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:text="Pick a date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

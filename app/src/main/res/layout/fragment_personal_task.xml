@@ -7,7 +7,6 @@
     tools:context=".ui.main.sector.task.fragment.PersonalTaskFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="8dp"
         android:id="@+id/personal_task_list_RV"
         android:background="@color/colorAccent"
         android:layout_width="match_parent"

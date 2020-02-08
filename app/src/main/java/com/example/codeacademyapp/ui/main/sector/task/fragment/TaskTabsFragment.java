@@ -31,29 +31,20 @@ public class TaskTabsFragment extends Fragment {
     private FloatingActionButton addNewTaskFloatbtn;
 
     public TaskTabsFragment() {
-
     }
 
+    private View rootView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_task_tabs, container, false);
 
-        Toolbar toolbar = rootView.findViewById(R.id.toolbar_tasks_tab_fragment);
-        toolbar.setTitle("Back to group chat");
-        toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.white)));
+        if(rootView!=null){
+            return rootView;
+        }
 
-        toolbar.setNavigationIcon(R.drawable.ic_back_button_white);
+        rootView = inflater.inflate(R.layout.fragment_task_tabs, container, false);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getActivity().onBackPressed();
-            }
-        });
 
         addNewTaskFloatbtn = rootView.findViewById(R.id.add_new_task_floating_btn);
 

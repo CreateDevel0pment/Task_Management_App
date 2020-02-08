@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.UsersToAssignTaskFragment">
@@ -15,19 +15,37 @@
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/text_dark_grey" />
 
+    <ScrollView
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/users_list_task_toAssign_RV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent" />
+    </ScrollView>
 
-    <Button
-        android:id="@+id/assign_users_btn"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Assign Users"
-        android:textColor="@color/white" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <Button
+            android:textAllCaps="false"
+            android:id="@+id/assign_users_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Assign members"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

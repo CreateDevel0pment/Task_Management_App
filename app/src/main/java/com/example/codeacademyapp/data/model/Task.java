@@ -1,7 +1,5 @@
 package com.example.codeacademyapp.data.model;
 
-import com.google.firebase.database.Exclude;
-
 import java.util.List;
 
 public class Task {
@@ -12,7 +10,7 @@ public class Task {
     private int state;
     private String importance;
     private String start_date;
-    private String due_date;
+    private String endDate;
     private String user_Id;
     private String id;
     private String group;
@@ -36,7 +34,7 @@ public class Task {
         this.state = state;
         this.importance = importance;
         this.start_date = start_date;
-        this.due_date = due_date;
+        this.endDate = due_date;
         this.user_Id = user_Id;
         this.id = id;
     }
@@ -47,7 +45,7 @@ public class Task {
         this.note = note;
         this.state = state;
         this.importance = importance;
-        this.due_date = due_date;
+        this.endDate = due_date;
         this.user_Id = user_Id;
     }
 
@@ -115,12 +113,12 @@ public class Task {
         this.start_date = start_date;
     }
 
-    public String getDue_date() {
-        return due_date;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setDue_date(String due_date) {
-        this.due_date = due_date;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getUser_Id() {

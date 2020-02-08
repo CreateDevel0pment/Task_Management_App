@@ -11,6 +11,8 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="materialCardViewStyle">@color/tabStyle</item>
 
+        <item name="android:datePickerDialogTheme">@style/DatePicker.AppTheme.DialogTheme</item>
+
     </style>
 
     <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
@@ -18,6 +20,29 @@
         <item name="colorBackgroundFloating">#ffffff</item>
         <item name="editTextStyle">@color/editTextColor</item>
     </style>
+
+    <style name="Base.Theme.AppCompat.Dialog." parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="colorBackgroundFloating">#ffffff</item>
+        <item name="editTextStyle">@color/editTextColor</item>
+        <item name="android:backgroundTint">#00FFFFFF</item>
+    </style>
+
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <!--  other attributes  -->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="DatePicker.AppTheme.DialogTheme" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/white</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:calendarTextColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHighlight">@color/colorPrimaryDark</item>
+        <item name="android:dateTextAppearance">@color/colorPrimaryDark</item>
+    </style>
+
 
 
 </resources>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.adapters.TaskAdapter;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
@@ -37,6 +38,7 @@ public class ViewAllTaskFragment extends Fragment {
 
     private List<TaskInformation> tasks;
     private DatabaseReference myRef;
+    private List<AssignedUsers> assignedUsersList;
 
     private RecyclerView rvTasks;
     private String userSector;
@@ -69,6 +71,7 @@ public class ViewAllTaskFragment extends Fragment {
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
 
+        assignedUsersList = new ArrayList<>();
         rvTasks = rootView.findViewById(R.id.task_list_RV);
         tasks = new ArrayList<>();
 
@@ -77,18 +80,23 @@ public class ViewAllTaskFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
-
+                    assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
                     String description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
                     String group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
                     String note = taskDataSnapshot.getValue(TaskInformation.class).getNote();
                     String name = taskDataSnapshot.getValue(TaskInformation.class).getName();
                     String timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
                     String taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
+                    String endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
 
-                    if (group != null) {
-                        if (group.equals(userSector)) {
-                            TaskInformation task = new TaskInformation(name, description, note, group, timeCreated, taskPriority);
-                            tasks.add(task);
+
+                    if(assignedUsersList==null){
+                        if (group != null) {
+                            if (group.equals(userSector)) {
+                                TaskInformation task = new TaskInformation(name, description,
+                                        note, group, timeCreated, taskPriority, endDate);
+                                tasks.add(task);
+                            }
                         }
                     }
                 }

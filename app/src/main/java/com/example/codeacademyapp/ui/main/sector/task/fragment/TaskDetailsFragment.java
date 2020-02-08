@@ -22,7 +22,7 @@ import com.example.codeacademyapp.data.model.TaskInformation;
  */
 public class TaskDetailsFragment extends Fragment {
     private TaskInformation task;
-    private TextView taskName, taskDesc, taskNote, taskDateCreated, taskPriority;
+    private TextView taskName, taskDesc, taskNote, taskDateCreated, taskPriority, taskEndDate;
     RoundCornerProgressBar priorityProgressBar;
 
 
@@ -40,26 +40,13 @@ public class TaskDetailsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_task_details, container, false);
 
 
-        Toolbar toolbar = rootView.findViewById(R.id.toolbar_task_details);
-        toolbar.setTitle((R.string.back_to_task_list));
-        toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.text_dark_grey)));
-
-        toolbar.setNavigationIcon(R.drawable.ic_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity activity = getActivity();
-                if (activity != null) {
-                    activity.onBackPressed();
-                }
-            }
-        });
 
         taskPriority = rootView.findViewById(R.id.task_priority_details);
         taskName = rootView.findViewById(R.id.task_name_details);
         taskDesc = rootView.findViewById(R.id.task_desc_details);
         taskNote = rootView.findViewById(R.id.task_note_details);
         taskDateCreated = rootView.findViewById(R.id.task_dateCreated_details);
+        taskEndDate = rootView.findViewById(R.id.task_endDate_details);
 
         priorityProgressBar = rootView.findViewById(R.id.task_priority_progress_bar);
         priorityProgressBar.setMax(3);
@@ -78,11 +65,15 @@ public class TaskDetailsFragment extends Fragment {
             taskPriority.setTextColor((ContextCompat.getColor(getContext(), R.color.green)));
         }
 
+        String taskEndDateString = task.getEndDate();
+        String name = task.getName();
+
         taskName.setText(task.getName());
         taskDesc.setText(task.getDescription());
         taskNote.setText(task.getNote());
         taskDateCreated.setText(task.getTimeCreated());
         taskPriority.setText(task.getTaskPriority());
+        taskEndDate.setText(taskEndDateString);
 
         return rootView;
     }

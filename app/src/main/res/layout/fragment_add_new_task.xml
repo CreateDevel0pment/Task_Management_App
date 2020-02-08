@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BEBEBE"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="top"
     tools:context=".ui.main.sector.task.fragment.AddNewTaskFragment">
 
 
@@ -85,6 +86,73 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create personal task for.."/>
+
+                <ImageView
+                    android:id="@+id/assign_to_img"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_person_"/>
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set task end date.."/>
+
+                <ImageView
+                    android:id="@+id/date_picker_icon"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/date_picker_icon"
+                    android:tint="@color/colorPrimaryDark"/>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@android:color/white">
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:gravity="start|center_vertical"
@@ -95,28 +163,13 @@
                     android:layout_margin="8dp"
                     android:entries="@array/Priority"
                     android:id="@+id/priorty_spinner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:layout_margin="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Assign to.."/>
-
-                <ImageView
-                    android:id="@+id/assign_to_img"
-                    android:layout_margin="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_person_"/>
 
             </LinearLayout>
 
 
         </androidx.cardview.widget.CardView>
-
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/create_task_btn"

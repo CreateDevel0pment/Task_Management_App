@@ -2,17 +2,7 @@ package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.codeacademyapp.data.model.AssignedUsers;
-import com.example.codeacademyapp.data.model.UserInformation;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.Task;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -47,7 +39,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener{
+public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener,DatePickerDialogListener{
 
 
     private EditText task_name, task_description, task_note;
@@ -62,6 +54,8 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private Spinner taskPrioritySpinner;
     private Task task;
     private View rootView;
+    private String currentDate;
+    String endDate;
 
     private List<AssignedUsers> assignedUsersList;
 
@@ -83,9 +77,17 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
         task_note = rootView.findViewById(R.id.task_note);
+
+
+        ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
+        datePickerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+
         ImageView assignToUsersImg = rootView.findViewById(R.id.assign_to_img);
-
-
         assignToUsersImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +103,13 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         if (userFb != null) {
             userID = userFb.getUid();
         }
+
+        Calendar calForDate = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+
+        currentDate = currentDateFormat.format(calForDate.getTime());
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
@@ -163,33 +172,18 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             }
         });
 
-        Calendar calForDate = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
 
-        final String currentDate = currentDateFormat.format(calForDate.getTime());
 
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                task = new Task();
-                task.setName(task_name.getText().toString());
-                task.setDescription(task_description.getText().toString());
-                task.setNote(task_note.getText().toString());
-                task.setStart_date(currentDate);
-                task.setImportance(taskPriority);
-                task.setGroup(userGroup);
-                task.setAssignedUsers(assignedUsersList);
 
+                setTaskValues();
                 taskViewModel.createNewTask(task);
 
-                TaskTabsFragment tabsFragment = new TaskTabsFragment();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.task_fragments_container, tabsFragment)
-                        .commit();
-
                 toastMessage("Task created");
+                clearFieldsAfterCreatingTask();
 
             }
         });
@@ -197,6 +191,12 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         return rootView;
     }
 
+    private void showDatePickerDialog(){
+        DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+        datePickerDialogFragment.show(getFragmentManager(), "date_picker_fragemnt");
+        datePickerDialogFragment.setTargetFragment(AddNewTaskFragment.this, 300);
+
+    }
 
     private void showUsersListDialog() {
 
@@ -211,8 +211,36 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    private void clearFieldsAfterCreatingTask(){
+        task_note.setText("");
+        task_description.setText("");
+        task_name.setText("");
+        taskPrioritySpinner.setSelection(0);
+        assignedUsersList.clear();
+        endDate = null;
+    }
+
+    private void setTaskValues(){
+
+        task = new Task();
+
+        task.setName(task_name.getText().toString());
+        task.setDescription(task_description.getText().toString());
+        task.setNote(task_note.getText().toString());
+        task.setStart_date(currentDate);
+        task.setImportance(taskPriority);
+        task.setGroup(userGroup);
+        task.setAssignedUsers(assignedUsersList);
+        task.setEndDate(endDate);
+    }
+
     @Override
     public void passListOfUsersToAddNewTaskFragment(List<AssignedUsers> list) {
         this.assignedUsersList = list;
+    }
+
+    @Override
+    public void passDateString(String date) {
+        this.endDate = date;
     }
 }

@@ -10,19 +10,23 @@ public class TaskInformation {
     private String Name;
     private String TimeCreated;
     private String TaskPriority;
+    private String EndDate;
     private List<AssignedUsers> AssignedUsers;
 
 
     public TaskInformation() {
     }
 
-    public TaskInformation(String name, String description, String note,  String group, String timeCreated, String taskPriority) {
+    public TaskInformation(String name, String description, String note,
+                           String group, String timeCreated,
+                           String taskPriority, String endDate) {
         this.Name = name;
         this.Description = description;
         this.Note = note;
         this.Sector = group;
         this.TimeCreated = timeCreated;
         this.TaskPriority = taskPriority;
+        this.EndDate = endDate;
     }
 
     public String getTaskPriority() {
@@ -81,4 +85,11 @@ public class TaskInformation {
         this.AssignedUsers = assignedUsers;
     }
 
+    public String getEndDate() {
+        return EndDate;
+    }
+
+    public void setEndDate(String endDate) {
+        EndDate = endDate;
+    }
 }

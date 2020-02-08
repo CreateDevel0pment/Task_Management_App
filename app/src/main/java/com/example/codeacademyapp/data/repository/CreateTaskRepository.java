@@ -62,6 +62,10 @@ public class CreateTaskRepository {
                     .child("AssignedUsers")
                     .setValue(task.getAssignedUsers());
 
+            myRef.child("Tasks").child(task.getName())
+                    .child("EndDate")
+                    .setValue(task.getEndDate());
+
 
         }
         return setTaskInformation;
