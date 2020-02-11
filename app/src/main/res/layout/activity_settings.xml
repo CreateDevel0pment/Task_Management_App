@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.edit_find.edit.EditProfileActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_above="@+id/scroll_view"
+        android:background="@color/colorPrimary"
+        android:id="@+id/edit_toolbar"
+        tools:ignore="UnknownIdInLayout" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/scrolle_view"
         >
 
     <RelativeLayout
@@ -23,7 +32,7 @@
             android:layout_height="250dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="64dp"
             android:src="@drawable/profile_image"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="2dp" />
@@ -81,7 +90,7 @@
         />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_position"
+        android:id="@+id/edit_position"
         app:cardElevation="@dimen/default_circle_indicator_radius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,7 +112,7 @@
 
     <TextView
         android:id="@+id/group_text"
-        android:layout_below="@id/card_position"
+        android:layout_below="@id/edit_position"
         android:textColor="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,7 +124,7 @@
         />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_group"
+        android:id="@+id/edit_group"
         app:cardElevation="@dimen/default_circle_indicator_radius"
         android:layout_below="@id/group_text"
         android:layout_width="match_parent"
@@ -136,13 +145,12 @@
 
     </androidx.cardview.widget.CardView>
 
-
     <Button
         android:backgroundTint="@color/colorPrimary"
         android:id="@+id/edit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/card_group"
+        android:layout_below="@+id/edit_group"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"

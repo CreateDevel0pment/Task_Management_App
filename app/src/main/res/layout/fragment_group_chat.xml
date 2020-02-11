@@ -91,17 +91,6 @@
             android:src="@drawable/ic_send"
             android:background="@android:color/transparent"/>
 
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/new_task_button"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_margin="8dp"-->
-<!--            android:backgroundTint="@color/colorPrimaryDark"-->
-<!--            android:src="@drawable/assignment"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"/>-->
-
-
     </LinearLayout>
 
 

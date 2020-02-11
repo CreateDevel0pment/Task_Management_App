@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".ui.main.wall.WallTabFragment">
 
+
     <com.google.android.material.tabs.TabLayout
-        android:background="@color/colorAccent"
-        android:layout_marginTop="6dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        app:tabTextColor="@color/colorPrimaryDark"
+        android:id="@+id/tab_layout_public_wall"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
         app:tabMode="fixed"
-        app:tabIndicatorColor="@color/colorSecondary"
-        android:id="@+id/tab_layout_public_wall"/>
+        app:tabTextColor="#808080" />
+
 
     <androidx.viewpager.widget.ViewPager
-        android:layout_below="@+id/tab_layout_public_wall"
         android:id="@+id/view_pager_public_wall"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_layout_public_wall" />
 
-</RelativeLayout>
+</LinearLayout>

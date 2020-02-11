@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bottomNav.setSelectedItemId(R.id.home);
+
     }
 
     public void switchToFragment(Fragment fragment, int container) {

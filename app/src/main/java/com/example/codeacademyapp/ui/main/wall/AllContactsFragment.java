@@ -70,7 +70,6 @@ public class AllContactsFragment extends Fragment {
                         if (getActivity() != null) {
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.wall_container, fragment)
-                                    .addToBackStack(null)
                                     .commit();
                         }
 

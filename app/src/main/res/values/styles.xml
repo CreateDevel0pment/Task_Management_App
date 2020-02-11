@@ -45,4 +45,11 @@
 
 
 
+    <style name="AndroidStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#ffff</item>
+        <item name="colorPrimaryDark">#ffff</item>
+        <item name="colorAccent">#c6d97f</item>
+    </style>
+
+
 </resources>

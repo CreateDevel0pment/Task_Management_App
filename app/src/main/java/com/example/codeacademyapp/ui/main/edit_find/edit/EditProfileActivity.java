@@ -5,33 +5,48 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.edit_find.CloudStorageViewModel;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    public static final int GALLERY_PICK=1;
+    public static final int GALLERY_PICK = 1;
 
     CircleImageView profile_picture;
     TextView user_name;
-    Spinner group, position;
+    Spinner group, positionSpinner;
     Button edit_btn;
+    Toolbar toolbar;
+    String group_string, position_string;
+
+    DatabaseReference userRef;
 
     ChatViewModel viewModel;
     CloudStorageViewModel cloudStorageViewModel;
@@ -44,30 +59,62 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         initializedView();
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String currentUserId = auth.getCurrentUser().getUid();
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+
+        edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateUserInformation();
+            }
+        });
+
         userInformationViewModel();
 
-        cloudStorageViewModel=ViewModelProviders.of(this).get(CloudStorageViewModel.class);
+        cloudStorageViewModel = ViewModelProviders.of(this).get(CloudStorageViewModel.class);
 
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
-                        .setAspectRatio(1,1)
+                        .setAspectRatio(1, 1)
                         .start(EditProfileActivity.this);
             }
         });
     }
 
+    private void updateUserInformation() {
+
+        if (!position_string.equals("")) {
+            userRef.child("Position").setValue(position_string).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
+        if (!group_string.equals("")) {
+            userRef.child("Sector").setValue(group_string).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
+        Toast.makeText(this, "Changes are edit", Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null){
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null) {
 
-            Uri imageUri=data.getData();
+            Uri imageUri = data.getData();
 
 
         }
@@ -75,14 +122,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            if(resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
 
                 loadingBar.setTitle("Set Profile Image");
                 loadingBar.setMessage("Please wait, your profile image is updating");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
 
-                Uri resultUri=result.getUri();
+                Uri resultUri = result.getUri();
                 cloudStorageViewModel.getRefFromCloud(resultUri);
 
                 loadingBar.dismiss();
@@ -90,16 +137,16 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void userInformationViewModel(){
+    private void userInformationViewModel() {
         viewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         viewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    String username= dataSnapshot.child("Name").getValue().toString();
+                    String username = dataSnapshot.child("Name").getValue().toString();
 
-                    if(dataSnapshot.hasChild("image")) {
+                    if (dataSnapshot.hasChild("image")) {
 
                         String image = dataSnapshot.child("image").getValue().toString();
                         Picasso.get().load(image).into(profile_picture);
@@ -111,11 +158,60 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void initializedView() {
+
+        toolbar = findViewById(R.id.edit_toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Edit Profile");
+
         profile_picture = findViewById(R.id.edit_profile_image);
         user_name = findViewById(R.id.edit_user_name);
         group = findViewById(R.id.edit_spinner_group);
-        position = findViewById(R.id.edit_spinner_role);
+        positionSpinner = findViewById(R.id.edit_spinner_role);
         edit_btn = findViewById(R.id.edit_button);
-        loadingBar=new ProgressDialog(this);
+
+        loadingBar = new ProgressDialog(this);
+
+
+        group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+                if (group.getSelectedItem().equals("Android")) {
+                    group_string = "Android";
+                } else if (group.getSelectedItem().equals("Web Development")) {
+                    group_string = "Web Development";
+                } else if (group.getSelectedItem().equals("Ruby on rails")) {
+                    group_string = "Ruby on rails";
+                } else {
+                    group_string = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        positionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (positionSpinner.getSelectedItem().equals("Manager")) {
+                    position_string = "Manager";
+                } else if (positionSpinner.getSelectedItem().equals("Staff")) {
+                    position_string = "Staff";
+                } else {
+                    position_string = "";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 }

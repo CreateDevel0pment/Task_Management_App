@@ -1,9 +1,13 @@
 package com.example.codeacademyapp.data.repository;
 
+import android.text.TextUtils;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,12 +19,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChatRepository {
 
     private FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef,groupMessageKeyRef;
+    private DatabaseReference myRef,groupMessageKeyRef,roothRef;
     private FirebaseAuth auth;
 
     public void setGroupNameToFirebase(String groupName) {
@@ -98,6 +103,7 @@ public class ChatRepository {
     public MutableLiveData<DataSnapshot> displayMessageOnPublicWall(){
         final MutableLiveData<DataSnapshot> dispalyMessage = new MutableLiveData<>();
 
+
         myRef=FirebaseDatabase.getInstance().getReference().child("Wall").child("Public Chat");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -133,6 +139,7 @@ public class ChatRepository {
                                         String message, String currentDate,
                                         String currentTime){
 
+
         myRef=FirebaseDatabase.getInstance().getReference().child("Wall").child("Public Chat");
         String messageKey=myRef.push().getKey();
 
@@ -153,8 +160,6 @@ public class ChatRepository {
         groupMessageKeyRef.updateChildren(messageInfoMap);
 
     }
-
-
 
    public void saveMessageForGroupChat(String group_name, String currentUserName,
                                        String message, String currentDate,
@@ -177,7 +182,5 @@ public class ChatRepository {
        messageInfoMap.put("time", currentTime);
 
        groupMessageKeyRef.updateChildren(messageInfoMap);
-
-
    }
 }
