@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.AssignedUsers;
+import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.adapters.TaskAdapter;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
@@ -39,9 +40,11 @@ public class ViewAllTaskFragment extends Fragment {
     private List<TaskInformation> tasks;
     private DatabaseReference myRef;
     private List<AssignedUsers> assignedUsersList;
+    private List<CompletedBy> completedByList;
+    private TaskAdapter taskAdapter;
 
     private RecyclerView rvTasks;
-    private String userSector;
+    private String userSector, userId, id;
 
     private View rootView;
 
@@ -51,9 +54,6 @@ public class ViewAllTaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (rootView != null) {
-            return rootView;
-        }
 
         rootView = inflater.inflate(R.layout.fragment_view_all_task, container, false);
 
@@ -66,12 +66,15 @@ public class ViewAllTaskFragment extends Fragment {
                 if (dataSnapshot.exists()) {
                     userSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                 }
+
+                userId = dataSnapshot.getKey();
             }
         });
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
 
         assignedUsersList = new ArrayList<>();
+        completedByList = new ArrayList<>();
         rvTasks = rootView.findViewById(R.id.task_list_RV);
         tasks = new ArrayList<>();
 
@@ -81,6 +84,7 @@ public class ViewAllTaskFragment extends Fragment {
                 for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
                     assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
+                    completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
                     String description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
                     String group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
                     String note = taskDataSnapshot.getValue(TaskInformation.class).getNote();
@@ -89,13 +93,32 @@ public class ViewAllTaskFragment extends Fragment {
                     String taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
                     String endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
 
+                    if (completedByList != null) {
+                        for (int i = 0; i < completedByList.size(); i++) {
+                            CompletedBy completedBy;
+                            completedBy = completedByList.get(i);
+                            id = completedBy.getUserId();
+                        }
+                        if (!id.equals(userId)) {
+                            if (assignedUsersList == null) {
+                                if (group != null) {
+                                    if (group.equals(userSector)) {
+                                        TaskInformation task = new TaskInformation(name, description,
+                                                note, group, timeCreated, taskPriority, endDate);
+                                        tasks.add(task);
+                                    }
+                                }
+                            }
+                        }
 
-                    if(assignedUsersList==null){
-                        if (group != null) {
-                            if (group.equals(userSector)) {
-                                TaskInformation task = new TaskInformation(name, description,
-                                        note, group, timeCreated, taskPriority, endDate);
-                                tasks.add(task);
+                    } else {
+                        if (assignedUsersList == null) {
+                            if (group != null) {
+                                if (group.equals(userSector)) {
+                                    TaskInformation task = new TaskInformation(name, description,
+                                            note, group, timeCreated, taskPriority, endDate);
+                                    tasks.add(task);
+                                }
                             }
                         }
                     }
@@ -103,7 +126,7 @@ public class ViewAllTaskFragment extends Fragment {
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                 rvTasks.setLayoutManager(layoutManager);
-                TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
+                taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
                 rvTasks.setAdapter(taskAdapter);
             }
 
@@ -112,6 +135,8 @@ public class ViewAllTaskFragment extends Fragment {
 
             }
         });
+
+
         return rootView;
     }
 

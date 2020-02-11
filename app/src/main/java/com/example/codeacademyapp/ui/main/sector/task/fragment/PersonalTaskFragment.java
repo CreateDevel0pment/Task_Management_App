@@ -83,25 +83,26 @@ public class PersonalTaskFragment extends Fragment {
                     timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
                     taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
                     endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
+                    String state = taskDataSnapshot.getValue(TaskInformation.class).getState();
+
 
                     if (assignedUsersList != null) {
-                        for (int i = 0; i <assignedUsersList.size(); i++) {
+                        for (int i = 0; i < assignedUsersList.size(); i++) {
                             AssignedUsers assignedUser;
                             assignedUser = assignedUsersList.get(i);
                             id = assignedUser.getUserId();
                         }
-
                         if (id.equals(userId)) {
                             TaskInformation task =
                                     new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
                             tasks.add(task);
                         }
-                    }
 
+                    }
                 }
 
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-                rvPersonalTasks.setLayoutManager(layoutManager);
+
+
                 TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
                 rvPersonalTasks.setAdapter(taskAdapter);
 
@@ -113,7 +114,9 @@ public class PersonalTaskFragment extends Fragment {
             }
         });
 
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        rvPersonalTasks.setLayoutManager(layoutManager);
         return rootView;
-    }
 
+    }
 }

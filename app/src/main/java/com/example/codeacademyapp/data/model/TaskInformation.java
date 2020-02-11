@@ -11,7 +11,9 @@ public class TaskInformation {
     private String TimeCreated;
     private String TaskPriority;
     private String EndDate;
+    private String State;
     private List<AssignedUsers> AssignedUsers;
+    private List<CompletedBy> CompletedBy;
 
 
     public TaskInformation() {
@@ -91,5 +93,20 @@ public class TaskInformation {
 
     public void setEndDate(String endDate) {
         EndDate = endDate;
+    }
+
+    public String getState() {
+        return State;
+    }
+    public void setState(String state) {
+        State = state;
+    }
+
+    public List<com.example.codeacademyapp.data.model.CompletedBy> getCompletedBy() {
+        return CompletedBy;
+    }
+
+    public void setCompletedBy(List<com.example.codeacademyapp.data.model.CompletedBy> completedBy) {
+        CompletedBy = completedBy;
     }
 }

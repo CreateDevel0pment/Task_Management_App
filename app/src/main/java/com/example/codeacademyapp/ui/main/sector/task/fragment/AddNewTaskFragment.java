@@ -178,7 +178,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             @Override
             public void onClick(View v) {
 
-
                 setTaskValues();
                 taskViewModel.createNewTask(task);
 
@@ -216,7 +215,10 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task_description.setText("");
         task_name.setText("");
         taskPrioritySpinner.setSelection(0);
-        assignedUsersList.clear();
+        if(assignedUsersList!=null){
+            assignedUsersList.clear();
+        }
+
         endDate = null;
     }
 

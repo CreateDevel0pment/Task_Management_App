@@ -22,7 +22,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     private List<TaskInformation> tasks;
     private Context context;
-    FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     public TaskAdapter(Context context, List<TaskInformation> tasks, FragmentManager fragmentManager) {
         this.tasks = tasks;
@@ -54,11 +54,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             }
         });
 
-
         if(task.getTaskPriority().equals("High")){
             holder.priority.setTextColor(ContextCompat.getColor(context, R.color.red));
         } else if(task.getTaskPriority().equals("Medium")){
-            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.orange));
+            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.yellow));
         } else {
             holder.priority.setTextColor(ContextCompat.getColor(context, R.color.green));
         }

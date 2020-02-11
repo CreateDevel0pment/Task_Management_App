@@ -16,6 +16,7 @@ public class NewTaskPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+
         PersonalTaskFragment personalTask = new PersonalTaskFragment();
         ViewAllTaskFragment viewAllTaskFragment = new ViewAllTaskFragment();
 

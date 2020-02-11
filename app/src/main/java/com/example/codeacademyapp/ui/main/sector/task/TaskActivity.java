@@ -37,6 +37,5 @@ public class TaskActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.task_fragments_container, taskTabsFragment)
                 .commit();
-
     }
 }
