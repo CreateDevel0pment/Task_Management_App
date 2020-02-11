@@ -57,7 +57,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         if(task.getTaskPriority().equals("High")){
             holder.priority.setTextColor(ContextCompat.getColor(context, R.color.red));
         } else if(task.getTaskPriority().equals("Medium")){
-            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.yellow));
+            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.orange));
         } else {
             holder.priority.setTextColor(ContextCompat.getColor(context, R.color.green));
         }

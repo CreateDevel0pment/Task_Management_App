@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.main.sector.task.fragment.ViewAllTaskFragment">
+    tools:context=".ui.main.sector.task.fragment.CompletedTasksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/task_list_RV"
+        android:id="@+id/tasks_completed_list_RV"
         android:background="@color/low_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-</LinearLayout>
+</FrameLayout>

@@ -91,12 +91,14 @@ public class PersonalTaskFragment extends Fragment {
                             AssignedUsers assignedUser;
                             assignedUser = assignedUsersList.get(i);
                             id = assignedUser.getUserId();
+
+                            if (id.equals(userId)) {
+                                TaskInformation task =
+                                        new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
+                                tasks.add(task);
+                            }
                         }
-                        if (id.equals(userId)) {
-                            TaskInformation task =
-                                    new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
-                            tasks.add(task);
-                        }
+
 
                     }
                 }

@@ -86,8 +86,8 @@ public class TaskDetailsFragment extends Fragment {
             priorityIcon.getDrawable().setTint((ContextCompat.getColor(getContext(), R.color.red)));
             taskPriority.setTextColor((ContextCompat.getColor(getContext(), R.color.red)));
         } else if (task.getTaskPriority().equals("Medium")) {
-            priorityIcon.getDrawable().setTint((ContextCompat.getColor(getContext(), R.color.yellow)));
-            taskPriority.setTextColor((ContextCompat.getColor(getContext(), R.color.yellow)));
+            priorityIcon.getDrawable().setTint((ContextCompat.getColor(getContext(), R.color.orange)));
+            taskPriority.setTextColor((ContextCompat.getColor(getContext(), R.color.orange)));
         } else {
 
             priorityIcon.getDrawable().setTint((ContextCompat.getColor(getContext(), R.color.green)));
@@ -110,13 +110,10 @@ public class TaskDetailsFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     localCompletedByList = dataSnapshot.getValue(TaskInformation.class).getCompletedBy();
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -134,8 +131,6 @@ public class TaskDetailsFragment extends Fragment {
                 }
                 taskViewModel.addCompletedBy(task);
                 getActivity().onBackPressed();
-
-
             }
         });
 
