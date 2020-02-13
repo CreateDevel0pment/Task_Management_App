@@ -154,11 +154,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_marginEnd="25dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:id="@+id/sign_up_btn"
             android:hint="Sign Up"
             android:textSize="18sp"
-            android:textColorHint="@color/colorPrimary"
+            android:textColorHint="@color/white"
             android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 </ScrollView>

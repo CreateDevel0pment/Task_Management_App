@@ -24,8 +24,8 @@
     <com.viewpagerindicator.CirclePageIndicator
         android:outlineSpotShadowColor="#313131"
         app:radius="4dp"
-        app:fillColor="@color/colorPrimary"
-        android:outlineAmbientShadowColor="@color/colorPrimary"
+        app:fillColor="@color/colorPrimaryDark"
+        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
         android:layout_margin="10dp"
         android:layout_weight="0.1"
         android:id="@+id/page_indicator"

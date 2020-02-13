@@ -17,8 +17,10 @@ import android.view.ViewGroup;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.TaskAdapter;
 import com.example.codeacademyapp.data.model.AssignedUsers;
+import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,12 +36,14 @@ import java.util.List;
 public class PersonalTaskFragment extends Fragment {
 
     private List<TaskInformation> tasks;
+    private List<CompletedBy> completedByList;
     private DatabaseReference myRef;
+    private TaskViewModel taskViewModel;
 
     private RecyclerView rvPersonalTasks;
     private String userId;
     private String name, group, note, timeCreated, taskPriority, description, endDate;
-    private String id;
+    private String id, completedCheck;
 
 
     private List<AssignedUsers> assignedUsersList;
@@ -58,6 +62,8 @@ public class PersonalTaskFragment extends Fragment {
 
         ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
+        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
+
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
@@ -66,15 +72,19 @@ public class PersonalTaskFragment extends Fragment {
             }
         });
 
+
         tasks = new ArrayList<>();
+        completedByList = new ArrayList<>();
         assignedUsersList = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tasks.clear();
                 for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
+                    completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
                     assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
                     description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
                     group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
@@ -85,27 +95,47 @@ public class PersonalTaskFragment extends Fragment {
                     endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
                     String state = taskDataSnapshot.getValue(TaskInformation.class).getState();
 
+                    if (completedByList != null) {
+                        for (int i = 0; i < completedByList.size(); i++) {
+                            CompletedBy completedBy;
+                            completedBy = completedByList.get(i);
+                            id = completedBy.getUserId();
+                        }
+                        if (!id.equals(userId)) {
+                            if (assignedUsersList != null) {
+                                for (int i = 0; i < assignedUsersList.size(); i++) {
+                                    AssignedUsers assignedUser;
+                                    assignedUser = assignedUsersList.get(i);
+                                    id = assignedUser.getUserId();
 
-                    if (assignedUsersList != null) {
-                        for (int i = 0; i < assignedUsersList.size(); i++) {
-                            AssignedUsers assignedUser;
-                            assignedUser = assignedUsersList.get(i);
-                            id = assignedUser.getUserId();
-
-                            if (id.equals(userId)) {
-                                TaskInformation task =
-                                        new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
-                                tasks.add(task);
+                                    if (id.equals(userId)) {
+                                        TaskInformation task =
+                                                new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
+                                        tasks.add(task);
+                                    }
+                                }
                             }
                         }
+                    } else {
+                        if (assignedUsersList != null) {
+                            for (int i = 0; i < assignedUsersList.size(); i++) {
+                                AssignedUsers assignedUser;
+                                assignedUser = assignedUsersList.get(i);
+                                id = assignedUser.getUserId();
 
-
+                                if (id.equals(userId)) {
+                                    TaskInformation task =
+                                            new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
+                                    tasks.add(task);
+                                }
+                            }
+                        }
                     }
+
                 }
 
-
-
-                TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
+                String completedCheck = "";
+                TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
                 rvPersonalTasks.setAdapter(taskAdapter);
 
             }

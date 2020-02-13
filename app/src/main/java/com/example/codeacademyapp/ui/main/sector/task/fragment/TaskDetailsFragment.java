@@ -59,6 +59,7 @@ public class TaskDetailsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_task_details, container, false);
 
         taskViewModel = ViewModelProviders.of(TaskDetailsFragment.this).get(TaskViewModel.class);
+
         ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
@@ -120,6 +121,7 @@ public class TaskDetailsFragment extends Fragment {
         taskCompletedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 CompletedBy completedByUser = new CompletedBy(userId);
 
                 if(localCompletedByList==null){

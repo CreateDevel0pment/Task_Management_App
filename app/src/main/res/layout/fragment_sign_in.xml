@@ -58,19 +58,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_marginTop="16dp"
         android:id="@+id/log_in_btn"
         android:textSize="18sp"
         android:hint="@string/log_in"
-        android:textColorHint="@color/colorPrimary"
+        android:textColorHint="@color/white"
         />
 
     <TextView
         android:id="@+id/forgot_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/forgot_your_password"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"

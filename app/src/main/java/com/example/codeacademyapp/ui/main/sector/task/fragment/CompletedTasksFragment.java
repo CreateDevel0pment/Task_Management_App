@@ -20,6 +20,7 @@ import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,7 @@ public class CompletedTasksFragment extends Fragment {
     private List<AssignedUsers> assignedUsersList;
     private List<CompletedBy> completedByList;
     private TaskAdapter taskAdapter;
+    TaskViewModel taskViewModel;
 
     private RecyclerView rvTasks;
     private String userSector, userId, id;
@@ -57,6 +59,7 @@ public class CompletedTasksFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_completed_tasks, container, false);
 
         ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+        taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
             @Override
@@ -80,6 +83,7 @@ public class CompletedTasksFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tasks.clear();
                 for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
                     assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
@@ -116,7 +120,8 @@ public class CompletedTasksFragment extends Fragment {
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                 rvTasks.setLayoutManager(layoutManager);
-                taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager());
+                String completedCheck = "completeGONE";
+                taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
                 rvTasks.setAdapter(taskAdapter);
             }
 
