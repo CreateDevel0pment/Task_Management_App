@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/wall_user_name"
@@ -33,9 +33,10 @@
             android:layout_marginTop="4dp"
             android:layout_gravity="bottom"
             android:text="Full Name"
-            android:textColor="#808080"
+            android:textColor="@color/text_dark_grey"
             android:textSize="16dp"
-            android:textStyle="italic"
+            android:textStyle="bold"
+
              />
 
         <TextView
@@ -46,7 +47,7 @@
             android:layout_marginTop="2dp"
             android:layout_gravity="bottom"
             android:text="sector"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:textColor="#808080"
             android:textSize="14dp" />
 
@@ -61,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardElevation="6dp"
-        android:layout_marginEnd="4dp"
+        android:layout_margin="4dp"
         app:cardBackgroundColor="#9874a7"
         app:cardCornerRadius="12dp">
 

@@ -7,14 +7,14 @@
     tools:context=".ui.splash.SplashActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="32dp"
-        android:src="@drawable/logo_code_academy" />
+        android:src="@drawable/logoworkers" />
 
     <ImageView
-        android:layout_width="150dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
