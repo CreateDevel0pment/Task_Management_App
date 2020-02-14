@@ -5,11 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -23,6 +26,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageAdapter;
 import com.example.codeacademyapp.data.model.Messages;
 import com.example.codeacademyapp.ui.main.MainActivity;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,6 +57,8 @@ public class PrivateChatActivity extends AppCompatActivity {
     MessageAdapter adapter;
     RecyclerView user_message_list;
 
+    ChatViewModel chatViewModel;
+
     FirebaseAuth auth;
     DatabaseReference roothRef;
 
@@ -60,6 +66,9 @@ public class PrivateChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_private_chat);
+        initializedView();
+
+        chatViewModel= ViewModelProviders.of(this).get(ChatViewModel.class);
 
         auth=FirebaseAuth.getInstance();
         message_sender_id=auth.getCurrentUser().getUid();
@@ -70,11 +79,10 @@ public class PrivateChatActivity extends AppCompatActivity {
         user_sector=getIntent().getExtras().get("visit_user_sector").toString();
         user_image=getIntent().getExtras().get("visit_user_image").toString();
 
-        initializedView();
-
         userNAme.setText(message_reciever_name);
         userSector.setText(user_sector);
-        Picasso.get().load(user_image).placeholder(R.drawable.profile_image).into(iserImage);
+        Picasso.get().load(user_image).into(iserImage);
+
         send_message_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,76 +92,23 @@ public class PrivateChatActivity extends AppCompatActivity {
             }
         });
 
-        displayMessage();
+        displayMessage(message_reciever_id);
     }
 
-    private void initializedView() {
-        toolbar=findViewById(R.id.private_chat_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+    private  void displayMessage(String message_reciever_id){
+
+        chatViewModel.displayMessageToPrivateChat(message_reciever_id).observe(this, new Observer<DataSnapshot>() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onChanged(DataSnapshot dataSnapshot) {
+
+                Messages messages=dataSnapshot.getValue(Messages.class);
+
+                messageList.add(messages);
+                adapter=new MessageAdapter(messageList);
+                user_message_list.setAdapter(adapter);
             }
         });
-
-        LayoutInflater inflater= (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View actionBArView= inflater.inflate(R.layout.custom_chat_bar,null);
-        getSupportActionBar().setCustomView(actionBArView);
-
-        iserImage=findViewById(R.id.custom_profile_image);
-        userSector=findViewById(R.id.custom_profile_sector);
-        userNAme=findViewById(R.id.custom_profile_name);
-        userLastSeen=findViewById(R.id.custom_user_last_seen);
-
-        send_message_btn=findViewById(R.id.sent_private_message_btn);
-        input_message=findViewById(R.id.input_private_message);
-
-        adapter=new MessageAdapter(messageList);
-        user_message_list=findViewById(R.id.private_message_list);
-        user_message_list.setLayoutManager(new LinearLayoutManager(this));
-        user_message_list.setAdapter(adapter);
-
     }
-
-    private  void displayMessage(){
-
-        roothRef.child("Message").child(message_sender_id).child(message_reciever_id)
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                        Messages messages=dataSnapshot.getValue(Messages.class);
-
-                        messageList.add(messages);
-                        adapter.notifyDataSetChanged();
-
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-    }
-
 
     private void sendMessage(){
 
@@ -197,5 +152,34 @@ public class PrivateChatActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void initializedView() {
+        toolbar=findViewById(R.id.private_chat_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        LayoutInflater inflater= (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View actionBArView= inflater.inflate(R.layout.custom_chat_bar,null);
+        getSupportActionBar().setCustomView(actionBArView);
+
+        iserImage=findViewById(R.id.custom_profile_image);
+        userSector=findViewById(R.id.custom_profile_sector);
+        userNAme=findViewById(R.id.custom_profile_name);
+        userLastSeen=findViewById(R.id.custom_user_last_seen);
+
+        send_message_btn=findViewById(R.id.sent_private_message_btn);
+        input_message=findViewById(R.id.input_private_message);
+
+        user_message_list=findViewById(R.id.private_message_list);
+        user_message_list.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }

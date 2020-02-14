@@ -64,7 +64,7 @@ public class MyContactsFragment extends Fragment {
         FirebaseRecyclerAdapter<ModelFirebase, MyContactsHolder> adapter =
                 new FirebaseRecyclerAdapter<ModelFirebase, MyContactsHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final MyContactsHolder holder, int position, @NonNull ModelFirebase model) {
+                    protected void onBindViewHolder(@NonNull final MyContactsHolder holder, int position, @NonNull final ModelFirebase model) {
 
                         final String usersIds = getRef(position).getKey();
 
@@ -92,6 +92,7 @@ public class MyContactsFragment extends Fragment {
                                         Intent intent = new Intent(getContext(), PrivateChatActivity.class);
                                         intent.putExtra("visit_user_id", usersIds);
                                         intent.putExtra("visit_user_name",userName);
+
                                         intent.putExtra("visit_user_image",profileImage);
                                         intent.putExtra("visit_user_sector",userSector);
                                         startActivity(intent);

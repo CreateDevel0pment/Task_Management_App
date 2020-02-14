@@ -87,7 +87,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
             if(fromUserId.equals(messageSenderId)){
 
-                holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
+//                holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
                 holder.sender_message.setText(messages.getMessage());
             }else {
 
@@ -96,12 +96,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
                 holder.reciverProfileImage.setVisibility(View.VISIBLE);
                 holder.receiver_message.setVisibility(View.VISIBLE);
 
-                holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
+//                holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
                 holder.receiver_message.setText(messages.getMessage());
 
             }
         }
-
     }
 
     @Override

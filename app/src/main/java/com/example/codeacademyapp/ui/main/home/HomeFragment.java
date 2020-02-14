@@ -32,7 +32,7 @@ public class HomeFragment extends BaseFragment {
         setTitle(R.string.home);
 
         WebView browser = view.findViewById(R.id.home_web_view);
-        browser.loadUrl("https://codeacademy.mk");
+//        browser.loadUrl("https://codeacademy.mk");
 
 
         return view;

@@ -53,21 +53,18 @@ public class AcademyWallFragment extends BaseFragment {
 
     private ImageButton sentMessage_btn;
     private EditText userMessage_input;
-    private ScrollView scrollView;
-    private TextView display_text_messages;
 
-    private String currentUserName,message_sender_id;
-    private String userGroup;
+    private String currentUserName;
+    private String userGroup,userImage;
 
-    View view;
+    private View view;
 
-    ChatViewModel wallChatViewModel;
+    private ChatViewModel wallChatViewModel;
 
-    FirebaseAuth auth;
+    private RecyclerView recyclerView;
+    private MessageWallAdapter adapter;
+
     DatabaseReference roothRef;
-    RecyclerView recyclerView;
-    MessageWallAdapter adapter;
-
 
     List<MessagesFromWall> messageList=new ArrayList<>();
 
@@ -78,26 +75,17 @@ public class AcademyWallFragment extends BaseFragment {
 
         wallChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
-        displayMessage();
-//        wallChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
-//            @Override
-//            public void onChanged(DataSnapshot dataSnapshot) {
-//
-//                if (dataSnapshot.exists()) {
-//
-//                    wallChatViewModel.displayMessageToWall().observe(AcademyWallFragment.this, new Observer<DataSnapshot>() {
-//                        @Override
-//                        public void onChanged(DataSnapshot dataSnapshot) {
-//
-//                            if (dataSnapshot.exists()) {
-//
-//                                displayMessages(dataSnapshot);
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        wallChatViewModel.displayMessageToWall().observe(this, new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(DataSnapshot dataSnapshot) {
+
+                MessagesFromWall messages=dataSnapshot.getValue(MessagesFromWall.class);
+
+                messageList.add(messages);
+                adapter=new MessageWallAdapter(messageList);
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     @Override
@@ -113,19 +101,10 @@ public class AcademyWallFragment extends BaseFragment {
         recyclerView=view.findViewById(R.id.group_chat_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter=new MessageWallAdapter(messageList);
-       recyclerView.setAdapter(adapter);
+        roothRef = FirebaseDatabase.getInstance().getReference();
 
         setTitle(R.string.academy_wall);
         initialisedFields(view);
-
-        auth=FirebaseAuth.getInstance();
-        message_sender_id=auth.getCurrentUser().getUid();
-        roothRef= FirebaseDatabase.getInstance().getReference();
-
-//        auth = FirebaseAuth.getInstance();
-//        currentUserId = auth.getCurrentUser().getUid();
-//        userRefereces = FirebaseDatabase.getInstance().getReference().child("Users");
 
         getUserInfo();
 
@@ -164,35 +143,8 @@ public class AcademyWallFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            wallChatViewModel.saveMessageFromWallChat(currentUserName, userGroup, message, currentDate, currentTime);
+            wallChatViewModel.saveMessageFromWallChat(currentUserName, userGroup,userImage, message, currentDate, currentTime);
 
-        }
-    }
-
-    private void initialisedFields(View view) {
-        sentMessage_btn = view.findViewById(R.id.sent_message_btn);
-        userMessage_input = view.findViewById(R.id.input_user_message);
-        display_text_messages = view.findViewById(R.id.group_chat_display);
-        scrollView = view.findViewById(R.id.scroll_view);
-    }
-
-    private void displayMessages(DataSnapshot dataSnapshot) {
-
-        Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
-
-        while (iterator.hasNext()) {
-
-            String userGroup = (String) iterator.next().getValue();
-            String chatDate = (String) iterator.next().getValue();
-            String chatMessage = (String) iterator.next().getValue();
-            String chatName = (String) iterator.next().getValue();
-            String chatTime = (String) iterator.next().getValue();
-
-            display_text_messages.append(chatName + " from " + chatDate + "\n"
-                            + "#message: " + chatMessage + "\n" +
-                            userGroup + " at " + chatTime + "\n\n");
-
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
         }
     }
 
@@ -204,48 +156,13 @@ public class AcademyWallFragment extends BaseFragment {
 
                 currentUserName = dataSnapshot.child("Name").getValue().toString();
                 userGroup = dataSnapshot.child("Sector").getValue().toString();
+                userImage=dataSnapshot.child("image").getValue().toString();
             }
         });
     }
 
-
-    private  void displayMessage(){
-
-        roothRef=FirebaseDatabase.getInstance().getReference().child("Wall").child("Public Chat");
-               roothRef.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                        MessagesFromWall messages=dataSnapshot.getValue(MessagesFromWall.class);
-
-                        messageList.add(messages);
-                        adapter=new MessageWallAdapter(messageList);
-
-
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+    private void initialisedFields(View view) {
+        sentMessage_btn = view.findViewById(R.id.sent_message_btn);
+        userMessage_input = view.findViewById(R.id.input_user_message);
     }
-
-
-
 }

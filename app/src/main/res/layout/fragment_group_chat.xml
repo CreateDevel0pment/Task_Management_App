@@ -6,36 +6,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.sector.chat.ChatFragment">
 
-
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/layout_face"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/my_linear_layout"
-        android:id="@+id/scroll_view">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentTop="true"
+            android:background="#f8f8f8"
+            android:id="@+id/group_face_recycler_"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/group_chat_display"
-                android:padding="10dp"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:textColor="@color/editTextColor"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="50dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/group_chat_recycler"/>
+
+    </LinearLayout>
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/colorPrimaryDark"-->
+<!--        android:layout_below="@+id/layout_face"-->
+<!--        />-->
+
+<!--    <ScrollView-->
+<!--        android:layout_below="@+id/layout_face"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/scroll_view">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/group_chat_display"-->
+<!--                android:padding="10dp"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:text="poraka"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textColor="@color/editTextColor"-->
+<!--                android:layout_marginStart="2dp"-->
+<!--                android:layout_marginEnd="2dp"-->
+<!--                android:layout_marginBottom="50dp"/>-->
 
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
 
-    </ScrollView>
+<!--    </ScrollView>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_task_button"
@@ -92,6 +118,5 @@
             android:background="@android:color/transparent"/>
 
     </LinearLayout>
-
 
 </RelativeLayout>

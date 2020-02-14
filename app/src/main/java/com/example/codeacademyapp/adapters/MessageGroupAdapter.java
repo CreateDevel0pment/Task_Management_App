@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.data.model.MessageFromGroup;
 import com.example.codeacademyapp.data.model.MessagesFromWall;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -18,41 +19,40 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.MyHolder> {
+public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapter.MyHolder> {
 
-    private List<MessagesFromWall> mList;
+    private List<MessageFromGroup> mList;
     FirebaseAuth auth;
     DatabaseReference userrsRef;
 
-    public MessageWallAdapter(List<MessagesFromWall> mList) {
+    public MessageGroupAdapter(List<MessageFromGroup> mList) {
         this.mList = mList;
     }
 
 
     @NonNull
     @Override
-    public MessageWallAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MessageGroupAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_message_wall, parent, false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_message_wall,parent, false);
 
-        auth = FirebaseAuth.getInstance();
+        auth=FirebaseAuth.getInstance();
 
 
         return new MyHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MessageGroupAdapter.MyHolder holder, int position) {
 
         String messageSenderId = auth.getCurrentUser().getUid();
 
-        MessagesFromWall messages = mList.get(holder.getAdapterPosition());
+        MessageFromGroup messages=mList.get(holder.getAdapterPosition());
 
-        holder.messageContent.setText(messages.getMessage());
         holder.userName.setText(messages.getName());
-        holder.userSector.setText(messages.getGroup());
         holder.messageContent.setText(messages.getMessage());
         Picasso.get().load(messages.getImage()).into(holder.profileImage);
+
     }
 
     @Override
@@ -62,17 +62,16 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        TextView userName, messageContent, userSector;
+        TextView userName, messageContent,userSector;
         CircleImageView profileImage;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
-            userName = itemView.findViewById(R.id.wall_user_name);
-            messageContent = itemView.findViewById(R.id.wall_message_text);
-            userSector = itemView.findViewById(R.id.wall_sector);
-            userSector.setVisibility(View.VISIBLE);
-            profileImage = itemView.findViewById(R.id.wall_profile_image);
+            userName=itemView.findViewById(R.id.wall_user_name);
+            messageContent=itemView.findViewById(R.id.wall_message_text);
+            userSector=itemView.findViewById(R.id.wall_sector);
+            profileImage=itemView.findViewById(R.id.wall_profile_image);
 
         }
     }

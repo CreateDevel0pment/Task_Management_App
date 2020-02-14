@@ -12,6 +12,8 @@
         <item name="materialCardViewStyle">@color/tabStyle</item>
 
         <item name="android:datePickerDialogTheme">@style/DatePicker.AppTheme.DialogTheme</item>
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
 
     </style>
 
@@ -49,6 +51,11 @@
         <item name="colorPrimary">#ffff</item>
         <item name="colorPrimaryDark">#ffff</item>
         <item name="colorAccent">#c6d97f</item>
+    </style>
+
+
+    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorPrimaryDark</item>
     </style>
 
 

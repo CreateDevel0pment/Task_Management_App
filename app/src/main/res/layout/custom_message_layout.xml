@@ -22,9 +22,9 @@
         android:layout_toEndOf="@+id/message_profile_image"
         android:background="@drawable/reciever_message_layout"
         android:text="reciever Message"
-        android:textColor="#707070"
+        android:textColor="@color/colorPrimaryDark"
         android:padding="8dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"/>
 
     <TextView
@@ -37,7 +37,7 @@
         android:background="@drawable/sender_message_layout"
         android:text="sender Message"
         android:padding="8dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@color/white"
         android:textStyle="bold"/>
 

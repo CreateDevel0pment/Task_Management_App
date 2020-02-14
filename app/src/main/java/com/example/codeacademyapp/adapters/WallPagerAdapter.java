@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.codeacademyapp.ui.main.wall.AcademyWallFragment;
-import com.example.codeacademyapp.ui.main.wall.AllContactsFragment;
 import com.example.codeacademyapp.ui.main.wall.MyContactsFragment;
 import com.example.codeacademyapp.ui.main.wall.RequestsFragment;
 

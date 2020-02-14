@@ -58,7 +58,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#808080"
         />
 
     <Button
@@ -70,7 +70,7 @@
         android:layout_marginRight="65dp"
         android:textSize="18sp"
         android:text="Send Message"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:textAllCaps="false"
         android:layout_marginTop="24dp"/>
 

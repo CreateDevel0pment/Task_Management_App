@@ -15,35 +15,6 @@
         android:layout_above="@id/my_linear_layout"
         android:id="@+id/group_chat_recycler"/>
 
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_above="@+id/my_linear_layout"-->
-<!--        android:id="@+id/scroll_view">-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/group_chat_display"-->
-<!--                android:padding="10dp"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textColor="@color/editTextColor"-->
-<!--                android:layout_marginStart="2dp"-->
-<!--                android:layout_marginEnd="2dp"-->
-<!--                android:layout_marginBottom="50dp"/>-->
-
-
-<!--        </RelativeLayout>-->
-
-<!--    </ScrollView>-->
-
     <View
         android:layout_above="@+id/my_linear_layout"
         android:layout_width="match_parent"
