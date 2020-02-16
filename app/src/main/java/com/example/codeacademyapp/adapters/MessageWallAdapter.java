@@ -52,7 +52,9 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
         holder.userName.setText(messages.getName());
         holder.userSector.setText(messages.getGroup());
         holder.messageContent.setText(messages.getMessage());
-        Picasso.get().load(messages.getImage()).into(holder.profileImage);
+        Picasso.get().load(messages.getImage())
+                .placeholder(R.drawable.profile_image)
+                .into(holder.profileImage);
     }
 
     @Override

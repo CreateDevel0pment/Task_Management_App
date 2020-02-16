@@ -21,7 +21,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatFragment;
+import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
 import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         switchToFragment(new WallTabFragment(), R.id.wall_container);
                         break;
                     case R.id.sector:
-                        switchToFragment(new ChatFragment(), R.id.group_container);
+                        switchToFragment(new GroupChatFragment(), R.id.group_container);
                         break;
                 }
                 return false;

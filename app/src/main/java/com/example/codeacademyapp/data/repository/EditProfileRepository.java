@@ -1,7 +1,9 @@
 package com.example.codeacademyapp.data.repository;
 
 import android.net.Uri;
+import android.widget.Toast;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,13 +18,13 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Objects;
 
-public class CloudStorageRepository {
+public class EditProfileRepository {
 
     private FirebaseAuth auth;
-    private DatabaseReference roothRef;
+    private DatabaseReference roothRef,userRef;
 
 
-    public CloudStorageRepository() {
+    public EditProfileRepository() {
         auth=FirebaseAuth.getInstance();
     }
 
@@ -38,17 +40,6 @@ public class CloudStorageRepository {
 
                 if(task.isSuccessful()){
 
-
-//                    String image= task.getResult().getStorage().getDownloadUrl().toString();
-//
-//                    roothRef.child("Users").child(currentUserId).child("image").setValue(image)
-//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//
-//                                }
-//                            });
-
                     task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
@@ -63,11 +54,30 @@ public class CloudStorageRepository {
 
                         }
                     });
-                }else {
-
-                    String error= Objects.requireNonNull(task.getException()).getMessage();
                 }
             }
         });
+    }
+
+    public void updateUserInformation(String position_string,String group_string) {
+        String currentUserId =auth.getCurrentUser().getUid();
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+
+        if (!position_string.equals("")) {
+            userRef.child("Position").setValue(position_string).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
+        if (!group_string.equals("")) {
+            userRef.child("Sector").setValue(group_string).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+        }
     }
 }

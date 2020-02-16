@@ -21,7 +21,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
-import com.example.codeacademyapp.ui.sign_in_up.UserViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.LogUserViewModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,7 +43,7 @@ public class SignUpFragment extends Fragment {
     private String position_string;
     private String sector_string;
 
-    private UserViewModel userViewModel;
+    private LogUserViewModel userViewModel;
     private ChatViewModel groupChatViewModel;
 
     @Override
@@ -52,7 +52,7 @@ public class SignUpFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         initializedView(view);
 
-        userViewModel = ViewModelProviders.of(SignUpFragment.this).get(UserViewModel.class);
+        userViewModel = ViewModelProviders.of(SignUpFragment.this).get(LogUserViewModel.class);
         groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
         userImageView.setOnClickListener(new View.OnClickListener() {

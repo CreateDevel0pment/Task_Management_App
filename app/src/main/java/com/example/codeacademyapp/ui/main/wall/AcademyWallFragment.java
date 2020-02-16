@@ -84,6 +84,8 @@ public class AcademyWallFragment extends BaseFragment {
                 messageList.add(messages);
                 adapter=new MessageWallAdapter(messageList);
                 recyclerView.setAdapter(adapter);
+
+                recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
             }
         });
     }
@@ -156,7 +158,11 @@ public class AcademyWallFragment extends BaseFragment {
 
                 currentUserName = dataSnapshot.child("Name").getValue().toString();
                 userGroup = dataSnapshot.child("Sector").getValue().toString();
-                userImage=dataSnapshot.child("image").getValue().toString();
+                if(userImage != null){
+
+                    userImage=dataSnapshot.child("image").getValue().toString();
+
+                }
             }
         });
     }

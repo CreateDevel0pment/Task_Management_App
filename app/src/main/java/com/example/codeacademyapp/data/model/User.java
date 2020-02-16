@@ -12,6 +12,7 @@ public class User implements Serializable {
     public String name;
     public String position_spinner;
     public String sector_spinner;
+    public String device_token;
 
 
     @Exclude
@@ -23,10 +24,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String eMail, String password, String user_id ) {
+    public User(String eMail, String password, String user_id,String device_token ) {
         this.eMail = eMail;
         this.password = password;
         this.id_user=user_id;
+        this.device_token=device_token;
     }
 
     public String geteMail() {
@@ -75,5 +77,13 @@ public class User implements Serializable {
 
     public void setNew(boolean aNew) {
         isNew = aNew;
+    }
+
+    public String getDevice_token() {
+        return device_token;
+    }
+
+    public void setDevice_token(String device_token) {
+        this.device_token = device_token;
     }
 }

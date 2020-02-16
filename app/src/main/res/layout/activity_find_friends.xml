@@ -8,11 +8,6 @@
     android:id="@+id/find_friends_container"
     tools:context=".ui.main.edit_find.find_friends.FindFriendsActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:id="@+id/user_byId_container"/>
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -21,12 +16,23 @@
         app:titleTextColor="@color/colorPrimaryDark"
         android:id="@+id/toolbar_find_friends"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <View
+        android:layout_above="@+id/private_chat_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:id="@+id/find_friends_recycler"/>
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/user_byId_container"/>
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/colorAccent"-->
+<!--            android:id="@+id/find_friends_recycler"/>-->
 
 
 </LinearLayout>

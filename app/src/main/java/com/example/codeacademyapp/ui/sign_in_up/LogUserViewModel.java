@@ -11,12 +11,12 @@ import com.example.codeacademyapp.data.repository.SigInRepository;
 import com.example.codeacademyapp.data.repository.SignUpRepository;
 import com.google.firebase.auth.FirebaseUser;
 
-public class UserViewModel extends AndroidViewModel {
+public class LogUserViewModel extends AndroidViewModel {
 
     private SigInRepository signInRepository;
     private SignUpRepository signUpRepository;
 
-    public UserViewModel(@NonNull Application application) {
+    public LogUserViewModel(@NonNull Application application) {
         super(application);
 
         signInRepository = new SigInRepository();

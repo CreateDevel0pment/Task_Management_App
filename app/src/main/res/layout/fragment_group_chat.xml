@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.sector.chat.ChatFragment">
+    tools:context=".ui.main.sector.chat.GroupChatFragment">
 
     <LinearLayout
         android:id="@+id/layout_face"
+        android:layout_above="@+id/my_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

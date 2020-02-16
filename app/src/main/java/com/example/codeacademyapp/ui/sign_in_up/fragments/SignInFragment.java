@@ -19,7 +19,8 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.data.model.User;
-import com.example.codeacademyapp.ui.sign_in_up.UserViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.LogUserViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
@@ -33,7 +34,9 @@ import static com.example.codeacademyapp.utils.HelperTextFocus.setFocus;
 public class SignInFragment extends Fragment {
 
     private EditText mail_et, password_et;
-    private UserViewModel userViewModel;
+    private LogUserViewModel userViewModel;
+    private UserInformationViewModel userInformationViewModel;
+    private String userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +45,8 @@ public class SignInFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         //TODO splash
-        userViewModel = ViewModelProviders.of(SignInFragment.this).get(UserViewModel.class);
+        userViewModel = ViewModelProviders.of(SignInFragment.this).get(LogUserViewModel.class);
+        userInformationViewModel=ViewModelProviders.of(SignInFragment.this).get(UserInformationViewModel.class);
 
         mail_et = view.findViewById(R.id.mail_text);
         setFocus(mail_et);
@@ -106,6 +110,8 @@ public class SignInFragment extends Fragment {
             public void onChanged(DataSnapshot dataSnapshot) {
 
                 if(dataSnapshot.exists()) {
+
+                    userId=userInformationViewModel.getUserId();
                     String userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                     goToStartActivity(userGroup);
                 }
@@ -123,4 +129,5 @@ public class SignInFragment extends Fragment {
         intent.putExtra("TITLE", userGroup);
         startActivity(intent);
     }
+
 }

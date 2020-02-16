@@ -9,10 +9,16 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_above="@+id/scrolle_view"
         android:background="@color/colorPrimary"
         android:id="@+id/edit_toolbar"
+        app:titleTextColor="@color/colorPrimaryDark"
         tools:ignore="UnknownIdInLayout" />
+
+    <View
+        android:layout_below="@id/edit_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
 
     <ScrollView
         android:layout_width="match_parent"

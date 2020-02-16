@@ -12,6 +12,12 @@
         android:layout_height="?attr/actionBarSize"
         />
 
+    <View
+        android:layout_above="@+id/private_chat_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
+
     <FrameLayout
         android:id="@+id/task_fragments_container"
         android:layout_width="match_parent"

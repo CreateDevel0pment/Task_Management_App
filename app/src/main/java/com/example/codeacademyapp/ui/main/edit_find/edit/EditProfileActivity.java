@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,14 +18,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.edit_find.CloudStorageViewModel;
+import com.example.codeacademyapp.ui.main.edit_find.EditProfileViewModel;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -46,10 +40,8 @@ public class EditProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
     String group_string, position_string;
 
-    DatabaseReference userRef;
-
     ChatViewModel viewModel;
-    CloudStorageViewModel cloudStorageViewModel;
+    EditProfileViewModel editProfileViewModel;
 
     ProgressDialog loadingBar;
 
@@ -59,21 +51,19 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         initializedView();
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String currentUserId = auth.getCurrentUser().getUid();
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-
         edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                updateUserInformation();
+                editProfileViewModel.updateUserInfo(position_string, group_string);
+
+                Toast.makeText(EditProfileActivity.this, "Changes are edit", Toast.LENGTH_SHORT).show();
             }
         });
 
         userInformationViewModel();
 
-        cloudStorageViewModel = ViewModelProviders.of(this).get(CloudStorageViewModel.class);
+        editProfileViewModel = ViewModelProviders.of(this).get(EditProfileViewModel.class);
 
         profile_picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,28 +75,6 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void updateUserInformation() {
-
-        if (!position_string.equals("")) {
-            userRef.child("Position").setValue(position_string).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                }
-            });
-        }
-        if (!group_string.equals("")) {
-            userRef.child("Sector").setValue(group_string).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                }
-            });
-        }
-        Toast.makeText(this, "Changes are edit", Toast.LENGTH_SHORT).show();
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -129,8 +97,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
 
+                assert result != null;
                 Uri resultUri = result.getUri();
-                cloudStorageViewModel.getRefFromCloud(resultUri);
+                editProfileViewModel.getRefFromCloud(resultUri);
 
                 loadingBar.dismiss();
             }

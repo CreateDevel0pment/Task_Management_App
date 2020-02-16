@@ -12,6 +12,8 @@
         android:id="@+id/wall_profile_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_width="1dp"
         android:layout_margin="4dp" />
 
 
