@@ -4,47 +4,34 @@ package com.example.codeacademyapp.ui.main.wall;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.MessageAdapter;
 import com.example.codeacademyapp.adapters.MessageWallAdapter;
-import com.example.codeacademyapp.data.model.Messages;
 import com.example.codeacademyapp.data.model.MessagesFromWall;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
-
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +42,7 @@ public class AcademyWallFragment extends BaseFragment {
     private EditText userMessage_input;
 
     private String currentUserName;
-    private String userGroup,userImage;
+    private String userGroup, userImage;
 
     private View view;
 
@@ -66,7 +53,7 @@ public class AcademyWallFragment extends BaseFragment {
 
     DatabaseReference roothRef;
 
-    List<MessagesFromWall> messageList=new ArrayList<>();
+    List<MessagesFromWall> messageList = new ArrayList<>();
 
 
     @Override
@@ -79,10 +66,10 @@ public class AcademyWallFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                MessagesFromWall messages=dataSnapshot.getValue(MessagesFromWall.class);
+                MessagesFromWall messages = dataSnapshot.getValue(MessagesFromWall.class);
 
                 messageList.add(messages);
-                adapter=new MessageWallAdapter(messageList);
+                adapter = new MessageWallAdapter(messageList);
                 recyclerView.setAdapter(adapter);
 
                 recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
@@ -100,7 +87,7 @@ public class AcademyWallFragment extends BaseFragment {
 
         view = inflater.inflate(R.layout.fragment_academy_wall, container, false);
 
-        recyclerView=view.findViewById(R.id.group_chat_recycler);
+        recyclerView = view.findViewById(R.id.group_chat_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         roothRef = FirebaseDatabase.getInstance().getReference();
@@ -145,7 +132,7 @@ public class AcademyWallFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            wallChatViewModel.saveMessageFromWallChat(currentUserName, userGroup,userImage, message, currentDate, currentTime);
+            wallChatViewModel.saveMessageFromWallChat(currentUserName, userGroup, userImage, message, currentDate, currentTime);
 
         }
     }
@@ -158,11 +145,8 @@ public class AcademyWallFragment extends BaseFragment {
 
                 currentUserName = dataSnapshot.child("Name").getValue().toString();
                 userGroup = dataSnapshot.child("Sector").getValue().toString();
-                if(userImage != null){
 
-                    userImage=dataSnapshot.child("image").getValue().toString();
-
-                }
+                userImage = dataSnapshot.child("image").getValue().toString();
             }
         });
     }

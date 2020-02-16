@@ -49,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
         initializedView();
 
         edit_btn.setOnClickListener(new View.OnClickListener() {

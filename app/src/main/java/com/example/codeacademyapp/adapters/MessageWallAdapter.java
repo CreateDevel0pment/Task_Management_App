@@ -12,6 +12,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.MessagesFromWall;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -48,13 +49,23 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
         MessagesFromWall messages = mList.get(holder.getAdapterPosition());
 
+        userrsRef = FirebaseDatabase.getInstance().getReference()
+                .child("Users").child(messageSenderId);
+
         holder.messageContent.setText(messages.getMessage());
         holder.userName.setText(messages.getName());
         holder.userSector.setText(messages.getGroup());
         holder.messageContent.setText(messages.getMessage());
-        Picasso.get().load(messages.getImage())
-                .placeholder(R.drawable.profile_image)
-                .into(holder.profileImage);
+        if(messages.getImage()!=null){
+
+            Picasso.get().load(messages.getImage())
+                    .into(holder.profileImage);
+        }else {
+
+            Picasso.get().load(R.drawable.profile_image)
+                    .into(holder.profileImage);
+        }
+
     }
 
     @Override
