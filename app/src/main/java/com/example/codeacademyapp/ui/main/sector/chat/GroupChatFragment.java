@@ -44,6 +44,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -187,7 +189,7 @@ public class GroupChatFragment extends BaseFragment {
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView profileImage;
+        CircleImageView profileImage;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -219,9 +221,15 @@ public class GroupChatFragment extends BaseFragment {
                             if (dataSnapshot.hasChild("image")) {
 
                                 userProfileImage = dataSnapshot.child("image").getValue().toString();
+
                                 Picasso.get().load(userProfileImage)
                                         .placeholder(R.drawable.profile_image)
                                         .into(holder.profileImage);
+                            }else {
+
+                                Picasso.get().load(R.drawable.profile_image)
+                                        .into(holder.profileImage);
+
                             }
 
                             final String userName = dataSnapshot.child("Name").getValue().toString();
@@ -231,16 +239,16 @@ public class GroupChatFragment extends BaseFragment {
                                 @Override
                                 public void onClick(View v) {
 
+                                    Intent intent = new Intent(getContext(), PrivateChatActivity.class);
+
                                     if (dataSnapshot.hasChild("image")) {
 
                                         profileImageE = dataSnapshot.child("image").getValue().toString();
-
+                                        intent.putExtra("visit_user_image", profileImageE);
                                     }
 
-                                    Intent intent = new Intent(getContext(), PrivateChatActivity.class);
                                     intent.putExtra("visit_user_id", usersIds);
                                     intent.putExtra("visit_user_name", userName);
-                                    intent.putExtra("visit_user_image", profileImageE);
                                     intent.putExtra("visit_user_sector", userSector);
                                     startActivity(intent);
                                 }
