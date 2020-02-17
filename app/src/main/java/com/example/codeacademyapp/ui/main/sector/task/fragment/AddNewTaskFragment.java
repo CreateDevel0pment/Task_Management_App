@@ -150,7 +150,31 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             }
         };
 
-        taskPrioritySpinner = rootView.findViewById(R.id.priorty_spinner);
+//        taskPrioritySpinner = rootView.findViewById(R.id.priorty_spinner);
+//
+//        taskPrioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (taskPrioritySpinner.getSelectedItem().equals("High")) {
+//                    taskPriority = "High";
+//                } else if (taskPrioritySpinner.getSelectedItem().equals("Medium")) {
+//                    taskPriority = "Medium";
+//                } else if (taskPrioritySpinner.getSelectedItem().equals("Low")) {
+//                    taskPriority = "Low";
+//                } else {
+//                    taskPriority = "";
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+
+        priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
+        priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
+        priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
 
         taskPrioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
