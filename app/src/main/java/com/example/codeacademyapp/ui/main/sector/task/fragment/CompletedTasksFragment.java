@@ -2,6 +2,9 @@ package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -9,10 +12,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.TaskAdapter;
@@ -56,7 +55,8 @@ public class CompletedTasksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_completed_tasks, container, false);
+
+        rootView = inflater.inflate(R.layout.fragment_completed_tasks, container, false);
 
         ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
@@ -70,67 +70,69 @@ public class CompletedTasksFragment extends Fragment {
                 }
 
                 userId = dataSnapshot.getKey();
-            }
-        });
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
 
-        assignedUsersList = new ArrayList<>();
-        completedByList = new ArrayList<>();
-        rvTasks = rootView.findViewById(R.id.tasks_completed_list_RV);
-        tasks = new ArrayList<>();
+                myRef = FirebaseDatabase.getInstance().getReference().child("Tasks").child("CompletedTasks").child(userSector);
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                tasks.clear();
-                for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
+                assignedUsersList = new ArrayList<>();
+                completedByList = new ArrayList<>();
+                rvTasks = rootView.findViewById(R.id.tasks_completed_list_RV);
+                tasks = new ArrayList<>();
 
-                    assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
-                    completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
-                    String description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
-                    String group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
-                    String note = taskDataSnapshot.getValue(TaskInformation.class).getNote();
-                    String name = taskDataSnapshot.getValue(TaskInformation.class).getName();
-                    String timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
-                    String taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
-                    String endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        tasks.clear();
+                        for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
-                    if (completedByList != null) {
-                        for (int i = 0; i < completedByList.size(); i++) {
-                            CompletedBy completedBy;
-                            completedBy = completedByList.get(i);
-                            id = completedBy.getUserId();
-                            if (id.equals(userId)) {
-                                if (assignedUsersList == null) {
-                                    if (group != null) {
-                                        if (group.equals(userSector)) {
-                                            TaskInformation task = new TaskInformation(name, description,
-                                                    note, group, timeCreated, taskPriority, endDate);
-                                            tasks.add(task);
-                                        }
-                                    }
-                                }
-                            }
+                            assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
+                            completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
+                            String description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
+                            String group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
+                            String name = taskDataSnapshot.getValue(TaskInformation.class).getName();
+                            String timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
+                            String taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
+                            String endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
+                            String taskRef = taskDataSnapshot.getValue(TaskInformation.class).getTaskRef();
+
+                            TaskInformation task = new TaskInformation(name, description,
+                                     group, timeCreated, taskPriority, endDate, taskRef);
+                            tasks.add(task);
+
+//                    if (completedByList != null) {
+//                        for (int i = 0; i < completedByList.size(); i++) {
+//                            CompletedBy completedBy;
+//                            completedBy = completedByList.get(i);
+//                            id = completedBy.getUserId();
+//                            if (id.equals(userId)) {
+//                                if (assignedUsersList == null) {
+//                                    if (group != null) {
+//                                        if (group.equals(userSector)) {
+//
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//
+//
+//                    }
                         }
 
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                        rvTasks.setLayoutManager(layoutManager);
+                        String completedCheck = "completeGONE";
+                        taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
+                        rvTasks.setAdapter(taskAdapter);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                }
-
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-                rvTasks.setLayoutManager(layoutManager);
-                String completedCheck = "completeGONE";
-                taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
-                rvTasks.setAdapter(taskAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                });
             }
         });
-
         return rootView;
     }
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TaskInformation {
 
-    private String Note;
+
     private String Description;
     private String Sector;
     private String Name;
@@ -12,6 +12,7 @@ public class TaskInformation {
     private String TaskPriority;
     private String EndDate;
     private String State;
+    private String TaskRef;
     private List<AssignedUsers> AssignedUsers;
     private List<CompletedBy> CompletedBy;
 
@@ -19,16 +20,16 @@ public class TaskInformation {
     public TaskInformation() {
     }
 
-    public TaskInformation(String name, String description, String note,
+    public TaskInformation(String name, String description,
                            String group, String timeCreated,
-                           String taskPriority, String endDate) {
+                           String taskPriority, String endDate, String taskRef) {
         this.Name = name;
         this.Description = description;
-        this.Note = note;
         this.Sector = group;
         this.TimeCreated = timeCreated;
         this.TaskPriority = taskPriority;
         this.EndDate = endDate;
+        this.TaskRef = taskRef;
     }
 
     public String getTaskPriority() {
@@ -45,14 +46,6 @@ public class TaskInformation {
 
     public void setName(String name) {
         this.Name = name;
-    }
-
-    public String getNote() {
-        return Note;
-    }
-
-    public void setNote(String note) {
-        this.Note = note;
     }
 
     public String getDescription() {
@@ -108,5 +101,13 @@ public class TaskInformation {
 
     public void setCompletedBy(List<com.example.codeacademyapp.data.model.CompletedBy> completedBy) {
         CompletedBy = completedBy;
+    }
+
+    public String getTaskRef() {
+        return TaskRef;
+    }
+
+    public void setTaskRef(String taskRef) {
+        TaskRef = taskRef;
     }
 }

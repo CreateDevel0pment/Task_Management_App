@@ -90,32 +90,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/note_linear"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Note:"
-            android:textColor="@color/text_dark_grey" />
-
-        <TextView
-            android:id="@+id/task_note_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/text_dark_grey" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/dates_linear"

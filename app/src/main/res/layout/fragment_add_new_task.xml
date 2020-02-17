@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BEBEBE"
     android:orientation="vertical"
     android:gravity="top"
     tools:context=".ui.main.sector.task.fragment.AddNewTaskFragment">
@@ -12,21 +11,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:gravity="center"
         android:orientation="vertical">
 
 
         <androidx.cardview.widget.CardView
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
+                android:padding="10dp"
                 android:id="@+id/task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,15 +35,12 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
+                android:padding="10dp"
                 android:hint="add description.."
-                android:minLines="8"
+                android:minLines="5"
                 android:maxLines="10"
                 android:gravity="top|start"
                 android:id="@+id/task_desc"
@@ -61,28 +54,6 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@android:color/white">
-
-            <EditText
-                android:hint="add notes.."
-                android:id="@+id/task_note"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
@@ -112,11 +83,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:gravity="start"
@@ -145,10 +113,6 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
@@ -157,12 +121,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Spinner
+                <TextView
                     android:layout_margin="8dp"
-                    android:entries="@array/Priority"
-                    android:id="@+id/priorty_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Task priority"/>
+
+                <RadioGroup
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/priority_radioGroup"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/radiobtn_priority_high"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="High"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <RadioButton
+                        android:id="@+id/radiobtn_priority_medium"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <RadioButton
+                        android:id="@+id/radiobtn_priority_low"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Low"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RadioGroup>
+<!--                <Spinner-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:entries="@array/Priority"-->
+<!--                    android:id="@+id/priorty_spinner"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
 
             </LinearLayout>
 

@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -42,7 +45,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener,DatePickerDialogListener{
 
 
-    private EditText task_name, task_description, task_note;
+    private EditText task_name, task_description;
     private Button create_task;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
@@ -54,8 +57,9 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private Spinner taskPrioritySpinner;
     private Task task;
     private View rootView;
-    private String currentDate;
-    String endDate;
+    private String currentDate, endDate;
+    private RadioButton priorityBtnHigh,priorityBtnMedium,priorityBtnLow;
+    private RadioGroup priorityRadioGroup;
 
     private List<AssignedUsers> assignedUsersList;
 
@@ -76,7 +80,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
-        task_note = rootView.findViewById(R.id.task_note);
+
 
 
         ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
@@ -171,28 +175,43 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 //
 //            }
 //        });
-
+        
         priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
         priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
         priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
 
-        taskPrioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        priorityRadioGroup = rootView.findViewById(R.id.priority_radioGroup);
+
+        priorityBtnHigh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (taskPrioritySpinner.getSelectedItem().equals("High")) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()){
                     taskPriority = "High";
-                } else if (taskPrioritySpinner.getSelectedItem().equals("Medium")) {
-                    taskPriority = "Medium";
-                } else if (taskPrioritySpinner.getSelectedItem().equals("Low")) {
-                    taskPriority = "Low";
-                } else {
-                    taskPriority = "";
+                }else {
+                    taskPriority = null;
                 }
             }
+        });
 
+        priorityBtnMedium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()){
+                    taskPriority = "Medium";
+                } else {
+                    taskPriority = null;
+                }
+            }
+        });
 
+        priorityBtnLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()){
+                    taskPriority = "Low";
+                }else {
+                    taskPriority = null;
+                }
             }
         });
 
@@ -203,10 +222,14 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             public void onClick(View v) {
 
                 setTaskValues();
-                taskViewModel.createNewTask(task);
+                if(assignedUsersList!=null){
+                    taskViewModel.createAssignedTask(task);
+                } else {
+                    taskViewModel.createGroupTask(task);}
 
-                toastMessage("Task created");
-                clearFieldsAfterCreatingTask();
+                getActivity().onBackPressed();
+//                toastMessage("Task created");
+//                clearFieldsAfterCreatingTask();
 
             }
         });
@@ -235,7 +258,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     }
 
     private void clearFieldsAfterCreatingTask(){
-        task_note.setText("");
+        priorityRadioGroup.clearCheck();
         task_description.setText("");
         task_name.setText("");
         taskPrioritySpinner.setSelection(0);
@@ -252,7 +275,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
         task.setName(task_name.getText().toString());
         task.setDescription(task_description.getText().toString());
-        task.setNote(task_note.getText().toString());
         task.setStart_date(currentDate);
         task.setImportance(taskPriority);
         task.setGroup(userGroup);
