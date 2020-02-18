@@ -51,8 +51,6 @@ public class AcademyWallFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private MessageWallAdapter adapter;
 
-    DatabaseReference roothRef;
-
     List<MessagesFromWall> messageList = new ArrayList<>();
 
 
@@ -61,7 +59,6 @@ public class AcademyWallFragment extends BaseFragment {
         super.onAttach(context);
 
         wallChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-
         wallChatViewModel.displayMessageToWall().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
@@ -87,14 +84,8 @@ public class AcademyWallFragment extends BaseFragment {
 
         view = inflater.inflate(R.layout.fragment_academy_wall, container, false);
 
-        recyclerView = view.findViewById(R.id.group_chat_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        roothRef = FirebaseDatabase.getInstance().getReference();
-
         setTitle(R.string.academy_wall);
-        initialisedFields(view);
-
+        initializedView(view);
         getUserInfo();
 
         sentMessage_btn.setOnClickListener(new View.OnClickListener() {
@@ -151,8 +142,10 @@ public class AcademyWallFragment extends BaseFragment {
         });
     }
 
-    private void initialisedFields(View view) {
+    private void initializedView(View view) {
         sentMessage_btn = view.findViewById(R.id.sent_message_btn);
         userMessage_input = view.findViewById(R.id.input_user_message);
+        recyclerView = view.findViewById(R.id.group_chat_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

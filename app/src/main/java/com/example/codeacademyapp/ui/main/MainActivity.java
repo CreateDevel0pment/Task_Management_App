@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -15,11 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
+import com.example.codeacademyapp.ui.main.home.HomeSettings;
+import com.example.codeacademyapp.ui.main.home.HomeViewModel;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
@@ -27,6 +31,7 @@ import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -108,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentEditProfile = new Intent(MainActivity.this, EditProfileActivity.class);
                 startActivity(intentEditProfile);
                 break;
+            case R.id.edit_home:
+                Intent intentSettingsHome = new Intent(MainActivity.this, HomeSettings.class);
+                startActivity(intentSettingsHome);
             default:
                 return false;
         }
@@ -123,9 +131,5 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void toastMessage(String message) {
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
-    }
+
 }

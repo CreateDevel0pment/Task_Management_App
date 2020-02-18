@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageGroupAdapter;
+import com.example.codeacademyapp.adapters.UserRecyclerAdapter;
 import com.example.codeacademyapp.data.model.MessageFromGroup;
 import com.example.codeacademyapp.data.model.ModelFirebase;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
@@ -65,14 +65,15 @@ public class GroupChatFragment extends BaseFragment {
 
     private RecyclerView face_profile_recycler, chat_recycler;
     private MessageGroupAdapter adapter;
+    private UserRecyclerAdapter adapterUser;
     private List<MessageFromGroup> messageList = new ArrayList<>();
+    private List<ModelFirebase> userList = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
 
         groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
@@ -94,6 +95,8 @@ public class GroupChatFragment extends BaseFragment {
                             chat_recycler.setAdapter(adapter);
 
                             chat_recycler.smoothScrollToPosition(chat_recycler.getAdapter().getItemCount());
+
+
                         }
                     });
                 }
@@ -118,7 +121,8 @@ public class GroupChatFragment extends BaseFragment {
 
         initialisedFields(view);
         getUserInfo();
-        dispalyImage();
+//        dispalyImage();
+
 
         sentMessage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,10 +170,9 @@ public class GroupChatFragment extends BaseFragment {
 
                 if (dataSnapshot.exists()) {
                     currentUserName = dataSnapshot.child("Name").getValue().toString();
-                    if(userImage != null){
 
-                        userImage = dataSnapshot.child("image").getValue().toString();
-                    }
+                    userImage = dataSnapshot.child("image").getValue().toString();
+
                 }
             }
         });
@@ -209,58 +212,45 @@ public class GroupChatFragment extends BaseFragment {
 
         FirebaseRecyclerAdapter<ModelFirebase, ImageViewHolder> adapter = new FirebaseRecyclerAdapter<ModelFirebase, ImageViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final ImageViewHolder holder, int position, @NonNull ModelFirebase model) {
+            protected void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position, @NonNull final ModelFirebase model) {
 
-                final String usersIds = getRef(position).getKey();
+                if (model.Sector.equals(userGroup)) {
 
-                if (usersIds != null) {
-                    usersRef.child(usersIds).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                    if (model.image != null) {
 
-                            if (dataSnapshot.hasChild("image")) {
+                        userProfileImage = model.image;
 
-                                userProfileImage = dataSnapshot.child("image").getValue().toString();
+                        Picasso.get().load(userProfileImage)
+                                .placeholder(R.drawable.profile_image)
+                                .into(holder.profileImage);
+                    } else {
 
-                                Picasso.get().load(userProfileImage)
-                                        .placeholder(R.drawable.profile_image)
-                                        .into(holder.profileImage);
-                            }else {
-
-                                Picasso.get().load(R.drawable.profile_image)
-                                        .into(holder.profileImage);
-
-                            }
-
-                            final String userName = dataSnapshot.child("Name").getValue().toString();
-                            final String userSector = dataSnapshot.child("Sector").getValue().toString();
-
-                            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                    Intent intent = new Intent(getContext(), PrivateChatActivity.class);
-
-                                    if (dataSnapshot.hasChild("image")) {
-
-                                        profileImageE = dataSnapshot.child("image").getValue().toString();
-                                        intent.putExtra("visit_user_image", profileImageE);
-                                    }
-
-                                    intent.putExtra("visit_user_id", usersIds);
-                                    intent.putExtra("visit_user_name", userName);
-                                    intent.putExtra("visit_user_sector", userSector);
-                                    startActivity(intent);
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                        Picasso.get().load(R.drawable.profile_image)
+                                .into(holder.profileImage);
+                    }
                 }
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String userName = model.Name;
+                        String userSector = model.Sector;
+                        String usersIds = getRef(position).getKey();
+
+                        Intent intent = new Intent(getContext(), PrivateChatActivity.class);
+
+                        if (model.image != null) {
+
+                            profileImageE = model.image;
+                            intent.putExtra("visit_user_image", profileImageE);
+                        }
+                        intent.putExtra("visit_user_id", usersIds);
+                        intent.putExtra("visit_user_name", userName);
+                        intent.putExtra("visit_user_sector", userSector);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @NonNull

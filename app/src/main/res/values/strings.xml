@@ -10,7 +10,7 @@
     <string name="settings">Settings</string>
     <string name="log_out">Log out</string>
     <string name="username">username</string>
-    <string name="edit_profile">Edit Profile</string>
+    <string name="edit_profile">Update Profile</string>
     <string name="warning_text">Change position or sector only in case,
         \n if you are promoted or switched to another sector</string>
     <string name="set_profile_image">Edit</string>
@@ -28,6 +28,7 @@
     <string name="full_name">Full Name</string>
     <string name="on_position">On Position:</string>
     <string name="in_sector">In Sector:</string>
+    <string name="home_settings">Home Settings</string>
 
     <string-array name="Sector">
         <item>Choose Sector - </item>

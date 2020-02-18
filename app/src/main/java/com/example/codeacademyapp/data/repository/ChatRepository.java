@@ -225,10 +225,10 @@ public class ChatRepository {
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
         messageInfoMap.put("name", currentUserName);
+        messageInfoMap.put("image",userImage);
         messageInfoMap.put("message", message);
         messageInfoMap.put("date", currentDate);
         messageInfoMap.put("time", currentTime);
-        messageInfoMap.put("image",userImage);
 
         groupMessageKeyRef.updateChildren(messageInfoMap);
     }

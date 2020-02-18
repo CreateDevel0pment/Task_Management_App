@@ -23,10 +23,9 @@ public class SigInRepository {
     private DatabaseReference usersRef;
 
     public MutableLiveData<FirebaseUser> authUserInformation(String email, String password) {
-        userInformationsMutableLiveData = new MutableLiveData<>();
-        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
 
+        userInformationsMutableLiveData = new MutableLiveData<>();
+        usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
 
         if (!email.equals("") && !password.equals("")) {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -35,7 +34,9 @@ public class SigInRepository {
 
                     if (task.isSuccessful()) {
 
-                        final boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                        final boolean isNewUser = Objects.requireNonNull(Objects.requireNonNull(task.getResult())
+                                .getAdditionalUserInfo()).isNewUser();
+                        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
                         if (firebaseUser != null) {
 

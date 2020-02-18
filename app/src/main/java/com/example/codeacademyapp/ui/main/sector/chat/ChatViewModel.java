@@ -37,6 +37,12 @@ public class ChatViewModel extends AndroidViewModel {
         return chatRepository.displayMessageInUsersGroup(curenUserGroup);
     }
 
+    public void saveMessageFromWallChat (String currentUserName,String userGroup,String userImage,
+                                         String message, String currentDate,
+                                         String currentTime) {
+        chatRepository.saveMessageForPublicChat(currentUserName,userGroup,userImage, message,currentDate,currentTime);
+    }
+
     public LiveData<DataSnapshot> displayMessageToWall(){
         return chatRepository.displayMessageOnPublicWall();
     }
@@ -44,22 +50,4 @@ public class ChatViewModel extends AndroidViewModel {
     public LiveData<DataSnapshot> displayMessageToPrivateChat(String message_reciever_id ){
         return chatRepository.displayMessageOnPrivateChat(message_reciever_id);
     }
-
-    public void saveMessageFromWallChat (String currentUserName,String userGroup,String userImage,
-                             String message, String currentDate,
-                             String currentTime) {
-        chatRepository.saveMessageForPublicChat(currentUserName,userGroup,userImage, message,currentDate,currentTime);
-    }
-
-//    public LiveData<Iterator<DataSnapshot>> getGroupNames(){
-//        return chatRepository.getGroupNamesFromFirebase();
-//    }
-//
-//    public LiveData<String> getReferencesForUsersGroup(){
-//        return chatRepository.getReferencesForUsersGroup();
-//    }
-//
-//    public void setWallChat (){
-//        chatRepository.setWallChat();
-//    }
 }

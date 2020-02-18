@@ -10,8 +10,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/wall_profile_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         app:civ_border_color="@color/colorPrimaryDark"
         app:civ_border_width="1dp"
         android:layout_margin="4dp" />
@@ -46,7 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
             android:layout_gravity="bottom"
             android:text="sector"
             android:visibility="gone"
@@ -55,30 +54,23 @@
 
     </LinearLayout>
 
-
-
-
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardElevation="6dp"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="#9874a7"
-        app:cardCornerRadius="12dp">
+        app:cardElevation="1dp"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardCornerRadius="8dp">
 
             <TextView
                 android:id="@+id/wall_message_text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="message content"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 android:textColor="#ffffff"
                 android:textSize="18dp"
-                android:textStyle="bold"
                  />
-
 
     </androidx.cardview.widget.CardView>
     </LinearLayout>

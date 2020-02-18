@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.MessageFromGroup;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -31,15 +30,13 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
     public MessageGroupAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_message_wall, parent, false);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-
         return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MessageGroupAdapter.MyHolder holder, int position) {
 
-        MessageFromGroup messages = mList.get(holder.getAdapterPosition());
+        final MessageFromGroup messages = mList.get(holder.getAdapterPosition());
 
         holder.userName.setText(messages.getName());
         holder.messageContent.setText(messages.getMessage());

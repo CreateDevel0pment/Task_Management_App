@@ -13,6 +13,11 @@
         app:showAsAction="never"/>
 
     <item
+        android:title="@string/home_settings"
+        android:id="@+id/edit_home"
+        app:showAsAction="never"/>
+
+    <item
         android:title="@string/log_out"
         android:id="@+id/log_out_btn"
         app:showAsAction="never"/>
