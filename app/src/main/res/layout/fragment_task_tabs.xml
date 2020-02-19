@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
-        app:tabIndicatorColor="@color/colorPrimary"
+        style="@style/MyCustomTabLayout"
+        app:tabIndicatorColor="@color/colorPrimaryDark"
         android:id="@+id/tab_layout_new_tasks"/>
 
     <androidx.viewpager.widget.ViewPager

@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageGroupAdapter;
-import com.example.codeacademyapp.adapters.UserRecyclerAdapter;
 import com.example.codeacademyapp.data.model.MessageFromGroup;
 import com.example.codeacademyapp.data.model.ModelFirebase;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
@@ -65,7 +64,7 @@ public class GroupChatFragment extends BaseFragment {
 
     private RecyclerView face_profile_recycler, chat_recycler;
     private MessageGroupAdapter adapter;
-    private UserRecyclerAdapter adapterUser;
+
     private List<MessageFromGroup> messageList = new ArrayList<>();
     private List<ModelFirebase> userList = new ArrayList<>();
 

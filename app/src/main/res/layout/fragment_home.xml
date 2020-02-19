@@ -6,40 +6,40 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".ui.main.home.HomeFragment">
 
     <LinearLayout
+        android:gravity="center"
         android:visibility="gone"
         android:id="@+id/home_welcome_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="sans-serif-light"
-        android:text="Welcome"
-        android:textSize="24dp" />
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="36dp"-->
+<!--        android:layout_marginTop="36dp"-->
+<!--        android:fontFamily="sans-serif-light"-->
+<!--        android:text="Welcome"-->
+<!--        android:textSize="24dp" />-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/colorPrimaryDark" />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginEnd="24dp"-->
+<!--        android:background="@color/colorPrimaryDark" />-->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:fontFamily="sans-serif-light"
-        android:text="The strong emphasis of most current templated welcome messages is on improving quality of content by directing new editors to a range of resources on editorial policies and guidelines and by offering help. Attention to encouraging participation among new editors is also demonstrated through friendly greetings, expressions of appreciation for early contributions, instruction in signing talk page posts, and, again, offers of help. The emphasis on promoting quality and responding to potential problems has tended to dominate the tone of the "
-        android:textSize="14sp" />
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/responsive"
+        android:layout_margin="16dp"
+        />
 
 
     <TextView
@@ -48,8 +48,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-light"
-        android:text="Enter your website here"
-        android:textSize="16dp"
+        android:text="Enter your website here and make it a home"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView

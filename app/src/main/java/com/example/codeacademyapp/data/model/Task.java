@@ -14,6 +14,7 @@ public class Task {
     private String user_Id;
     private String id;
     private String group;
+    private String assignedUserId;
     private List<AssignedUsers> assignedUsers;
 
 
@@ -27,7 +28,7 @@ public class Task {
     }
 
     public Task(String name, String description, String note, int state, String importance, String start_date,
-                String due_date, String user_Id, String id) {
+                String due_date, String user_Id, String id, String assignedUserId) {
         this.name = name;
         this.description = description;
         this.note = note;
@@ -37,6 +38,7 @@ public class Task {
         this.endDate = due_date;
         this.user_Id = user_Id;
         this.id = id;
+        this.assignedUserId = assignedUserId;
     }
 
     public Task(String name, String description, String note, int state, String importance, String due_date, String user_Id) {
@@ -137,4 +139,11 @@ public class Task {
         this.id = id;
     }
 
+    public String getAssignedUserId() {
+        return assignedUserId;
+    }
+
+    public void setAssignedUserId(String assignedUserId) {
+        this.assignedUserId = assignedUserId;
+    }
 }

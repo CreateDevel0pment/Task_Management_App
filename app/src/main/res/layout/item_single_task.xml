@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
@@ -78,14 +78,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
           android:layout_margin="8dp"
-            android:src="@drawable/ic_description" />
+            android:src="@drawable/ic_description"
+            android:tint="@color/white"
+            />
 
         <TextView
             android:id="@+id/task_desc_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@color/text_dark_grey"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -104,14 +106,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/date_picker_icon"
-            android:tint="@color/colorPrimaryDark" />
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Created:"
-            android:textColor="@color/text_dark_grey" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/task_dateCreated_details"
@@ -121,21 +123,24 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
-            android:textColor="@color/green" />
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Deadline:"
-            android:textColor="@color/text_dark_grey" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/task_endDate_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@color/red" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 
@@ -149,7 +154,7 @@
         >
 
         <TextView
-            android:textColor="#303030"
+            android:textColor="@color/white"
             android:text="Task priority:"
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
@@ -159,7 +164,9 @@
             android:id="@+id/task_priority"
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            />
 
         </LinearLayout>
 
@@ -167,17 +174,20 @@
                 android:visibility="gone"
                 android:id="@+id/task_complete"
                 android:layout_gravity="end"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 app:cardCornerRadius="16dp"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:backgroundTint="@color/white"
                     android:layout_margin="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_done"/>
+                    android:src="@drawable/ic_done"
+                    android:tint="@color/colorPrimaryDark"
+                    />
 
             </androidx.cardview.widget.CardView>
 

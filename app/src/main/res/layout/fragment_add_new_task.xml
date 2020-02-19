@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="top"
+    android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.AddNewTaskFragment">
 
     <LinearLayout
@@ -16,17 +16,17 @@
 
 
         <androidx.cardview.widget.CardView
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
-                android:padding="10dp"
                 android:id="@+id/task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="the task name.."
+                android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray" />
 
@@ -38,14 +38,14 @@
             app:cardBackgroundColor="@android:color/white">
 
             <EditText
-                android:padding="10dp"
-                android:hint="add description.."
-                android:minLines="5"
-                android:maxLines="10"
-                android:gravity="top|start"
                 android:id="@+id/task_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:hint="add description.."
+                android:maxLines="10"
+                android:minLines="5"
+                android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray" />
         </androidx.cardview.widget.CardView>
@@ -57,24 +57,30 @@
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="start"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Create personal task for.."/>
+                    android:layout_margin="8dp"
+                    android:text="Create personal task for.." />
 
                 <ImageView
                     android:id="@+id/assign_to_img"
-                    android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_person_"/>
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_person_" />
 
-
+                <TextView
+                    android:id="@+id/assigned_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    />
             </LinearLayout>
 
 
@@ -86,24 +92,24 @@
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="start"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Set task end date.."/>
+                    android:layout_margin="8dp"
+                    android:text="Set task end date.." />
 
                 <ImageView
                     android:id="@+id/date_picker_icon"
-                    android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
                     android:src="@drawable/date_picker_icon"
-                    android:tint="@color/colorPrimaryDark"/>
+                    android:tint="@color/colorPrimaryDark" />
 
             </LinearLayout>
 
@@ -116,52 +122,52 @@
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:gravity="start|center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Task priority"/>
+                    android:layout_margin="8dp"
+                    android:text="Task priority" />
 
                 <RadioGroup
-                    android:layout_marginStart="16dp"
                     android:id="@+id/priority_radioGroup"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_high"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="High"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="High"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_medium"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="Medium"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Medium"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_low"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="Low"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Low"
+                        android:textColor="@color/colorPrimaryDark" />
 
                 </RadioGroup>
-<!--                <Spinner-->
-<!--                    android:layout_margin="8dp"-->
-<!--                    android:entries="@array/Priority"-->
-<!--                    android:id="@+id/priorty_spinner"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"/>-->
+                <!--                <Spinner-->
+                <!--                    android:layout_margin="8dp"-->
+                <!--                    android:entries="@array/Priority"-->
+                <!--                    android:id="@+id/priorty_spinner"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"/>-->
 
             </LinearLayout>
 

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,9 +50,9 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
+    private DatabaseReference myRef, assignedUserRef;
     private FirebaseUser userFb;
-    private String userID, userGroup, taskPriority;
+    private String userID, userGroup, taskPriority, userName;
     private TaskViewModel taskViewModel;
     private Spinner taskPrioritySpinner;
     private Task task;
@@ -60,6 +60,8 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private String currentDate, endDate;
     private RadioButton priorityBtnHigh,priorityBtnMedium,priorityBtnLow;
     private RadioGroup priorityRadioGroup;
+    private TextView assignedUserNameTV;
+    private String assignedUserId;
 
     private List<AssignedUsers> assignedUsersList;
 
@@ -80,7 +82,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
-
+        assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
 
 
         ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
@@ -117,8 +119,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -136,45 +136,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         });
 
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-
-                    toastMessage("Successfully signed in with: " + user.getEmail());
-
-                } else {
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                    toastMessage("Successfully signed out.");
-                }
-            }
-        };
-
-//        taskPrioritySpinner = rootView.findViewById(R.id.priorty_spinner);
-//
-//        taskPrioritySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                if (taskPrioritySpinner.getSelectedItem().equals("High")) {
-//                    taskPriority = "High";
-//                } else if (taskPrioritySpinner.getSelectedItem().equals("Medium")) {
-//                    taskPriority = "Medium";
-//                } else if (taskPrioritySpinner.getSelectedItem().equals("Low")) {
-//                    taskPriority = "Low";
-//                } else {
-//                    taskPriority = "";
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
         
         priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
         priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
@@ -222,7 +183,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             public void onClick(View v) {
 
                 setTaskValues();
-                if(assignedUsersList!=null){
+                if(assignedUserId !=null){
                     taskViewModel.createAssignedTask(task);
                 } else {
                     taskViewModel.createGroupTask(task);}
@@ -280,11 +241,27 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task.setGroup(userGroup);
         task.setAssignedUsers(assignedUsersList);
         task.setEndDate(endDate);
+        task.setAssignedUserId(assignedUserId);
     }
 
     @Override
-    public void passListOfUsersToAddNewTaskFragment(List<AssignedUsers> list) {
-        this.assignedUsersList = list;
+    public void passListOfUsersToAddNewTaskFragment(String userID) {
+        this.assignedUserId = userID;
+            assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
+            assignedUserRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        userName = dataSnapshot.child("Name").getValue().toString();
+                        assignedUserNameTV.setText(userName);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
     }
 
     @Override

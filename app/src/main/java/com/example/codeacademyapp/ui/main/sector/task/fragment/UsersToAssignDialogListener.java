@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface UsersToAssignDialogListener {
 
-    void passListOfUsersToAddNewTaskFragment(List<AssignedUsers> list);
+    void passListOfUsersToAddNewTaskFragment(String userId);
 
 }

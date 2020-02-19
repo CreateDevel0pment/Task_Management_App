@@ -7,6 +7,54 @@
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.ViewAllTaskFragment">
 
+    <LinearLayout
+        android:id="@+id/quote_linear_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+<!--        <TextView-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="You have no tasks available"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="28sp"/>-->
+
+<!--        <ImageView-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:src="@drawable/clipboard"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"/>-->
+
+
+        <TextView
+            android:layout_margin="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_dark_grey"
+            android:textStyle="bold"
+            android:id="@+id/random_quote_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_dark_grey"
+            android:layout_gravity="end"
+            android:textStyle="italic"
+            android:id="@+id/random_quote_author_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list_RV"
         android:background="@color/low_white"

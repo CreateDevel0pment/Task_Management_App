@@ -75,8 +75,10 @@ public class CreateTaskRepository {
         myRef.child("Tasks").child("GroupTasks").child(taskInformation.getSector()).child(taskInformation.getTaskRef())
                 .removeValue();
 
-        myRef.child("Tasks").child("AssignedTasks").child(taskInformation.getSector()).child(taskInformation.getTaskRef())
-                .removeValue();
+//        myRef.child("Tasks").child("AssignedTasks").child(taskInformation.getSector()).child(taskInformation.getTaskRef())
+//                .removeValue();
+
+
 
         return taskInformationMutableLiveData;
     }
@@ -162,53 +164,44 @@ public class CreateTaskRepository {
             if (taskRef.getKey() == null) {
                 return setTaskInformation;
             }
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+
+
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("Description")
                     .setValue(task.getDescription());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("Name")
                     .setValue(task.getName());
-//
-//            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
-//                    .child("Note")
-//                    .setValue(task.getNote());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("Sector")
                     .setValue(task.getGroup());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("TimeCreated")
                     .setValue(task.getStart_date());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("TaskPriority")
                     .setValue(task.getImportance());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("AssignedUsers")
                     .setValue(task.getAssignedUsers());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("EndDate")
                     .setValue(task.getEndDate());
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("TaskCreator")
                     .setValue(userID);
 
-            myRef.child("Tasks").child("AssignedTasks").child(task.getGroup()).child(taskRef.getKey())
+            myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("TaskRef")
                     .setValue(taskRef.getKey());
 
-//
-//            for (AssignedUsers user : task.getAssignedUsers()) {
-//                DatabaseReference userTaskRef = myRef.child("Users").child(user.getUserId()).child("Tasks").push();
-//                Map<String, Object> map = new HashMap<>();
-//                map.put(userTaskRef.getKey(), new UserTask(taskRef.getKey(), false));
-//                myRef.child("Users").child(user.getUserId()).child("Tasks").updateChildren(map);
-//            }
         }
         return setTaskInformation;
     }

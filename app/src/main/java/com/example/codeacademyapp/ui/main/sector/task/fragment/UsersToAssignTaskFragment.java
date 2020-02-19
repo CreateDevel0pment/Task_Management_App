@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.codeacademyapp.R;
@@ -45,6 +46,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
     private RecyclerView usersListRV;
     private DatabaseReference usersRef;
     private List<AssignedUsers> assignedUsers;
+    private String selectedUserId;
 
 
     public UsersToAssignTaskFragment() {
@@ -57,22 +59,24 @@ public class UsersToAssignTaskFragment extends DialogFragment{
 
         Toolbar toolbar = rootView.findViewById(R.id.toolbar_users_list_assignTo_fragment);
         toolbar.setTitle("Assign the task to..");
-        toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.white)));
+        if(getContext()!=null){
+            toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.white)));
+        }
 
         assignedUsers = new ArrayList<>();
-
-        final Button assignUsersBtn = rootView.findViewById(R.id.assign_users_btn);
-        assignUsersBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
-                if (listener != null) {
-                    listener.passListOfUsersToAddNewTaskFragment(assignedUsers);
-                }
-                if(getDialog()!=null){
-                    getDialog().dismiss();}
-            }
-        });
+//
+//        final Button assignUsersBtn = rootView.findViewById(R.id.assign_users_btn);
+//        assignUsersBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
+//                if (listener != null) {
+//                    listener.passListOfUsersToAddNewTaskFragment(assignedUserId);
+//                }
+//                if(getDialog()!=null){
+//                    getDialog().dismiss();}
+//            }
+//        });
 
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
         usersListRV = rootView.findViewById(R.id.users_list_task_toAssign_RV);
@@ -107,16 +111,54 @@ public class UsersToAssignTaskFragment extends DialogFragment{
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                             if(buttonView.isChecked()){
-                                String selectedUserId = getRef(holder.getAdapterPosition()).getKey();
 
-                                AssignedUsers assignedUser = new AssignedUsers(selectedUserId);
+//                                assignedUserId = getRef(holder.getAdapterPosition()).getKey();
 
-                                assignedUser.setUserId(selectedUserId);
-                                assignedUsers.add(assignedUser);
+//                                AssignedUsers assignedUser = new AssignedUsers(assignedUserId);
+//
+//                                assignedUser.setUserId(assignedUserId);
+//                                assignedUsers.add(assignedUser);
 
                             }
                         }
                 });
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        selectedUserId = getRef(holder.getAdapterPosition()).getKey();
+
+                        UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
+                        if (listener != null) {
+                            listener.passListOfUsersToAddNewTaskFragment(selectedUserId);
+                        }
+                        if(getDialog()!=null){
+                            getDialog().dismiss();}
+                    }
+                });
+
+//                holder.selectUserToAssignRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                        if(buttonView.isChecked()){
+//
+//                           assignedUserId = getRef(holder.getAdapterPosition()).getKey();
+//
+//                            UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
+//                            if (listener != null) {
+//                                listener.passListOfUsersToAddNewTaskFragment(assignedUserId);
+//                            }
+//                            if(getDialog()!=null){
+//                                getDialog().dismiss();}
+//
+////                            AssignedUsers assignedUser = new AssignedUsers(assignedUserId);
+////
+////                            assignedUser.setUserId(assignedUserId);
+////                            assignedUsers.add(assignedUser);
+//
+//                        }
+//                    }
+//                });
             }
 
             @NonNull
@@ -135,6 +177,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
         TextView userNAme, userGroup;
         CircleImageView profileImage;
         CheckBox selectUserToAssignCB;
+        RadioButton selectUserToAssignRB;
 
         FindFriendsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -143,6 +186,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             userGroup=itemView.findViewById(R.id.user_group);
             profileImage=itemView.findViewById(R.id.users_profile_image);
             selectUserToAssignCB=itemView.findViewById(R.id.select_to_assign_checkbox);
+            selectUserToAssignRB=itemView.findViewById(R.id.select_to_assign_radioBtn);
 
         }
     }
