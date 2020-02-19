@@ -159,6 +159,7 @@ public class UserByIdFragment extends Fragment {
                     if (current_State.equals("new")) {
 
                         sendChatRequest();
+
                     }
                     if (current_State.equals("request send")) {
 
@@ -297,7 +298,9 @@ public class UserByIdFragment extends Fragment {
     private void sendChatRequest() {
 
         chatRequestRef.child(sender_user_id).child(receiver_user_id)
-                .child("request_type").setValue("send").addOnCompleteListener(new OnCompleteListener<Void>() {
+                .child("request_type")
+                .setValue("send")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -314,7 +317,8 @@ public class UserByIdFragment extends Fragment {
                                     chatNotificationMap.put("type","request");
 
                                     notificationRef.child(receiver_user_id).push()
-                                            .setValue(chatNotificationMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            .setValue(chatNotificationMap)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
 

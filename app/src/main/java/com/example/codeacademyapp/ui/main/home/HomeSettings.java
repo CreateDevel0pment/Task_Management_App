@@ -31,6 +31,7 @@ public class HomeSettings extends AppCompatActivity {
             public void onClick(View v) {
 
                 homeViewModel.setHomePageUrl(web_edit.getText().toString());
+                finish();
             }
         });
     }

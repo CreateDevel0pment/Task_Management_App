@@ -75,12 +75,9 @@ public class SignUpRepository {
                                                 setUserInformation.setValue(setUser);
                                             }
                                         }
-
                                     }
                                 }
                             });
-
-
 
 //                                myRef.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
 //                                    @Override

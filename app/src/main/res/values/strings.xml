@@ -30,6 +30,10 @@
     <string name="in_sector">In Sector:</string>
     <string name="home_settings">Home Settings</string>
 
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="fcm_message">FCM Message</string>
+
+
     <string-array name="Sector">
         <item>Choose Sector - </item>
         <item>Android</item>
