@@ -137,8 +137,7 @@ public class AcademyWallFragment extends BaseFragment {
                 currentUserName = dataSnapshot.child("Name").getValue().toString();
                 userGroup = dataSnapshot.child("Sector").getValue().toString();
 
-                if(userImage != null){
-
+                if(dataSnapshot.child("image").getValue()!= null){
                     userImage = dataSnapshot.child("image").getValue().toString();
 
                 }

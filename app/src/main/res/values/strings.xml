@@ -17,7 +17,7 @@
     <string name="back_to_task_list">Back to task list</string>
     <string name="change_position">Change Position:</string>
     <string name="change_group">Change Group</string>
-    <string name="edit">Edit</string>
+    <string name="edit">Update</string>
     <string name="write_message">write message...</string>
     <string name="info_page">Info Page</string>
     <string name="new_task_view">new task view</string>
@@ -32,6 +32,8 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="fcm_message">FCM Message</string>
+    <string name="add_title">Add Title</string>
+    <string name="created">Created:</string>
 
 
     <string-array name="Sector">

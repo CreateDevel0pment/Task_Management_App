@@ -17,51 +17,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="#f8f8f8"
+            android:background="#333333"
             android:id="@+id/group_face_recycler_"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#333333"
             android:id="@+id/group_chat_recycler"/>
 
     </LinearLayout>
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:background="@color/colorPrimaryDark"-->
-<!--        android:layout_below="@+id/layout_face"-->
-<!--        />-->
-
-<!--    <ScrollView-->
-<!--        android:layout_below="@+id/layout_face"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/scroll_view">-->
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/group_chat_display"-->
-<!--                android:padding="10dp"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:text="poraka"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textColor="@color/editTextColor"-->
-<!--                android:layout_marginStart="2dp"-->
-<!--                android:layout_marginEnd="2dp"-->
-<!--                android:layout_marginBottom="50dp"/>-->
-
-
-<!--        </RelativeLayout>-->
-
-
-<!--    </ScrollView>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_task_button"
@@ -80,7 +45,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorAccent"
+        android:background="#333333"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"

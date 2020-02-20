@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#333333"
     tools:context=".ui.main.wall.MyContactsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#333333"
         android:id="@+id/my_contact_list"/>
 
 </LinearLayout>

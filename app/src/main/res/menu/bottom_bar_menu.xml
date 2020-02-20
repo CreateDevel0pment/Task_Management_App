@@ -3,14 +3,15 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home_ic"
-        android:title="@string/home" />
+        android:title=""
+        />
     <item
         android:id="@+id/academy_wall"
         android:icon="@drawable/group_people_ic"
-        android:title="@string/academy_wall" />
+        android:title="" />
     <item
         android:id="@+id/sector"
         android:icon="@drawable/group_chat"
-        android:title="@string/my_group" />
+        android:title="" />
 
 </menu>

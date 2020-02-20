@@ -3,9 +3,11 @@ package com.example.codeacademyapp.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
@@ -85,6 +87,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
             holder.receiver_message.setVisibility(View.INVISIBLE);
             holder.reciverProfileImage.setVisibility(View.INVISIBLE);
             holder.sender_message.setVisibility(View.INVISIBLE);
+            holder.cardView.setVisibility(View.INVISIBLE);
+
 
 
             if(fromUserId.equals(messageSenderId)){
@@ -98,6 +102,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
                 holder.reciverProfileImage.setVisibility(View.VISIBLE);
                 holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
 
                 holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
                 holder.receiver_message.setText(messages.getMessage());
@@ -113,7 +118,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView sender_message, receiver_message;
-        CircleImageView reciverProfileImage;
+        ImageView reciverProfileImage;
+        CardView cardView;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -121,6 +127,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
             sender_message=itemView.findViewById(R.id.sender_message_text);
             receiver_message=itemView.findViewById(R.id.reciever_message_text);
             reciverProfileImage=itemView.findViewById(R.id.message_profile_image);
+            cardView=itemView.findViewById(R.id.message_profile_imagee);
         }
     }
 }

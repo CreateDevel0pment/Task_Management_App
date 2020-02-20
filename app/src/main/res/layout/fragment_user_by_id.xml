@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.main.edit_find.find_friends.UserByIdFragment">
@@ -17,11 +18,11 @@
         android:layout_height="match_parent"
         >
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:src="@drawable/logo_code_academy"
-        android:background="@color/colorAccent"/>
+<!--    <ImageView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:src="@drawable/logo_code_academy"-->
+<!--        android:background="@color/colorAccent"/>-->
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="200dp"
@@ -38,7 +39,8 @@
         android:id="@+id/visit_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="username"
+        android:text="@string/username"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_below="@+id/visit_profile_image"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -61,7 +63,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:textColor="#808080"
+        android:textColor="#ffffff"
         />
 
     <Button
@@ -73,6 +75,7 @@
         android:layout_marginRight="65dp"
         android:textSize="18sp"
         android:text="Send Message"
+        android:textColor="#333333"
         android:backgroundTint="@color/colorPrimaryDark"
         android:textAllCaps="false"
         android:layout_marginTop="24dp"/>

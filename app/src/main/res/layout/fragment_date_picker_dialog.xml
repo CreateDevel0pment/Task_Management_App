@@ -28,8 +28,8 @@
         <Button
             android:id="@+id/pick_a_date_btn"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"
-            android:text="Pick a date"
+            android:textColor="#333333"
+            android:text="Set Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

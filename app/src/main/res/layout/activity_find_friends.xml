@@ -6,13 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/find_friends_container"
+    android:background="#333333"
     tools:context=".ui.main.edit_find.find_friends.FindFriendsActivity">
 
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="#333333"
         app:titleTextColor="@color/colorPrimaryDark"
         android:id="@+id/toolbar_find_friends"/>
 
@@ -27,12 +28,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/user_byId_container"/>
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@color/colorAccent"-->
-<!--            android:id="@+id/find_friends_recycler"/>-->
-
 
 </LinearLayout>

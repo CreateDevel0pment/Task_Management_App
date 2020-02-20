@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.TaskActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_tasks_tab_fragment"
         android:layout_width="match_parent"
+        android:background="#333333"
+        app:titleTextColor="@color/colorPrimaryDark"
         android:layout_height="?attr/actionBarSize"
         />
 

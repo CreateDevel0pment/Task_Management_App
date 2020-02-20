@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
+    android:backgroundTint="#333333"
     android:gravity="center"
     tools:context=".ui.main.home.HomeFragment">
 
@@ -45,10 +46,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:textAlignment="center"
         android:fontFamily="sans-serif-light"
-        android:text="Enter your website here and make it a home"
+        android:text="Enter website and make it a home page"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -75,13 +76,14 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"
         android:id="@+id/home_ok_btn"
         android:text="OK"
         android:textSize="16dp"
+        android:textColor="#333333"
         android:backgroundTint="@color/colorPrimaryDark"
         android:layout_gravity="end"/>
 

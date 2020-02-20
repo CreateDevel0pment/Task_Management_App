@@ -43,6 +43,7 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textColorHighlight">@color/colorPrimaryDark</item>
         <item name="android:dateTextAppearance">@color/colorPrimaryDark</item>
+        <item name="android:actionBarItemBackground">@color/colorPrimaryDark</item>
     </style>
 
 

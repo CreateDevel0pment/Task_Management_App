@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="#333333"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.UsersToAssignTaskFragment">
 
@@ -12,8 +12,13 @@
         android:id="@+id/toolbar_users_list_assignTo_fragment"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:titleTextColor="@color/text_dark_grey" />
+        android:background="#333333"
+        app:titleTextColor="@color/colorPrimaryDark" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
 
     <ScrollView
         android:layout_margin="8dp"
@@ -24,7 +29,7 @@
         android:id="@+id/users_list_task_toAssign_RV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent" />
+        android:background="#333333" />
     </ScrollView>
 
 
@@ -43,7 +48,8 @@
             android:layout_margin="8dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:text="Assign members"
-            android:textColor="@color/white" />
+            android:textSize="18sp"
+            android:textColor="#333333" />
 
     </LinearLayout>
 

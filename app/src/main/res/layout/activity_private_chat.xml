@@ -15,6 +15,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#333333"
         android:background="@color/colorPrimary"
         app:titleTextColor="@color/colorPrimaryDark"
         android:id="@+id/private_chat_toolbar"/>
@@ -29,7 +30,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"
+        android:background="#333333"
         android:layout_below="@+id/private_chat_toolbar"
         android:id="@+id/private_message_list"/>
 
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorAccent"
+        android:background="#333333"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"

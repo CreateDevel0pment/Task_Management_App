@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#333333"
     android:orientation="vertical">
     
     <de.hdodenhof.circleimageview.CircleImageView
@@ -24,7 +24,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="user name"
-        android:textColor="#808080"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
@@ -37,7 +37,7 @@
         android:id="@+id/custom_profile_sector"
         android:layout_alignParentStart="true"
         android:text="sector"
-        android:textColor="#808080"
+        android:textColor="#ffffff"
         android:textSize="16sp"
         />
 
@@ -48,6 +48,7 @@
         android:layout_below="@+id/custom_profile_sector"
         android:layout_alignParentStart="true"
         android:text="last seen"
+        android:visibility="gone"
         android:layout_marginTop="2dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"

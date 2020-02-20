@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     tools:context=".ui.main.edit_find.edit.EditProfileActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="#333333"
         android:id="@+id/edit_toolbar"
         app:titleTextColor="@color/colorPrimaryDark"
         tools:ignore="UnknownIdInLayout" />
@@ -162,7 +163,7 @@
         android:padding="8dp"
         android:text="@string/edit"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="#333333"
         android:textSize="20sp"
         android:textStyle="bold" />
 

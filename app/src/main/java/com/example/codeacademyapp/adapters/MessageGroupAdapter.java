@@ -3,6 +3,7 @@ package com.example.codeacademyapp.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,7 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
     public class MyHolder extends RecyclerView.ViewHolder {
 
         TextView userName, messageContent, userSector;
-        CircleImageView profileImage;
+        ImageView profileImage;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);

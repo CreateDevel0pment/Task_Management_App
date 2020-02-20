@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#333333"
     tools:context=".ui.main.home.HomeSettings">
 
 
@@ -15,6 +16,7 @@
         android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-light"
         android:text="Settings"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="24dp" />
 
     <View
@@ -31,6 +33,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-light"
         android:text="Update your website here"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="16dp"
         android:textStyle="bold" />
 
@@ -57,13 +60,14 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"
         android:id="@+id/settings_ok_btn"
         android:text="OK"
         android:textSize="16dp"
+        android:textColor="#333333"
         android:backgroundTint="@color/colorPrimaryDark"
         android:layout_gravity="end"/>
 

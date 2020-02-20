@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#333333"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.ViewAllTaskFragment">
 
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="#333333"
         android:visibility="gone"
         >
 
@@ -34,7 +36,7 @@
         <TextView
             android:layout_margin="16dp"
             android:textSize="16sp"
-            android:textColor="@color/text_dark_grey"
+            android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:id="@+id/random_quote_tv"
             android:layout_width="match_parent"
@@ -45,7 +47,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            android:textColor="@color/text_dark_grey"
+            android:textColor="#ffffff"
             android:layout_gravity="end"
             android:textStyle="italic"
             android:id="@+id/random_quote_author_tv"
@@ -57,7 +59,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list_RV"
-        android:background="@color/low_white"
+        android:background="#333333"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

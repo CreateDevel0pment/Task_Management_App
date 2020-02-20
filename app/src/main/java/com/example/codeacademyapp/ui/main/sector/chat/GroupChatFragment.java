@@ -170,7 +170,10 @@ public class GroupChatFragment extends BaseFragment {
                 if (dataSnapshot.exists()) {
                     currentUserName = dataSnapshot.child("Name").getValue().toString();
 
-                    userImage = dataSnapshot.child("image").getValue().toString();
+                    if(dataSnapshot.child("image").getValue() !=null){
+
+                        userImage = dataSnapshot.child("image").getValue().toString();
+                    }
 
                 }
             }

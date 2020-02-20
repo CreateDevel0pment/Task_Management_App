@@ -12,21 +12,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#333333"
         android:layout_above="@id/my_linear_layout"
         android:id="@+id/group_chat_recycler"/>
 
     <View
         android:layout_above="@+id/my_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white"/>
+        android:layout_height="1dp"
+        android:background="@color/colorPrimaryDark"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorAccent"
+        android:background="#333333"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
+    android:padding="16dp"
     android:gravity="top"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.AddNewTaskFragment">
@@ -11,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#333333"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -19,13 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardBackgroundColor="#333333">
 
             <EditText
                 android:id="@+id/task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="the task name.."
+                android:hint="@string/add_title"
                 android:padding="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray" />
@@ -35,7 +38,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardBackgroundColor="#333333">
 
             <EditText
                 android:id="@+id/task_desc"
@@ -54,7 +57,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardBackgroundColor="#333333">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,6 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorPrimaryDark"
                     android:text="Create personal task for.." />
 
                 <ImageView
@@ -79,6 +84,7 @@
                     android:id="@+id/assigned_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
                     android:layout_margin="8dp"
                     />
             </LinearLayout>
@@ -89,7 +95,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardBackgroundColor="#333333">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,6 +106,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dp"
                     android:layout_margin="8dp"
                     android:text="Set task end date.." />
 
@@ -119,7 +127,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/white">
+            app:cardBackgroundColor="#333333">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,6 +139,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/colorPrimaryDark"
                     android:text="Task priority" />
 
                 <RadioGroup
@@ -145,12 +155,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="High"
+                        android:layout_marginEnd="8dp"
                         android:textColor="@color/colorPrimaryDark" />
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:text="Medium"
                         android:textColor="@color/colorPrimaryDark" />
 
@@ -179,13 +191,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:hint="Create Task"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textSize="16dp"
+            android:textColorHint="#333333" />
 
     </LinearLayout>
 
