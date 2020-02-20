@@ -27,20 +27,20 @@ public class ChatViewModel extends AndroidViewModel {
         chatRepository.setGroupNameToFirebase(chatName);
     }
 
-    public void saveMessageFromGroupChat(String group_name, String currentUserName,String userImage,
+    public void saveMessageFromGroupChat(String userID,String group_name, String currentUserName,String userImage,
                                          String message, String currentDate,
                                          String currentTime) {
-        chatRepository.saveMessageForGroupChat(group_name,currentUserName,userImage, message,currentDate,currentTime);
+        chatRepository.saveMessageForGroupChat(userID,group_name,currentUserName,userImage, message,currentDate,currentTime);
     }
 
     public LiveData<DataSnapshot> displayMessageToGroup(String curenUserGroup){
         return chatRepository.displayMessageInUsersGroup(curenUserGroup);
     }
 
-    public void saveMessageFromWallChat (String currentUserName,String userGroup,String userImage,
+    public void saveMessageFromWallChat (String userId,String currentUserName,String userGroup,String userImage,
                                          String message, String currentDate,
                                          String currentTime) {
-        chatRepository.saveMessageForPublicChat(currentUserName,userGroup,userImage, message,currentDate,currentTime);
+        chatRepository.saveMessageForPublicChat(userId,currentUserName,userGroup,userImage, message,currentDate,currentTime);
     }
 
     public LiveData<DataSnapshot> displayMessageToWall(){

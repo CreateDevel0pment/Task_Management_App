@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.retrofit;
+package com.example.codeacademyapp.data.retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

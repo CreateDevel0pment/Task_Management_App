@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.retrofit;
+package com.example.codeacademyapp.data.retrofit;
 
 import com.example.codeacademyapp.data.model.Quote;
 

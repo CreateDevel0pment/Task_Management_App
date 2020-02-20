@@ -3,9 +3,10 @@ package com.example.codeacademyapp.data.repository;
 import android.content.Context;
 
 import com.example.codeacademyapp.data.model.Quote;
-import com.example.codeacademyapp.retrofit.LoadRandomQuoteListener;
-import com.example.codeacademyapp.retrofit.QuotesApi;
-import com.example.codeacademyapp.retrofit.RetrofitClient;
+
+import com.example.codeacademyapp.data.retrofit.LoadRandomQuoteListener;
+import com.example.codeacademyapp.data.retrofit.QuotesApi;
+import com.example.codeacademyapp.data.retrofit.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +34,7 @@ public class QuoteRepository {
         this.quotesApi = quotesApi;
     }
 
-    public void getRandomQuote(final LoadRandomQuoteListener loadRandomQuoteListener){
+    public void getRandomQuote(final LoadRandomQuoteListener loadRandomQuoteListener) {
 
         quotesApi.getRandomQuote().enqueue(new Callback<Quote>() {
             @Override

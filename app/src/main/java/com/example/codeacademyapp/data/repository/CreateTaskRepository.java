@@ -110,7 +110,7 @@ public class CreateTaskRepository {
                     .child("Name")
                     .setValue(task.getName());
 //
-//            myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
+//            myRef.child("Tasks").child("GroupTasks").child(task.getSector()).child(taskRef.getKey())
 //                    .child("Note")
 //                    .setValue(task.getNote());
 
@@ -126,7 +126,7 @@ public class CreateTaskRepository {
                     .child("TaskPriority")
                     .setValue(task.getImportance());
 
-//            myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
+//            myRef.child("Tasks").child("GroupTasks").child(task.getSector()).child(taskRef.getKey())
 //                    .child("AssignedUsers")
 //                    .setValue(task.getAssignedUsers());
 

@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.repository.QuoteRepository;
-import com.example.codeacademyapp.retrofit.LoadRandomQuoteListener;
+import com.example.codeacademyapp.data.retrofit.LoadRandomQuoteListener;
 
 public class QuoteViewModel extends AndroidViewModel {
 

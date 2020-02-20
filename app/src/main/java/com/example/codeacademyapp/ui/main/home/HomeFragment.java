@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
@@ -51,9 +52,11 @@ public class HomeFragment extends BaseFragment {
                     getUrl = dataSnapshot.getValue().toString();
 
                     WebView browser = view.findViewById(R.id.home_web_view);
+                    CardView cardView=view.findViewById(R.id.web_card_view);
 
                     browser.loadUrl(getUrl);
                     browser.setVisibility(View.VISIBLE);
+                    cardView.setVisibility(View.VISIBLE);
                 } else {
                     web_layout.setVisibility(View.VISIBLE);
                 }

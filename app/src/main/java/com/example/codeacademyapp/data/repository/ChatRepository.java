@@ -183,7 +183,7 @@ public class ChatRepository {
         return dispalyMessage;
     }
 
-    public void saveMessageForPublicChat(String currentUserName, String userGroup, String image,
+    public void saveMessageForPublicChat(String userId,String currentUserName, String userGroup, String image,
                                          String message, String currentDate,
                                          String currentTime) {
 
@@ -199,9 +199,10 @@ public class ChatRepository {
         }
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
+        messageInfoMap.put("id",userId);
         messageInfoMap.put("name", currentUserName);
         messageInfoMap.put("image", image);
-        messageInfoMap.put("group", userGroup);
+        messageInfoMap.put("sector", userGroup);
         messageInfoMap.put("message", message);
         messageInfoMap.put("date", currentDate);
         messageInfoMap.put("time", currentTime);
@@ -209,7 +210,7 @@ public class ChatRepository {
         groupMessageKeyRef.updateChildren(messageInfoMap);
     }
 
-    public void saveMessageForGroupChat(String group_name, String currentUserName,String userImage,
+    public void saveMessageForGroupChat(String userId,String group_name, String currentUserName,String userImage,
                                         String message, String currentDate,
                                         String currentTime) {
 
@@ -224,6 +225,8 @@ public class ChatRepository {
         }
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
+        messageInfoMap.put("id",userId);
+        messageInfoMap.put("sector",group_name);
         messageInfoMap.put("name", currentUserName);
         messageInfoMap.put("image",userImage);
         messageInfoMap.put("message", message);

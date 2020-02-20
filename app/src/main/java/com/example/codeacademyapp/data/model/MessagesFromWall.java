@@ -2,16 +2,18 @@ package com.example.codeacademyapp.data.model;
 
 public class MessagesFromWall {
 
-    String date;
-    String group;
-    String message;
-    String name;
-    String time;
-    String image;
+    private String id;
+    private String date;
+    private String sector;
+    private String message;
+    private String name;
+    private String time;
+    private String image;
 
-    public MessagesFromWall(String date, String group, String message, String name, String time, String image) {
+    public MessagesFromWall(String id, String date, String sector, String message, String name, String time, String image) {
+        this.id = id;
         this.date = date;
-        this.group = group;
+        this.sector = sector;
         this.message = message;
         this.name = name;
         this.time = time;
@@ -25,16 +27,24 @@ public class MessagesFromWall {
         return date;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setDate(String date) {
         this.date = date;
     }
 
-    public String getGroup() {
-        return group;
+    public String getSector() {
+        return sector;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setSector(String sector) {
+        this.sector = sector;
     }
 
     public String getMessage() {

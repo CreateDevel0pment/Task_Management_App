@@ -56,6 +56,7 @@ public class GroupChatFragment extends BaseFragment {
     private String userGroup;
     private String userProfileImage;
     private String profileImageE;
+    private String userID;
 
     private ChatViewModel groupChatViewModel;
 
@@ -81,6 +82,8 @@ public class GroupChatFragment extends BaseFragment {
 
                 if (dataSnapshot.exists()) {
                     userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                    userID = dataSnapshot.getRef().getKey();
+
                     setTitle(userGroup + " Sector");
 
                     groupChatViewModel.displayMessageToGroup(userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
@@ -90,7 +93,7 @@ public class GroupChatFragment extends BaseFragment {
                             MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
 
                             messageList.add(messages);
-                            adapter = new MessageGroupAdapter(messageList);
+                            adapter = new MessageGroupAdapter(messageList, getContext());
                             chat_recycler.setAdapter(adapter);
 
                             chat_recycler.smoothScrollToPosition(chat_recycler.getAdapter().getItemCount());
@@ -156,7 +159,7 @@ public class GroupChatFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            groupChatViewModel.saveMessageFromGroupChat(userGroup, currentUserName, userImage, message, currentDate, currentTime);
+            groupChatViewModel.saveMessageFromGroupChat(userID,userGroup, currentUserName, userImage, message, currentDate, currentTime);
 
         }
     }
