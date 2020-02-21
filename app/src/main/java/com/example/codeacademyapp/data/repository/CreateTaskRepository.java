@@ -24,7 +24,6 @@ public class CreateTaskRepository {
         mAuth = FirebaseAuth.getInstance();
     }
 
-
     public MutableLiveData<TaskInformation> addCompletedByOnTask(TaskInformation taskInformation) {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -35,7 +34,6 @@ public class CreateTaskRepository {
         if (userFb != null) {
             userID = userFb.getUid();
         }
-
 
         DatabaseReference taskRef;
         taskRef = myRef.child("Tasks").push();
@@ -55,10 +53,6 @@ public class CreateTaskRepository {
         myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
                 .child("Name")
                 .setValue(taskInformation.getName());
-//
-//        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
-//                .child("Note")
-//                .setValue(taskInformation.getNote());
 
         myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
                 .child("TimeCreated")
@@ -75,10 +69,8 @@ public class CreateTaskRepository {
         myRef.child("Tasks").child("GroupTasks").child(taskInformation.getSector()).child(taskInformation.getTaskRef())
                 .removeValue();
 
-//        myRef.child("Tasks").child("AssignedTasks").child(taskInformation.getSector()).child(taskInformation.getTaskRef())
-//                .removeValue();
-
-
+        myRef.child("Users").child(userID).child("Tasks").child(taskInformation.getTaskRef())
+                .removeValue();
 
         return taskInformationMutableLiveData;
     }
@@ -109,10 +101,6 @@ public class CreateTaskRepository {
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("Name")
                     .setValue(task.getName());
-//
-//            myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
-//                    .child("Note")
-//                    .setValue(task.getNote());
 
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("Sector")
@@ -125,10 +113,6 @@ public class CreateTaskRepository {
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("TaskPriority")
                     .setValue(task.getImportance());
-
-//            myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
-//                    .child("AssignedUsers")
-//                    .setValue(task.getAssignedUsers());
 
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("EndDate")
@@ -164,7 +148,6 @@ public class CreateTaskRepository {
             if (taskRef.getKey() == null) {
                 return setTaskInformation;
             }
-
 
             myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
                     .child("Description")

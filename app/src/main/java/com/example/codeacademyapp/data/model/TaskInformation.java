@@ -13,6 +13,7 @@ public class TaskInformation {
     private String EndDate;
     private String State;
     private String TaskRef;
+    private String AssignedUser;
     private List<AssignedUsers> AssignedUsers;
     private List<CompletedBy> CompletedBy;
 

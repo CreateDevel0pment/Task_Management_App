@@ -17,23 +17,23 @@
         android:visibility="gone"
         >
 
-        <!--        <TextView-->
-        <!--            android:layout_margin="8dp"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="You have no tasks available"-->
-        <!--            android:textStyle="bold"-->
-        <!--            android:textSize="28sp"/>-->
+                <TextView
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You have no tasks available"
+                    android:textStyle="bold"
+                    android:textSize="28sp"/>
 
-        <!--        <ImageView-->
-        <!--            android:layout_margin="8dp"-->
-        <!--            android:src="@drawable/clipboard"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"/>-->
+                <ImageView
+                    android:layout_margin="8dp"
+                    android:src="@drawable/clipboard"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"/>
 
 
         <TextView
-            android:layout_margin="16dp"
+            android:layout_margin="24dp"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
