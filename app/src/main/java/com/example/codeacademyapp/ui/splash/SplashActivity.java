@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
-import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
+import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
     private void goToSignUpActivity() {
-        Intent intent = new Intent(SplashActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(SplashActivity.this, StartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("SIGNUP", "signUp");
         startActivity(intent);

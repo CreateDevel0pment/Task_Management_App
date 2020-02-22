@@ -71,7 +71,6 @@ public class CompletedTasksFragment extends Fragment {
 
                 userId = dataSnapshot.getKey();
 
-
                 myRef = FirebaseDatabase.getInstance().getReference().child("Tasks").child("CompletedTasks").child(userSector);
 
                 assignedUsersList = new ArrayList<>();
@@ -118,7 +117,6 @@ public class CompletedTasksFragment extends Fragment {
 //
 //                    }
                         }
-
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                         rvTasks.setLayoutManager(layoutManager);
                         String completedCheck = "completeGONE";

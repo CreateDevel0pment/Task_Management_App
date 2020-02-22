@@ -15,6 +15,7 @@
         app:titleTextColor="@color/colorPrimaryDark"
         tools:ignore="UnknownIdInLayout" />
 
+
     <View
         android:layout_below="@id/edit_toolbar"
         android:layout_width="match_parent"
@@ -41,11 +42,19 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="64dp"
-            android:src="@drawable/profile_image"
+            android:src="@drawable/astronaut"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="2dp" />
 
-    <TextView
+        <ImageView
+            android:layout_marginTop="80dp"
+            android:layout_toRightOf="@+id/edit_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"/>
+
+
+        <TextView
         android:id="@+id/edit_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

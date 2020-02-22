@@ -114,7 +114,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-
         currentDate = currentDateFormat.format(calForDate.getTime());
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -136,7 +135,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         });
 
 
-        
         priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
         priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
         priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
@@ -189,6 +187,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
                     taskViewModel.createGroupTask(task);}
 
                 getActivity().onBackPressed();
+
 //                toastMessage("Task created");
 //                clearFieldsAfterCreatingTask();
 

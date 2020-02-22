@@ -15,7 +15,6 @@ public class QuoteViewModel extends AndroidViewModel {
     public MutableLiveData<Quote> randomQuote = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
 
-
     public QuoteViewModel(@NonNull Application application) {
         super(application);
     }

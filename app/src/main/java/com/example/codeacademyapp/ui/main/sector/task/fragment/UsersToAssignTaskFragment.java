@@ -106,22 +106,22 @@ public class UsersToAssignTaskFragment extends DialogFragment{
                         .placeholder(R.drawable.profile_image)
                         .into(holder.profileImage);
 
-                holder.selectUserToAssignCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                            if(buttonView.isChecked()){
-
-//                                assignedUserId = getRef(holder.getAdapterPosition()).getKey();
-
-//                                AssignedUsers assignedUser = new AssignedUsers(assignedUserId);
+//                holder.selectUserToAssignCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                    @Override
+//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //
-//                                assignedUser.setUserId(assignedUserId);
-//                                assignedUsers.add(assignedUser);
-
-                            }
-                        }
-                });
+//                            if(buttonView.isChecked()){
+//
+////                                assignedUserId = getRef(holder.getAdapterPosition()).getKey();
+//
+////                                AssignedUsers assignedUser = new AssignedUsers(assignedUserId);
+////
+////                                assignedUser.setUserId(assignedUserId);
+////                                assignedUsers.add(assignedUser);
+//
+//                            }
+//                        }
+//                });
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -185,8 +185,8 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             userNAme=itemView.findViewById(R.id.user_profile_name);
             userGroup=itemView.findViewById(R.id.user_group);
             profileImage=itemView.findViewById(R.id.users_profile_image);
-            selectUserToAssignCB=itemView.findViewById(R.id.select_to_assign_checkbox);
-            selectUserToAssignRB=itemView.findViewById(R.id.select_to_assign_radioBtn);
+//            selectUserToAssignCB=itemView.findViewById(R.id.select_to_assign_checkbox);
+//            selectUserToAssignRB=itemView.findViewById(R.id.select_to_assign_radioBtn);
 
         }
     }

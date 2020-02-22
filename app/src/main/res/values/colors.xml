@@ -5,7 +5,7 @@
     <color name="colorAccent">#ffffff</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="editTextColor">#000000</color>
-    <color name="textColor">#242424</color>
+    <color name="darkGrey">#333333</color>
     <color name="colorSecondary">#424242</color>
     <color name="tabStyle">#FFFFFF</color>
     <color name="darkblue">#2f2e41</color>

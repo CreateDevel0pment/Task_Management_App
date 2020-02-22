@@ -149,8 +149,6 @@ public class ViewAllTaskFragment extends Fragment {
                             taskAdapter.notifyDataSetChanged();
                             rvTasks.setAdapter(taskAdapter);
                         }
-
-
                     }
 
                     @Override
@@ -160,7 +158,6 @@ public class ViewAllTaskFragment extends Fragment {
                 });
             }
         });
-
         return rootView;
     }
 }

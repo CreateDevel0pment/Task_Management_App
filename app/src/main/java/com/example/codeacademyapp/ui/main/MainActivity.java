@@ -2,36 +2,30 @@ package com.example.codeacademyapp.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
 import com.example.codeacademyapp.ui.main.home.HomeSettings;
-import com.example.codeacademyapp.ui.main.home.HomeViewModel;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
 import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
-import com.example.codeacademyapp.ui.sign_in_up.SignUpActivity;
+import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -126,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();
         finish();
-        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(MainActivity.this, StartActivity.class);
         startActivity(intent);
         finish();
     }

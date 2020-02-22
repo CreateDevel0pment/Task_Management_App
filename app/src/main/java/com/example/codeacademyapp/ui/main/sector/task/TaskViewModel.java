@@ -33,11 +33,9 @@ public class TaskViewModel extends AndroidViewModel {
     }
 
 
-
     public void addCompletedBy(TaskInformation taskInformation){
         createNewTaskInformationLiveData = createTaskRepository.addCompletedByOnTask(taskInformation);
     }
-
 
 
     public LiveData<Task> getCreateGroupTaskLiveData() {

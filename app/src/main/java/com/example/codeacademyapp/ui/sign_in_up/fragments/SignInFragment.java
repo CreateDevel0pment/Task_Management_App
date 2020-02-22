@@ -37,12 +37,17 @@ public class SignInFragment extends Fragment {
     private LogUserViewModel userViewModel;
     private UserInformationViewModel userInformationViewModel;
     private String userId;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
+        if(view!=null){
+            return view;
+        }
+
+        view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         //TODO splash
         userViewModel = ViewModelProviders.of(SignInFragment.this).get(LogUserViewModel.class);
@@ -89,13 +94,20 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String email = mail_et.getText().toString();
-                if (TextUtils.isEmpty(email)) {
-                    toastMessage("Please enter your Email");
-                } else {
-                    userViewModel.forgotPassword(email);
-                    toastMessage("Check your Email account: " + "\n" + email);
-                }
+                ForgotPasswordFragment passwordFragment = new ForgotPasswordFragment();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.start_activity_main_container, passwordFragment)
+                        .addToBackStack("null")
+                        .commit();
+
+//                String email = mail_et.getText().toString();
+//                if (TextUtils.isEmpty(email)) {
+//                    toastMessage("Please enter your Email");
+//                } else {
+//                    userViewModel.forgotPassword(email);
+//                    toastMessage("Check your Email account: " + "\n" + email);
+//                }
             }
         });
 

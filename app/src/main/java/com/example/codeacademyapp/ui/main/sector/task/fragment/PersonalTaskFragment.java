@@ -60,7 +60,10 @@ public class PersonalTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        if (rootView!=null)
+        {
+            return rootView;
+        }
         rootView = inflater.inflate(R.layout.fragment_personal_task, container, false);
 
         rvPersonalTasks = rootView.findViewById(R.id.personal_task_list_RV);

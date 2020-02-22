@@ -1,63 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.main.MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:background="#333333"
-        android:id="@+id/toolbar"
-        app:titleTextColor="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent">
-    </androidx.appcompat.widget.Toolbar>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
+    android:gravity="center"
+    tools:context=".ui.sign_in_up.StartActivity">
 
     <FrameLayout
-        android:id="@+id/home_container"
+        android:id="@+id/start_activity_main_container"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-    <FrameLayout
-        android:id="@+id/wall_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-    <FrameLayout
-        android:id="@+id/group_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        android:layout_height="match_parent"/>
 
-    <FrameLayout
-        android:id="@+id/main_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/colorPrimaryDark"
-        android:backgroundTint="#333333"
-        android:outlineAmbientShadowColor="@android:color/darker_gray"
-        android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_bar_menu" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

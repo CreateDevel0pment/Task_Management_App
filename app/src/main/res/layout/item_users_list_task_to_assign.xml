@@ -10,6 +10,10 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/profile_image"
         android:id="@+id/users_profile_image"/>
 
@@ -19,6 +23,8 @@
         android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -34,13 +40,6 @@
         android:textStyle="bold"
         android:layout_marginStart="8dp"/>
 
-        <ImageView
-            android:id="@+id/user_online_status"
-            android:layout_width="11dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/online"
-            android:visibility="invisible" />
 
 </LinearLayout>
 
@@ -52,36 +51,7 @@
             android:textColor="#ffffff"
             android:id="@+id/user_group"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end|center_vertical"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_assign"
-                android:tint="@color/colorPrimaryDark"
-                />
-
-            <RadioButton
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:buttonTint="@color/colorPrimaryDark"
-                android:id="@+id/select_to_assign_radioBtn"/>
-
-            <CheckBox
-                android:visibility="gone"
-                android:layout_marginEnd="16dp"
-                android:buttonTint="@color/colorPrimaryDark"
-                android:id="@+id/select_to_assign_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 
