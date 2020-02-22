@@ -22,13 +22,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder> {
 
     private List<Messages> mList;
-    FirebaseAuth auth;
-    DatabaseReference userrsRef;
+    private FirebaseAuth auth;
 
     public MessageAdapter(List<Messages> mList) {
         this.mList = mList;
@@ -54,14 +51,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
         Messages messages=mList.get(holder.getAdapterPosition());
 
-
         String fromUserId=messages.getFrom();
         String fromMessageType=messages.getType();
 
-        userrsRef = FirebaseDatabase.getInstance().getReference()
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference()
                 .child("Users").child(fromUserId);
 
-        userrsRef.addValueEventListener(new ValueEventListener() {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -88,6 +84,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
             holder.reciverProfileImage.setVisibility(View.INVISIBLE);
             holder.sender_message.setVisibility(View.INVISIBLE);
             holder.cardView.setVisibility(View.INVISIBLE);
+            holder.receiver_time.setVisibility(View.INVISIBLE);
+            holder.sender_time.setVisibility(View.INVISIBLE);
 
 
 
@@ -96,6 +94,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
                 holder.sender_message.setVisibility(View.VISIBLE);
                 holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
                 holder.sender_message.setText(messages.getMessage());
+
 
             }else {
 
@@ -117,7 +116,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView sender_message, receiver_message;
+
+        TextView sender_message, receiver_message,receiver_time,sender_time;
         ImageView reciverProfileImage;
         CardView cardView;
 
@@ -128,6 +128,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
             receiver_message=itemView.findViewById(R.id.reciever_message_text);
             reciverProfileImage=itemView.findViewById(R.id.message_profile_image);
             cardView=itemView.findViewById(R.id.message_profile_imagee);
+            receiver_time=itemView.findViewById(R.id.reciever_time);
+            sender_time=itemView.findViewById(R.id.sender_time);
         }
     }
 }

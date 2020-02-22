@@ -41,7 +41,7 @@ public class AcademyWallFragment extends BaseFragment {
     private ImageButton sentMessage_btn;
     private EditText userMessage_input;
 
-    private String currentUserName;
+    private String currentUserName,id;
     private String userGroup, userImage;
 
     private View view;
@@ -123,7 +123,7 @@ public class AcademyWallFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            wallChatViewModel.saveMessageFromWallChat(currentUserName, userGroup, userImage, message, currentDate, currentTime);
+            wallChatViewModel.saveMessageFromWallChat(id,currentUserName, userGroup, userImage, message, currentDate, currentTime);
 
         }
     }
@@ -136,6 +136,7 @@ public class AcademyWallFragment extends BaseFragment {
 
                 currentUserName = dataSnapshot.child("Name").getValue().toString();
                 userGroup = dataSnapshot.child("Sector").getValue().toString();
+                id=dataSnapshot.getRef().getKey();
 
                 if(dataSnapshot.child("image").getValue()!= null){
                     userImage = dataSnapshot.child("image").getValue().toString();

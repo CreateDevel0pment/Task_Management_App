@@ -27,10 +27,9 @@ public class SplashRepository {
 
                 isUserAuthenticateInFirebaseMutableLiveData.setValue(firebaseUser);
             }
-        }, 1500);
+        }, 1000);
 
         return isUserAuthenticateInFirebaseMutableLiveData;
     }
-
 
 }
