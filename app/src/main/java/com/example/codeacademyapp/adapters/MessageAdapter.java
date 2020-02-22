@@ -1,6 +1,5 @@
 package com.example.codeacademyapp.adapters;
 
-import android.drm.ProcessedData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +22,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder> {
 
     private List<Messages> mList;
-    FirebaseAuth auth;
-    DatabaseReference userrsRef;
+    private FirebaseAuth auth;
 
     public MessageAdapter(List<Messages> mList) {
         this.mList = mList;
@@ -58,10 +54,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
         String fromUserId=messages.getFrom();
         String fromMessageType=messages.getType();
 
-        userrsRef = FirebaseDatabase.getInstance().getReference()
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference()
                 .child("Users").child(fromUserId);
 
-        userrsRef.addValueEventListener(new ValueEventListener() {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
