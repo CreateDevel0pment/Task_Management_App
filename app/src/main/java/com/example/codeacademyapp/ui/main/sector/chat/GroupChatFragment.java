@@ -57,6 +57,7 @@ public class GroupChatFragment extends BaseFragment {
     private String userProfileImage;
     private String profileImageE;
     private String userID;
+    private FloatingActionButton new_task_btn;
 
     private ChatViewModel groupChatViewModel;
 
@@ -112,7 +113,7 @@ public class GroupChatFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_group_chat, container, false);
 
-        FloatingActionButton new_task_btn = view.findViewById(R.id.new_task_button);
+        new_task_btn = view.findViewById(R.id.new_task_button);
         new_task_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,6 +189,7 @@ public class GroupChatFragment extends BaseFragment {
         sentMessage_btn = view.findViewById(R.id.sent_message_btn);
         userMessage_input = view.findViewById(R.id.input_user_message);
 
+
         face_profile_recycler = view.findViewById(R.id.group_face_recycler_);
         face_profile_recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         chat_recycler = view.findViewById(R.id.group_chat_recycler);
@@ -201,7 +203,6 @@ public class GroupChatFragment extends BaseFragment {
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-
 
             profileImage = itemView.findViewById(R.id.item_image);
 
@@ -226,7 +227,7 @@ public class GroupChatFragment extends BaseFragment {
                         userProfileImage = model.image;
 
                         Picasso.get().load(userProfileImage)
-                                .placeholder(R.drawable.profile_image)
+                                .placeholder(R.drawable.astronaut)
                                 .into(holder.profileImage);
                     } else {
 

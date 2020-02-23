@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.sector.task.fragment;
+package com.example.codeacademyapp.ui.main.sector.task.fragment.listeners;
 
 import com.example.codeacademyapp.data.model.AssignedUsers;
 

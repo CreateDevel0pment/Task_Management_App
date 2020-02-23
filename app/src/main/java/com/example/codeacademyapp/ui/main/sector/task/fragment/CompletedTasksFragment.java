@@ -98,24 +98,7 @@ public class CompletedTasksFragment extends Fragment {
                                      group, timeCreated, taskPriority, endDate, taskRef);
                             tasks.add(task);
 
-//                    if (completedByList != null) {
-//                        for (int i = 0; i < completedByList.size(); i++) {
-//                            CompletedBy completedBy;
-//                            completedBy = completedByList.get(i);
-//                            id = completedBy.getUserId();
-//                            if (id.equals(userId)) {
-//                                if (assignedUsersList == null) {
-//                                    if (group != null) {
-//                                        if (group.equals(userSector)) {
-//
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//
-//                    }
+
                         }
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                         rvTasks.setLayoutManager(layoutManager);

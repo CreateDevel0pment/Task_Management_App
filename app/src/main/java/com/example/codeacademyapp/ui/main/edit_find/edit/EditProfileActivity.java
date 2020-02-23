@@ -58,7 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 editProfileViewModel.updateUserInfo(position_string, group_string);
 
-                Toast.makeText(EditProfileActivity.this, "Changes are edit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileActivity.this, "Changes are updated", Toast.LENGTH_SHORT).show();
             }
         });
 

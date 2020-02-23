@@ -97,33 +97,7 @@ public class ViewAllTaskFragment extends Fragment {
                                     group, timeCreated, taskPriority, endDate, taskRef);
                             tasks.add(task);
 
-//                    if (completedByList != null) {
-//                        for (int i = 0; i < completedByList.size(); i++) {
-//                            CompletedBy completedBy;
-//                            completedBy = completedByList.get(i);
-//                            id = completedBy.getUserId();
-//                        }
-//                        if (!id.equals(userId)) {
-//                            if (assignedUsersList == null) {
-//                                if (group != null) {
-//                                    if (group.equals(userSector)) {
-//                                        TaskInformation task = new TaskInformation(name, description,
-//                                                note, group, timeCreated, taskPriority, endDate);
-//                                        tasks.add(task);
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                    } else {
-//                        if (assignedUsersList == null) {
-//                            if (group != null) {
-//                                if (group.equals(userSector)) {
-//
-//                                }
-//                            }
-//                        }
-//                    }
+
                         }
 
                         if (tasks.isEmpty()) {

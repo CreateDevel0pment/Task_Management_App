@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item
         android:id="@+id/home"
-        android:icon="@drawable/home_ic"
-        android:title=""
+        android:icon="@drawable/logoworkers"
+        android:title="Home"
         />
     <item
         android:id="@+id/academy_wall"
         android:icon="@drawable/group_people_ic"
-        android:title="" />
+        android:title="Wall" />
     <item
         android:id="@+id/sector"
         android:icon="@drawable/group_chat"
-        android:title="" />
+        android:title="My Sector" />
 
 </menu>

@@ -1,7 +1,6 @@
 package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,9 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.DatePickerDialogListener;
 
 import java.util.Objects;
 

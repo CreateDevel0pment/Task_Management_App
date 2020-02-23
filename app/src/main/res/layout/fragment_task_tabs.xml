@@ -9,13 +9,12 @@
 
     <com.google.android.material.tabs.TabLayout
         android:layout_alignParentTop="true"
-        android:background="#333333"
-        app:tabTextColor="@color/colorPrimaryDark"
+        app:tabTextColor="@color/darkGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         style="@style/MyCustomTabLayout"
-        app:tabIndicatorColor="@color/colorPrimaryDark"
+        app:tabIndicatorColor="@color/darkGrey"
         android:id="@+id/tab_layout_new_tasks"/>
 
     <androidx.viewpager.widget.ViewPager

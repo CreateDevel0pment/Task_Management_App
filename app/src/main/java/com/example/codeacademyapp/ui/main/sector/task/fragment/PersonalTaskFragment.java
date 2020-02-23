@@ -109,41 +109,6 @@ public class PersonalTaskFragment extends Fragment {
                                             new TaskInformation(name, description, group, timeCreated, taskPriority, endDate, taskRef);
                                     tasks.add(task);
 
-//                                    if (completedByList != null) {
-//                                        for (int i = 0; i < completedByList.size(); i++) {
-//                                            CompletedBy completedBy;
-//                                            completedBy = completedByList.get(i);
-//                                            id = completedBy.getUserId();
-//                                        }
-//                                        if (!id.equals(userId)) {
-//                                            if (assignedUsersList != null) {
-//                                                for (int i = 0; i < assignedUsersList.size(); i++) {
-//                                                    AssignedUsers assignedUser;
-//                                                    assignedUser = assignedUsersList.get(i);
-//                                                    id = assignedUser.getUserId();
-//
-//                                                    if (id.equals(userId)) {
-//                                                        TaskInformation task =
-//                                                                new TaskInformation(name, description, note, group, timeCreated, taskPriority, endDate);
-//                                                        tasks.add(task);
-//                                                    }
-//                                                }
-//                                            }
-//                                        }
-//                                    } else {
-//                                        if (assignedUsersList != null) {
-//                                            for (int i = 0; i < assignedUsersList.size(); i++) {
-//                                                AssignedUsers assignedUser;
-//                                                assignedUser = assignedUsersList.get(i);
-//                                                id = assignedUser.getUserId();
-//
-//                                                if (id.equals(userId)) {
-//
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-
                                 }
 
                                 if (tasks.isEmpty()) {

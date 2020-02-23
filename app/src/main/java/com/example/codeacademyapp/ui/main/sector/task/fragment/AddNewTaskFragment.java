@@ -25,6 +25,8 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.Task;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.DatePickerDialogListener;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.UsersToAssignDialogListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +44,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener,DatePickerDialogListener{
+public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener, DatePickerDialogListener {
 
 
     private EditText task_name, task_description;
@@ -52,7 +54,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef, assignedUserRef;
     private FirebaseUser userFb;
-    private String userID, userGroup, taskPriority, userName;
+    private String userID, userGroup, taskPriority, userName, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
     private Spinner taskPrioritySpinner;
     private Task task;
@@ -63,12 +65,14 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private TextView assignedUserNameTV;
     private String assignedUserId;
 
-    private List<AssignedUsers> assignedUsersList;
+
+    public AddNewTaskFragment(String userName, String extrasUserId) {
+        this.extrasUserName = userName;
+        this.extrasUserId = extrasUserId;
+    }
 
     public AddNewTaskFragment() {
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +88,9 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task_description = rootView.findViewById(R.id.task_desc);
         assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
 
+        if(extrasUserName !=null){
+            assignedUserNameTV.setText(extrasUserName);
+        }
 
         ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
         datePickerImg.setOnClickListener(new View.OnClickListener() {
@@ -181,15 +188,13 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             public void onClick(View v) {
 
                 setTaskValues();
-                if(assignedUserId !=null){
+                if(assignedUserId !=null || extrasUserId!=null){
                     taskViewModel.createAssignedTask(task);
                 } else {
                     taskViewModel.createGroupTask(task);}
 
                 getActivity().onBackPressed();
 
-//                toastMessage("Task created");
-//                clearFieldsAfterCreatingTask();
 
             }
         });
@@ -212,22 +217,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         usersToAssignTaskFragment.setTargetFragment(AddNewTaskFragment.this, 300);
     }
 
-    private void toastMessage(String message) {
 
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void clearFieldsAfterCreatingTask(){
-        priorityRadioGroup.clearCheck();
-        task_description.setText("");
-        task_name.setText("");
-        taskPrioritySpinner.setSelection(0);
-        if(assignedUsersList!=null){
-            assignedUsersList.clear();
-        }
-
-        endDate = null;
-    }
 
     private void setTaskValues(){
 
@@ -238,14 +228,19 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task.setStart_date(currentDate);
         task.setImportance(taskPriority);
         task.setGroup(userGroup);
-        task.setAssignedUsers(assignedUsersList);
         task.setEndDate(endDate);
-        task.setAssignedUserId(assignedUserId);
+        if(extrasUserId !=null){
+            task.setAssignedUserId(extrasUserId);
+        } else {
+            task.setAssignedUserId(assignedUserId);
+        }
+
     }
 
     @Override
     public void passListOfUsersToAddNewTaskFragment(String userID) {
         this.assignedUserId = userID;
+
             assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
             assignedUserRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -261,6 +256,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
                 }
             });
+
     }
 
     @Override

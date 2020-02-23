@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#333333"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.ViewAllTaskFragment">
 
@@ -13,8 +12,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/darkGrey"
         android:gravity="center"
-        android:background="#333333"
         android:visibility="gone"
         >
 
@@ -59,7 +58,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list_RV"
-        android:background="#333333"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

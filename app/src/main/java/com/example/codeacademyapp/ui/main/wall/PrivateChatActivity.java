@@ -23,8 +23,10 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageAdapter;
 import com.example.codeacademyapp.data.model.Messages;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -80,6 +82,16 @@ public class PrivateChatActivity extends AppCompatActivity {
         if (intent.getExtras().get("visit_user_image") != null) {
             user_image = intent.getExtras().get("visit_user_image").toString();
         }
+
+        FloatingActionButton newPersonalTaskBtn = findViewById(R.id.new_personal_task_button);
+        newPersonalTaskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newTaskIntent = new Intent(PrivateChatActivity.this, TaskActivity.class);
+                newTaskIntent.putExtra("id", message_reciever_id);
+                startActivity(newTaskIntent);
+        }
+        });
 
 
         userNAme.setText(message_reciever_name);

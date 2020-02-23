@@ -76,7 +76,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
             holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
             holder.receiver_message.setText(messages.getMessage());
-            Picasso.get().load(messages.getImage()).into(holder.reciverProfileImage);
+            Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
         }
 

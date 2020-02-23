@@ -1,5 +1,6 @@
 package com.example.codeacademyapp.ui.main.sector.task;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -9,10 +10,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.AddNewTaskFragment;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.TaskTabsFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class TaskActivity extends AppCompatActivity {
 
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +29,7 @@ public class TaskActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_tasks_tab_fragment);
         toolbar.setTitle("Back to group chat");
-        toolbar.setTitleTextColor((ContextCompat.getColor(this, R.color.colorPrimaryDark)));
+        toolbar.setTitleTextColor((ContextCompat.getColor(this, R.color.white)));
 
         toolbar.setNavigationIcon(R.drawable.ic_back_button_white);
 
@@ -33,10 +41,35 @@ public class TaskActivity extends AppCompatActivity {
             }
         });
 
-        TaskTabsFragment taskTabsFragment = new TaskTabsFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .replace(R.id.task_fragments_container, taskTabsFragment)
-                .commit();
+        final String userID = getIntent().getStringExtra("id");
+
+        if(userID!=null){
+            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Name");
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        userName = dataSnapshot.getValue().toString();
+                        AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment(userName, userID);
+                        FragmentManager manager = getSupportFragmentManager();
+                        manager.beginTransaction()
+                                .replace(R.id.task_fragments_container, addNewTaskFragment)
+                                .commit();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        } else {
+            TaskTabsFragment taskTabsFragment = new TaskTabsFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction()
+                    .replace(R.id.task_fragments_container, taskTabsFragment)
+                    .commit();
+        }
     }
 }

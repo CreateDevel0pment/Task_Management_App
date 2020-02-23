@@ -17,14 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="4dp"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -37,6 +37,7 @@
             android:src="@drawable/profile_image" />
 
         <LinearLayout
+            android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -63,7 +64,7 @@
                     android:layout_height="16dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/online"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -89,7 +90,7 @@
                     android:backgroundTint="@android:color/holo_red_dark"
                     android:text="cancel"
                     android:textAllCaps="false"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/request_accept_btn"
@@ -99,7 +100,7 @@
                     android:backgroundTint="@android:color/holo_green_light"
                     android:text="accept"
                     android:textAllCaps="false"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
