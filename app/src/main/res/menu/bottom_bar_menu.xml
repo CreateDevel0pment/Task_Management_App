@@ -3,7 +3,7 @@
     >
     <item
         android:id="@+id/home"
-        android:icon="@drawable/logoworkers"
+        android:icon="@drawable/home_ic"
         android:title="Home"
         />
     <item
@@ -14,5 +14,9 @@
         android:id="@+id/sector"
         android:icon="@drawable/group_chat"
         android:title="My Sector" />
+    <item
+        android:id="@+id/tasks"
+        android:icon="@drawable/assignment"
+        android:title="Tasks" />
 
 </menu>

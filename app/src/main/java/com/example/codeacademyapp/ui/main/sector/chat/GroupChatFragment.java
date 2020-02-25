@@ -25,6 +25,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageGroupAdapter;
 import com.example.codeacademyapp.data.model.MessageFromGroup;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
+import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
@@ -73,8 +74,9 @@ public class GroupChatFragment extends BaseFragment {
         new_task_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TaskActivity.class);
-                startActivity(intent);
+                Intent newTaskIntent = new Intent(getActivity(), TaskActivity.class);
+                newTaskIntent.putExtra("type", "forAll");
+                startActivity(newTaskIntent);
             }
         });
 

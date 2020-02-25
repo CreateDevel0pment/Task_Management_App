@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/AccentColor"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,7 +10,6 @@
         app:cardBackgroundColor="#333333"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,6 +18,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:background="#333333"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
@@ -30,6 +30,8 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -115,7 +117,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:textSize="16dp"
             android:text="@string/created"
             android:textColor="#ffffff" />
@@ -130,7 +133,7 @@
             android:layout_marginBottom="8dp"
             android:textSize="16dp"
             android:textColor="@color/AccentColor"
-            android:textStyle="bold"/>
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -147,7 +150,6 @@
             android:layout_margin="8dp"
             android:textSize="16dp"
             android:textColor="@color/AccentColor"
-            android:textStyle="bold"
             />
 
     </LinearLayout>
@@ -163,7 +165,7 @@
         >
 
         <TextView
-            android:textColor="@color/AccentColor"
+            android:textColor="@color/colorPrimary"
             android:text="Task priority:"
             android:layout_margin="8dp"
             android:textSize="16dp"

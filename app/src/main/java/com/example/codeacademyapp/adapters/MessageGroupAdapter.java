@@ -57,7 +57,6 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
 
         if (messages.getId().equals(currentUser)) {
 
-
             holder.sender_message.setVisibility(View.VISIBLE);
             holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
             holder.sender_message.setText(messages.getMessage());

@@ -30,12 +30,13 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/add_title"
                 android:padding="10dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorPrimary"
                 android:textColorHint="@android:color/darker_gray" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#333333">
@@ -49,12 +50,47 @@
                 android:maxLines="10"
                 android:minLines="5"
                 android:padding="10dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorPrimary"
                 android:textColorHint="@android:color/darker_gray" />
         </androidx.cardview.widget.CardView>
 
 
         <androidx.cardview.widget.CardView
+            android:layout_marginTop="8dp"
+            android:id="@+id/cardView_CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#333333">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/AccentColor"
+                    android:text="Create sector project" />
+
+                <CheckBox
+                    android:id="@+id/create_sector_project_checkbox"
+                    android:checked="true"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="8dp"
+            android:id="@+id/assigned_user_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#333333">
@@ -93,6 +129,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#333333">
@@ -125,6 +162,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="#333333">
@@ -174,12 +212,6 @@
                         android:textColor="@color/AccentColor" />
 
                 </RadioGroup>
-                <!--                <Spinner-->
-                <!--                    android:layout_margin="8dp"-->
-                <!--                    android:entries="@array/Priority"-->
-                <!--                    android:id="@+id/priorty_spinner"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"/>-->
 
             </LinearLayout>
 

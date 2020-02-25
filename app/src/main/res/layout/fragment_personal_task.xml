@@ -57,6 +57,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:background="#666666"
         android:id="@+id/personal_task_list_RV"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -8,21 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.Task;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.DatePickerDialogListener;
@@ -37,7 +36,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -56,15 +54,13 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private FirebaseUser userFb;
     private String userID, userGroup, taskPriority, userName, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
-    private Spinner taskPrioritySpinner;
     private Task task;
     private View rootView;
     private String currentDate, endDate;
-    private RadioButton priorityBtnHigh,priorityBtnMedium,priorityBtnLow;
-    private RadioGroup priorityRadioGroup;
     private TextView assignedUserNameTV;
     private String assignedUserId;
-
+    private CheckBox checkBoxSectorProject;
+    private CardView assignUserCardView, checkBoxCardView;
 
     public AddNewTaskFragment(String userName, String extrasUserId) {
         this.extrasUserName = userName;
@@ -87,10 +83,26 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
         assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
+        checkBoxSectorProject = rootView.findViewById(R.id.create_sector_project_checkbox);
+        assignUserCardView = rootView.findViewById(R.id.assigned_user_card);
+        checkBoxCardView = rootView.findViewById(R.id.cardView_CheckBox);
 
-        if(extrasUserName !=null){
+        if (extrasUserName != null) {
             assignedUserNameTV.setText(extrasUserName);
+            checkBoxCardView.setVisibility(View.GONE);
+        } else {
+            assignUserCardView.setVisibility(View.GONE);
         }
+
+//        checkBoxSectorProject.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(buttonView.isChecked()){
+//                    assignedUserNameTV.setText(null);
+//                }
+//            }
+//        });
+
 
         ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
         datePickerImg.setOnClickListener(new View.OnClickListener() {
@@ -142,18 +154,18 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         });
 
 
-        priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
-        priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
-        priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
+        RadioButton priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
+        RadioButton priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
+        RadioButton priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
 
-        priorityRadioGroup = rootView.findViewById(R.id.priority_radioGroup);
+        RadioGroup priorityRadioGroup = rootView.findViewById(R.id.priority_radioGroup);
 
         priorityBtnHigh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(buttonView.isChecked()){
+                if (buttonView.isChecked()) {
                     taskPriority = "High";
-                }else {
+                } else {
                     taskPriority = null;
                 }
             }
@@ -162,7 +174,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         priorityBtnMedium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(buttonView.isChecked()){
+                if (buttonView.isChecked()) {
                     taskPriority = "Medium";
                 } else {
                     taskPriority = null;
@@ -173,26 +185,27 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         priorityBtnLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(buttonView.isChecked()){
+                if (buttonView.isChecked()) {
                     taskPriority = "Low";
-                }else {
+                } else {
                     taskPriority = null;
                 }
             }
         });
 
 
-
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
                 setTaskValues();
-                if(assignedUserId !=null || extrasUserId!=null){
+
+                if (assignedUserId != null || extrasUserId != null) {
                     taskViewModel.createAssignedTask(task);
                 } else {
-                    taskViewModel.createGroupTask(task);}
-
+                    taskViewModel.createGroupTask(task);
+                }
                 getActivity().onBackPressed();
 
 
@@ -202,7 +215,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         return rootView;
     }
 
-    private void showDatePickerDialog(){
+    private void showDatePickerDialog() {
         DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
         datePickerDialogFragment.show(getFragmentManager(), "date_picker_fragemnt");
         datePickerDialogFragment.setTargetFragment(AddNewTaskFragment.this, 300);
@@ -218,8 +231,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     }
 
 
-
-    private void setTaskValues(){
+    private void setTaskValues() {
 
         task = new Task();
 
@@ -229,7 +241,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task.setImportance(taskPriority);
         task.setGroup(userGroup);
         task.setEndDate(endDate);
-        if(extrasUserId !=null){
+        if (extrasUserId != null) {
             task.setAssignedUserId(extrasUserId);
         } else {
             task.setAssignedUserId(assignedUserId);
@@ -241,21 +253,22 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     public void passListOfUsersToAddNewTaskFragment(String userID) {
         this.assignedUserId = userID;
 
-            assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
-            assignedUserRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        userName = dataSnapshot.child("Name").getValue().toString();
-                        assignedUserNameTV.setText(userName);
-                    }
+        assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
+        assignedUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    userName = dataSnapshot.child("Name").getValue().toString();
+                    assignedUserNameTV.setText(userName);
+                    checkBoxSectorProject.setChecked(false);
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+        });
 
     }
 

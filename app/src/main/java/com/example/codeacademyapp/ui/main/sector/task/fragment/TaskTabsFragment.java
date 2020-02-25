@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 

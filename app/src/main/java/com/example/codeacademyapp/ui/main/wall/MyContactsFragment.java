@@ -39,6 +39,7 @@ public class MyContactsFragment extends Fragment {
     private String userSector;
     private String userName;
 
+
     String profileImage="default";
 
     public MyContactsFragment() {
@@ -47,6 +48,7 @@ public class MyContactsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         View view = inflater.inflate(R.layout.fragment_my_contacts, container, false);
 
@@ -103,10 +105,10 @@ public class MyContactsFragment extends Fragment {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                        if (dataSnapshot.hasChild("image")) {
+                                        profileImage=null;
 
+                                        if (dataSnapshot.hasChild("image")) {
                                             profileImage = dataSnapshot.child("image").getValue().toString();
-                                            Picasso.get().load(profileImage).into(holder.image);
                                         }
 
                                         userName = dataSnapshot.child("Name").getValue().toString();

@@ -6,7 +6,7 @@
 
         <item name="android:textColor">@color/colorPrimaryDarkMode</item>
         <item name="colorSecondary">@color/text_dark_grey</item>
-        <item name="android:colorBackground">@color/AccentColor</item>
+        <item name="android:colorBackground">@color/colorPrimaryDarkMode</item>
         <item name="android:windowDisablePreview">true</item>
 
 

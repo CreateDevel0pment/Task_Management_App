@@ -85,13 +85,13 @@ public class RequestsFragment extends Fragment {
                         protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final ModelFirebase model) {
 
 
+
                             holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.VISIBLE);
                             holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
                                     acceptTheRequest();
-
 
                                 }
                             });

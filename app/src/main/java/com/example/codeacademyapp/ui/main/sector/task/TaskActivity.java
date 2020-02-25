@@ -24,18 +24,17 @@ import com.google.firebase.database.ValueEventListener;
 public class TaskActivity extends AppCompatActivity {
 
     String userName;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_tasks_tab_fragment);
-        toolbar.setTitle("Back to group chat");
-        toolbar.setTitleTextColor((ContextCompat.getColor(this, R.color.colorPrimary)));
 
+        toolbar = findViewById(R.id.toolbar_tasks_tab_fragment);
         toolbar.setNavigationIcon(R.drawable.ic_back_button_white);
-
+        toolbar.setTitle("Tasks");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +44,7 @@ public class TaskActivity extends AppCompatActivity {
         });
 
         final String userID = getIntent().getStringExtra("id");
+        final String taskType = getIntent().getStringExtra("type");
 
         if(userID!=null){
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Name");
@@ -58,8 +58,8 @@ public class TaskActivity extends AppCompatActivity {
                         manager.beginTransaction()
                                 .replace(R.id.task_fragments_container, addNewTaskFragment)
                                 .commit();
+                        toolbar.setTitle("Create task");
                     }
-
                 }
 
                 @Override
@@ -67,7 +67,16 @@ public class TaskActivity extends AppCompatActivity {
 
                 }
             });
-        } else {
+        } else if (taskType!=null){
+            AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment(null, null);
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction()
+                    .replace(R.id.task_fragments_container, addNewTaskFragment)
+                    .commit();
+            toolbar.setTitle("Create project");
+        }
+
+         else {
             TaskTabsFragment taskTabsFragment = new TaskTabsFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction()

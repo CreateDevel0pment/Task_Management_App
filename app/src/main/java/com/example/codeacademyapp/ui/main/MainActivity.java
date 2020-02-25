@@ -22,6 +22,7 @@ import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActi
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
 import com.example.codeacademyapp.ui.main.home.HomeSettings;
 import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
+import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.sector:
                         switchToFragment(new GroupChatFragment(), R.id.group_container);
                         break;
+                    case R.id.tasks:
+                        Intent intent = new Intent(MainActivity.this, TaskActivity.class);
+                        startActivity(intent);
                 }
                 return false;
             }
