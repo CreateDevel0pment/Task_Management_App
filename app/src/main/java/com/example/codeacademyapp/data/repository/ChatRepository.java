@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class ChatRepository {
 
@@ -32,17 +31,16 @@ public class ChatRepository {
         myRef = rootRef.getReference();
         myRef.child("Groups").child(groupName).setValue("")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    //TODO
-                }
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //TODO
+                        }
+                    }
+                });
     }
 
-
-    public MutableLiveData<DataSnapshot> getchatRequest (final String currentUserId){
+    public MutableLiveData<DataSnapshot> getchatRequest(final String currentUserId) {
 
         final MutableLiveData<DataSnapshot> setChatRequest = new MutableLiveData<>();
         chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
@@ -52,7 +50,7 @@ public class ChatRepository {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                    setChatRequest.setValue(dataSnapshot);
+                setChatRequest.setValue(dataSnapshot);
 
             }
 
@@ -145,8 +143,8 @@ public class ChatRepository {
         final MutableLiveData<DataSnapshot> dispalyMessage = new MutableLiveData<>();
 
         auth = FirebaseAuth.getInstance();
-        String message_sender_id=auth.getCurrentUser().getUid();
-        privateReference=FirebaseDatabase.getInstance().getReference();
+        String message_sender_id = auth.getCurrentUser().getUid();
+        privateReference = FirebaseDatabase.getInstance().getReference();
 
         privateReference.child("Message").child(message_sender_id).child(message_reciever_id)
                 .addChildEventListener(new ChildEventListener() {
@@ -187,7 +185,7 @@ public class ChatRepository {
         return dispalyMessage;
     }
 
-    public void saveMessageForPublicChat(String userId,String currentUserName, String userGroup, String image,
+    public void saveMessageForPublicChat(String userId, String currentUserName, String userGroup, String image,
                                          String message, String currentDate,
                                          String currentTime) {
 
@@ -203,7 +201,7 @@ public class ChatRepository {
         }
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
-        messageInfoMap.put("id",userId);
+        messageInfoMap.put("id", userId);
         messageInfoMap.put("name", currentUserName);
         messageInfoMap.put("image", image);
         messageInfoMap.put("sector", userGroup);
@@ -214,7 +212,7 @@ public class ChatRepository {
         groupMessageKeyRef.updateChildren(messageInfoMap);
     }
 
-    public void saveMessageForGroupChat(String userId,String group_name, String currentUserName,String userImage,
+    public void saveMessageForGroupChat(String userId, String group_name, String currentUserName, String userImage,
                                         String message, String currentDate,
                                         String currentTime) {
 
@@ -229,10 +227,10 @@ public class ChatRepository {
         }
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
-        messageInfoMap.put("id",userId);
-        messageInfoMap.put("sector",group_name);
+        messageInfoMap.put("id", userId);
+        messageInfoMap.put("sector", group_name);
         messageInfoMap.put("name", currentUserName);
-        messageInfoMap.put("image",userImage);
+        messageInfoMap.put("image", userImage);
         messageInfoMap.put("message", message);
         messageInfoMap.put("date", currentDate);
         messageInfoMap.put("time", currentTime);

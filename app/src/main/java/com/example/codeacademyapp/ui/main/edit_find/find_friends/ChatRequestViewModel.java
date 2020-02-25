@@ -12,7 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 
 public class ChatRequestViewModel extends AndroidViewModel {
 
-    ChatRequestRepository chatRequestRepository;
+   private ChatRequestRepository chatRequestRepository;
 
     public ChatRequestViewModel(@NonNull Application application) {
         super(application);

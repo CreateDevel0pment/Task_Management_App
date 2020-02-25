@@ -3,9 +3,7 @@ package com.example.codeacademyapp.ui.main.home;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +11,15 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
-import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.firebase.database.DataSnapshot;
 
 /**
@@ -51,12 +46,12 @@ public class HomeFragment extends BaseFragment {
 
                 web_layout = view.findViewById(R.id.home_welcome_layout);
 
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     getUrl = dataSnapshot.getValue().toString();
 
                     WebView browser = view.findViewById(R.id.home_web_view);
                     browser.setBackgroundColor(Color.TRANSPARENT);
-                    CardView cardView=view.findViewById(R.id.web_card_view);
+                    CardView cardView = view.findViewById(R.id.web_card_view);
 
                     browser.loadUrl(getUrl);
                     browser.setVisibility(View.VISIBLE);
@@ -74,7 +69,7 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(view!=null){
+        if (view != null) {
 
             return view;
         }
@@ -88,16 +83,16 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                if(web_text.getText().toString().equals("")){
+                if (web_text.getText().toString().equals("")) {
 
                     web_text.setError("Enter web");
 
-                }else {
+                } else {
 
                     String webUrl = web_text.getText().toString();
                     homeViewModel.setHomePageUrl(webUrl);
 
-                    HomeFragment homeFragment=new HomeFragment();
+                    HomeFragment homeFragment = new HomeFragment();
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.home_container, homeFragment)

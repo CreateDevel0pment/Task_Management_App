@@ -137,7 +137,6 @@ public class MyContactsFragment extends Fragment {
                                     }
                                 });
 
-
                             }
                         });
                     }
