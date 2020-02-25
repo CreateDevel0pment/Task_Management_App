@@ -11,7 +11,7 @@ import com.google.firebase.database.DataSnapshot;
 
 public class HomeViewModel extends AndroidViewModel {
 
-    HomePageRepository homePageRepository;
+    private HomePageRepository homePageRepository;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.MessageFromGroup;
-import com.example.codeacademyapp.data.model.MessagesFromWall;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -39,8 +38,8 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
     public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, int position) {
 
         MessageFromGroup messages = mList.get(holder.getAdapterPosition());
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        String currenUser=auth.getCurrentUser().getUid();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String currenUser = auth.getCurrentUser().getUid();
 
         holder.receiver_message.setVisibility(View.INVISIBLE);
         holder.reciverProfileImage.setVisibility(View.INVISIBLE);
@@ -49,7 +48,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
         holder.receiver_time.setVisibility(View.INVISIBLE);
         holder.sender_time.setVisibility(View.INVISIBLE);
 
-        if(messages.getId().equals(currenUser)){
+        if (messages.getId().equals(currenUser)) {
 
 
             holder.sender_message.setVisibility(View.VISIBLE);
@@ -59,7 +58,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             holder.sender_time.setVisibility(View.VISIBLE);
             holder.sender_time.setText(messages.getTime());
 
-        }else {
+        } else {
 
             holder.receiver_name.setVisibility(View.VISIBLE);
             holder.receiver_name.setText(messages.getName());
@@ -88,21 +87,21 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        TextView sender_message, receiver_message,receiver_name,receiver_sector,receiver_time,sender_time;
+        TextView sender_message, receiver_message, receiver_name, receiver_sector, receiver_time, sender_time;
         ImageView reciverProfileImage;
         CardView cardView;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
-            sender_message=itemView.findViewById(R.id.sender_message_text);
-            receiver_message=itemView.findViewById(R.id.reciever_message_text);
-            reciverProfileImage=itemView.findViewById(R.id.message_profile_image);
-            cardView=itemView.findViewById(R.id.message_profile_imagee);
-            receiver_name=itemView.findViewById(R.id.reciever_name);
-            receiver_sector=itemView.findViewById(R.id.reciever_sector);
-            receiver_time=itemView.findViewById(R.id.reciever_time);
-            sender_time=itemView.findViewById(R.id.sender_time);
+            sender_message = itemView.findViewById(R.id.sender_message_text);
+            receiver_message = itemView.findViewById(R.id.reciever_message_text);
+            reciverProfileImage = itemView.findViewById(R.id.message_profile_image);
+            cardView = itemView.findViewById(R.id.message_profile_imagee);
+            receiver_name = itemView.findViewById(R.id.reciever_name);
+            receiver_sector = itemView.findViewById(R.id.reciever_sector);
+            receiver_time = itemView.findViewById(R.id.reciever_time);
+            sender_time = itemView.findViewById(R.id.sender_time);
 
         }
     }

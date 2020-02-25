@@ -2,13 +2,13 @@ package com.example.codeacademyapp.data.model;
 
 public class MessageFromGroup {
 
-    String date;
-    String id;
-    String sector;
-    String message;
-    String name;
-    String time;
-    String image;
+    private String date;
+    private String id;
+    private String sector;
+    private String message;
+    private String name;
+    private String time;
+    private String image;
 
     public MessageFromGroup() {
     }

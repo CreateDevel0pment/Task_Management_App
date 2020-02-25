@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
-import com.example.codeacademyapp.utils.Constants;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.squareup.picasso.Picasso;
@@ -100,7 +99,7 @@ public class UserByIdFragment extends Fragment {
     private void menageChatRequest() {
 
         chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        chatRequestViewModel=ViewModelProviders.of(this).get(ChatRequestViewModel.class);
+        chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
         chatViewModel.getchatRequest(current_user_id).observe(this, new Observer<DataSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -121,17 +120,16 @@ public class UserByIdFragment extends Fragment {
                         send_message_btn.setText("Accept Chat Request");
 
                     }
-                }
-                else {
-                    chatRequestViewModel.setValueForRemove(current_user_id,receiver_user_id)
+                } else {
+                    chatRequestViewModel.setValueForRemove(current_user_id, receiver_user_id)
                             .observe(UserByIdFragment.this, new Observer<DataSnapshot>() {
-                        @Override
-                        public void onChanged(DataSnapshot dataSnapshot) {
+                                @Override
+                                public void onChanged(DataSnapshot dataSnapshot) {
 
-                            current_State = "friends";
-                            send_message_btn.setText("remove this contact");
-                        }
-                    });
+                                    current_State = "friends";
+                                    send_message_btn.setText("remove this contact");
+                                }
+                            });
 
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.codeacademyapp.ui.main.edit_find.edit;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -146,9 +147,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         group.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                ((TextView)parent.getChildAt(0)).setTextColor(R.color.colorPrimaryDarkMode);
 
                 if (group.getSelectedItem().equals("Android")) {
                     group_string = "Android";
@@ -169,8 +172,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         positionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView)parent.getChildAt(0)).setTextColor(R.color.colorPrimaryDarkMode);
+
                 if (positionSpinner.getSelectedItem().equals("Manager")) {
                     position_string = "Manager";
                 } else if (positionSpinner.getSelectedItem().equals("Staff")) {

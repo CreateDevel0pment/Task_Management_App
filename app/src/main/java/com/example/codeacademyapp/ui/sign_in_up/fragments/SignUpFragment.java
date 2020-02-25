@@ -1,5 +1,6 @@
 package com.example.codeacademyapp.ui.sign_in_up.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -73,8 +75,12 @@ public class SignUpFragment extends Fragment {
         });
 
         position_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView)parent.getChildAt(0)).setTextColor(R.color.colorPrimaryDarkMode);
+
                 if (position_spiner.getSelectedItem().equals("Manager")) {
                     position_string = "Manager";
                 } else if (position_spiner.getSelectedItem().equals("Staff")) {
@@ -90,8 +96,12 @@ public class SignUpFragment extends Fragment {
         });
 
         sector_spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView)parent.getChildAt(0)).setTextColor(R.color.colorPrimaryDarkMode);
+
                 if (sector_spiner.getSelectedItem().equals("Android")) {
                     sector_string = "Android";
                 } else if (sector_spiner.getSelectedItem().equals("Web Development")) {
