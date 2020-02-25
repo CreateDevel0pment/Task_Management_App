@@ -76,7 +76,6 @@ public class MyContactsFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                 if (dataSnapshot.hasChild("image")) {
-
                                     profileImage = dataSnapshot.child("image").getValue().toString();
                                     Picasso.get().load(profileImage).into(holder.image);
                                 }
