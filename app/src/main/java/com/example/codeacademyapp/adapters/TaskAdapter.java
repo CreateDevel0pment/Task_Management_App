@@ -90,20 +90,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             }
         });
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!completedCheck.equals("completeGONE")) {
-                    holder.completeTask.setVisibility(View.VISIBLE);
-                }
-                holder.completeTask.setVisibility(View.VISIBLE);
-                holder.priorityLinear.setVisibility(View.VISIBLE);
-                holder.descLinear.setVisibility(View.VISIBLE);
-                holder.datesLinear.setVisibility(View.VISIBLE);
-                holder.detailsUpIc.setVisibility(View.VISIBLE);
-                holder.detailsDropdownIc.setVisibility(View.GONE);
-            }
-        });
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!completedCheck.equals("completeGONE")) {
+//                    holder.completeTask.setVisibility(View.VISIBLE);
+//                }
+//                holder.completeTask.setVisibility(View.VISIBLE);
+//                holder.priorityLinear.setVisibility(View.VISIBLE);
+//                holder.descLinear.setVisibility(View.VISIBLE);
+//                holder.datesLinear.setVisibility(View.VISIBLE);
+//                holder.detailsUpIc.setVisibility(View.VISIBLE);
+//                holder.detailsDropdownIc.setVisibility(View.GONE);
+//            }
+//        });
 
         holder.completeTask.setOnClickListener(new View.OnClickListener() {
             @Override

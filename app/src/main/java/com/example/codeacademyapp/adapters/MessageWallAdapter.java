@@ -65,7 +65,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             holder.receiver_name.setText(messages.getName());
 
             holder.receiver_sector.setVisibility(View.VISIBLE);
-            holder.receiver_sector.setText(messages.getSector());
+            holder.receiver_sector.setText("| " + messages.getSector());
 
             holder.reciverProfileImage.setVisibility(View.VISIBLE);
             holder.receiver_message.setVisibility(View.VISIBLE);

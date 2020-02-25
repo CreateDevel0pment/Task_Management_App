@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.ModelFirebase;
-import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,8 +35,11 @@ public class MyContactsFragment extends Fragment {
     private DatabaseReference contactsRef, usersRef;
     private FirebaseAuth auth;
     private String currentUserId;
+    private String profileImageE;
+    private String userSector;
+    private String userName;
 
-    private String profileImage="default";
+    String profileImage="default";
 
     public MyContactsFragment() {
     }
@@ -68,6 +70,7 @@ public class MyContactsFragment extends Fragment {
 
                         final String usersIds = getRef(position).getKey();
 
+
                         usersRef.child(usersIds).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -78,26 +81,11 @@ public class MyContactsFragment extends Fragment {
                                     Picasso.get().load(profileImage).into(holder.image);
                                 }
 
-                                final String userName = dataSnapshot.child("Name").getValue().toString();
-                                final String userSector = dataSnapshot.child("Sector").getValue().toString();
+                                userName = dataSnapshot.child("Name").getValue().toString();
+                                userSector = dataSnapshot.child("Sector").getValue().toString();
 
                                 holder.userNAme.setText(userName);
                                 holder.userSector.setText(userSector);
-
-
-                                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        Intent intent = new Intent(getContext(), PrivateChatActivity.class);
-                                        intent.putExtra("visit_user_id", usersIds);
-                                        intent.putExtra("visit_user_name",userName);
-
-                                        intent.putExtra("visit_user_image",profileImage);
-                                        intent.putExtra("visit_user_sector",userSector);
-                                        startActivity(intent);
-                                    }
-                                });
 
                             }
 
@@ -107,7 +95,49 @@ public class MyContactsFragment extends Fragment {
                             }
                         });
 
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+                                usersRef.child(usersIds).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                        if (dataSnapshot.hasChild("image")) {
+
+                                            profileImage = dataSnapshot.child("image").getValue().toString();
+                                            Picasso.get().load(profileImage).into(holder.image);
+                                        }
+
+                                        userName = dataSnapshot.child("Name").getValue().toString();
+
+                                        userSector = dataSnapshot.child("Sector").getValue().toString();
+
+                                        holder.userNAme.setText(userName);
+                                        holder.userSector.setText(userSector);
+
+                                        Intent intent = new Intent(getContext(), PrivateChatActivity.class);
+                                        intent.putExtra("visit_user_id", usersIds);
+                                        intent.putExtra("visit_user_name",userName);
+
+                                        if (profileImage!= null) {
+                                            intent.putExtra("visit_user_image", profileImage);
+                                        }
+
+                                        intent.putExtra("visit_user_sector",userSector);
+                                        startActivity(intent);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+                            }
+                        });
                     }
 
                     @NonNull
@@ -129,7 +159,6 @@ public class MyContactsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
 
     }
 

@@ -122,7 +122,7 @@ public class ViewAllTaskFragment extends Fragment {
 
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                             rvTasks.setLayoutManager(layoutManager);
-                            String completedCheck = "";
+                            String completedCheck = "completeGONE";
                             taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
                             taskAdapter.notifyDataSetChanged();
                             rvTasks.setAdapter(taskAdapter);

@@ -40,7 +40,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
 
     private RecyclerView usersListRV;
     private DatabaseReference usersRef;
-    private List<AssignedUsers> assignedUsers;
     private String selectedUserId;
 
 
@@ -58,20 +57,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.colorPrimary)));
         }
 
-        assignedUsers = new ArrayList<>();
-//
-//        final Button assignUsersBtn = rootView.findViewById(R.id.assign_users_btn);
-//        assignUsersBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
-//                if (listener != null) {
-//                    listener.passListOfUsersToAddNewTaskFragment(assignedUserId);
-//                }
-//                if(getDialog()!=null){
-//                    getDialog().dismiss();}
-//            }
-//        });
+
 
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
         usersListRV = rootView.findViewById(R.id.users_list_task_toAssign_RV);
@@ -101,22 +87,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
                         .placeholder(R.drawable.profile_image)
                         .into(holder.profileImage);
 
-//                holder.selectUserToAssignCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//
-//                            if(buttonView.isChecked()){
-//
-////                                assignedUserId = getRef(holder.getAdapterPosition()).getKey();
-//
-////                                AssignedUsers assignedUser = new AssignedUsers(assignedUserId);
-////
-////                                assignedUser.setUserId(assignedUserId);
-////                                assignedUsers.add(assignedUser);
-//
-//                            }
-//                        }
-//                });
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -131,29 +101,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
                             getDialog().dismiss();}
                     }
                 });
-
-//                holder.selectUserToAssignRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                        if(buttonView.isChecked()){
-//
-//                           assignedUserId = getRef(holder.getAdapterPosition()).getKey();
-//
-//                            UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
-//                            if (listener != null) {
-//                                listener.passListOfUsersToAddNewTaskFragment(assignedUserId);
-//                            }
-//                            if(getDialog()!=null){
-//                                getDialog().dismiss();}
-//
-////                            AssignedUsers assignedUser = new AssignedUsers(assignedUserId);
-////
-////                            assignedUser.setUserId(assignedUserId);
-////                            assignedUsers.add(assignedUser);
-//
-//                        }
-//                    }
-//                });
             }
 
             @NonNull
@@ -171,8 +118,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
 
         TextView userNAme, userGroup;
         CircleImageView profileImage;
-        CheckBox selectUserToAssignCB;
-        RadioButton selectUserToAssignRB;
 
         FindFriendsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -180,8 +125,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             userNAme=itemView.findViewById(R.id.user_profile_name);
             userGroup=itemView.findViewById(R.id.user_group);
             profileImage=itemView.findViewById(R.id.users_profile_image);
-//            selectUserToAssignCB=itemView.findViewById(R.id.select_to_assign_checkbox);
-//            selectUserToAssignRB=itemView.findViewById(R.id.select_to_assign_radioBtn);
+
 
         }
     }

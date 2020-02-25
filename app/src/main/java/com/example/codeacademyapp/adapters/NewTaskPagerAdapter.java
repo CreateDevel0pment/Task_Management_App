@@ -49,7 +49,7 @@ public class NewTaskPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "My Tasks";
             case 1:
-                return "Group Tasks";
+                return "Projects";
             case 2:
                 return "Completed";
             default:

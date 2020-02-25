@@ -20,16 +20,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapter.MyHolder> {
 
     private List<MessageFromGroup> mList;
-    Context context;
+    private Context context;
+    private String currentUser;
 
     public MessageGroupAdapter(List<MessageFromGroup> mList, Context context) {
         this.mList = mList;
-        this.context =  context;
+        this.context = context;
     }
 
 
@@ -45,18 +44,18 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
     public void onBindViewHolder(@NonNull final MessageGroupAdapter.MyHolder holder, int position) {
 
         final MessageFromGroup messages = mList.get(holder.getAdapterPosition());
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        String currenUser=auth.getCurrentUser().getUid();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser().getUid();
 
 
         holder.receiver_message.setVisibility(View.INVISIBLE);
-        holder.reciverProfileImage.setVisibility(View.INVISIBLE);
+        holder.receiverProfileImage.setVisibility(View.INVISIBLE);
         holder.sender_message.setVisibility(View.INVISIBLE);
         holder.cardView.setVisibility(View.INVISIBLE);
         holder.receiver_time.setVisibility(View.INVISIBLE);
         holder.sender_time.setVisibility(View.INVISIBLE);
 
-        if(messages.getId().equals(currenUser)){
+        if (messages.getId().equals(currentUser)) {
 
 
             holder.sender_message.setVisibility(View.VISIBLE);
@@ -66,11 +65,11 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
             holder.sender_time.setVisibility(View.VISIBLE);
             holder.sender_time.setText(messages.getTime());
 
-        }else {
+        } else {
 
             holder.receiver_name.setVisibility(View.VISIBLE);
             holder.receiver_name.setText(messages.getName());
-            holder.reciverProfileImage.setVisibility(View.VISIBLE);
+            holder.receiverProfileImage.setVisibility(View.VISIBLE);
             holder.receiver_message.setVisibility(View.VISIBLE);
             holder.cardView.setVisibility(View.VISIBLE);
 
@@ -79,24 +78,26 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
 
             holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
             holder.receiver_message.setText(messages.getMessage());
-            Picasso.get().load(messages.getImage()).into(holder.reciverProfileImage);
+            Picasso.get().load(messages.getImage()).into(holder.receiverProfileImage);
 
         }
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!messages.getId().equals(currentUser)) {
+                    Intent intent = new Intent(context, PrivateChatActivity.class);
+                    intent.putExtra("visit_user_id", messages.getId());
+                    intent.putExtra("visit_user_name", messages.getName());
 
-                Intent intent = new Intent(context, PrivateChatActivity.class);
-                intent.putExtra("visit_user_id", messages.getId());
-                intent.putExtra("visit_user_name",messages.getName());
-
-                intent.putExtra("visit_user_image",messages.getImage());
-                intent.putExtra("visit_user_sector",messages.getSector());
-                context.startActivity(intent);
-
+                    intent.putExtra("visit_user_image", messages.getImage());
+                    intent.putExtra("visit_user_sector", messages.getSector());
+                    context.startActivity(intent);
+                }
             }
         });
+
 
     }
 
@@ -107,20 +108,20 @@ public class MessageGroupAdapter extends RecyclerView.Adapter<MessageGroupAdapte
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        TextView sender_message, receiver_message,receiver_name,receiver_time,sender_time;
-        ImageView reciverProfileImage;
+        TextView sender_message, receiver_message, receiver_name, receiver_time, sender_time;
+        ImageView receiverProfileImage;
         CardView cardView;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
-            sender_message=itemView.findViewById(R.id.sender_message_text);
-            receiver_message=itemView.findViewById(R.id.reciever_message_text);
-            reciverProfileImage=itemView.findViewById(R.id.message_profile_image);
-            cardView=itemView.findViewById(R.id.message_profile_imagee);
-            receiver_name=itemView.findViewById(R.id.reciever_name);
-            receiver_time=itemView.findViewById(R.id.reciever_time);
-            sender_time=itemView.findViewById(R.id.sender_time);
+            sender_message = itemView.findViewById(R.id.sender_message_text);
+            receiver_message = itemView.findViewById(R.id.reciever_message_text);
+            receiverProfileImage = itemView.findViewById(R.id.message_profile_image);
+            cardView = itemView.findViewById(R.id.message_profile_imagee);
+            receiver_name = itemView.findViewById(R.id.reciever_name);
+            receiver_time = itemView.findViewById(R.id.reciever_time);
+            sender_time = itemView.findViewById(R.id.sender_time);
 
         }
     }
