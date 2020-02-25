@@ -29,7 +29,7 @@ public class TaskActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_tasks_tab_fragment);
         toolbar.setTitle("Back to group chat");
-        toolbar.setTitleTextColor((ContextCompat.getColor(this, R.color.white)));
+        toolbar.setTitleTextColor((ContextCompat.getColor(this, R.color.colorPrimary)));
 
         toolbar.setNavigationIcon(R.drawable.ic_back_button_white);
 

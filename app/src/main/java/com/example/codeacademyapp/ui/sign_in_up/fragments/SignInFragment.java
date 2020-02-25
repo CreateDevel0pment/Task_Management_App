@@ -16,11 +16,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
-import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.data.model.User;
+import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.sign_in_up.LogUserViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
@@ -36,14 +34,14 @@ public class SignInFragment extends Fragment {
     private EditText mail_et, password_et;
     private LogUserViewModel userViewModel;
     private UserInformationViewModel userInformationViewModel;
-    private String userId;
     private View view;
+    private String userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(view!=null){
+        if (view != null) {
             return view;
         }
 
@@ -51,7 +49,7 @@ public class SignInFragment extends Fragment {
 
         //TODO splash
         userViewModel = ViewModelProviders.of(SignInFragment.this).get(LogUserViewModel.class);
-        userInformationViewModel=ViewModelProviders.of(SignInFragment.this).get(UserInformationViewModel.class);
+        userInformationViewModel = ViewModelProviders.of(SignInFragment.this).get(UserInformationViewModel.class);
 
         mail_et = view.findViewById(R.id.mail_text);
         setFocus(mail_et);
@@ -67,9 +65,9 @@ public class SignInFragment extends Fragment {
                 String mail = mail_et.getText().toString();
                 String password = password_et.getText().toString();
 
-                if(TextUtils.isEmpty(mail) || TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(mail) || TextUtils.isEmpty(password)) {
                     Toast.makeText(getContext(), "Empty field error!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
 
                     User user = new User();
                     user.seteMail(mail);
@@ -100,14 +98,6 @@ public class SignInFragment extends Fragment {
                         .replace(R.id.start_activity_main_container, passwordFragment)
                         .addToBackStack("null")
                         .commit();
-
-//                String email = mail_et.getText().toString();
-//                if (TextUtils.isEmpty(email)) {
-//                    toastMessage("Please enter your Email");
-//                } else {
-//                    userViewModel.forgotPassword(email);
-//                    toastMessage("Check your Email account: " + "\n" + email);
-//                }
             }
         });
 
@@ -116,16 +106,17 @@ public class SignInFragment extends Fragment {
 
     public void getReferencesForUserGroup() {
 
-        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.exists()) {
 
-                if(dataSnapshot.exists()) {
-
-                    userId=userInformationViewModel.getUserId();
-                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
-                    goToStartActivity(userGroup);
+                        userId = dataSnapshot.getRef().getKey();
+                        String userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                        goToStartActivity(userGroup);
+                    }
                 }
             }
         });

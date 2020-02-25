@@ -1,57 +1,20 @@
 <resources>
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar" >
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@android:color/darker_gray</item>
+        <item name="colorPrimaryDark">@color/AccentColor</item>
+        <item name="colorAccent">@color/AccentColor</item>
 
-        <item name="android:colorBackground">@color/colorBackground</item>
-        <item name="editTextColor">@color/editTextColor</item>
-        <item name="android:textColor">@color/darkGrey</item>
-        <item name="editTextBackground">@color/editTextColor</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
-        <item name="materialCardViewStyle">@color/tabStyle</item>
-
-        <item name="android:datePickerDialogTheme">@style/DatePicker.AppTheme.DialogTheme</item>
-        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
-        <item name="colorControlNormal">@color/colorPrimaryDark</item>
-
-    </style>
-
-    <style name="AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="colorBackgroundFloating">#ffffff</item>
-        <item name="editTextStyle">@color/editTextColor</item>
-    </style>
-
-    <style name="Base.Theme.AppCompat.Dialog." parent="Theme.AppCompat.Dialog.Alert">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="colorBackgroundFloating">#ffffff</item>
-        <item name="editTextStyle">@color/editTextColor</item>
-        <item name="android:backgroundTint">#00FFFFFF</item>
-    </style>
-
-    <style name="MyDialog" parent="@android:style/Theme.Dialog">
-        <!--  other attributes  -->
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-    <style name="DatePicker.AppTheme.DialogTheme" parent="@android:style/Widget.Material.Light.DatePicker">
-        <item name="android:headerBackground">@color/white</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorPrimaryDark</item>
-        <item name="android:calendarTextColor">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textColorHighlight">@color/colorPrimaryDark</item>
-        <item name="android:dateTextAppearance">@color/colorPrimaryDark</item>
-        <item name="android:actionBarItemBackground">@color/colorPrimaryDark</item>
-    </style>
+        <item name="android:textColor">@color/colorPrimaryDarkMode</item>
+        <item name="colorSecondary">@color/text_dark_grey</item>
+        <item name="android:colorBackground">@color/AccentColor</item>
+        <item name="android:windowDisablePreview">true</item>
 
 
+        <!--                <item name="editTextBackground">@android:color/black</item>-->
+        <!--        <item name="materialCardViewStyle">@color/colorPrimary</item>-->
+        <!--        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>-->
+        <!--        <item name="colorControlNormal">@color/AccentColor</item>-->
 
-    <style name="AndroidStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#ffff</item>
-        <item name="colorPrimaryDark">#ffff</item>
-        <item name="colorAccent">#c6d97f</item>
     </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
@@ -61,10 +24,5 @@
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
-
-    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">@color/white</item>
-    </style>
-
 
 </resources>

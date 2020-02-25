@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:textSize="16dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/AccentColor"
                     android:text="Create personal task for.." />
 
                 <ImageView
@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/AccentColor"
                     android:textSize="16dp"
                     android:layout_margin="8dp"
                     android:text="Set task end date.." />
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:src="@drawable/date_picker_icon"
-                    android:tint="@color/colorPrimaryDark" />
+                    android:tint="@color/AccentColor" />
 
             </LinearLayout>
 
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:textSize="16dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/AccentColor"
                     android:text="Task priority" />
 
                 <RadioGroup
@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:text="High"
                         android:layout_marginEnd="8dp"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/AccentColor" />
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_medium"
@@ -164,14 +164,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="Medium"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/AccentColor" />
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Low"
-                        android:textColor="@color/colorPrimaryDark" />
+                        android:textColor="@color/AccentColor" />
 
                 </RadioGroup>
                 <!--                <Spinner-->
@@ -194,7 +194,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="30dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/AccentColor"
             android:hint="Create Task"
             android:textSize="16dp"
             android:textColorHint="#333333" />

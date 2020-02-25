@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageWallAdapter;
-import com.example.codeacademyapp.data.model.MessagesFromWall;
+import com.example.codeacademyapp.data.model.MessageFromGroup;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
+import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,17 +43,18 @@ public class AcademyWallFragment extends BaseFragment {
     private ImageButton sentMessage_btn;
     private EditText userMessage_input;
 
-    private String currentUserName,id;
+    private String currentUserName, id;
     private String userGroup, userImage;
 
     private View view;
 
     private ChatViewModel wallChatViewModel;
+    private UserInformationViewModel userInformationViewModel;
 
     private RecyclerView recyclerView;
     private MessageWallAdapter adapter;
 
-    List<MessagesFromWall> messageList = new ArrayList<>();
+    private List<MessageFromGroup> messageList = new ArrayList<>();
 
 
     @Override
@@ -63,19 +66,19 @@ public class AcademyWallFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                MessagesFromWall messages = dataSnapshot.getValue(MessagesFromWall.class);
+                MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
 
                 messageList.add(messages);
                 adapter = new MessageWallAdapter(messageList);
                 recyclerView.setAdapter(adapter);
 
-                recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
+                recyclerView.smoothScrollToPosition(Objects.requireNonNull(recyclerView.getAdapter()).getItemCount());
             }
         });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         if (view != null) {
@@ -123,26 +126,28 @@ public class AcademyWallFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            wallChatViewModel.saveMessageFromWallChat(id,currentUserName, userGroup, userImage, message, currentDate, currentTime);
+            wallChatViewModel.saveMessageFromWallChat(id, currentUserName, userGroup, userImage, message, currentDate, currentTime);
 
         }
     }
 
     private void getUserInfo() {
 
-        wallChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
-                currentUserName = dataSnapshot.child("Name").getValue().toString();
-                userGroup = dataSnapshot.child("Sector").getValue().toString();
-                id=dataSnapshot.getRef().getKey();
+                    currentUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                    userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                    id = dataSnapshot.getRef().getKey();
 
-                if(dataSnapshot.child("image").getValue()!= null){
-                    userImage = dataSnapshot.child("image").getValue().toString();
+                    if (dataSnapshot.child("image").getValue() != null) {
+                        userImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
 
+                    }
                 }
-
             }
         });
     }
@@ -152,5 +157,18 @@ public class AcademyWallFragment extends BaseFragment {
         userMessage_input = view.findViewById(R.id.input_user_message);
         recyclerView = view.findViewById(R.id.group_chat_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+        if(NetworkConnectivity.isConnectivityNetworkAvailable(getContext())){
+
+            Toast connectivityToast = Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG);
+            connectivityToast.setGravity(Gravity.CENTER,0,0);
+            connectivityToast.show();
+        }
     }
 }

@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.data.model.MessageFromGroup;
 import com.example.codeacademyapp.data.model.MessagesFromWall;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
@@ -19,12 +20,11 @@ import java.util.List;
 
 public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.MyHolder> {
 
-    private List<MessagesFromWall> mList;
+    private List<MessageFromGroup> mList;
 
-    public MessageWallAdapter(List<MessagesFromWall> mList) {
+    public MessageWallAdapter(List<MessageFromGroup> mList) {
         this.mList = mList;
     }
-
 
     @NonNull
     @Override
@@ -38,7 +38,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, int position) {
 
-        MessagesFromWall messages = mList.get(holder.getAdapterPosition());
+        MessageFromGroup messages = mList.get(holder.getAdapterPosition());
         FirebaseAuth auth=FirebaseAuth.getInstance();
         String currenUser=auth.getCurrentUser().getUid();
 
@@ -79,21 +79,6 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
         }
-
-//        holder.messageContent.setText(messages.getMessage());
-//        holder.userName.setText(messages.getName());
-//        holder.userSector.setText(messages.getSector());
-//        holder.messageContent.setText(messages.getMessage());
-//        if (messages.getImage() != null) {
-//
-//            Picasso.get().load(messages.getImage())
-//                    .into(holder.profileImage);
-//        } else {
-//
-//            Picasso.get().load(R.drawable.profile_image)
-//                    .into(holder.profileImage);
-//        }
-
     }
 
     @Override

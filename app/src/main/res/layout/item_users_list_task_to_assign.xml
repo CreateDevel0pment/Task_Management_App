@@ -33,7 +33,7 @@
         android:id="@+id/user_profile_name"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/AccentColor"
         android:text="username"
         android:textAlignment="textStart"
         android:textSize="18sp"

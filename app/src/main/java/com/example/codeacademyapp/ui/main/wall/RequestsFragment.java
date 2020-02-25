@@ -39,21 +39,24 @@ public class RequestsFragment extends Fragment {
 
     private RecyclerView requestList;
 
-    String currentUserId;
-    String list_user_id;
-    DatabaseReference chat_request_ref, usersRef, contactRef;
-    FirebaseAuth auth;
+    private String currentUserId;
+    private String list_user_id;
+    private DatabaseReference chat_request_ref,
+            usersRef,
+            contactRef;
+    private FirebaseAuth auth;
 
-
-    public RequestsFragment() {
-    }
-
+    private TextView no_text;
+    private CircleImageView avatar_image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_requests, container, false);
+
+        no_text=view.findViewById(R.id.request_text);
+        avatar_image=view.findViewById(R.id.request_circular_image);
 
         auth = FirebaseAuth.getInstance();
         currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
@@ -71,103 +74,106 @@ public class RequestsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<ModelFirebase> options =
+        final FirebaseRecyclerOptions<ModelFirebase> options =
                 new FirebaseRecyclerOptions.Builder<ModelFirebase>()
                         .setQuery(chat_request_ref.child(currentUserId), ModelFirebase.class)
                         .build();
 
-        FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder> andapter =
-                new FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final ModelFirebase model) {
-
-                        holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.VISIBLE);
-                        holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                acceptTheRequest();
+            final FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder> adapter =
+                    new FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder>(options) {
+                        @Override
+                        protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final ModelFirebase model) {
 
 
-                            }
-                        });
+                            holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.VISIBLE);
+                            holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
-                        holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.VISIBLE);
-                        holder.itemView.findViewById(R.id.request_cancel_btn).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                                    acceptTheRequest();
 
-                                cancelRequest();
 
-                            }
-                        });
+                                }
+                            });
 
-                        list_user_id = getRef(position).getKey();
+                            holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.VISIBLE);
+                            holder.itemView.findViewById(R.id.request_cancel_btn).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
 
-                        DatabaseReference getTypeRef = getRef(position).child("request_type").getRef();
+                                    cancelRequest();
 
-                        getTypeRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                }
+                            });
 
-                                if (dataSnapshot.exists()) {
+                            list_user_id = getRef(position).getKey();
 
-                                    String type = Objects.requireNonNull(dataSnapshot.getValue()).toString();
+                            DatabaseReference getTypeRef = getRef(position).child("request_type").getRef();
 
-                                    if (type.equals("received")) {
+                            getTypeRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                        if (list_user_id != null) {
-                                            usersRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                    if (dataSnapshot.hasChild("image")) {
+                                            if (list_user_id != null) {
+                                                usersRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                        String requestUserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
-                                                        String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                                                        String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                                                        if (dataSnapshot.exists()) {
 
-                                                        holder.userNAme.setText(requestUserName);
-                                                        holder.userSector.setText(requestUserSector);
-                                                        Picasso.get().load(requestUserImage).into(holder.image);
+                                                            no_text.setVisibility(View.GONE);
+                                                            avatar_image.setVisibility(View.GONE);
+
+
+                                                            if (dataSnapshot.hasChild("image")) {
+
+                                                                String requestUserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
+                                                                String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                                                                String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+
+                                                                holder.userNAme.setText(requestUserName);
+                                                                holder.userSector.setText(requestUserSector);
+                                                                Picasso.get().load(requestUserImage).into(holder.image);
+                                                            }
+
+                                                            String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                                                            String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+
+                                                            holder.userNAme.setText(requestUserName);
+                                                            holder.userSector.setText(requestUserSector);
+                                                        }
                                                     }
 
-                                                    String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                                                    String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                    holder.userNAme.setText(requestUserName);
-                                                    holder.userSector.setText(requestUserSector);
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                }
-                                            });
+                                                    }
+                                                });
+                                            }
                                         }
-                                    }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                 }
-                            }
+                            });
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
 
-                            }
-                        });
-                    }
+                        @NonNull
+                        @Override
+                        public RequestsContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                    @NonNull
-                    @Override
-                    public RequestsContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_request_layout, parent, false);
 
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout, parent, false);
+                            return new RequestsContactsHolder(view);
+                        }
+                    };
 
-                        return new RequestsContactsHolder(view);
-                    }
-                };
+            requestList.setAdapter(adapter);
+            adapter.startListening();
 
-        requestList.setAdapter(andapter);
-        andapter.startListening();
     }
 
     private void acceptTheRequest() {

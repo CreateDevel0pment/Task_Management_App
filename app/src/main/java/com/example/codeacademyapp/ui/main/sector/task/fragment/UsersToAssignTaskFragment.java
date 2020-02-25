@@ -55,7 +55,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
         Toolbar toolbar = rootView.findViewById(R.id.toolbar_users_list_assignTo_fragment);
         toolbar.setTitle("Assign the task to..");
         if(getContext()!=null){
-            toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.white)));
+            toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.colorPrimary)));
         }
 
         assignedUsers = new ArrayList<>();

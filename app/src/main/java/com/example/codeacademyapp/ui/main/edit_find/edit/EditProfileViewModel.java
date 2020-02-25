@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.edit_find;
+package com.example.codeacademyapp.ui.main.edit_find.edit;
 
 import android.app.Application;
 import android.net.Uri;

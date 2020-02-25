@@ -11,6 +11,7 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
@@ -40,8 +41,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     public void getReferencesForUserGroup() {
-        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+
+        UserInformationViewModel userInformationViewModel=ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

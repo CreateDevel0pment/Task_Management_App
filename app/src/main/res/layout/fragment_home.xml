@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:backgroundTint="#333333"
     android:weightSum="1"
@@ -34,7 +34,7 @@
             android:fontFamily="sans-serif-light"
             android:text="Enter website and make it a home page"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/AccentColor"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/AccentColor"
             android:text="OK"
             android:textColor="#333333"
             android:textSize="16dp" />
@@ -78,12 +78,17 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/web_card_view"
         android:layout_width="match_parent"
+        android:backgroundTint="@color/colorPrimaryDarkMode"
         android:layout_height="0dp"
         android:layout_weight="1.05"
         android:layout_marginTop="24dp"
-        android:visibility="invisible"
         app:cardCornerRadius="16dp">
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/progress_circular_web"/>
 
         <WebView
             android:id="@+id/home_web_view"

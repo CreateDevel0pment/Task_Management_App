@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="1dp"
     android:layout_marginTop="2dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/AccentColor"
     android:orientation="horizontal">
 
 
@@ -17,19 +17,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:padding="8dp"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/users_profile_image"
-            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_color="@color/AccentColor"
             app:civ_border_width="1dp"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -37,7 +37,6 @@
             android:src="@drawable/profile_image" />
 
         <LinearLayout
-            android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -52,7 +51,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/AccentColor"
                     android:text="username"
                     android:textAlignment="textStart"
                     android:textSize="18sp"
@@ -64,7 +63,7 @@
                     android:layout_height="16dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/online"
-                    android:visibility="gone" />
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -90,17 +89,20 @@
                     android:backgroundTint="@android:color/holo_red_dark"
                     android:text="cancel"
                     android:textAllCaps="false"
-                    android:visibility="gone" />
+                    android:visibility="invisible"
+                    />
 
                 <Button
                     android:id="@+id/request_accept_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
-                    android:backgroundTint="@android:color/holo_green_light"
+                    android:backgroundTint="@color/AccentColor"
+                    android:textColor="#333333"
                     android:text="accept"
                     android:textAllCaps="false"
-                    android:visibility="gone" />
+                    android:visibility="invisible"
+                     />
 
             </LinearLayout>
 

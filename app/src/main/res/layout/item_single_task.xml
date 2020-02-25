@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/AccentColor"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="8dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="#333333"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
@@ -18,10 +19,11 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
+            android:background="#333333"
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                app:cardBackgroundColor="@color/darkGrey"
+                app:cardBackgroundColor="#333333"
                 app:cardElevation="5dp"
                 android:id="@+id/cardview_item_task"
                 android:layout_width="match_parent"
@@ -35,7 +37,7 @@
 
                     <TextView
                         android:layout_alignParentStart="true"
-                        android:textColor="@color/white"
+                        android:textColor="@color/AccentColor"
                         android:textSize="24sp"
                         android:fontFamily="sans-serif-condensed"
                         android:id="@+id/task_name_item"
@@ -50,7 +52,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_arrow_drop_down"
-
                         />
 
                     <ImageView
@@ -71,6 +72,7 @@
     <LinearLayout
         android:id="@+id/desc_linear"
         android:visibility="gone"
+        android:background="#333333"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -81,7 +83,7 @@
             android:layout_height="wrap_content"
           android:layout_margin="8dp"
             android:src="@drawable/ic_description"
-            android:tint="@color/darkGrey"
+            android:tint="@color/AccentColor"
             />
 
         <TextView
@@ -89,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textColor="@color/darkGrey"
+            android:textColor="@color/AccentColor"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -104,13 +106,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/date_picker_icon"
-            android:tint="@color/darkGrey"
             />
 
         <TextView
@@ -119,7 +118,7 @@
             android:layout_margin="8dp"
             android:textSize="16dp"
             android:text="@string/created"
-            android:textColor="@color/darkGrey" />
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/task_dateCreated_details"
@@ -130,17 +129,16 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:textSize="16dp"
-            android:textColor="@color/darkGrey"
+            android:textColor="@color/AccentColor"
             android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:textSize="16dp"
             android:text="Deadline:"
-            android:textColor="@color/darkGrey" />
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/task_endDate_details"
@@ -148,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textSize="16dp"
-            android:textColor="@color/darkGrey"
+            android:textColor="@color/AccentColor"
             android:textStyle="bold"
             />
 
@@ -159,12 +157,13 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#333333"
         android:orientation="horizontal"
         android:layout_gravity="start|center_vertical"
         >
 
         <TextView
-            android:textColor="@color/darkGrey"
+            android:textColor="@color/AccentColor"
             android:text="Task priority:"
             android:layout_margin="8dp"
             android:textSize="16dp"
@@ -176,36 +175,32 @@
             android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/darkGrey"
+            android:textColor="@color/AccentColor"
             android:textSize="16dp"
             />
 
         </LinearLayout>
 
+            <androidx.cardview.widget.CardView
+                android:visibility="gone"
+                android:id="@+id/task_complete"
+                android:layout_gravity="end"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="16dp"
+                android:backgroundTint="#333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
-                    android:visibility="gone"
-                    android:id="@+id/task_complete"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    app:cardCornerRadius="16dp"
-                    android:backgroundTint="@color/colorPrimaryDark"
+                <ImageView
+                    android:backgroundTint="@color/AccentColor"
+                    android:layout_margin="4dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_done"
+                    android:tint="@color/AccentColor"
+                    />
 
-                    <ImageView
-                        android:backgroundTint="@color/darkGrey"
-                        android:layout_margin="4dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_done"
-                        android:tint="@color/darkGrey"
-                        />
-
-                </androidx.cardview.widget.CardView>
-
-
-
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

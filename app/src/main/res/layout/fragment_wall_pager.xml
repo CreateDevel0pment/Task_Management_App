@@ -7,16 +7,16 @@
     android:orientation="vertical"
     tools:context=".ui.main.wall.WallTabFragment">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout_public_wall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:tabIndicatorColor="@color/darkGrey"
-            app:tabIndicatorFullWidth="true"
-            app:tabMode="fixed"
-            style="@style/MyCustomTabLayout"
-            app:tabTextColor="@color/darkGrey" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_public_wall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333333"
+        app:tabIndicatorColor="@color/AccentColor"
+        app:tabMode="fixed"
+        style="@style/MyCustomTabLayout"
+        app:tabTextColor="@color/AccentColor" />
 
 
     <androidx.viewpager.widget.ViewPager

@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darkGrey"
+        android:background="@color/colorPrimaryDarkMode"
         android:gravity="center"
         android:visibility="gone"
         >
@@ -35,7 +35,7 @@
         <TextView
             android:layout_margin="24dp"
             android:textSize="16sp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/AccentColor"
             android:textStyle="bold"
             android:id="@+id/random_quote_tv"
             android:layout_width="match_parent"

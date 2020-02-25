@@ -9,6 +9,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class CreateTaskRepository {
 
     private MutableLiveData<Task> setTaskInformation;
@@ -93,6 +95,21 @@ public class CreateTaskRepository {
             if (taskRef.getKey() == null) {
                 return setTaskInformation;
             }
+
+//            HashMap<String, String> createTaskMap= new HashMap();
+//            createTaskMap.put("Description",task.getDescription());
+//            createTaskMap.put("Name",task.getDescription());
+//            createTaskMap.put("Sector",task.getGroup());
+//            createTaskMap.put("TimeCreated",task.getStart_date());
+//            createTaskMap.put("EndDate",task.getEndDate());
+//            createTaskMap.put("TaskCreator",userID);
+//            createTaskMap.put("TaskRef",taskRef.getKey());
+//
+//            myRef.child("Tasks").child("GroupTasks")
+//                    .child(task.getGroup())
+//                    .child(taskRef.getKey())
+//                    .setValue(createTaskMap);
+
 
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("Description")

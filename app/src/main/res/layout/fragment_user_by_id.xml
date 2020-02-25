@@ -31,7 +31,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="180dp"
         android:src="@drawable/profile_image"
-        app:civ_border_color="@color/colorPrimaryDark"
+        app:civ_border_color="@color/AccentColor"
         app:civ_border_width="2dp"
         android:id="@+id/visit_profile_image"/>
 
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/username"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/AccentColor"
         android:layout_below="@+id/visit_profile_image"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -76,7 +76,7 @@
         android:textSize="18sp"
         android:text="Send Message"
         android:textColor="#333333"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/AccentColor"
         android:textAllCaps="false"
         android:layout_marginTop="24dp"/>
 

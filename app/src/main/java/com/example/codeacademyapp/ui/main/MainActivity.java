@@ -2,28 +2,29 @@ package com.example.codeacademyapp.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
-import com.example.codeacademyapp.ui.main.home.HomeSettings;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
-import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
+import com.example.codeacademyapp.ui.main.home.HomeSettings;
+import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
+import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -32,16 +33,14 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
     Toolbar toolbar;
 
-    ChatViewModel groupChatViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
         bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -123,5 +122,15 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        if (NetworkConnectivity.isConnectivityNetworkAvailable(this)) {
+
+            Toast connectivityToast = Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG);
+            connectivityToast.setGravity(Gravity.CENTER, 0, 0);
+            connectivityToast.show();
+        }
+    }
 }

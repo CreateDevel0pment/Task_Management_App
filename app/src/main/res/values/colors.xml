@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ffffff </color>
-    <color name="colorPrimaryDark">#edb705</color>
-    <color name="colorAccent">#ffffff</color>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="editTextColor">#000000</color>
-    <color name="darkGrey">#333333</color>
-    <color name="colorSecondary">#424242</color>
-    <color name="tabStyle">#FFFFFF</color>
-    <color name="darkblue">#2f2e41</color>
-    <color name="white">#FFFFFF</color>
-    <color name="transparent">#00FFFFFF</color>
+    <color name="colorPrimaryDarkMode">#333333</color>
+    <color name="AccentColor">#edb705</color>
 
-    <color name="low_white">#66B6B6B6</color>
+
 
     <color name="red">#E53935</color>
     <color name="green">#00897B</color>

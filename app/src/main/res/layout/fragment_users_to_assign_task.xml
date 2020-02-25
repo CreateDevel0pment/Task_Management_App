@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#333333"
-        app:titleTextColor="@color/colorPrimaryDark" />
+        app:titleTextColor="@color/AccentColor" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/AccentColor"/>
 
     <ScrollView
         android:layout_margin="8dp"

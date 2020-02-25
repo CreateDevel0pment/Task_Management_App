@@ -17,19 +17,20 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#333333"
         android:background="@color/colorPrimary"
-        app:titleTextColor="@color/colorPrimaryDark"
+        app:titleTextColor="@color/AccentColor"
         android:id="@+id/private_chat_toolbar"/>
 
     <View
         android:layout_above="@+id/private_chat_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/AccentColor"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#333333"
         android:layout_below="@+id/private_chat_toolbar"
         android:id="@+id/private_message_list"/>
 
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="#333333"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"
@@ -76,8 +78,8 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_send"
-            android:tint="@color/darkGrey"
             android:background="@android:color/transparent"/>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/new_personal_task_button"
@@ -85,9 +87,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="2dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/AccentColor"
             android:src="@drawable/assignment"
-            app:backgroundTint="@color/white" />
+            />
 
     </LinearLayout>
 

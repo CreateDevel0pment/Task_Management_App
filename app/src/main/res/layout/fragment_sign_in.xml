@@ -20,7 +20,7 @@
 
         <EditText
             android:drawableStart="@drawable/mail_ic"
-            android:drawableTint="@color/darkGrey"
+            android:drawableTint="@color/colorPrimaryDarkMode"
             android:focusedByDefault="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
     <EditText
         android:drawableStart="@drawable/pass_ic"
         android:focusedByDefault="false"
-        android:drawableTint="@color/darkGrey"
+        android:drawableTint="@color/colorPrimaryDarkMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
@@ -60,19 +60,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/darkGrey"
+        android:backgroundTint="@color/colorPrimaryDarkMode"
         android:layout_marginTop="16dp"
         android:id="@+id/log_in_btn"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:hint="@string/log_in"
-        android:textColorHint="@color/white"
+        android:textColorHint="@color/colorPrimary"
         />
 
     <TextView
         android:id="@+id/forgot_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorPrimaryDarkMode"
         android:text="@string/forgot_your_password"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"

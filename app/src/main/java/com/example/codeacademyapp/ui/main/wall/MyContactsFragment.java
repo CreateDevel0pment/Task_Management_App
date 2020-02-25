@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.ModelFirebase;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,8 +37,7 @@ public class MyContactsFragment extends Fragment {
     private FirebaseAuth auth;
     private String currentUserId;
 
-    String profileImage="default";
-
+    private String profileImage="default";
 
     public MyContactsFragment() {
     }
@@ -114,7 +114,7 @@ public class MyContactsFragment extends Fragment {
                     @Override
                     public MyContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout, parent, false);
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_request_layout, parent, false);
 
                         return new MyContactsHolder(view);
                     }

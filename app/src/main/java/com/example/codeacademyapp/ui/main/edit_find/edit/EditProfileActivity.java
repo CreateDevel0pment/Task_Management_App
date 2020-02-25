@@ -18,8 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.edit_find.EditProfileViewModel;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -40,8 +39,8 @@ public class EditProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
     String group_string, position_string;
 
-    ChatViewModel viewModel;
     EditProfileViewModel editProfileViewModel;
+    UserInformationViewModel userInformationViewModel;
 
     ProgressDialog loadingBar;
 
@@ -62,7 +61,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        userInformationViewModel();
+        getUserInformation();
 
         editProfileViewModel = ViewModelProviders.of(this).get(EditProfileViewModel.class);
 
@@ -107,11 +106,13 @@ public class EditProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void userInformationViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        viewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+    private void getUserInformation() {
+
+        userInformationViewModel=ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userInformationViewModel.getUserInformation().observe(this,new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.exists()) {
 
                     String username = dataSnapshot.child("Name").getValue().toString();

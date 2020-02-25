@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     tools:context=".ui.main.wall.AcademyWallFragment">
@@ -12,20 +12,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#333333"
         android:layout_above="@id/my_linear_layout"
         android:id="@+id/group_chat_recycler"/>
 
-<!--    <View-->
-<!--        android:layout_above="@+id/my_linear_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:background="@color/colorPrimaryDark"/>-->
+    <View
+        android:layout_above="@+id/my_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/AccentColor"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="#333333"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"
@@ -60,7 +62,6 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_send"
-            android:tint="@color/darkGrey"
             android:background="@android:color/transparent"/>
     </LinearLayout>
 

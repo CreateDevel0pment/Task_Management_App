@@ -18,8 +18,8 @@
             >
                 <DatePicker
                     android:id="@+id/datePicker"
-                    android:headerBackground="@color/colorPrimaryDark"
-                    android:calendarTextColor="@color/white"
+                    android:headerBackground="@color/AccentColor"
+                    android:calendarTextColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
 
@@ -27,7 +27,7 @@
 
         <Button
             android:id="@+id/pick_a_date_btn"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/AccentColor"
             android:textColor="#333333"
             android:text="Set Date"
             android:layout_width="wrap_content"

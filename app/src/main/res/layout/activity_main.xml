@@ -10,17 +10,18 @@
     <androidx.appcompat.widget.Toolbar
         android:background="#333333"
         android:id="@+id/toolbar"
-        app:titleTextColor="@color/white"
+        app:titleTextColor="@color/AccentColor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent">
     </androidx.appcompat.widget.Toolbar>
 
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:background="@color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/toolbar"/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/AccentColor"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
+
 
     <FrameLayout
         android:id="@+id/home_container"
@@ -49,14 +50,16 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/bottom_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@color/darkGrey"
-            app:itemTextColor="@color/darkGrey"
-            app:menu="@menu/bottom_bar_menu" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:itemIconTint="@color/AccentColor"
+        app:itemTextColor="@color/AccentColor"
+        android:backgroundTint="#333333"
+        android:outlineAmbientShadowColor="@android:color/darker_gray"
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_bar_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

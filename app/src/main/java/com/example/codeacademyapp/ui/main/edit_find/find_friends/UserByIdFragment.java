@@ -1,5 +1,6 @@
 package com.example.codeacademyapp.ui.main.edit_find.find_friends;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,37 +8,40 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
+import com.example.codeacademyapp.utils.Constants;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.codeacademyapp.utils.Constants.USER_BY_ID;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class UserByIdFragment extends Fragment {
 
-    private String receiver_user_id, sender_user_id, current_State;
+    private String receiver_user_id,
+            current_user_id,
+            current_State;
 
     private CircleImageView userProfileImage;
     private TextView userProfileName, userProfileGroup;
     private Button send_message_btn;
 
-    private DatabaseReference userRef, chatRequestRef, contactRef,notificationRef;
-    private FirebaseAuth auth;
+    private UserInformationViewModel userInformationViewModel;
+    private ChatViewModel chatViewModel;
+    private ChatRequestViewModel chatRequestViewModel;
 
     public UserByIdFragment() {
     }
@@ -48,35 +52,29 @@ public class UserByIdFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_by_id, container, false);
         initializedView(view);
 
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
-        contactRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
-        notificationRef=FirebaseDatabase.getInstance().getReference().child("Notifications");
-
-        auth = FirebaseAuth.getInstance();
-        sender_user_id = auth.getCurrentUser().getUid();
-
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        current_user_id = userInformationViewModel.getUserId();
 
         if (getArguments() != null) {
-            receiver_user_id = getArguments().getString("user_by_id");
+            receiver_user_id = getArguments().getString(USER_BY_ID);
         }
 
         current_State = "new";
-        retreiveUserInformations();
+        retrieveUserInformation();
 
         return view;
     }
 
-    private void retreiveUserInformations() {
+    private void retrieveUserInformation() {
 
-        userRef.child(receiver_user_id).addValueEventListener(new ValueEventListener() {
+        userInformationViewModel.retrieveRecieverUserInfo(receiver_user_id).observe(this, new Observer<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChanged(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists() && (dataSnapshot.hasChild("image"))) {
-                    String userImage = dataSnapshot.child("image").getValue().toString();
-                    String userName = dataSnapshot.child("Name").getValue().toString();
-                    String userGroup = dataSnapshot.child("Sector").getValue().toString();
+                    String userImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
+                    String userName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
 
                     Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(userProfileImage);
                     userProfileName.setText(userName);
@@ -86,18 +84,14 @@ public class UserByIdFragment extends Fragment {
 
                 } else {
 
-                    String userName = dataSnapshot.child("Name").getValue().toString();
-                    String userGroup = dataSnapshot.child("Sector").getValue().toString();
+                    String userName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                    String userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                     userProfileName.setText(userName);
                     userProfileGroup.setText(userGroup);
 
                     menageChatRequest();
 
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
@@ -105,13 +99,18 @@ public class UserByIdFragment extends Fragment {
 
     private void menageChatRequest() {
 
-        chatRequestRef.child(sender_user_id).addValueEventListener(new ValueEventListener() {
+        chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+        chatRequestViewModel=ViewModelProviders.of(this).get(ChatRequestViewModel.class);
+        chatViewModel.getchatRequest(current_user_id).observe(this, new Observer<DataSnapshot>() {
+            @SuppressLint("SetTextI18n")
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onChanged(DataSnapshot dataSnapshot) {
+
 
                 if (dataSnapshot.hasChild(receiver_user_id)) {
 
-                    String request_type = dataSnapshot.child(receiver_user_id).child("request_type").getValue().toString();
+                    String request_type = Objects.requireNonNull(dataSnapshot.child(receiver_user_id)
+                            .child("request_type").getValue()).toString();
 
                     if (request_type.equals("send")) {
                         current_State = "request send";
@@ -122,33 +121,23 @@ public class UserByIdFragment extends Fragment {
                         send_message_btn.setText("Accept Chat Request");
 
                     }
-                } else {
-
-                    contactRef.child(sender_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                }
+                else {
+                    chatRequestViewModel.setValueForRemove(current_user_id,receiver_user_id)
+                            .observe(UserByIdFragment.this, new Observer<DataSnapshot>() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onChanged(DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.hasChild(receiver_user_id)) {
-                                current_State = "friends";
-                                send_message_btn.setText("remove this contact");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            current_State = "friends";
+                            send_message_btn.setText("remove this contact");
                         }
                     });
+
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
-        if (!sender_user_id.equals(receiver_user_id)) {
+        if (!current_user_id.equals(receiver_user_id)) {
 
             send_message_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -183,32 +172,18 @@ public class UserByIdFragment extends Fragment {
 
     private void removeSpecificContact() {
 
-        contactRef.child(sender_user_id).child(receiver_user_id)
-                .removeValue()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+        chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
+        chatRequestViewModel.removeFromMyContacts(current_user_id, receiver_user_id)
+                .observe(this, new Observer<Task>() {
+                    @SuppressLint("SetTextI18n")
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+                    public void onChanged(Task task) {
 
                         if (task.isSuccessful()) {
 
+                            send_message_btn.setEnabled(true);
+                            current_State = "new";
                             send_message_btn.setText("Send Message");
-
-                            contactRef.child(receiver_user_id).child(sender_user_id)
-                                    .removeValue()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            if (task.isSuccessful()) {
-
-                                                send_message_btn.setEnabled(true);
-                                                current_State = "new";
-                                                send_message_btn.setText("Send Message");
-
-                                            }
-
-                                        }
-                                    });
                         }
                     }
                 });
@@ -217,125 +192,61 @@ public class UserByIdFragment extends Fragment {
 
     private void acceptChatRequest() {
 
-        contactRef.child(sender_user_id).child(receiver_user_id).child("Contacts").setValue("Saved")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+        chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
+        chatRequestViewModel.acceptChatRequest(current_user_id, receiver_user_id).observe(this, new Observer<Task>() {
+            @Override
+            public void onChanged(Task task) {
 
-                        if (task.isSuccessful()) {
+                if ((task.isSuccessful())) {
 
-                            contactRef.child(receiver_user_id).child(sender_user_id).child("Contacts").setValue("Saved")
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                    chatRequestViewModel.cancelChatRequest(current_user_id, receiver_user_id)
+                            .observe(UserByIdFragment.this, new Observer<Task>() {
+                                @SuppressLint("SetTextI18n")
+                                @Override
+                                public void onChanged(Task task) {
 
-                                            if (task.isSuccessful()) {
-
-                                                chatRequestRef.child(sender_user_id).child(receiver_user_id)
-                                                        .removeValue()
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                                                if (task.isSuccessful()) {
-
-                                                                    chatRequestRef.child(receiver_user_id).child(sender_user_id)
-                                                                            .removeValue()
-                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                @Override
-                                                                                public void onComplete(@NonNull Task<Void> task) {
-
-                                                                                    send_message_btn.setEnabled(true);
-                                                                                    current_State = "Friends";
-                                                                                    send_message_btn.setText("Remove this Contact");
-                                                                                }
-                                                                            });
-                                                                }
-                                                            }
-                                                        });
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-                });
+                                    send_message_btn.setEnabled(true);
+                                    current_State = "friends";
+                                    send_message_btn.setText("Remove this Contact");
+                                }
+                            });
+                }
+            }
+        });
 
     }
 
     private void cancelChatRequest() {
 
-        chatRequestRef.child(sender_user_id).child(receiver_user_id)
-                .removeValue()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
+        chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
+        chatRequestViewModel.cancelChatRequest(current_user_id, receiver_user_id).observe(this, new Observer<Task>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onChanged(Task task) {
 
-                        if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
 
-                            send_message_btn.setText("Send Message");
-
-                            chatRequestRef.child(receiver_user_id).child(sender_user_id)
-                                    .removeValue()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            if (task.isSuccessful()) {
-
-                                                send_message_btn.setEnabled(true);
-                                                current_State = "new";
-                                                send_message_btn.setText("Send Message");
-
-                                            }
-
-                                        }
-                                    });
-                        }
-                    }
-                });
+                    send_message_btn.setEnabled(true);
+                    current_State = "new";
+                    send_message_btn.setText("Send Message");
+                }
+            }
+        });
     }
 
     private void sendChatRequest() {
-
-        chatRequestRef.child(sender_user_id).child(receiver_user_id)
-                .child("request_type")
-                .setValue("send")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
+        chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
+        chatRequestViewModel.getChatRequest(current_user_id, receiver_user_id).observe(this, new Observer<Task>() {
+            @SuppressLint("SetTextI18n")
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
+            public void onChanged(Task task) {
 
-                chatRequestRef.child(receiver_user_id).child(sender_user_id)
-                        .child("request_type").setValue("received")
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
 
-                                if (task.isSuccessful()) {
-
-                                    HashMap<String,String> chatNotificationMap=new HashMap<>();
-                                    chatNotificationMap.put("from",sender_user_id);
-                                    chatNotificationMap.put("type","request");
-
-                                    notificationRef.child(receiver_user_id).push()
-                                            .setValue(chatNotificationMap)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-
-                                            if(task.isSuccessful()){
-
-                                                send_message_btn.setEnabled(true);
-                                                current_State = "request send";
-                                                send_message_btn.setText("Cancel Chat Request");
-
-                                            }
-                                        }
-                                    });
-
-                                }
-                            }
-                        });
-
+                    send_message_btn.setEnabled(true);
+                    current_State = "request send";
+                    send_message_btn.setText("Cancel Chat Request");
+                }
             }
         });
     }

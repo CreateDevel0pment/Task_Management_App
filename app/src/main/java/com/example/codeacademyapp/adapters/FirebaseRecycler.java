@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.codeacademyapp.utils.Constants.USER_BY_ID;
+
 public class FirebaseRecycler extends
         com.firebase.ui.database.FirebaseRecyclerAdapter<ModelFirebase,
                 FirebaseRecycler.FindFriendsViewHolder> {
@@ -48,14 +50,13 @@ public class FirebaseRecycler extends
                 UserByIdFragment fragment=new UserByIdFragment();
 
                 Bundle bundle=new Bundle();
-                bundle.putString("user_by_id",visit_user_id);
+                bundle.putString(USER_BY_ID,visit_user_id);
                 fragment.setArguments(bundle);
 
                 fragmentManager.beginTransaction()
                         .replace(R.id.user_byId_container, fragment)
                         .addToBackStack("back")
                         .commit();
-
             }
         });
     }
@@ -64,7 +65,7 @@ public class FirebaseRecycler extends
     @Override
     public FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_request_layout, parent, false);
         return new FindFriendsViewHolder(view);
     }
 

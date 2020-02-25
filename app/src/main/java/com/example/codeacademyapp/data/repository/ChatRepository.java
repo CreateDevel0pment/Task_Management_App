@@ -20,13 +20,18 @@ import java.util.Objects;
 public class ChatRepository {
 
     private FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef, groupMessageKeyRef, roothRef,privateReference;
+    private DatabaseReference myRef,
+            groupMessageKeyRef,
+            privateReference,
+            chatRequestRef;
+
     private FirebaseAuth auth;
 
     public void setGroupNameToFirebase(String groupName) {
 
         myRef = rootRef.getReference();
-        myRef.child("Groups").child(groupName).setValue("").addOnCompleteListener(new OnCompleteListener<Void>() {
+        myRef.child("Groups").child(groupName).setValue("")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -36,29 +41,28 @@ public class ChatRepository {
         });
     }
 
-    public MutableLiveData<DataSnapshot> getUserInformation() {
-        final MutableLiveData<DataSnapshot> getUserInformations = new MutableLiveData<>();
 
-        auth = FirebaseAuth.getInstance();
-        String currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
-        myRef = FirebaseDatabase.getInstance().getReference().child("Users");
+    public MutableLiveData<DataSnapshot> getchatRequest (final String currentUserId){
 
-        myRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
+        final MutableLiveData<DataSnapshot> setChatRequest = new MutableLiveData<>();
+        chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
+
+        chatRequestRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()) {
-                    getUserInformations.setValue(dataSnapshot);
-                }
+
+                    setChatRequest.setValue(dataSnapshot);
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
             }
         });
-        return getUserInformations;
+
+        return setChatRequest;
     }
 
     public MutableLiveData<DataSnapshot> displayMessageInUsersGroup(String group_name) {

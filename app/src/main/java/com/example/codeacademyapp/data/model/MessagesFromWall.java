@@ -2,6 +2,9 @@ package com.example.codeacademyapp.data.model;
 
 public class MessagesFromWall {
 
+
+    //TODO delete
+
     private String id;
     private String date;
     private String sector;

@@ -18,8 +18,8 @@ import com.example.codeacademyapp.adapters.TaskAdapter;
 import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.TaskInformation;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,16 +41,14 @@ public class CompletedTasksFragment extends Fragment {
     private List<AssignedUsers> assignedUsersList;
     private List<CompletedBy> completedByList;
     private TaskAdapter taskAdapter;
-    TaskViewModel taskViewModel;
+
+    private TaskViewModel taskViewModel;
+    private UserInformationViewModel userInformationViewModel;
 
     private RecyclerView rvTasks;
     private String userSector, userId, id;
 
-    private View rootView;
-
-    public CompletedTasksFragment() {
-    }
-
+    View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,14 +56,15 @@ public class CompletedTasksFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_completed_tasks, container, false);
 
-        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
-        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
+
                     userSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                 }
 
@@ -95,9 +94,8 @@ public class CompletedTasksFragment extends Fragment {
                             String taskRef = taskDataSnapshot.getValue(TaskInformation.class).getTaskRef();
 
                             TaskInformation task = new TaskInformation(name, description,
-                                     group, timeCreated, taskPriority, endDate, taskRef);
+                                    group, timeCreated, taskPriority, endDate, taskRef);
                             tasks.add(task);
-
 
                         }
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
@@ -112,8 +110,11 @@ public class CompletedTasksFragment extends Fragment {
 
                     }
                 });
+
             }
+
         });
+
         return rootView;
     }
 

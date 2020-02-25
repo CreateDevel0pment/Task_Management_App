@@ -19,10 +19,6 @@ public class ChatViewModel extends AndroidViewModel {
         chatRepository = new ChatRepository();
     }
 
-    public LiveData<DataSnapshot> getUserIngormations (){
-        return chatRepository.getUserInformation();
-    }
-
     public void setGroupNameToFirebase(String chatName) {
         chatRepository.setGroupNameToFirebase(chatName);
     }
@@ -49,5 +45,9 @@ public class ChatViewModel extends AndroidViewModel {
 
     public LiveData<DataSnapshot> displayMessageToPrivateChat(String message_reciever_id ){
         return chatRepository.displayMessageOnPrivateChat(message_reciever_id);
+    }
+
+    public LiveData<DataSnapshot> getchatRequest (String currentUserId){
+        return chatRepository.getchatRequest(currentUserId);
     }
 }

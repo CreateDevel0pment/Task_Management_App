@@ -2,6 +2,7 @@ package com.example.codeacademyapp.ui.main.home;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -22,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
+import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.firebase.database.DataSnapshot;
 
 /**
@@ -33,8 +36,8 @@ public class HomeFragment extends BaseFragment {
     private EditText web_text;
     private Button ok_btn;
     private View view;
-    HomeViewModel homeViewModel;
-    String getUrl;
+    private HomeViewModel homeViewModel;
+    private String getUrl;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -52,6 +55,7 @@ public class HomeFragment extends BaseFragment {
                     getUrl = dataSnapshot.getValue().toString();
 
                     WebView browser = view.findViewById(R.id.home_web_view);
+                    browser.setBackgroundColor(Color.TRANSPARENT);
                     CardView cardView=view.findViewById(R.id.web_card_view);
 
                     browser.loadUrl(getUrl);
@@ -105,4 +109,5 @@ public class HomeFragment extends BaseFragment {
 
         return view;
     }
+
 }

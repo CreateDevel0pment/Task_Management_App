@@ -14,16 +14,16 @@ import java.util.Objects;
 
 public class GetUserInformationRepository {
 
-    FirebaseAuth auth;
-    DatabaseReference myRef;
-
+    private FirebaseAuth auth;
+    private DatabaseReference myRef;
+    private String currentUserId;
 
 
     public MutableLiveData<DataSnapshot> getUserInformation() {
         final MutableLiveData<DataSnapshot> getUserInformations = new MutableLiveData<>();
 
         auth = FirebaseAuth.getInstance();
-        String currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+        currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
         myRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         myRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
@@ -49,5 +49,53 @@ public class GetUserInformationRepository {
         String userId=auth.getCurrentUser().getUid();
 
         return userId;
+    }
+
+
+    public MutableLiveData<DataSnapshot> retrieveRecieverUserInfo (String receiver_user_id){
+        final MutableLiveData<DataSnapshot> setUserInfo = new MutableLiveData<>();
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+
+        myRef.child(receiver_user_id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                setUserInfo.setValue(dataSnapshot);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return setUserInfo;
+    }
+
+
+    public MutableLiveData<DataSnapshot> myContactsInfo (){
+        final MutableLiveData<DataSnapshot> contactInfo = new MutableLiveData<>();
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+
+        myRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                contactInfo.setValue(dataSnapshot);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return contactInfo;
     }
 }

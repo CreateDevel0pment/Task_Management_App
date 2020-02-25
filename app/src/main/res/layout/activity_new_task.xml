@@ -11,7 +11,7 @@
         android:id="@+id/toolbar_tasks_tab_fragment"
         android:layout_width="match_parent"
         android:background="#333333"
-        app:titleTextColor="@color/colorPrimaryDark"
+        app:titleTextColor="@color/AccentColor"
         android:layout_height="?attr/actionBarSize"
         />
 
@@ -19,7 +19,7 @@
         android:layout_above="@+id/private_chat_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimaryDark"/>
+        android:background="@color/AccentColor"/>
 
     <FrameLayout
         android:id="@+id/task_fragments_container"

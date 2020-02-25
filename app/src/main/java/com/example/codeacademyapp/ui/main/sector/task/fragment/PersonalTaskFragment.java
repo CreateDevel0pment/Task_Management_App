@@ -21,9 +21,9 @@ import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.model.TaskInformation;
-import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.QuoteViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +41,10 @@ public class PersonalTaskFragment extends Fragment {
     private List<TaskInformation> tasks;
     private List<CompletedBy> completedByList;
     private DatabaseReference myRef;
+
     private TaskViewModel taskViewModel;
+    private UserInformationViewModel userInformationViewModel;
+    private QuoteViewModel quoteViewModel;
 
     private RecyclerView rvPersonalTasks;
     private String userId;
@@ -60,86 +62,75 @@ public class PersonalTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (rootView!=null)
-        {
+        if (rootView != null) {
             return rootView;
         }
         rootView = inflater.inflate(R.layout.fragment_personal_task, container, false);
 
         rvPersonalTasks = rootView.findViewById(R.id.personal_task_list_RV);
 
-        final QuoteViewModel quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
-        ChatViewModel groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userId = userInformationViewModel.getUserId();
 
+        quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
-        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
-            @Override
-            public void onChanged(DataSnapshot dataSnapshot) {
+        tasks = new ArrayList<>();
+        completedByList = new ArrayList<>();
+        assignedUsersList = new ArrayList<>();
 
-                userId = dataSnapshot.getKey();
-                if (dataSnapshot.exists()) {
-                    userSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Tasks");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tasks.clear();
+                for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
+
+
+                    completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
+                    assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
+                    description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
+                    group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
+                    name = taskDataSnapshot.getValue(TaskInformation.class).getName();
+                    timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
+                    taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
+                    endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
+                    String taskRef = taskDataSnapshot.getValue(TaskInformation.class).getTaskRef();
+
+                    TaskInformation task =
+                            new TaskInformation(name, description, group, timeCreated, taskPriority, endDate, taskRef);
+                    tasks.add(task);
                 }
 
-                tasks = new ArrayList<>();
-                completedByList = new ArrayList<>();
-                assignedUsersList = new ArrayList<>();
+                if (tasks.isEmpty()) {
+                    quoteViewModel.randomQuote.observe(PersonalTaskFragment.this, new Observer<Quote>() {
+                        @Override
+                        public void onChanged(Quote quote) {
+                            TextView randomQuoteTV = rootView.findViewById(R.id.random_quote_tv);
+                            TextView authorQuoteTV = rootView.findViewById(R.id.random_quote_author_tv);
+                            LinearLayout quoteLinearLayout = rootView.findViewById(R.id.quote_linear_layout);
+                            randomQuoteTV.setText(String.format("%s%s\"", '"', quote.getEn()));
+                            authorQuoteTV.setText(quote.getAuthor());
+                            quoteLinearLayout.setVisibility(View.VISIBLE);
+                            rvPersonalTasks.setVisibility(View.GONE);
+                        }
+                    });
+                    quoteViewModel.loadRandomQuote();
 
-                myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Tasks");
+                } else {
+                    String completedCheck = "";
+                    TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
+                    rvPersonalTasks.setAdapter(taskAdapter);
+                }
+            }
 
-                myRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                tasks.clear();
-                                for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-                                    completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
-                                    assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
-                                    description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
-                                    group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
-                                    name = taskDataSnapshot.getValue(TaskInformation.class).getName();
-                                    timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
-                                    taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
-                                    endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
-                                    String taskRef = taskDataSnapshot.getValue(TaskInformation.class).getTaskRef();
-
-                                    TaskInformation task =
-                                            new TaskInformation(name, description, group, timeCreated, taskPriority, endDate, taskRef);
-                                    tasks.add(task);
-
-                                }
-
-                                if (tasks.isEmpty()) {
-                                    quoteViewModel.randomQuote.observe(PersonalTaskFragment.this, new Observer<Quote>() {
-                                        @Override
-                                        public void onChanged(Quote quote) {
-                                            TextView randomQuoteTV = rootView.findViewById(R.id.random_quote_tv);
-                                            TextView authorQuoteTV = rootView.findViewById(R.id.random_quote_author_tv);
-                                            LinearLayout quoteLinearLayout = rootView.findViewById(R.id.quote_linear_layout);
-                                            randomQuoteTV.setText(String.format("%s%s\"", '"', quote.getEn()));
-                                            authorQuoteTV.setText(quote.getAuthor());
-                                            quoteLinearLayout.setVisibility(View.VISIBLE);
-                                            rvPersonalTasks.setVisibility(View.GONE);
-                                        }
-                                    });
-                                    quoteViewModel.loadRandomQuote();
-
-                                } else {
-                                    String completedCheck = "";
-                                    TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
-                                    rvPersonalTasks.setAdapter(taskAdapter);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
             }
         });
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rvPersonalTasks.setLayoutManager(layoutManager);
         return rootView;

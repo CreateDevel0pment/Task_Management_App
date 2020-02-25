@@ -3,41 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="8dp"
     android:padding="4dp"
+    android:background="#333333"
     android:orientation="vertical">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/message_profile_imagee"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         app:cardCornerRadius="16dp">
 
         <ImageView
             android:id="@+id/message_profile_image"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             />
 
     </androidx.cardview.widget.CardView>
-
-<!--    <de.hdodenhof.circleimageview.CircleImageView-->
-<!--        android:layout_width="60dp"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:layout_marginEnd="4dp"-->
-<!--        android:src="@drawable/logo_create_development"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        app:civ_border_color="@color/colorPrimaryDark"-->
-<!--        app:civ_border_width="1dp"-->
-<!--        android:id="@+id/message_profile_image"/>-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="reciever_name"
         android:visibility="gone"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/AccentColor"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/message_profile_imagee"
@@ -59,7 +49,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/AccentColor"
         android:text="11:11"
         android:textSize="11sp"
         android:layout_toEndOf="@+id/message_profile_imagee"
@@ -79,7 +69,7 @@
         android:layout_below="@+id/reciever_name"
         android:background="@drawable/reciever_message_layout"
         android:text="reciever Message"
-        android:textColor="@color/white"
+        android:textColor="#333333"
         android:padding="8dp"
         android:textSize="16sp"
         />

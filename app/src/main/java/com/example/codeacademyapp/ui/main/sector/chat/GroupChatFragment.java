@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,27 +24,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageGroupAdapter;
 import com.example.codeacademyapp.data.model.MessageFromGroup;
-import com.example.codeacademyapp.data.model.ModelFirebase;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
-import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
+import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,57 +46,21 @@ public class GroupChatFragment extends BaseFragment {
     private EditText userMessage_input;
     private String currentUserName, userImage;
     private String userGroup;
-    private String userProfileImage;
-    private String profileImageE;
     private String userID;
-    private FloatingActionButton new_task_btn;
 
     private ChatViewModel groupChatViewModel;
+    private UserInformationViewModel userInformationViewModel;
 
-    private DatabaseReference usersRef;
 
-
-    private RecyclerView face_profile_recycler, chat_recycler;
+    private RecyclerView chat_recycler;
     private MessageGroupAdapter adapter;
 
     private List<MessageFromGroup> messageList = new ArrayList<>();
-    private List<ModelFirebase> userList = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
-        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-
-        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
-            @Override
-            public void onChanged(DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()) {
-                    userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
-                    userID = dataSnapshot.getRef().getKey();
-
-                    setTitle(userGroup + " Sector");
-
-                    groupChatViewModel.displayMessageToGroup(userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
-                        @Override
-                        public void onChanged(DataSnapshot dataSnapshot) {
-
-                            MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
-
-                            messageList.add(messages);
-                            adapter = new MessageGroupAdapter(messageList, getContext());
-                            chat_recycler.setAdapter(adapter);
-
-                            chat_recycler.smoothScrollToPosition(chat_recycler.getAdapter().getItemCount());
-
-
-                        }
-                    });
-                }
-            }
-        });
+        displayMessage();
     }
 
     @Override
@@ -113,7 +69,7 @@ public class GroupChatFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_group_chat, container, false);
 
-        new_task_btn = view.findViewById(R.id.new_task_button);
+        FloatingActionButton new_task_btn = view.findViewById(R.id.new_task_button);
         new_task_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,16 +79,11 @@ public class GroupChatFragment extends BaseFragment {
         });
 
         initialisedFields(view);
-        getUserInfo();
-//        dispalyImage();
-
-
         sentMessage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 SaveMessageToDataBase();
-
                 userMessage_input.setText("");
             }
         });
@@ -160,116 +111,71 @@ public class GroupChatFragment extends BaseFragment {
 
             String currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            groupChatViewModel.saveMessageFromGroupChat(userID,userGroup, currentUserName, userImage, message, currentDate, currentTime);
+            groupChatViewModel.saveMessageFromGroupChat(userID, userGroup, currentUserName, userImage, message, currentDate, currentTime);
 
         }
     }
 
-    private void getUserInfo() {
+    private void displayMessage() {
 
-        groupChatViewModel.getUserIngormations().observe(this, new Observer<DataSnapshot>() {
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
-
                 if (dataSnapshot.exists()) {
-                    currentUserName = dataSnapshot.child("Name").getValue().toString();
+                    currentUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
 
-                    if(dataSnapshot.child("image").getValue() !=null){
+                    userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                    userID = dataSnapshot.getRef().getKey();
 
-                        userImage = dataSnapshot.child("image").getValue().toString();
+                    setTitle(userGroup + " Sector");
+
+                    if (dataSnapshot.child("image").getValue() != null) {
+                        userImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
                     }
 
+                    displayMessageToGroup(userGroup);
                 }
             }
         });
+    }
 
+    private void displayMessageToGroup(String userGroup) {
+
+        groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+        groupChatViewModel.displayMessageToGroup(userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
+            @Override
+            public void onChanged(DataSnapshot dataSnapshot) {
+
+                MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
+
+                messageList.add(messages);
+                adapter = new MessageGroupAdapter(messageList, getContext());
+                chat_recycler.setAdapter(adapter);
+
+                chat_recycler.smoothScrollToPosition(Objects.requireNonNull(chat_recycler.getAdapter()).getItemCount());
+            }
+        });
     }
 
     private void initialisedFields(View view) {
         sentMessage_btn = view.findViewById(R.id.sent_message_btn);
         userMessage_input = view.findViewById(R.id.input_user_message);
 
-
-        face_profile_recycler = view.findViewById(R.id.group_face_recycler_);
-        face_profile_recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         chat_recycler = view.findViewById(R.id.group_chat_recycler);
         chat_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView profileImage;
+        if(NetworkConnectivity.isConnectivityNetworkAvailable(getContext())){
 
-        public ImageViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            profileImage = itemView.findViewById(R.id.item_image);
-
+            Toast connectivityToast = Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG);
+            connectivityToast.setGravity(Gravity.CENTER,0,0);
+            connectivityToast.show();
         }
-    }
-
-    private void dispalyImage() {
-
-        FirebaseRecyclerOptions<ModelFirebase> options =
-                new FirebaseRecyclerOptions.Builder<ModelFirebase>()
-                        .setQuery(usersRef, ModelFirebase.class)
-                        .build();
-
-        FirebaseRecyclerAdapter<ModelFirebase, ImageViewHolder> adapter = new FirebaseRecyclerAdapter<ModelFirebase, ImageViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull final ImageViewHolder holder, final int position, @NonNull final ModelFirebase model) {
-
-                if (model.Sector.equals(userGroup)) {
-
-                    if (model.image != null) {
-
-                        userProfileImage = model.image;
-
-                        Picasso.get().load(userProfileImage)
-                                .placeholder(R.drawable.astronaut)
-                                .into(holder.profileImage);
-                    } else {
-
-                        Picasso.get().load(R.drawable.profile_image)
-                                .into(holder.profileImage);
-                    }
-                }
-
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        String userName = model.Name;
-                        String userSector = model.Sector;
-                        String usersIds = getRef(position).getKey();
-
-                        Intent intent = new Intent(getContext(), PrivateChatActivity.class);
-
-                        if (model.image != null) {
-
-                            profileImageE = model.image;
-                            intent.putExtra("visit_user_image", profileImageE);
-                        }
-                        intent.putExtra("visit_user_id", usersIds);
-                        intent.putExtra("visit_user_name", userName);
-                        intent.putExtra("visit_user_sector", userSector);
-                        startActivity(intent);
-                    }
-                });
-            }
-
-            @NonNull
-            @Override
-            public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_picture, parent, false);
-                return new ImageViewHolder(view);
-            }
-        };
-
-        face_profile_recycler.setAdapter(adapter);
-        adapter.startListening();
-
     }
 }
