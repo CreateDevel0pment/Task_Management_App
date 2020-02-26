@@ -53,7 +53,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:itemIconTint="@color/AccentColor"
         app:itemTextColor="@color/AccentColor"
-        android:backgroundTint="#333333"
+        android:backgroundTint="@color/colorPrimaryDarkMode"
         android:outlineAmbientShadowColor="@android:color/darker_gray"
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"

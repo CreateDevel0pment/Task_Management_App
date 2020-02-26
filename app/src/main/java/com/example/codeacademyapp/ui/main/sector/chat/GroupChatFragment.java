@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,12 +32,18 @@ import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewMod
 import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,11 +58,11 @@ public class GroupChatFragment extends BaseFragment {
 
     private ChatViewModel groupChatViewModel;
     private UserInformationViewModel userInformationViewModel;
-
+    private FloatingActionButton new_task_btn;
 
     private RecyclerView chat_recycler;
     private MessageGroupAdapter adapter;
-
+    private DatabaseReference myRef;
     private List<MessageFromGroup> messageList = new ArrayList<>();
 
     @Override
@@ -69,8 +76,30 @@ public class GroupChatFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_group_chat, container, false);
+        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
 
-        FloatingActionButton new_task_btn = view.findViewById(R.id.new_task_button);
+        String id = userInformationViewModel.getUserId();
+        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    userGroup = dataSnapshot.child("Sector").getValue().toString();
+                    if(!dataSnapshot.child("Position").getValue().equals("Staff")){
+                        new_task_btn.show();
+                    }
+                }
+            }
+
+            @Override
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        new_task_btn = view.findViewById(R.id.new_task_button);
         new_task_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

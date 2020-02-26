@@ -40,7 +40,7 @@ public class ChatRepository {
                 });
     }
 
-    public MutableLiveData<DataSnapshot> getchatRequest(final String currentUserId) {
+    public MutableLiveData<DataSnapshot> getChatRequest(final String currentUserId) {
 
         final MutableLiveData<DataSnapshot> setChatRequest = new MutableLiveData<>();
         chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
@@ -64,7 +64,7 @@ public class ChatRepository {
     }
 
     public MutableLiveData<DataSnapshot> displayMessageInUsersGroup(String group_name) {
-        final MutableLiveData<DataSnapshot> dispalyMessage = new MutableLiveData<>();
+        final MutableLiveData<DataSnapshot> displayMessage = new MutableLiveData<>();
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Groups").child(group_name);
         myRef.addChildEventListener(new ChildEventListener() {
@@ -72,7 +72,7 @@ public class ChatRepository {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 if (dataSnapshot.exists()) {
-                    dispalyMessage.setValue(dataSnapshot);
+                    displayMessage.setValue(dataSnapshot);
                 }
             }
 
@@ -80,7 +80,7 @@ public class ChatRepository {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 if (dataSnapshot.exists()) {
-                    dispalyMessage.setValue(dataSnapshot);
+                    displayMessage.setValue(dataSnapshot);
                 }
             }
 
@@ -97,12 +97,12 @@ public class ChatRepository {
             }
         });
 
-        return dispalyMessage;
+        return displayMessage;
     }
 
 
     public MutableLiveData<DataSnapshot> displayMessageOnPublicWall() {
-        final MutableLiveData<DataSnapshot> dispalyMessage = new MutableLiveData<>();
+        final MutableLiveData<DataSnapshot> displayMessage = new MutableLiveData<>();
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Wall").child("Public Chat");
         myRef.addChildEventListener(new ChildEventListener() {
@@ -110,7 +110,7 @@ public class ChatRepository {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 if (dataSnapshot.exists()) {
-                    dispalyMessage.setValue(dataSnapshot);
+                    displayMessage.setValue(dataSnapshot);
                 }
             }
 
@@ -118,7 +118,7 @@ public class ChatRepository {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 if (dataSnapshot.exists()) {
-                    dispalyMessage.setValue(dataSnapshot);
+                    displayMessage.setValue(dataSnapshot);
                 }
             }
 
@@ -135,12 +135,12 @@ public class ChatRepository {
             }
         });
 
-        return dispalyMessage;
+        return displayMessage;
 
     }
 
     public MutableLiveData<DataSnapshot> displayMessageOnPrivateChat(String message_reciever_id) {
-        final MutableLiveData<DataSnapshot> dispalyMessage = new MutableLiveData<>();
+        final MutableLiveData<DataSnapshot> displayMessage = new MutableLiveData<>();
 
         auth = FirebaseAuth.getInstance();
         String message_sender_id = auth.getCurrentUser().getUid();
@@ -152,7 +152,7 @@ public class ChatRepository {
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                         if (dataSnapshot.exists()) {
-                            dispalyMessage.setValue(dataSnapshot);
+                            displayMessage.setValue(dataSnapshot);
                         }
 
                     }
@@ -161,7 +161,7 @@ public class ChatRepository {
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                         if (dataSnapshot.exists()) {
-                            dispalyMessage.setValue(dataSnapshot);
+                            displayMessage.setValue(dataSnapshot);
                         }
                     }
 
@@ -182,7 +182,7 @@ public class ChatRepository {
                 });
 
 
-        return dispalyMessage;
+        return displayMessage;
     }
 
     public void saveMessageForPublicChat(String userId, String currentUserName, String userGroup, String image,

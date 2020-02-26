@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.codeacademyapp.ui.main.wall.AcademyWallFragment;
+import com.example.codeacademyapp.ui.main.wall.WallFragment;
 import com.example.codeacademyapp.ui.main.wall.MyContactsFragment;
 import com.example.codeacademyapp.ui.main.wall.RequestsFragment;
 
@@ -19,13 +19,13 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        AcademyWallFragment academyWallFragment = new AcademyWallFragment();
+        WallFragment wallFragment = new WallFragment();
 //        AllContactsFragment allContactsFragment = new AllContactsFragment();
         MyContactsFragment myContactsFragment = new MyContactsFragment();
         RequestsFragment requestsFragment = new RequestsFragment();
 
         if (position == 0) {
-            return academyWallFragment;
+            return wallFragment;
         } else if (position == 1) {
             return myContactsFragment;
         }

@@ -38,7 +38,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AcademyWallFragment extends BaseFragment {
+public class WallFragment extends BaseFragment {
 
     private ImageButton sentMessage_btn;
     private EditText userMessage_input;
@@ -85,7 +85,7 @@ public class AcademyWallFragment extends BaseFragment {
             return view;
         }
 
-        view = inflater.inflate(R.layout.fragment_academy_wall, container, false);
+        view = inflater.inflate(R.layout.fragment_wall, container, false);
 
         setTitle(R.string.academy_wall);
         initializedView(view);

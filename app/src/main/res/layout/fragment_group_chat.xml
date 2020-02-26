@@ -72,6 +72,7 @@
             android:background="@android:color/transparent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="gone"
             android:id="@+id/new_task_button"
             android:layout_alignParentEnd="true"
             android:layout_margin="8dp"

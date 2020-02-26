@@ -61,6 +61,8 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private String assignedUserId;
     private CheckBox checkBoxSectorProject;
     private CardView assignUserCardView, checkBoxCardView;
+    private TaskNotificationViewModel taskNotificationViewModel;
+    private String  userPostition;
 
     public AddNewTaskFragment(String userName, String extrasUserId) {
         this.extrasUserName = userName;
@@ -94,29 +96,13 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             assignUserCardView.setVisibility(View.GONE);
         }
 
-//        checkBoxSectorProject.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(buttonView.isChecked()){
-//                    assignedUserNameTV.setText(null);
-//                }
-//            }
-//        });
-
+        taskNotificationViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskNotificationViewModel.class);
 
         ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
         datePickerImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
-            }
-        });
-
-        ImageView assignToUsersImg = rootView.findViewById(R.id.assign_to_img);
-        assignToUsersImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showUsersListDialog();
             }
         });
 
@@ -143,6 +129,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
                 if (dataSnapshot.exists()) {
                     userGroup = dataSnapshot.child("Sector").getValue().toString();
+
                 }
             }
 
@@ -152,7 +139,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
 
         RadioButton priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
         RadioButton priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
@@ -197,8 +183,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 setTaskValues();
 
                 if (assignedUserId != null || extrasUserId != null) {
@@ -247,6 +231,14 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             task.setAssignedUserId(assignedUserId);
         }
 
+        if (extrasUserId!=null){
+            taskNotificationViewModel.sendTaskNotification(userID, extrasUserId);
+        }
+
+//        if(assignedUserId!=null){
+//            taskNotificationViewModel.sendTaskNotification(userID, assignedUserId);
+//        }
+
     }
 
     @Override
@@ -266,7 +258,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 

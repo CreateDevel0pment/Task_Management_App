@@ -130,7 +130,6 @@ public class UserByIdFragment extends Fragment {
                                     send_message_btn.setText("remove this contact");
                                 }
                             });
-
                 }
             }
         });

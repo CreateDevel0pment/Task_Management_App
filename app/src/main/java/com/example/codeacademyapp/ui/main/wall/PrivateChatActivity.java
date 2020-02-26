@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -24,13 +25,16 @@ import com.example.codeacademyapp.adapters.MessageAdapter;
 import com.example.codeacademyapp.data.model.Messages;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,6 +44,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PrivateChatActivity extends AppCompatActivity {
 
@@ -56,6 +62,8 @@ public class PrivateChatActivity extends AppCompatActivity {
     List<Messages> messageList = new ArrayList<>();
     MessageAdapter adapter;
     RecyclerView user_message_list;
+    FloatingActionButton newPersonalTaskBtn;
+    private DatabaseReference myRef;
 
     ChatViewModel chatViewModel;
 
@@ -74,6 +82,28 @@ public class PrivateChatActivity extends AppCompatActivity {
         message_sender_id = auth.getCurrentUser().getUid();
         roothRef = FirebaseDatabase.getInstance().getReference();
 
+
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(message_sender_id);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+
+                    if(!dataSnapshot.child("Position").getValue().equals("Staff")){
+                        newPersonalTaskBtn.show();
+                    }
+                }
+            }
+
+            @Override
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
         Intent intent = getIntent();
         message_reciever_id = intent.getExtras().get("visit_user_id").toString();
         String message_reciever_name = intent.getExtras().get("visit_user_name").toString();
@@ -83,7 +113,8 @@ public class PrivateChatActivity extends AppCompatActivity {
             user_image = intent.getExtras().get("visit_user_image").toString();
         }
 
-        FloatingActionButton newPersonalTaskBtn = findViewById(R.id.new_personal_task_button);
+
+        newPersonalTaskBtn = findViewById(R.id.new_personal_task_button);
         newPersonalTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

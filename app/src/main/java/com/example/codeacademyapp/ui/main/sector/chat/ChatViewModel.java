@@ -48,6 +48,6 @@ public class ChatViewModel extends AndroidViewModel {
     }
 
     public LiveData<DataSnapshot> getchatRequest (String currentUserId){
-        return chatRepository.getchatRequest(currentUserId);
+        return chatRepository.getChatRequest(currentUserId);
     }
 }
