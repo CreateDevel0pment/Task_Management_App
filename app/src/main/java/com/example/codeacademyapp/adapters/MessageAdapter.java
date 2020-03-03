@@ -87,8 +87,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
             holder.receiver_time.setVisibility(View.INVISIBLE);
             holder.sender_time.setVisibility(View.INVISIBLE);
 
-
-
             if(fromUserId.equals(messageSenderId)){
 
                 holder.sender_message.setVisibility(View.VISIBLE);
@@ -98,11 +96,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
             }else {
 
-
                 holder.reciverProfileImage.setVisibility(View.VISIBLE);
                 holder.receiver_message.setVisibility(View.VISIBLE);
                 holder.cardView.setVisibility(View.VISIBLE);
-
                 holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
                 holder.receiver_message.setText(messages.getMessage());
 

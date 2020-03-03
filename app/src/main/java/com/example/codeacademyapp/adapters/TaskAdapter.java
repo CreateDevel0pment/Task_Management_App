@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.TaskInformation;
+import com.example.codeacademyapp.databinding.ItemSingleTaskBinding;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.google.firebase.database.DatabaseReference;
 
@@ -47,8 +48,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @NonNull
     @Override
     public TaskAdapter.TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_single_task, parent, false);
-        return new TaskViewHolder(view);
+        ItemSingleTaskBinding binding = ItemSingleTaskBinding.inflate(LayoutInflater.from(parent.getContext()));
+//        ItemSingleTaskBinding binding = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_single_task, parent, false);
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_single_task, parent, false);
+        return new TaskViewHolder(binding);
     }
 
     @Override
@@ -58,62 +61,47 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         completedByList = new ArrayList<>();
         localCompletedByList = new ArrayList<>();
 
-        holder.name.setText(task.getName());
-        holder.priority.setText(task.getTaskPriority());
-        holder.description.setText(task.getDescription());
-        holder.timeCreated.setText(task.getTimeCreated());
-        holder.taskDeadline.setText(task.getEndDate());
+        holder.itemSingleTaskBinding.taskNameItem.setText(task.getName());
 
-        holder.detailsDropdownIc.setOnClickListener(new View.OnClickListener() {
+
+        holder.itemSingleTaskBinding.taskPriority.setText(task.getTaskPriority());
+        holder.itemSingleTaskBinding.taskDescDetails.setText(task.getDescription());
+        holder.itemSingleTaskBinding.taskDateCreatedDetails.setText(task.getTimeCreated());
+        holder.itemSingleTaskBinding.taskEndDateDetails.setText(task.getEndDate());
+
+        holder.itemSingleTaskBinding.detailsTaskDropdownBtnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!completedCheck.equals("completeGONE")) {
-                    holder.completeTask.setVisibility(View.VISIBLE);
+                    holder.itemSingleTaskBinding.taskComplete.setVisibility(View.VISIBLE);
                 }
-                holder.priorityLinear.setVisibility(View.VISIBLE);
-                holder.descLinear.setVisibility(View.VISIBLE);
-                holder.datesLinear.setVisibility(View.VISIBLE);
-                holder.detailsUpIc.setVisibility(View.VISIBLE);
-                holder.detailsDropdownIc.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.priorityLinear.setVisibility(View.VISIBLE);
+                holder.itemSingleTaskBinding.descLinear.setVisibility(View.VISIBLE);
+                holder.itemSingleTaskBinding.datesLinear.setVisibility(View.VISIBLE);
+                holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setVisibility(View.VISIBLE);
+                holder.itemSingleTaskBinding.detailsTaskDropdownBtnImg.setVisibility(View.GONE);
             }
         });
 
-        holder.detailsUpIc.setOnClickListener(new View.OnClickListener() {
+        holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.completeTask.setVisibility(View.GONE);
-                holder.priorityLinear.setVisibility(View.GONE);
-                holder.descLinear.setVisibility(View.GONE);
-                holder.datesLinear.setVisibility(View.GONE);
-                holder.detailsUpIc.setVisibility(View.GONE);
-                holder.detailsDropdownIc.setVisibility(View.VISIBLE);
+                holder.itemSingleTaskBinding.taskComplete.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.priorityLinear.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.descLinear.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.datesLinear.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.detailsTaskDropdownBtnImg.setVisibility(View.VISIBLE);
             }
         });
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!completedCheck.equals("completeGONE")) {
-//                    holder.completeTask.setVisibility(View.VISIBLE);
-//                }
-//                holder.completeTask.setVisibility(View.VISIBLE);
-//                holder.priorityLinear.setVisibility(View.VISIBLE);
-//                holder.descLinear.setVisibility(View.VISIBLE);
-//                holder.datesLinear.setVisibility(View.VISIBLE);
-//                holder.detailsUpIc.setVisibility(View.VISIBLE);
-//                holder.detailsDropdownIc.setVisibility(View.GONE);
-//            }
-//        });
-
-        holder.completeTask.setOnClickListener(new View.OnClickListener() {
+        holder.itemSingleTaskBinding.taskComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CompletedBy completedByUser = new CompletedBy(userId);
 
                 completedByList.add(completedByUser);
                 task.setCompletedBy(completedByList);
-
-
                 taskViewModel.addCompletedBy(task);
 
                 tasks.remove(holder.getAdapterPosition());
@@ -125,14 +113,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             }
         });
 
-
-//        if (task.getTaskPriority().equals("High")) {
-//            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.red));
-//        } else if (task.getTaskPriority().equals("Medium")) {
-//            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.orange));
-//        } else {
-//            holder.priority.setTextColor(ContextCompat.getColor(context, R.color.green));
-//        }
     }
 
     @Override
@@ -140,28 +120,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         return tasks.size();
     }
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder {
+    class TaskViewHolder extends RecyclerView.ViewHolder {
+       ItemSingleTaskBinding itemSingleTaskBinding;
 
-        TextView description, name, priority, timeCreated, taskDeadline;
-        CardView cardView, completeTask;
-        ImageView detailsDropdownIc, detailsUpIc;
-        LinearLayout descLinear, datesLinear, priorityLinear;
-
-        public TaskViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            cardView = itemView.findViewById(R.id.cardview_item_task);
-            priority = itemView.findViewById(R.id.task_priority);
-            name = itemView.findViewById(R.id.task_name_item);
-            description = itemView.findViewById(R.id.task_desc_details);
-            timeCreated = itemView.findViewById(R.id.task_dateCreated_details);
-            taskDeadline = itemView.findViewById(R.id.task_endDate_details);
-            detailsDropdownIc = itemView.findViewById(R.id.details_task_dropdown_btn_img);
-            detailsUpIc = itemView.findViewById(R.id.details_task_dropUp_btn_img);
-            descLinear = itemView.findViewById(R.id.desc_linear);
-            datesLinear = itemView.findViewById(R.id.dates_linear);
-            priorityLinear = itemView.findViewById(R.id.priority_linear);
-            completeTask = itemView.findViewById(R.id.task_complete);
+        TaskViewHolder(ItemSingleTaskBinding itemSingleTaskBinding) {
+            super(itemSingleTaskBinding.getRoot());
+            this.itemSingleTaskBinding = itemSingleTaskBinding;
         }
     }
 }

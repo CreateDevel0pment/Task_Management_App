@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
     Toolbar toolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
