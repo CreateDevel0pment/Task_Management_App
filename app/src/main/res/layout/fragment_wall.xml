@@ -57,6 +57,16 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_send"
             android:background="@android:color/transparent"/>
+
+
+        <ImageButton
+            android:layout_weight="1"
+            android:id="@+id/upload_file_btn"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_attach_file"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </RelativeLayout>

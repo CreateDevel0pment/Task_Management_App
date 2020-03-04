@@ -2,7 +2,12 @@ package com.example.codeacademyapp.ui.main.wall;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -14,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -28,6 +34,7 @@ import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.storage.StorageTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,10 +48,21 @@ import java.util.Objects;
 public class WallFragment extends BaseFragment {
 
     private ImageButton sentMessage_btn;
+    private ImageButton uploadFile_btn;
     private EditText userMessage_input;
+
+    private ProgressDialog loadingDialog;
 
     private String currentUserName, id;
     private String userGroup, userImage;
+
+    private String checker = null;
+    private String currentDate, currentTime;
+    private String myUrl = "";
+
+    private StorageTask uploadTask;
+    private Uri fileUri;
+
 
     private View view;
 
@@ -69,8 +87,12 @@ public class WallFragment extends BaseFragment {
                 MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
 
                 messageList.add(messages);
-                adapter = new MessageWallAdapter(messageList);
-                recyclerView.setAdapter(adapter);
+                if (messageList.size() > 0) {
+                    adapter = new MessageWallAdapter(messageList);
+                    recyclerView.setAdapter(adapter);
+
+                    loadingDialog.dismiss();
+                }
 
                 recyclerView.smoothScrollToPosition(Objects.requireNonNull(recyclerView.getAdapter()).getItemCount());
             }
@@ -101,6 +123,52 @@ public class WallFragment extends BaseFragment {
             }
         });
 
+        uploadFile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CharSequence[] options = new CharSequence[]{
+                        "Images",
+                        "PDF files",
+                        "Ms Word files"
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Select file type");
+
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        switch (which) {
+                            case 0:
+                                checker = "image";
+
+                                Intent intent = new Intent().setAction(Intent.ACTION_GET_CONTENT);
+                                intent.setType("image/*");
+                                startActivityForResult(Intent.createChooser(intent, "Select Photo"), 1);
+                                break;
+
+                            case 1:
+                                checker = "pdf";
+
+                                break;
+
+                            case 2:
+                                checker = "docx";
+
+                                break;
+
+                            default:
+                                return;
+                        }
+                    }
+                });
+                builder.show();
+
+            }
+        });
+
         return view;
     }
 
@@ -117,14 +185,14 @@ public class WallFragment extends BaseFragment {
             @SuppressLint("SimpleDateFormat")
             SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
 
-            String currentDate = currentDateFormat.format(calForDate.getTime());
+            currentDate = currentDateFormat.format(calForDate.getTime());
 
 
             Calendar calForTime = Calendar.getInstance();
             @SuppressLint("SimpleDateFormat")
             SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
 
-            String currentTime = currentTimeFormat.format(calForTime.getTime());
+            currentTime = currentTimeFormat.format(calForTime.getTime());
 
             wallChatViewModel.saveMessageFromWallChat(id, currentUserName, userGroup, userImage, message, currentDate, currentTime);
 
@@ -153,10 +221,13 @@ public class WallFragment extends BaseFragment {
     }
 
     private void initializedView(View view) {
+        uploadFile_btn = view.findViewById(R.id.upload_file_btn);
         sentMessage_btn = view.findViewById(R.id.sent_message_btn);
         userMessage_input = view.findViewById(R.id.input_user_message);
         recyclerView = view.findViewById(R.id.group_chat_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        loadingDialog = new ProgressDialog(getContext());
     }
 
     @Override
@@ -164,11 +235,28 @@ public class WallFragment extends BaseFragment {
         super.onStart();
 
 
-        if(NetworkConnectivity.isConnectivityNetworkAvailable(getContext())){
+        if (NetworkConnectivity.isConnectivityNetworkAvailable(getContext())) {
 
-            Toast connectivityToast = Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG);
-            connectivityToast.setGravity(Gravity.CENTER,0,0);
+            Toast connectivityToast = Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG);
+            connectivityToast.setGravity(Gravity.CENTER, 0, 0);
             connectivityToast.show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && data != null) {
+
+            loadingDialog.setTitle("Upload document");
+            loadingDialog.setMessage("Please wait. Document loading..");
+            loadingDialog.setCanceledOnTouchOutside(false);
+            loadingDialog.show();
+
+            Uri uri = data.getData();
+
+            wallChatViewModel.saveDocFromWallChat(id, currentUserName, userGroup, userImage, uri, currentDate, currentTime);
         }
     }
 }

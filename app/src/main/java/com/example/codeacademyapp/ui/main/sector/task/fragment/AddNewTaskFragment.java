@@ -187,6 +187,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
                 if (assignedUserId != null || extrasUserId != null) {
                     taskViewModel.createAssignedTask(task);
+
                 } else {
                     taskViewModel.createGroupTask(task);
                 }

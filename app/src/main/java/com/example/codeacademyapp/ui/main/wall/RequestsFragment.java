@@ -10,12 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.ModelFirebase;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,12 +41,16 @@ public class RequestsFragment extends Fragment {
 
     private RecyclerView requestList;
 
+    String userID;
+
     private String currentUserId;
     private String list_user_id;
     private DatabaseReference chat_request_ref,
             usersRef,
             contactRef;
     private FirebaseAuth auth;
+
+    private UserInformationViewModel userInformationViewModel;
 
     private TextView no_text;
     private CircleImageView avatar_image;
@@ -55,8 +61,8 @@ public class RequestsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_requests, container, false);
 
-        no_text=view.findViewById(R.id.request_text);
-        avatar_image=view.findViewById(R.id.request_circular_image);
+        no_text = view.findViewById(R.id.request_text);
+        avatar_image = view.findViewById(R.id.request_circular_image);
 
         auth = FirebaseAuth.getInstance();
         currentUserId = Objects.requireNonNull(auth.getCurrentUser()).getUid();
@@ -79,91 +85,93 @@ public class RequestsFragment extends Fragment {
                         .setQuery(chat_request_ref.child(currentUserId), ModelFirebase.class)
                         .build();
 
-            final FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder> adapter =
-                    new FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder>(options) {
-                        @Override
-                        protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final ModelFirebase model) {
+        final FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder> adapter =
+                new FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final ModelFirebase model) {
 
+                        list_user_id = getRef(position).getKey();
 
+                        DatabaseReference getTypeRef = getRef(position).child("request_type").getRef();
+                        
+                        getTypeRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.VISIBLE);
-                            holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
+                                if (dataSnapshot.getValue().equals("send")) {
 
-                                    acceptTheRequest();
+                                    holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.GONE);
+                                    holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
 
-                                }
-                            });
+                                            acceptTheRequest();
 
-                            holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.VISIBLE);
-                            holder.itemView.findViewById(R.id.request_cancel_btn).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                    cancelRequest();
-
-                                }
-                            });
-
-                            list_user_id = getRef(position).getKey();
-
-                            DatabaseReference getTypeRef = getRef(position).child("request_type").getRef();
-
-                            getTypeRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                                            if (list_user_id != null) {
-                                                usersRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                                        if (dataSnapshot.exists()) {
-
-                                                            no_text.setVisibility(View.GONE);
-                                                            avatar_image.setVisibility(View.GONE);
-
-
-                                                            if (dataSnapshot.hasChild("image")) {
-
-                                                                String requestUserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
-                                                                String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                                                                String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
-
-                                                                holder.userNAme.setText(requestUserName);
-                                                                holder.userSector.setText(requestUserSector);
-                                                                Picasso.get().load(requestUserImage).into(holder.image);
-                                                            }
-
-                                                            String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                                                            String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
-
-                                                            holder.userNAme.setText(requestUserName);
-                                                            holder.userSector.setText(requestUserSector);
-                                                        }
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
-                                                });
-                                            }
                                         }
+                                    });
+
+                                    holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.VISIBLE);
+                                    holder.itemView.findViewById(R.id.request_cancel_btn).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                            cancelRequest();
+
+                                        }
+                                    });
+                                }
+
+                                    if (list_user_id != null) {
+                                        usersRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                if (dataSnapshot.exists()) {
+
+                                                    no_text.setVisibility(View.GONE);
+                                                    avatar_image.setVisibility(View.GONE);
+
+
+                                                    if (dataSnapshot.hasChild("image")) {
+
+                                                        String requestUserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
+                                                        String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                                                        String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+
+                                                        holder.userNAme.setText(requestUserName);
+                                                        holder.userSector.setText(requestUserSector);
+                                                        Picasso.get().load(requestUserImage).into(holder.image);
+                                                    }
+
+                                                    String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                                                    String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+
+                                                    holder.userNAme.setText(requestUserName);
+                                                    holder.userSector.setText(requestUserSector);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+                                    }
+                                }
 
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                public void onCancelled (@NonNull DatabaseError databaseError){
 
                                 }
                             });
 
                         }
 
+
                         @NonNull
                         @Override
-                        public RequestsContactsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        public RequestsContactsHolder onCreateViewHolder (@NonNull ViewGroup parent,
+                        int viewType){
 
                             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_request_layout, parent, false);
 
@@ -171,102 +179,104 @@ public class RequestsFragment extends Fragment {
                         }
                     };
 
-            requestList.setAdapter(adapter);
-            adapter.startListening();
-
-    }
-
-    private void acceptTheRequest() {
-
-        contactRef.child(currentUserId).child(list_user_id).child("Contacts")
-                .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                if (task.isSuccessful()) {
 
 
-                    contactRef.child(list_user_id).child(currentUserId).child("Contacts")
-                            .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+        requestList.setAdapter(adapter);
+        adapter.startListening();
 
-                            if (task.isSuccessful()) {
+                }
 
-                                chat_request_ref.child(currentUserId).child(list_user_id)
-                                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
+        private void acceptTheRequest () {
 
-                                        if (task.isSuccessful()) {
+            contactRef.child(currentUserId).child(list_user_id).child("Contacts")
+                    .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
 
-                                            chat_request_ref.child(list_user_id).child(currentUserId)
-                                                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
 
-                                                    if (task.isSuccessful()) {
 
-                                                        Toast.makeText(getContext(), "Contact saved", Toast.LENGTH_SHORT).show();
+                        contactRef.child(list_user_id).child(currentUserId).child("Contacts")
+                                .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                if (task.isSuccessful()) {
+
+                                    chat_request_ref.child(currentUserId).child(list_user_id)
+                                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+
+                                                chat_request_ref.child(list_user_id).child(currentUserId)
+                                                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                        if (task.isSuccessful()) {
+
+                                                            Toast.makeText(getContext(), "Contact saved", Toast.LENGTH_SHORT).show();
+                                                        }
+
                                                     }
+                                                });
+                                            }
 
-                                                }
-                                            });
                                         }
-
-                                    }
-                                });
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
-
-    }
-
-    private void cancelRequest() {
-
-        chat_request_ref.child(currentUserId).child(list_user_id)
-                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                if (task.isSuccessful()) {
-
-                    chat_request_ref.child(list_user_id).child(currentUserId)
-                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            if (task.isSuccessful()) {
-
-                                Toast.makeText(getContext(), "Contact Deleted", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
-                }
-            }
-        });
-    }
-
-
-    public static class RequestsContactsHolder extends RecyclerView.ViewHolder {
-
-        TextView userNAme, userSector;
-        CircleImageView image;
-        Button accept, cancel;
-
-        public RequestsContactsHolder(@NonNull View itemView) {
-            super(itemView);
-
-            userNAme = itemView.findViewById(R.id.user_profile_name);
-            userSector = itemView.findViewById(R.id.user_group);
-            image = itemView.findViewById(R.id.users_profile_image);
-            accept = itemView.findViewById(R.id.request_accept_btn);
-            cancel = itemView.findViewById(R.id.request_cancel_btn);
+            });
 
         }
+
+        private void cancelRequest () {
+
+            chat_request_ref.child(currentUserId).child(list_user_id)
+                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()) {
+
+                        chat_request_ref.child(list_user_id).child(currentUserId)
+                                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                if (task.isSuccessful()) {
+
+                                    Toast.makeText(getContext(), "Contact Deleted", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+
+        public static class RequestsContactsHolder extends RecyclerView.ViewHolder {
+
+            TextView userNAme, userSector;
+            CircleImageView image;
+            Button accept, cancel;
+
+            public RequestsContactsHolder(@NonNull View itemView) {
+                super(itemView);
+
+                userNAme = itemView.findViewById(R.id.user_profile_name);
+                userSector = itemView.findViewById(R.id.user_group);
+                image = itemView.findViewById(R.id.users_profile_image);
+                accept = itemView.findViewById(R.id.request_accept_btn);
+                cancel = itemView.findViewById(R.id.request_cancel_btn);
+
+            }
+        }
     }
-}

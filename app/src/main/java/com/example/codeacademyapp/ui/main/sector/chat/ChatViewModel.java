@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui.main.sector.chat;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -37,6 +38,12 @@ public class ChatViewModel extends AndroidViewModel {
                                          String message, String currentDate,
                                          String currentTime) {
         chatRepository.saveMessageForPublicChat(userId,currentUserName,userGroup,userImage, message,currentDate,currentTime);
+    }
+
+    public void saveDocFromWallChat (String userId, String currentUserName, String userGroup, String userImage,
+                                     Uri docRef, String currentDate,
+                                     String currentTime) {
+        chatRepository.saveDocForPublicChat(userId,currentUserName,userGroup,userImage, docRef,currentDate,currentTime);
     }
 
     public LiveData<DataSnapshot> displayMessageToWall(){

@@ -28,7 +28,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         layout = findViewById(R.id.user_byId_container);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.user_byId_container, new AllFriendsListFragment())
+                .replace(R.id.user_byId_container, new AllContactsFragment())
                 .commit();
     }
 

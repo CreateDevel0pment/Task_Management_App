@@ -171,10 +171,10 @@ public class PrivateChatActivity extends AppCompatActivity {
             Toast.makeText(this, "Write message", Toast.LENGTH_SHORT).show();
         } else {
 
-            String message_sender_ref = "Message/" + message_sender_id + "/" + message_reciever_id;
-            String message_reciever_ref = "Message/" + message_reciever_id + "/" + message_sender_id;
+            String message_sender_ref = "Chat Private/" + message_sender_id + "/" + message_reciever_id;
+            String message_reciever_ref = "Chat Private/" + message_reciever_id + "/" + message_sender_id;
 
-            DatabaseReference userMessageKeyRef = roothRef.child("Messages")
+            DatabaseReference userMessageKeyRef = roothRef.child("Chat Private")
                     .child(message_sender_ref).child(message_reciever_ref).push();
 
 

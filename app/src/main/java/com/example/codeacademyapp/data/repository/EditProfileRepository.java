@@ -21,7 +21,7 @@ import java.util.Objects;
 public class EditProfileRepository {
 
     private FirebaseAuth auth;
-    private DatabaseReference roothRef,userRef;
+    private DatabaseReference roothRef,userRef,messageRef;
 
 
     public EditProfileRepository() {

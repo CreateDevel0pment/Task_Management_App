@@ -25,5 +25,4 @@ public class EditProfileViewModel extends AndroidViewModel {
 
         editProfileRepository.updateUserInformation(position_string,group_string);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.codeacademyapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
         return new MyHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, int position) {
 
@@ -55,6 +57,20 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
             holder.sender_message.setText(messages.getMessage());
 
+            if(messages.getMessage().contains("https://")){
+
+                holder.sender_message.setVisibility(View.INVISIBLE);
+                holder.sender_doc_image.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getMessage()).into(holder.sender_doc_image);
+
+                holder.sender_time.setVisibility(View.INVISIBLE);
+
+                holder.sender_doc_time.setVisibility(View.VISIBLE);
+                holder.sender_doc_time.setText(messages.getTime());
+            }
+
+
+
             holder.sender_time.setVisibility(View.VISIBLE);
             holder.sender_time.setText(messages.getTime());
 
@@ -73,6 +89,19 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             holder.receiver_time.setVisibility(View.VISIBLE);
             holder.receiver_time.setText(messages.getTime());
 
+            if(messages.getMessage().contains("https://")){
+
+                holder.receiver_message.setVisibility(View.INVISIBLE);
+                holder.reciever_doc_image.setVisibility(View.VISIBLE);
+
+                Picasso.get().load(messages.getMessage()).into(holder.reciever_doc_image);
+
+                holder.receiver_time.setVisibility(View.INVISIBLE);
+
+                holder.receiver_doc_time.setVisibility(View.VISIBLE);
+                holder.receiver_doc_time.setText(messages.getTime());
+            }
+
             holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
             holder.receiver_message.setText(messages.getMessage());
             Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
@@ -87,8 +116,9 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
-        TextView sender_message, receiver_message, receiver_name, receiver_sector, receiver_time, sender_time;
-        ImageView reciverProfileImage;
+        TextView sender_message, receiver_message, receiver_name, receiver_sector,
+                receiver_time, sender_time,receiver_doc_time,sender_doc_time;
+        ImageView reciverProfileImage,sender_doc_image,reciever_doc_image;
         CardView cardView;
 
         public MyHolder(@NonNull View itemView) {
@@ -102,6 +132,11 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             receiver_sector = itemView.findViewById(R.id.reciever_sector);
             receiver_time = itemView.findViewById(R.id.reciever_time);
             sender_time = itemView.findViewById(R.id.sender_time);
+            sender_doc_image=itemView.findViewById(R.id.sender_doc);
+            reciever_doc_image=itemView.findViewById(R.id.reciever_doc);
+            receiver_doc_time=itemView.findViewById(R.id.reciever_doc_time);
+            sender_doc_time=itemView.findViewById(R.id.sender_doc_time);
+
 
         }
     }

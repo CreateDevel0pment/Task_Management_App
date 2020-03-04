@@ -75,6 +75,32 @@
         />
 
 
+    <ImageView
+        android:id="@+id/reciever_doc"
+        android:layout_width="130dp"
+        android:layout_height="210dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@+id/message_profile_imagee"
+        android:layout_below="@+id/reciever_name"
+        android:visibility="gone"
+        android:background="@drawable/background_transparent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/AccentColor"
+        android:text="11:11"
+        android:textSize="11sp"
+        android:layout_toEndOf="@+id/message_profile_imagee"
+        android:layout_below="@+id/reciever_doc"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        android:id="@+id/reciever_doc_time"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,6 +126,29 @@
         android:textSize="16sp"
         android:textColor="#333333"
         />
+
+    <ImageView
+        android:id="@+id/sender_doc"
+        android:layout_width="120dp"
+        android:layout_height="210dp"
+        android:layout_alignParentTop="@+id/reciever_message_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:background="@drawable/background_transparent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/AccentColor"
+        android:text="11:11"
+        android:textSize="11sp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/sender_doc"
+        android:layout_marginStart="10dp"
+        android:visibility="gone"
+        android:id="@+id/sender_doc_time"/>
 
 
 </RelativeLayout>

@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AllFriendsListFragment extends Fragment {
+public class AllContactsFragment extends Fragment {
 
     private FirebaseRecycler adapter;
 
