@@ -22,10 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageAdapter;
-import com.example.codeacademyapp.data.model.Messages;
+import com.example.codeacademyapp.data.model.PrivateMessages;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
-import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -59,7 +58,7 @@ public class PrivateChatActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageButton send_message_btn;
     EditText input_message;
-    List<Messages> messageList = new ArrayList<>();
+    List<PrivateMessages> messageList = new ArrayList<>();
     MessageAdapter adapter;
     RecyclerView user_message_list;
     FloatingActionButton newPersonalTaskBtn;
@@ -151,7 +150,7 @@ public class PrivateChatActivity extends AppCompatActivity {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                Messages messages = dataSnapshot.getValue(Messages.class);
+                PrivateMessages messages = dataSnapshot.getValue(PrivateMessages.class);
 
                 messageList.add(messages);
                 adapter = new MessageAdapter(messageList);

@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.data.model.Messages;
+import com.example.codeacademyapp.data.model.PrivateMessages;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,10 +24,10 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder> {
 
-    private List<Messages> mList;
+    private List<PrivateMessages> mList;
     private FirebaseAuth auth;
 
-    public MessageAdapter(List<Messages> mList) {
+    public MessageAdapter(List<PrivateMessages> mList) {
         this.mList = mList;
     }
 
@@ -49,7 +49,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
         String messageSenderId = auth.getCurrentUser().getUid();
 
-        Messages messages=mList.get(holder.getAdapterPosition());
+        PrivateMessages messages=mList.get(holder.getAdapterPosition());
 
         String fromUserId=messages.getFrom();
         String fromMessageType=messages.getType();

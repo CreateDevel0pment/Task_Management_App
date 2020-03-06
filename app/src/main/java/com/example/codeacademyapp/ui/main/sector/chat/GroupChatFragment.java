@@ -2,9 +2,15 @@ package com.example.codeacademyapp.ui.main.sector.chat;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,10 +30,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.MessageGroupAdapter;
-import com.example.codeacademyapp.data.model.MessageFromGroup;
+import com.example.codeacademyapp.adapters.MessageWallAdapter;
+import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
-import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
@@ -50,20 +56,24 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class GroupChatFragment extends BaseFragment {
 
-    private ImageButton sentMessage_btn;
+    private ImageButton sentMessage_btn, uploadFile_btn;
     private EditText userMessage_input;
     private String currentUserName, userImage;
     private String userGroup;
     private String userID;
 
+    private String checker;
+
     private ChatViewModel groupChatViewModel;
     private UserInformationViewModel userInformationViewModel;
     private FloatingActionButton new_task_btn;
 
+    private ProgressDialog progressDialog;
+
     private RecyclerView chat_recycler;
-    private MessageGroupAdapter adapter;
+    private MessageWallAdapter adapter;
     private DatabaseReference myRef;
-    private List<MessageFromGroup> messageList = new ArrayList<>();
+    private List<PublicMessage> messageList = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -86,7 +96,7 @@ public class GroupChatFragment extends BaseFragment {
 
                 if (dataSnapshot.exists()) {
                     userGroup = dataSnapshot.child("Sector").getValue().toString();
-                    if(!dataSnapshot.child("Position").getValue().equals("Staff")){
+                    if (!dataSnapshot.child("Position").getValue().equals("Staff")) {
                         new_task_btn.show();
                     }
                 }
@@ -116,6 +126,59 @@ public class GroupChatFragment extends BaseFragment {
 
                 SaveMessageToDataBase();
                 userMessage_input.setText("");
+            }
+        });
+
+
+        uploadFile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CharSequence[] options = new CharSequence[]{
+                        "Images",
+                        "PDF files",
+                        "Ms Word files"
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Select file type");
+
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent().setAction(Intent.ACTION_GET_CONTENT);
+
+                        switch (which) {
+                            case 0:
+                                checker = ".jpg";
+
+                                intent.setType("image/*");
+                                startActivityForResult(Intent.createChooser(intent, "Select Photo"), 1);
+                                break;
+
+                            case 1:
+                                checker = ".pdf";
+
+                                intent.setType("application/pdf");
+                                startActivityForResult(Intent.createChooser(intent, "Select PDF File"), 1);
+                                break;
+
+                            case 2:
+                                checker = ".docx";
+
+                                intent.setType("application/msword");
+                                startActivityForResult(Intent.createChooser(intent, "Select Ms Word File"), 1);
+                                break;
+
+                            default:
+                                return;
+                        }
+                    }
+                });
+
+                builder.show();
+
             }
         });
 
@@ -178,11 +241,12 @@ public class GroupChatFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
+                PublicMessage messages = dataSnapshot.getValue(PublicMessage.class);
 
                 messageList.add(messages);
-                adapter = new MessageGroupAdapter(messageList, getContext());
+                adapter = new MessageWallAdapter(messageList);
                 chat_recycler.setAdapter(adapter);
+                progressDialog.dismiss();
 
                 chat_recycler.smoothScrollToPosition(Objects.requireNonNull(chat_recycler.getAdapter()).getItemCount());
             }
@@ -192,9 +256,12 @@ public class GroupChatFragment extends BaseFragment {
     private void initialisedFields(View view) {
         sentMessage_btn = view.findViewById(R.id.sent_message_btn);
         userMessage_input = view.findViewById(R.id.input_user_message);
+        uploadFile_btn = view.findViewById(R.id.group_chat_file_btn);
 
         chat_recycler = view.findViewById(R.id.group_chat_recycler);
         chat_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        progressDialog = new ProgressDialog(getContext());
     }
 
     @Override
@@ -202,11 +269,58 @@ public class GroupChatFragment extends BaseFragment {
         super.onStart();
 
 
-        if(NetworkConnectivity.isConnectivityNetworkAvailable(getContext())){
+        if (NetworkConnectivity.isConnectivityNetworkAvailable(getContext())) {
 
-            Toast connectivityToast = Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG);
-            connectivityToast.setGravity(Gravity.CENTER,0,0);
+            Toast connectivityToast = Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG);
+            connectivityToast.setGravity(Gravity.CENTER, 0, 0);
             connectivityToast.show();
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && data != null) {
+
+            progressDialog.setTitle("Upload document");
+            progressDialog.setMessage("Please wait. Document loading..");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+
+
+            Calendar calForDate = Calendar.getInstance();
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
+
+            String currentDate = currentDateFormat.format(calForDate.getTime());
+
+
+            Calendar calForTime = Calendar.getInstance();
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
+
+            String currentTime = currentTimeFormat.format(calForTime.getTime());
+
+            Uri uri = data.getData();
+
+            if (uri != null) {
+                String mimeType = Objects.requireNonNull(getContext()).getContentResolver().getType(uri);
+
+                Cursor returnCursor =
+                        getContext().getContentResolver().query(uri, null, null, null, null);
+
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+                returnCursor.moveToFirst();
+
+                String fileName = returnCursor.getString(nameIndex);
+
+
+                groupChatViewModel.saveDocFromGroupChat(userID, currentUserName, userGroup, userImage, uri, checker, fileName, currentDate, currentTime);
+            }
+
         }
     }
 }

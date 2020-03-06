@@ -160,7 +160,6 @@ public class ChatRepository {
                         if (dataSnapshot.exists()) {
                             displayMessage.setValue(dataSnapshot);
                         }
-
                     }
 
                     @Override
@@ -191,9 +190,9 @@ public class ChatRepository {
         return displayMessage;
     }
 
-    public void saveMessageForPublicChat(String userId, String currentUserName, String userGroup, String image,
-                                         String message, String currentDate,
-                                         String currentTime) {
+    public void saveMessageForPublicChat(final String userId, final String currentUserName, final String userGroup, final String image,
+                                         final String message,final String type, final String currentDate,
+                                         final String currentTime) {
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Chat Public Wall");
         String messageKey = myRef.push().getKey();
@@ -213,53 +212,64 @@ public class ChatRepository {
         messageInfoMap.put("message", message);
         messageInfoMap.put("date", currentDate);
         messageInfoMap.put("time", currentTime);
+        messageInfoMap.put("docType",type);
 
         groupMessageKeyRef.updateChildren(messageInfoMap);
     }
 
 
     public void saveDocForPublicChat(final String userId, final String currentUserName, final String userGroup, final String image,
-                                     final Uri docRef, final String currentDate,
+                                     final Uri docRef,final String type, final String fileName, final String currentDate,
                                      final String currentTime) {
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Chat Public Wall");
         final String messageKey = myRef.push().getKey();
 
-        StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("Send Picture");
-        StorageReference storagePath= storageReference.child(userId + ".jpg");
-        storagePath.putFile(docRef).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+        if (messageKey!=null) {
 
-                if(task.isSuccessful()){
+            StorageReference storageReference = FirebaseStorage.getInstance()
+                    .getReference()
+                    .child("Send Doc Files");
 
-                    task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
+            StorageReference storagePath = storageReference.child(docRef.toString());
 
-                            HashMap<String, Object> groipMessageKey = new HashMap<>();
-                            myRef.updateChildren(groipMessageKey);
+            storagePath.putFile(docRef).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                            if (messageKey != null) {
-                                groupMessageKeyRef = myRef.child(messageKey);
+                    if (task.isSuccessful()) {
+
+                        task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                HashMap<String, Object> groipMessageKey = new HashMap<>();
+                                myRef.updateChildren(groipMessageKey);
+
+                                if (messageKey != null) {
+                                    groupMessageKeyRef = myRef.child(messageKey);
+                                }
+
+                                HashMap<String, Object> messageInfoMap = new HashMap<>();
+                                messageInfoMap.put("id", userId);
+                                messageInfoMap.put("name", currentUserName);
+                                messageInfoMap.put("image", image);
+                                messageInfoMap.put("sector", userGroup);
+                                messageInfoMap.put("message", uri.toString());
+                                messageInfoMap.put("date", currentDate);
+                                messageInfoMap.put("time", currentTime);
+                                messageInfoMap.put("docType",type);
+                                messageInfoMap.put("docName",fileName);
+
+                                groupMessageKeyRef.updateChildren(messageInfoMap);
+
                             }
-
-                            HashMap<String, Object> messageInfoMap = new HashMap<>();
-                            messageInfoMap.put("id", userId);
-                            messageInfoMap.put("name", currentUserName);
-                            messageInfoMap.put("image", image);
-                            messageInfoMap.put("sector", userGroup);
-                            messageInfoMap.put("message", uri.toString());
-                            messageInfoMap.put("date", currentDate);
-                            messageInfoMap.put("time", currentTime);
-
-                            groupMessageKeyRef.updateChildren(messageInfoMap);
-
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+
+        }
 
     }
 
@@ -287,5 +297,61 @@ public class ChatRepository {
         messageInfoMap.put("time", currentTime);
 
         groupMessageKeyRef.updateChildren(messageInfoMap);
+    }
+
+
+    public void saveDocForGroupChat(final String userId, final String currentUserName, final String userGroup, final String image,
+                                     final Uri docRef,final String type, final String fileName, final String currentDate,
+                                     final String currentTime) {
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Chat Sector").child(userGroup);
+        final String messageKey = myRef.push().getKey();
+
+        if (messageKey!=null) {
+
+            StorageReference storageReference = FirebaseStorage.getInstance()
+                    .getReference()
+                    .child("Send Doc Files");
+
+            StorageReference storagePath = storageReference.child(docRef.toString());
+
+            storagePath.putFile(docRef).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                    if (task.isSuccessful()) {
+
+                        task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                HashMap<String, Object> groipMessageKey = new HashMap<>();
+                                myRef.updateChildren(groipMessageKey);
+
+                                if (messageKey != null) {
+                                    groupMessageKeyRef = myRef.child(messageKey);
+                                }
+
+                                HashMap<String, Object> messageInfoMap = new HashMap<>();
+                                messageInfoMap.put("id", userId);
+                                messageInfoMap.put("name", currentUserName);
+                                messageInfoMap.put("image", image);
+                                messageInfoMap.put("sector", userGroup);
+                                messageInfoMap.put("message", uri.toString());
+                                messageInfoMap.put("date", currentDate);
+                                messageInfoMap.put("time", currentTime);
+                                messageInfoMap.put("docType",type);
+                                messageInfoMap.put("docName",fileName);
+
+                                groupMessageKeyRef.updateChildren(messageInfoMap);
+
+                            }
+                        });
+                    }
+                }
+            });
+
+        }
+
     }
 }

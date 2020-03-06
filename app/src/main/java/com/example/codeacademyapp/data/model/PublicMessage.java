@@ -1,6 +1,6 @@
 package com.example.codeacademyapp.data.model;
 
-public class MessageFromGroup {
+public class PublicMessage {
 
     private String date;
     private String id;
@@ -9,12 +9,14 @@ public class MessageFromGroup {
     private String name;
     private String time;
     private String image;
+    private String docType;
+    private String docName;
 
-    public MessageFromGroup() {
+    public PublicMessage() {
     }
 
-    public MessageFromGroup(String date, String id, String sector,
-                            String message, String name, String time, String image) {
+    public PublicMessage(String date, String id, String sector, String message, String name,
+                         String time, String image, String docType, String docName) {
         this.date = date;
         this.id = id;
         this.sector = sector;
@@ -22,61 +24,43 @@ public class MessageFromGroup {
         this.name = name;
         this.time = time;
         this.image = image;
+        this.docType = docType;
+        this.docName = docName;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getSector() {
         return sector;
     }
 
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getTime() {
         return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getDocType() {
+        return docType;
+    }
+
+    public String getDocName() {
+        return docName;
     }
 }

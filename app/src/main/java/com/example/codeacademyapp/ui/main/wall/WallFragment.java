@@ -7,8 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.MessageWallAdapter;
-import com.example.codeacademyapp.data.model.MessageFromGroup;
+import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
@@ -56,7 +58,7 @@ public class WallFragment extends BaseFragment {
     private String currentUserName, id;
     private String userGroup, userImage;
 
-    private String checker = null;
+    private String checker = "";
     private String currentDate, currentTime;
     private String myUrl = "";
 
@@ -72,7 +74,7 @@ public class WallFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private MessageWallAdapter adapter;
 
-    private List<MessageFromGroup> messageList = new ArrayList<>();
+    private List<PublicMessage> messageList = new ArrayList<>();
 
 
     @Override
@@ -84,7 +86,7 @@ public class WallFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-                MessageFromGroup messages = dataSnapshot.getValue(MessageFromGroup.class);
+                PublicMessage messages = dataSnapshot.getValue(PublicMessage.class);
 
                 messageList.add(messages);
                 if (messageList.size() > 0) {
@@ -113,6 +115,8 @@ public class WallFragment extends BaseFragment {
         initializedView(view);
         getUserInfo();
 
+
+
         sentMessage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,23 +144,28 @@ public class WallFragment extends BaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        Intent intent = new Intent().setAction(Intent.ACTION_GET_CONTENT);
+
                         switch (which) {
                             case 0:
-                                checker = "image";
+                                checker = ".jpg";
 
-                                Intent intent = new Intent().setAction(Intent.ACTION_GET_CONTENT);
                                 intent.setType("image/*");
                                 startActivityForResult(Intent.createChooser(intent, "Select Photo"), 1);
                                 break;
 
                             case 1:
-                                checker = "pdf";
+                                checker = ".pdf";
 
+                                intent.setType("application/pdf");
+                                startActivityForResult(Intent.createChooser(intent, "Select PDF File"), 1);
                                 break;
 
                             case 2:
-                                checker = "docx";
+                                checker = ".docx";
 
+                                intent.setType("application/msword");
+                                startActivityForResult(Intent.createChooser(intent, "Select Ms Word File"), 1);
                                 break;
 
                             default:
@@ -194,7 +203,9 @@ public class WallFragment extends BaseFragment {
 
             currentTime = currentTimeFormat.format(calForTime.getTime());
 
-            wallChatViewModel.saveMessageFromWallChat(id, currentUserName, userGroup, userImage, message, currentDate, currentTime);
+            checker="";
+
+            wallChatViewModel.saveMessageFromWallChat(id, currentUserName, userGroup, userImage, message, checker, currentDate, currentTime);
 
         }
     }
@@ -254,9 +265,37 @@ public class WallFragment extends BaseFragment {
             loadingDialog.setCanceledOnTouchOutside(false);
             loadingDialog.show();
 
+
+            Calendar calForDate = Calendar.getInstance();
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
+
+            currentDate = currentDateFormat.format(calForDate.getTime());
+
+
+            Calendar calForTime = Calendar.getInstance();
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
+
+            currentTime = currentTimeFormat.format(calForTime.getTime());
+
             Uri uri = data.getData();
 
-            wallChatViewModel.saveDocFromWallChat(id, currentUserName, userGroup, userImage, uri, currentDate, currentTime);
+            if (uri != null) {
+                String mimeType = Objects.requireNonNull(getContext()).getContentResolver().getType(uri);
+
+                Cursor returnCursor =
+                        getContext().getContentResolver().query(uri, null, null, null, null);
+
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+                returnCursor.moveToFirst();
+
+                String fileName = returnCursor.getString(nameIndex);
+
+                wallChatViewModel.saveDocFromWallChat(id, currentUserName, userGroup, userImage, uri, checker,fileName, currentDate, currentTime);
+            }
+
         }
     }
 }

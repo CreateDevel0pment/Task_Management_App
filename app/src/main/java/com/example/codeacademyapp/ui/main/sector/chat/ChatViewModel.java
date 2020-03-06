@@ -35,15 +35,21 @@ public class ChatViewModel extends AndroidViewModel {
     }
 
     public void saveMessageFromWallChat (String userId,String currentUserName,String userGroup,String userImage,
-                                         String message, String currentDate,
+                                         String message,String type, String currentDate,
                                          String currentTime) {
-        chatRepository.saveMessageForPublicChat(userId,currentUserName,userGroup,userImage, message,currentDate,currentTime);
+        chatRepository.saveMessageForPublicChat(userId,currentUserName,userGroup,userImage, message,type,currentDate,currentTime);
     }
 
     public void saveDocFromWallChat (String userId, String currentUserName, String userGroup, String userImage,
-                                     Uri docRef, String currentDate,
+                                     Uri docRef,String type,String fileName, String currentDate,
                                      String currentTime) {
-        chatRepository.saveDocForPublicChat(userId,currentUserName,userGroup,userImage, docRef,currentDate,currentTime);
+        chatRepository.saveDocForPublicChat(userId,currentUserName,userGroup,userImage, docRef,type,fileName,currentDate,currentTime);
+    }
+
+    public void saveDocFromGroupChat (String userId, String currentUserName, String userGroup, String userImage,
+                                     Uri docRef,String type,String fileName, String currentDate,
+                                     String currentTime) {
+        chatRepository.saveDocForGroupChat(userId,currentUserName,userGroup,userImage, docRef,type,fileName,currentDate,currentTime);
     }
 
     public LiveData<DataSnapshot> displayMessageToWall(){

@@ -1,16 +1,16 @@
 package com.example.codeacademyapp.data.model;
 
-public class Messages {
+public class PrivateMessages {
 
     private String from,message,type;
 
-    public Messages(String from, String message, String type) {
+    public PrivateMessages(String from, String message, String type) {
         this.from = from;
         this.message = message;
         this.type = type;
     }
 
-    public Messages() {
+    public PrivateMessages() {
     }
 
     public String getFrom() {

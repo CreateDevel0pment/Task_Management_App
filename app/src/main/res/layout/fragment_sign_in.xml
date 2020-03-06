@@ -72,6 +72,7 @@
         android:id="@+id/forgot_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@f"
         android:textColor="@color/colorPrimaryDarkMode"
         android:text="@string/forgot_your_password"
         android:layout_marginStart="25dp"

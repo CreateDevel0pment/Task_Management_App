@@ -1,6 +1,8 @@
 package com.example.codeacademyapp.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.data.model.MessageFromGroup;
+import com.example.codeacademyapp.data.model.PublicMessage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +22,9 @@ import java.util.List;
 
 public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.MyHolder> {
 
-    private List<MessageFromGroup> mList;
+    private List<PublicMessage> mList;
 
-    public MessageWallAdapter(List<MessageFromGroup> mList) {
+    public MessageWallAdapter(List<PublicMessage> mList) {
         this.mList = mList;
     }
 
@@ -37,9 +39,9 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, final int position) {
 
-        MessageFromGroup messages = mList.get(holder.getAdapterPosition());
+        final PublicMessage messages = mList.get(holder.getAdapterPosition());
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String currenUser = auth.getCurrentUser().getUid();
 
@@ -53,58 +55,159 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
         if (messages.getId().equals(currenUser)) {
 
 
-            holder.sender_message.setVisibility(View.VISIBLE);
-            holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
-            holder.sender_message.setText(messages.getMessage());
+            if(messages.getDocType().equals(".jpg")){
 
-            if(messages.getMessage().contains("https://")){
-
-                holder.sender_message.setVisibility(View.INVISIBLE);
                 holder.sender_doc_image.setVisibility(View.VISIBLE);
                 Picasso.get().load(messages.getMessage()).into(holder.sender_doc_image);
 
-                holder.sender_time.setVisibility(View.INVISIBLE);
+                holder.sender_doc_time.setVisibility(View.VISIBLE);
+                holder.sender_doc_time.setText(messages.getTime());
+
+            }else if(messages.getDocType().equals(".pdf")){
+
+                holder.sender_message.setVisibility(View.VISIBLE);
+                holder.sender_message.setText(messages.getDocName());
 
                 holder.sender_doc_time.setVisibility(View.VISIBLE);
                 holder.sender_doc_time.setText(messages.getTime());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(mList.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
+
+            }else if(messages.getDocType().equals(".docx")) {
+
+                holder.sender_message.setVisibility(View.VISIBLE);
+                holder.sender_message.setText(messages.getDocName());
+
+                holder.sender_doc_time.setVisibility(View.VISIBLE);
+                holder.sender_doc_time.setText(messages.getTime());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(mList.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
+
+            }else {
+
+                holder.sender_doc_image.setVisibility(View.GONE);
+                holder.sender_message.setVisibility(View.VISIBLE);
+                holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
+                holder.sender_message.setText(messages.getMessage());
+                holder.sender_time.setVisibility(View.VISIBLE);
+                holder.sender_time.setText(messages.getTime());
+
             }
-
-
-
-            holder.sender_time.setVisibility(View.VISIBLE);
-            holder.sender_time.setText(messages.getTime());
 
         } else {
 
-            holder.receiver_name.setVisibility(View.VISIBLE);
-            holder.receiver_name.setText(messages.getName());
 
-            holder.receiver_sector.setVisibility(View.VISIBLE);
-            holder.receiver_sector.setText("| " + messages.getSector());
-
-            holder.reciverProfileImage.setVisibility(View.VISIBLE);
-            holder.receiver_message.setVisibility(View.VISIBLE);
-            holder.cardView.setVisibility(View.VISIBLE);
-
-            holder.receiver_time.setVisibility(View.VISIBLE);
-            holder.receiver_time.setText(messages.getTime());
-
-            if(messages.getMessage().contains("https://")){
+            if(messages.getDocType().equals(".jpg")){
 
                 holder.receiver_message.setVisibility(View.INVISIBLE);
                 holder.reciever_doc_image.setVisibility(View.VISIBLE);
-
                 Picasso.get().load(messages.getMessage()).into(holder.reciever_doc_image);
 
-                holder.receiver_time.setVisibility(View.INVISIBLE);
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
+
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+
 
                 holder.receiver_doc_time.setVisibility(View.VISIBLE);
                 holder.receiver_doc_time.setText(messages.getTime());
-            }
 
-            holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
-            holder.receiver_message.setText(messages.getMessage());
-            Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+            }else if(messages.getDocType().equals(".pdf")){
+
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
+
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+
+                holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.receiver_message.setText(messages.getDocName());
+
+                holder.receiver_time.setVisibility(View.VISIBLE);
+                holder.receiver_time.setText(messages.getTime());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(mList.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
+
+            }else if(messages.getDocType().equals(".docx")) {
+
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
+
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+
+                holder.cardView.setVisibility(View.VISIBLE);
+                holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.receiver_message.setText(messages.getDocName());
+
+                holder.receiver_time.setVisibility(View.VISIBLE);
+                holder.receiver_time.setText(messages.getTime());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(mList.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
+            }else {
+
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
+
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
+
+                holder.receiver_time.setVisibility(View.VISIBLE);
+                holder.receiver_time.setText(messages.getTime());
+
+                holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
+                holder.receiver_message.setText(messages.getMessage());
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+
+            }
 
         }
     }
