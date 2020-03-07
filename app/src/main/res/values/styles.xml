@@ -1,13 +1,15 @@
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar" >
+    <style name="DarkAppTheme" parent="Theme.MaterialComponents.NoActionBar" >
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/AccentColor</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkMode</item>
         <item name="colorAccent">@color/AccentColor</item>
 
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorSecondary">@color/text_dark_grey</item>
         <item name="android:colorBackground">@color/colorPrimaryDarkMode</item>
         <item name="android:windowDisablePreview">true</item>
+        <item name="bottomNavigationStyle">@style/BottomNavStyleDark</item>
+
     </style>
 
 
@@ -18,6 +20,13 @@
 
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="BottomNavStyleDark" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="background">@color/colorPrimaryDarkMode</item>
+    </style>
+    <style name="BottomNavStyleLight" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="background">@color/colorPrimaryLightMode</item>
     </style>
 
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.UsersToAssignTaskFragment">
 
@@ -12,7 +12,7 @@
         android:id="@+id/toolbar_users_list_assignTo_fragment"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         app:titleTextColor="@color/AccentColor" />
 
     <View
@@ -29,7 +29,7 @@
         android:id="@+id/users_list_task_toAssign_RV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333333" />
+        android:background="@color/recyclerview_grey_background" />
     </ScrollView>
 
 

@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         android:id="@+id/my_contact_list"/>
 
 </LinearLayout>

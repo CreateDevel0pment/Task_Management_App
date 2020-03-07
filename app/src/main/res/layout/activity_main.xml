@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main_layout"
     android:orientation="vertical"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.main.MainActivity"
+    >
 
     <androidx.appcompat.widget.Toolbar
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         android:id="@+id/toolbar"
         app:titleTextColor="@color/AccentColor"
         android:layout_width="match_parent"
@@ -53,8 +55,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:itemIconTint="@color/AccentColor"
         app:itemTextColor="@color/AccentColor"
-        android:backgroundTint="@color/colorPrimaryDarkMode"
-        android:outlineAmbientShadowColor="@android:color/darker_gray"
+        android:background="@color/colorPrimaryDarkMode"
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

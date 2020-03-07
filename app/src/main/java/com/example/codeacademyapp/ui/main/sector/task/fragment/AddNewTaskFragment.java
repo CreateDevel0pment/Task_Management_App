@@ -44,7 +44,6 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener, DatePickerDialogListener {
 
-
     private EditText task_name, task_description;
     private Button create_task;
     private FirebaseDatabase mFirebaseDatabase;
@@ -179,12 +178,10 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             }
         });
 
-
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setTaskValues();
-
                 if (assignedUserId != null || extrasUserId != null) {
                     taskViewModel.createAssignedTask(task);
 
@@ -192,8 +189,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
                     taskViewModel.createGroupTask(task);
                 }
                 getActivity().onBackPressed();
-
-
             }
         });
 
@@ -204,7 +199,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
         datePickerDialogFragment.show(getFragmentManager(), "date_picker_fragemnt");
         datePickerDialogFragment.setTargetFragment(AddNewTaskFragment.this, 300);
-
     }
 
     private void showUsersListDialog() {
@@ -217,9 +211,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
 
     private void setTaskValues() {
-
         task = new Task();
-
         task.setName(task_name.getText().toString());
         task.setDescription(task_description.getText().toString());
         task.setStart_date(currentDate);
@@ -236,9 +228,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             taskNotificationViewModel.sendTaskNotification(userID, extrasUserId);
         }
 
-//        if(assignedUserId!=null){
-//            taskNotificationViewModel.sendTaskNotification(userID, assignedUserId);
-//        }
 
     }
 

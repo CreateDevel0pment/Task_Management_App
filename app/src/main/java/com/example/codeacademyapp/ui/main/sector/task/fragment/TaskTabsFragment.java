@@ -47,18 +47,13 @@ public class TaskTabsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_task_tabs, container, false);
 
 
-        addNewTaskFloatbtn = rootView.findViewById(R.id.add_new_task_floating_btn);
-
-        addNewTaskFloatbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.task_fragments_container, addNewTaskFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+//        addNewTaskFloatbtn = rootView.findViewById(R.id.add_new_task_floating_btn);
+//        addNewTaskFloatbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         tabLayout = rootView.findViewById(R.id.tab_layout_new_tasks);
         viewPager = rootView.findViewById(R.id.view_pager_new_tasks);

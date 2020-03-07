@@ -70,7 +70,6 @@ public class HomeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         if (view != null) {
-
             return view;
         }
 
@@ -84,7 +83,6 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
 
                 if (web_text.getText().toString().equals("")) {
-
                     web_text.setError("Enter web");
 
                 } else {
@@ -97,7 +95,6 @@ public class HomeFragment extends BaseFragment {
                             .beginTransaction()
                             .replace(R.id.home_container, homeFragment)
                             .commit();
-
                 }
             }
         });

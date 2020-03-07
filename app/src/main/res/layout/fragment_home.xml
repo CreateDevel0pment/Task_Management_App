@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    android:backgroundTint="#333333"
+    android:backgroundTint="@color/colorPrimaryDarkMode"
     android:weightSum="1"
     android:gravity="center"
     tools:context=".ui.main.home.HomeFragment">
@@ -69,7 +69,7 @@
             android:layout_marginEnd="24dp"
             android:backgroundTint="@color/AccentColor"
             android:text="OK"
-            android:textColor="#333333"
+            android:textColor="@color/colorPrimaryDarkMode"
             android:textSize="16dp" />
 
     </LinearLayout>
@@ -84,11 +84,11 @@
         android:layout_marginTop="24dp"
         app:cardCornerRadius="16dp">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/progress_circular_web"/>
+<!--        <ProgressBar-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:id="@+id/progress_circular_web"/>-->
 
         <WebView
             android:id="@+id/home_web_view"

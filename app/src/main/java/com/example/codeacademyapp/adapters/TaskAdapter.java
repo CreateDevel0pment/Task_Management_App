@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     private String completedCheck;
 
     private TaskViewModel taskViewModel;
-    List<CompletedBy> completedByList, localCompletedByList;
+    private List<CompletedBy> completedByList;
     private DatabaseReference myRef;
 
 
@@ -59,22 +60,37 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         final TaskInformation task = tasks.get(holder.getAdapterPosition());
 
         completedByList = new ArrayList<>();
-        localCompletedByList = new ArrayList<>();
+        List<CompletedBy> localCompletedByList = new ArrayList<>();
 
         holder.itemSingleTaskBinding.taskNameItem.setText(task.getName());
-
-
         holder.itemSingleTaskBinding.taskPriority.setText(task.getTaskPriority());
         holder.itemSingleTaskBinding.taskDescDetails.setText(task.getDescription());
         holder.itemSingleTaskBinding.taskDateCreatedDetails.setText(task.getTimeCreated());
         holder.itemSingleTaskBinding.taskEndDateDetails.setText(task.getEndDate());
+
+        holder.itemSingleTaskBinding.shareTaskText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, task.getName()+"\n" + "\n" + task.getDescription());
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                context.startActivity(shareIntent);
+            }
+        });
 
         holder.itemSingleTaskBinding.detailsTaskDropdownBtnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!completedCheck.equals("completeGONE")) {
                     holder.itemSingleTaskBinding.taskComplete.setVisibility(View.VISIBLE);
+                    holder.itemSingleTaskBinding.lineSeparator.setVisibility(View.VISIBLE);
+                    holder.itemSingleTaskBinding.completeLinear.setVisibility(View.VISIBLE);
+
                 }
+
                 holder.itemSingleTaskBinding.priorityLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.descLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.datesLinear.setVisibility(View.VISIBLE);
@@ -86,6 +102,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.itemSingleTaskBinding.completeLinear.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.lineSeparator.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.taskComplete.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.priorityLinear.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.descLinear.setVisibility(View.GONE);

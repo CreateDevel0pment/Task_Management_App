@@ -22,4 +22,9 @@
         android:id="@+id/log_out_btn"
         app:showAsAction="never"/>
 
+    <item
+        android:title="@string/settings"
+        android:id="@+id/settings"
+        app:showAsAction="never"/>
+
 </menu>

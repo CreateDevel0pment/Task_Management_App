@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical"
     tools:context=".ui.main.wall.RequestsFragment">
 
@@ -12,7 +12,7 @@
         android:id="@+id/chat_requests_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333333" />
+        android:background="@color/colorPrimaryDarkMode" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/request_circular_image"

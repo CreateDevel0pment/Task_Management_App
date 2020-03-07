@@ -63,11 +63,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
                 if(dataSnapshot.hasChild("image")){
 
-                    String recieverImage=dataSnapshot.child("image").getValue().toString();
+                    String receiverImage=dataSnapshot.child("image").getValue().toString();
 
-                    Picasso.get().load(recieverImage)
+                    Picasso.get().load(receiverImage)
                             .placeholder(R.drawable.profile_image)
-                            .into(holder.reciverProfileImage);
+                            .into(holder.receiverProfileImage);
                 }
             }
 
@@ -81,7 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
         if(fromMessageType.equals("text")){
 
             holder.receiver_message.setVisibility(View.INVISIBLE);
-            holder.reciverProfileImage.setVisibility(View.INVISIBLE);
+            holder.receiverProfileImage.setVisibility(View.INVISIBLE);
             holder.sender_message.setVisibility(View.INVISIBLE);
             holder.cardView.setVisibility(View.INVISIBLE);
             holder.receiver_time.setVisibility(View.INVISIBLE);
@@ -93,10 +93,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
                 holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
                 holder.sender_message.setText(messages.getMessage());
 
-
             }else {
 
-                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.receiverProfileImage.setVisibility(View.VISIBLE);
                 holder.receiver_message.setVisibility(View.VISIBLE);
                 holder.cardView.setVisibility(View.VISIBLE);
                 holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
@@ -114,7 +113,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
     public class MyHolder extends RecyclerView.ViewHolder {
 
         TextView sender_message, receiver_message,receiver_time,sender_time;
-        ImageView reciverProfileImage;
+        ImageView receiverProfileImage;
         CardView cardView;
 
         public MyHolder(@NonNull View itemView) {
@@ -122,7 +121,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
             sender_message=itemView.findViewById(R.id.sender_message_text);
             receiver_message=itemView.findViewById(R.id.reciever_message_text);
-            reciverProfileImage=itemView.findViewById(R.id.message_profile_image);
+            receiverProfileImage =itemView.findViewById(R.id.message_profile_image);
             cardView=itemView.findViewById(R.id.message_profile_imagee);
             receiver_time=itemView.findViewById(R.id.reciever_time);
             sender_time=itemView.findViewById(R.id.sender_time);

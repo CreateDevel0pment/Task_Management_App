@@ -6,7 +6,7 @@
     tools:context=".ui.main.sector.task.fragment.CompletedTasksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="#666666"
+        android:background="@color/recyclerview_grey_background"
         android:id="@+id/tasks_completed_list_RV"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

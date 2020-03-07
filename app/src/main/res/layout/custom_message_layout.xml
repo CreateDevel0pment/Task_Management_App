@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical">
 
 
@@ -69,7 +69,7 @@
         android:layout_below="@+id/reciever_name"
         android:background="@drawable/reciever_message_layout"
         android:text="reciever Message"
-        android:textColor="#333333"
+        android:textColor="@color/colorPrimaryDarkMode"
         android:padding="8dp"
         android:textSize="16sp"
         />
@@ -104,7 +104,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorPrimary"
         android:text="11:11"
         android:textSize="11sp"
         android:layout_below="@+id/sender_message_text"
@@ -124,7 +124,7 @@
         android:text="sender Message"
         android:padding="8dp"
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="@color/colorPrimaryDarkMode"
         />
 
     <ImageView

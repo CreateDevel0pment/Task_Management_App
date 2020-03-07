@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     android:padding="16dp"
     android:gravity="top"
     android:orientation="vertical"
@@ -13,7 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:cardBackgroundColor="#333333">
+            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <EditText
                 android:id="@+id/task_name"
@@ -39,7 +39,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#333333">
+            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <EditText
                 android:id="@+id/task_desc"
@@ -60,7 +60,7 @@
             android:id="@+id/cardView_CheckBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#333333">
+            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,7 +93,7 @@
             android:id="@+id/assigned_user_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#333333">
+            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                     android:id="@+id/assigned_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/colorPrimary"
                     android:layout_margin="8dp"
                     />
             </LinearLayout>
@@ -132,7 +132,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#333333">
+            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,7 +165,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#333333">
+            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,7 +229,7 @@
             android:backgroundTint="@color/AccentColor"
             android:hint="Create Task"
             android:textSize="16dp"
-            android:textColorHint="#333333" />
+            android:textColorHint="@color/colorPrimaryDarkMode" />
 
     </LinearLayout>
 

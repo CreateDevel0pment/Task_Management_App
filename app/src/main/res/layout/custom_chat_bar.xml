@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical">
     
     <de.hdodenhof.circleimageview.CircleImageView
@@ -37,7 +37,7 @@
         android:id="@+id/custom_profile_sector"
         android:layout_alignParentStart="true"
         android:text="sector"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         />
 

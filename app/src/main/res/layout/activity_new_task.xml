@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_tasks_tab_fragment"
         android:layout_width="match_parent"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         app:titleTextColor="@color/AccentColor"
         android:layout_height="?attr/actionBarSize"
         />

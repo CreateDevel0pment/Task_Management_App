@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     tools:context=".ui.main.home.HomeSettings">
 
 
@@ -67,7 +67,7 @@
         android:id="@+id/settings_ok_btn"
         android:text="OK"
         android:textSize="20dp"
-        android:textColor="#333333"
+        android:textColor="@color/colorPrimaryDarkMode"
         android:backgroundTint="@color/AccentColor"
         android:layout_gravity="end"/>
 

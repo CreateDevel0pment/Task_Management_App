@@ -12,7 +12,7 @@
         android:id="@+id/tab_layout_public_wall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         app:tabIndicatorColor="@color/AccentColor"
         app:tabMode="fixed"
         style="@style/MyCustomTabLayout"

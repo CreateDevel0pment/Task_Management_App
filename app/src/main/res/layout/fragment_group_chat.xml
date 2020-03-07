@@ -17,13 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="#333333"
+            android:background="@color/colorPrimaryDarkMode"
             android:id="@+id/group_face_recycler_"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#333333"
+            android:background="@color/colorPrimaryDarkMode"
             android:id="@+id/group_chat_recycler"/>
 
     </LinearLayout>
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"

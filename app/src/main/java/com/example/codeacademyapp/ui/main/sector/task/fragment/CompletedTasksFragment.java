@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +19,9 @@ import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.TaskAdapter;
 import com.example.codeacademyapp.data.model.AssignedUsers;
 import com.example.codeacademyapp.data.model.CompletedBy;
+import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.model.TaskInformation;
+import com.example.codeacademyapp.ui.main.sector.task.QuoteViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +45,7 @@ public class CompletedTasksFragment extends Fragment {
     private List<AssignedUsers> assignedUsersList;
     private List<CompletedBy> completedByList;
     private TaskAdapter taskAdapter;
-
+    private QuoteViewModel quoteViewModel;
     private TaskViewModel taskViewModel;
     private UserInformationViewModel userInformationViewModel;
 
@@ -56,6 +60,7 @@ public class CompletedTasksFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_completed_tasks, container, false);
 
+        quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
         userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
@@ -70,7 +75,7 @@ public class CompletedTasksFragment extends Fragment {
 
                 userId = dataSnapshot.getKey();
 
-                myRef = FirebaseDatabase.getInstance().getReference().child("Tasks").child("CompletedTasks").child(userSector);
+                myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("CompletedTasks");
 
                 assignedUsersList = new ArrayList<>();
                 completedByList = new ArrayList<>();
@@ -98,21 +103,37 @@ public class CompletedTasksFragment extends Fragment {
                             tasks.add(task);
 
                         }
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-                        rvTasks.setLayoutManager(layoutManager);
-                        String completedCheck = "completeGONE";
-                        taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
-                        rvTasks.setAdapter(taskAdapter);
+
+                        if (tasks.isEmpty()) {
+                            quoteViewModel.randomQuote.observe(CompletedTasksFragment.this, new Observer<Quote>() {
+                                @Override
+                                public void onChanged(Quote quote) {
+                                    TextView randomQuoteTV = rootView.findViewById(R.id.random_quote_tv);
+                                    TextView authorQuoteTV = rootView.findViewById(R.id.random_quote_author_tv);
+                                    LinearLayout quoteLinearLayout = rootView.findViewById(R.id.quote_linear_layout);
+                                    randomQuoteTV.setText(String.format("%s%s\"", '"', quote.getEn()));
+                                    authorQuoteTV.setText(quote.getAuthor());
+                                    quoteLinearLayout.setVisibility(View.VISIBLE);
+                                    rvTasks.setVisibility(View.GONE);
+                                }
+                            });
+                            quoteViewModel.loadRandomQuote();
+                        }
+                        else
+                            {RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                            rvTasks.setLayoutManager(layoutManager);
+                            String completedCheck = "completeGONE";
+                            taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
+                            rvTasks.setAdapter(taskAdapter);}
+
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 });
 
             }
-
         });
 
         return rootView;

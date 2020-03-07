@@ -1,7 +1,9 @@
 package com.example.codeacademyapp.ui.main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,11 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.ui.main.edit_find.SettingsActivity;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
@@ -34,6 +38,25 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
     Toolbar toolbar;
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        boolean darkModeEnabled = sharedPreferences.getBoolean("dark_mode_on_off", true);
+//        View view = findViewById(R.id.activity_main_layout);
+//        view.setBackgroundColor(EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled));
+////        bottomNav.setBackgroundColor(ContextCompat.getColor(this, EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled)));
+//        toolbar.setBackgroundColor(ContextCompat.getColor(this, EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled)));
+//        this.setTheme(EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled));
+
+        if(darkModeEnabled){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         bottomNav = findViewById(R.id.bottom_bar);
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNav.setSelectedItemId(R.id.home);
     }
+
+
 
     public void switchToFragment(Fragment fragment, int container) {
         Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
@@ -110,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.edit_home:
                 Intent intentSettingsHome = new Intent(MainActivity.this, HomeSettings.class);
                 startActivity(intentSettingsHome);
+                break;
+                case R.id.settings:
+                Intent intentSettings = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intentSettings);
             default:
                 return false;
         }

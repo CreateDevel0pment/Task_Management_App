@@ -9,7 +9,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:layout_alignParentTop="true"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         app:tabTextColor="@color/AccentColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,14 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_new_task_floating_btn"
-        app:backgroundTint="@color/AccentColor"
-        android:src="@drawable/add_new"
-        android:layout_margin="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/add_new_task_floating_btn"-->
+<!--        app:backgroundTint="@color/AccentColor"-->
+<!--        android:src="@drawable/add_new"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
 
 </RelativeLayout>

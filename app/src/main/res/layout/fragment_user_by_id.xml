@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.main.edit_find.find_friends.UserByIdFragment">
@@ -18,19 +18,13 @@
         android:layout_height="match_parent"
         >
 
-<!--    <ImageView-->
-<!--        android:layout_width="250dp"-->
-<!--        android:layout_height="250dp"-->
-<!--        android:src="@drawable/logo_code_academy"-->
-<!--        android:background="@color/colorAccent"/>-->
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="180dp"
-        android:src="@drawable/profile_image"
+        android:src="@drawable/astronaut"
         app:civ_border_color="@color/AccentColor"
         app:civ_border_width="2dp"
         android:id="@+id/visit_profile_image"/>
@@ -63,7 +57,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="18sp"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorPrimary"
         />
 
     <Button
@@ -75,7 +69,7 @@
         android:layout_marginRight="65dp"
         android:textSize="18sp"
         android:text="Send Message"
-        android:textColor="#333333"
+        android:textColor="@color/colorPrimaryDarkMode"
         android:backgroundTint="@color/AccentColor"
         android:textAllCaps="false"
         android:layout_marginTop="24dp"/>

@@ -116,7 +116,6 @@ public class ViewAllTaskFragment extends Fragment {
                                 }
                             });
                             quoteViewModel.loadRandomQuote();
-
                         } else {
                             userId = userInformationViewModel.getUserId();
 

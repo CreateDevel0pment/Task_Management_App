@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="sector"
             android:layout_marginStart="8dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorPrimary"
             android:id="@+id/user_group"/>
 
 

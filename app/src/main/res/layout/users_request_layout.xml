@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="1dp"
     android:layout_marginTop="2dp"
-    android:background="#666666"
+    android:background="@color/recyclerview_grey_background"
     android:orientation="horizontal">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_item_task"
-        app:cardBackgroundColor="#333333"
+        app:cardBackgroundColor="@color/colorPrimaryDarkMode"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:layout_height="16dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/online"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="sector"
-                android:textColor="#ffffff" />
+                android:textColor="@color/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                     android:backgroundTint="@android:color/holo_red_dark"
                     android:text="cancel"
                     android:textAllCaps="false"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     />
 
                 <Button
@@ -98,10 +98,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:backgroundTint="@color/AccentColor"
-                    android:textColor="#333333"
+                    android:textColor="@color/colorPrimaryDarkMode"
                     android:text="accept"
                     android:textAllCaps="false"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                      />
 
             </LinearLayout>

@@ -46,7 +46,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorPrimary"
             android:layout_gravity="end"
             android:textStyle="italic"
             android:id="@+id/random_quote_author_tv"
@@ -57,7 +57,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="#666666"
+        android:background="@color/recyclerview_grey_background"
         android:id="@+id/task_list_RV"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

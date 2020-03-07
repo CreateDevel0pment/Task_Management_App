@@ -45,27 +45,24 @@ public class CreateTaskRepository {
             return taskInformationMutableLiveData;
         }
 
-        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector())
-                .child(taskRef.getKey())
+        myRef.child("Users").child(userID).child("CompletedTasks").child(taskRef.getKey())
                 .child("CompletedBy")
                 .setValue(taskInformation.getCompletedBy());
-        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
+        myRef.child("Users").child(userID).child("CompletedTasks").child(taskRef.getKey())
                 .child("Description")
                 .setValue(taskInformation.getDescription());
-        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
+        myRef.child("Users").child(userID).child("CompletedTasks").child(taskRef.getKey())
                 .child("Name")
                 .setValue(taskInformation.getName());
-        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
+        myRef.child("Users").child(userID).child("CompletedTasks").child(taskRef.getKey())
                 .child("TimeCreated")
                 .setValue(taskInformation.getTimeCreated());
-        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
+        myRef.child("Users").child(userID).child("CompletedTasks").child(taskRef.getKey())
                 .child("TaskPriority")
                 .setValue(taskInformation.getTaskPriority());
-        myRef.child("Tasks").child("CompletedTasks").child(taskInformation.getSector()).child(taskRef.getKey())
+        myRef.child("Users").child(userID).child("CompletedTasks").child(taskRef.getKey())
                 .child("EndDate")
                 .setValue(taskInformation.getEndDate());
-        myRef.child("Tasks").child("GroupTasks").child(taskInformation.getSector()).child(taskInformation.getTaskRef())
-                .removeValue();
         myRef.child("Users").child(userID).child("Tasks").child(taskInformation.getTaskRef())
                 .removeValue();
 

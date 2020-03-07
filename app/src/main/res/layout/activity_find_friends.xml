@@ -6,14 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/find_friends_container"
-    android:background="#333333"
+    android:background="@color/colorPrimaryDarkMode"
     tools:context=".ui.main.edit_find.find_friends.FindFriendsActivity">
 
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#333333"
+        android:background="@color/colorPrimaryDarkMode"
         app:titleTextColor="@color/AccentColor"
         android:id="@+id/toolbar_find_friends"/>
 
