@@ -73,6 +73,7 @@ public class UserStatsDetailsFragment extends Fragment {
             completionRate2 = completionRate1*100;
             completionRate3 = (int) completionRate2;
         }
+
         data = new ArrayList<>();
         data.add(new PieEntry(completedTasksCount, "Number of completed Tasks"));
         data.add(new PieEntry(personalTasksCount, "Number of TODO Tasks"));

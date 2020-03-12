@@ -106,9 +106,9 @@ public class ViewAllTaskFragment extends Fragment {
                             quoteViewModel.randomQuote.observe(ViewAllTaskFragment.this, new Observer<Quote>() {
                                 @Override
                                 public void onChanged(Quote quote) {
-                                    TextView randomQuoteTV = rootView.findViewById(R.id.random_quote_tv);
-                                    TextView authorQuoteTV = rootView.findViewById(R.id.random_quote_author_tv);
-                                    LinearLayout quoteLinearLayout = rootView.findViewById(R.id.quote_linear_layout);
+                                    TextView randomQuoteTV = rootView.findViewById(R.id.random_quote_tv_projects);
+                                    TextView authorQuoteTV = rootView.findViewById(R.id.random_quote_author_tv_projects);
+                                    LinearLayout quoteLinearLayout = rootView.findViewById(R.id.quote_linear_layout_projects);
                                     randomQuoteTV.setText(String.format("%s%s\"", '"', quote.getEn()));
                                     authorQuoteTV.setText(quote.getAuthor());
                                     quoteLinearLayout.setVisibility(View.VISIBLE);
