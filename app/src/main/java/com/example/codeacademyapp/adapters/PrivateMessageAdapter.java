@@ -122,7 +122,7 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
             sender_message=itemView.findViewById(R.id.sender_message_text);
             receiver_message=itemView.findViewById(R.id.reciever_message_text);
             receiverProfileImage =itemView.findViewById(R.id.message_profile_image);
-            cardView=itemView.findViewById(R.id.message_profile_imagee);
+            cardView=itemView.findViewById(R.id.message_profile_image_card);
             receiver_time=itemView.findViewById(R.id.reciever_time);
             sender_time=itemView.findViewById(R.id.sender_time);
         }

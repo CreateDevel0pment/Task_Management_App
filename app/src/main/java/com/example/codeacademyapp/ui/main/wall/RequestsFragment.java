@@ -92,20 +92,34 @@ public class RequestsFragment extends Fragment {
                         list_user_id = getRef(position).getKey();
 
                         DatabaseReference getTypeRef = getRef(position).child("request_type").getRef();
-                        
+
                         getTypeRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                if (dataSnapshot.getValue().equals("send")) {
+                                holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.VISIBLE);
+                                holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        acceptTheRequest();
+                                    }
+                                });
+                                holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.VISIBLE);
+                                holder.itemView.findViewById(R.id.request_cancel_btn).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        cancelRequest();
+                                    }
+                                });
+
+                                if(dataSnapshot.exists()){
+                                    if (dataSnapshot.getValue().equals("send")) {
 
                                     holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.GONE);
                                     holder.itemView.findViewById(R.id.request_accept_btn).setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-
                                             acceptTheRequest();
-
                                         }
                                     });
 
@@ -113,169 +127,158 @@ public class RequestsFragment extends Fragment {
                                     holder.itemView.findViewById(R.id.request_cancel_btn).setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-
                                             cancelRequest();
-
                                         }
                                     });
-                                }
-
-                                    if (list_user_id != null) {
-                                        usersRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                                if (dataSnapshot.exists()) {
-
-                                                    no_text.setVisibility(View.GONE);
-                                                    avatar_image.setVisibility(View.GONE);
+                                }}
 
 
-                                                    if (dataSnapshot.hasChild("image")) {
+                                if (list_user_id != null) {
+                                    usersRef.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                        String requestUserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
-                                                        String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                                                        String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                                            if (dataSnapshot.exists()) {
 
-                                                        holder.userNAme.setText(requestUserName);
-                                                        holder.userSector.setText(requestUserSector);
-                                                        Picasso.get().load(requestUserImage).into(holder.image);
-                                                    }
+                                                no_text.setVisibility(View.GONE);
+                                                avatar_image.setVisibility(View.GONE);
 
+                                                if (dataSnapshot.hasChild("image")) {
+
+                                                    String requestUserImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
                                                     String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
                                                     String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
 
                                                     holder.userNAme.setText(requestUserName);
                                                     holder.userSector.setText(requestUserSector);
+                                                    Picasso.get().load(requestUserImage).placeholder(R.drawable.astronaut).into(holder.image);
                                                 }
+
+                                                String requestUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
+                                                String requestUserSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+
+                                                holder.userNAme.setText(requestUserName);
+                                                holder.userSector.setText(requestUserSector);
                                             }
+                                        }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                            }
-                                        });
-                                    }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        }
+                                    });
                                 }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                @Override
-                                public void onCancelled (@NonNull DatabaseError databaseError){
+                            }
+                        });
+                    }
 
-                                }
-                            });
+                    @NonNull
+                    @Override
+                    public RequestsContactsHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                                     int viewType) {
 
-                        }
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_request_layout, parent, false);
 
-
-                        @NonNull
-                        @Override
-                        public RequestsContactsHolder onCreateViewHolder (@NonNull ViewGroup parent,
-                        int viewType){
-
-                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_request_layout, parent, false);
-
-                            return new RequestsContactsHolder(view);
-                        }
-                    };
-
+                        return new RequestsContactsHolder(view);
+                    }
+                };
 
 
         requestList.setAdapter(adapter);
         adapter.startListening();
 
-                }
+    }
 
-        private void acceptTheRequest () {
+    private void acceptTheRequest() {
 
-            contactRef.child(currentUserId).child(list_user_id).child("Contacts")
-                    .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
+        contactRef.child(currentUserId).child(list_user_id).child("Contacts")
+                .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
 
-                    if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
 
 
-                        contactRef.child(list_user_id).child(currentUserId).child("Contacts")
-                                .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
+                    contactRef.child(list_user_id).child(currentUserId).child("Contacts")
+                            .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
 
-                                if (task.isSuccessful()) {
+                            if (task.isSuccessful()) {
 
-                                    chat_request_ref.child(currentUserId).child(list_user_id)
-                                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                chat_request_ref.child(currentUserId).child(list_user_id)
+                                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
 
-                                            if (task.isSuccessful()) {
+                                        if (task.isSuccessful()) {
 
-                                                chat_request_ref.child(list_user_id).child(currentUserId)
-                                                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
+                                            chat_request_ref.child(list_user_id).child(currentUserId)
+                                                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
 
-                                                        if (task.isSuccessful()) {
+                                                    if (task.isSuccessful()) {
 
-                                                            Toast.makeText(getContext(), "Contact saved", Toast.LENGTH_SHORT).show();
-                                                        }
-
+                                                        Toast.makeText(getContext(), "Contact saved", Toast.LENGTH_SHORT).show();
                                                     }
-                                                });
-                                            }
-
+                                                }
+                                            });
                                         }
-                                    });
-                                }
+                                    }
+                                });
                             }
-                        });
-                    }
+                        }
+                    });
                 }
-            });
-
-        }
-
-        private void cancelRequest () {
-
-            chat_request_ref.child(currentUserId).child(list_user_id)
-                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                    if (task.isSuccessful()) {
-
-                        chat_request_ref.child(list_user_id).child(currentUserId)
-                                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                                if (task.isSuccessful()) {
-
-                                    Toast.makeText(getContext(), "Contact Deleted", Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
-                    }
-                }
-            });
-        }
-
-
-        public static class RequestsContactsHolder extends RecyclerView.ViewHolder {
-
-            TextView userNAme, userSector;
-            CircleImageView image;
-            Button accept, cancel;
-
-            public RequestsContactsHolder(@NonNull View itemView) {
-                super(itemView);
-
-                userNAme = itemView.findViewById(R.id.user_profile_name);
-                userSector = itemView.findViewById(R.id.user_group);
-                image = itemView.findViewById(R.id.users_profile_image);
-                accept = itemView.findViewById(R.id.request_accept_btn);
-                cancel = itemView.findViewById(R.id.request_cancel_btn);
-
             }
+        });
+    }
+
+    private void cancelRequest() {
+
+        chat_request_ref.child(currentUserId).child(list_user_id)
+                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()) {
+
+                    chat_request_ref.child(list_user_id).child(currentUserId)
+                            .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if (task.isSuccessful()) {
+
+                                Toast.makeText(getContext(), "Contact Deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    public static class RequestsContactsHolder extends RecyclerView.ViewHolder {
+
+        TextView userNAme, userSector;
+        CircleImageView image;
+        Button accept, cancel;
+
+        public RequestsContactsHolder(@NonNull View itemView) {
+            super(itemView);
+
+            userNAme = itemView.findViewById(R.id.user_profile_name);
+            userSector = itemView.findViewById(R.id.user_group);
+            image = itemView.findViewById(R.id.users_profile_image);
+            accept = itemView.findViewById(R.id.request_accept_btn);
+            cancel = itemView.findViewById(R.id.request_cancel_btn);
+
         }
     }
+}

@@ -237,7 +237,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
             sender_message = itemView.findViewById(R.id.sender_message_text);
             receiver_message = itemView.findViewById(R.id.reciever_message_text);
             reciverProfileImage = itemView.findViewById(R.id.message_profile_image);
-            cardView = itemView.findViewById(R.id.message_profile_imagee);
+            cardView = itemView.findViewById(R.id.message_profile_image_card);
             receiver_name = itemView.findViewById(R.id.reciever_name);
             receiver_sector = itemView.findViewById(R.id.reciever_sector);
             receiver_time = itemView.findViewById(R.id.reciever_time);

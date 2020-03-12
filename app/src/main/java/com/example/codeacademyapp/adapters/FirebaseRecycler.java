@@ -38,7 +38,7 @@ public class FirebaseRecycler extends
         holder.userNAme.setText(model.Name);
         holder.userGroup.setText(model.Sector);
         Picasso.get().load(model.image)
-                .placeholder(R.drawable.profile_image)
+                .placeholder(R.drawable.astronaut)
                 .into(holder.profileImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
