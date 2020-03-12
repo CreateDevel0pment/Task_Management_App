@@ -74,18 +74,31 @@
         android:textSize="16sp"
         />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/message_profile_imagee"
+        android:layout_below="@+id/reciever_name"
+        android:id="@+id/receiver_doc_card"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        >
 
     <ImageView
         android:id="@+id/reciever_doc"
-        android:layout_width="75dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"
         android:layout_toEndOf="@+id/message_profile_imagee"
         android:layout_below="@+id/reciever_name"
         android:visibility="gone"
+        android:scaleType="fitXY"
         android:background="@drawable/background_transparent"
         />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:layout_width="wrap_content"
@@ -94,7 +107,7 @@
         android:text="11:11"
         android:textSize="11sp"
         android:layout_toEndOf="@+id/message_profile_imagee"
-        android:layout_below="@+id/reciever_doc"
+        android:layout_below="@+id/receiver_doc_card"
         android:layout_marginStart="10dp"
         android:visibility="gone"
         android:id="@+id/reciever_doc_time"
@@ -127,16 +140,28 @@
         android:textColor="@color/colorPrimaryDarkMode"
         />
 
-    <ImageView
-        android:id="@+id/sender_doc"
-        android:layout_width="75dp"
-        android:layout_height="100dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="@+id/reciever_message_text"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
+        android:id="@+id/sender_doc_card"
         android:visibility="gone"
+        app:cardCornerRadius="8dp">
+
+    <ImageView
+        android:id="@+id/sender_doc"
+        android:layout_width="130dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="@+id/reciever_message_text"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:scaleType="fitXY"
         android:background="@drawable/background_transparent"
         />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -145,7 +170,7 @@
         android:text="11:11"
         android:textSize="11sp"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/sender_doc"
+        android:layout_below="@+id/sender_doc_card"
         android:layout_marginStart="10dp"
         android:visibility="gone"
         android:id="@+id/sender_doc_time"/>

@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.MessageWallAdapter;
+import com.example.codeacademyapp.adapters.PublicMessageAdapter;
 import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
@@ -62,6 +62,12 @@ public class GroupChatFragment extends BaseFragment {
     private String userGroup;
     private String userID;
 
+    private String message;
+    private String fileName;
+    private String currentDate, currentTime;
+
+    private Uri uri;
+
     private String checker;
 
     private ChatViewModel groupChatViewModel;
@@ -71,7 +77,7 @@ public class GroupChatFragment extends BaseFragment {
     private ProgressDialog progressDialog;
 
     private RecyclerView chat_recycler;
-    private MessageWallAdapter adapter;
+    private PublicMessageAdapter adapter;
     private DatabaseReference myRef;
     private List<PublicMessage> messageList = new ArrayList<>();
 
@@ -95,8 +101,8 @@ public class GroupChatFragment extends BaseFragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    userGroup = dataSnapshot.child("Sector").getValue().toString();
-                    if (!dataSnapshot.child("Position").getValue().equals("Staff")) {
+                    userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
+                    if (!Objects.requireNonNull(dataSnapshot.child("Position").getValue()).equals("Staff")) {
                         new_task_btn.show();
                     }
                 }
@@ -187,26 +193,16 @@ public class GroupChatFragment extends BaseFragment {
 
     private void SaveMessageToDataBase() {
 
-        String message = userMessage_input.getText().toString();
+        message = userMessage_input.getText().toString();
 
         if (TextUtils.isEmpty(message)) {
             Toast.makeText(getContext(), "Write your message", Toast.LENGTH_SHORT).show();
         } else {
+            getCurrentDateAndTime();
 
-            Calendar calForDate = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
+            checker = "";
 
-            String currentDate = currentDateFormat.format(calForDate.getTime());
-
-            Calendar calForTime = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
-
-            String currentTime = currentTimeFormat.format(calForTime.getTime());
-
-            groupChatViewModel.saveMessageFromGroupChat(userID, userGroup, currentUserName, userImage, message, currentDate, currentTime);
-
+            groupChatViewModel.saveMessageFromGroupChat(getMessage());
         }
     }
 
@@ -244,7 +240,7 @@ public class GroupChatFragment extends BaseFragment {
                 PublicMessage messages = dataSnapshot.getValue(PublicMessage.class);
 
                 messageList.add(messages);
-                adapter = new MessageWallAdapter(messageList);
+                adapter = new PublicMessageAdapter(messageList, getFragmentManager());
                 chat_recycler.setAdapter(adapter);
                 progressDialog.dismiss();
 
@@ -289,36 +285,53 @@ public class GroupChatFragment extends BaseFragment {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
+            getCurrentDateAndTime();
 
-            Calendar calForDate = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
-
-            String currentDate = currentDateFormat.format(calForDate.getTime());
-
-
-            Calendar calForTime = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
-
-            String currentTime = currentTimeFormat.format(calForTime.getTime());
-
-            Uri uri = data.getData();
+            uri = data.getData();
 
             if (uri != null) {
-                String mimeType = Objects.requireNonNull(getContext()).getContentResolver().getType(uri);
 
                 Cursor returnCursor =
                         getContext().getContentResolver().query(uri, null, null, null, null);
 
                 int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
                 returnCursor.moveToFirst();
 
-                String fileName = returnCursor.getString(nameIndex);
-                groupChatViewModel.saveDocFromGroupChat(userID, currentUserName, userGroup, userImage, uri, checker, fileName, currentDate, currentTime);
-            }
+                fileName = returnCursor.getString(nameIndex);
 
+                groupChatViewModel.saveDocFromGroupChat(getMessage());
+            }
         }
+    }
+
+    private PublicMessage getMessage() {
+
+        PublicMessage publicMessage = new PublicMessage();
+        publicMessage.setId(userID);
+        publicMessage.setName(currentUserName);
+        publicMessage.setSector(userGroup);
+        publicMessage.setImage(userImage);
+        publicMessage.setMessage(message);
+        publicMessage.setDocType(checker);
+        publicMessage.setDate(currentDate);
+        publicMessage.setTime(currentTime);
+        publicMessage.setDocName(fileName);
+        publicMessage.setUri(uri);
+
+        return publicMessage;
+    }
+
+
+    private void getCurrentDateAndTime() {
+
+        Calendar calForDate = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
+        currentDate = currentDateFormat.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
+        currentTime = currentTimeFormat.format(calForTime.getTime());
     }
 }

@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.MessageAdapter;
+import com.example.codeacademyapp.adapters.PrivateMessageAdapter;
 import com.example.codeacademyapp.data.model.PrivateMessages;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
@@ -59,7 +59,7 @@ public class PrivateChatActivity extends AppCompatActivity {
     ImageButton send_message_btn;
     EditText input_message;
     List<PrivateMessages> messageList = new ArrayList<>();
-    MessageAdapter adapter;
+    PrivateMessageAdapter adapter;
     RecyclerView user_message_list;
     FloatingActionButton newPersonalTaskBtn;
     private DatabaseReference myRef;
@@ -153,7 +153,7 @@ public class PrivateChatActivity extends AppCompatActivity {
                 PrivateMessages messages = dataSnapshot.getValue(PrivateMessages.class);
 
                 messageList.add(messages);
-                adapter = new MessageAdapter(messageList);
+                adapter = new PrivateMessageAdapter(messageList);
                 user_message_list.setAdapter(adapter);
 
                 user_message_list.smoothScrollToPosition(user_message_list.getAdapter().getItemCount());

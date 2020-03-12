@@ -80,7 +80,8 @@ public class SignInFragment extends Fragment {
                             if (firebaseUser != null) {
                                 getReferencesForUserGroup();
                             } else {
-                                toastMessage("Please Sign Up");
+                                Toast.makeText(getContext(), "Please Sign Up", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
@@ -122,15 +123,10 @@ public class SignInFragment extends Fragment {
         });
     }
 
-    private void toastMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
     private void goToStartActivity(String userGroup) {
         Intent intent = new Intent(getContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("TITLE", userGroup);
         startActivity(intent);
     }
-
 }

@@ -8,14 +8,11 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.TabPagerAdapter;
-import com.example.codeacademyapp.adapters.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,27 +58,9 @@ public class FragmentStartMain extends Fragment {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-        int[] landing_pictures = new int[]{
-                R.drawable.comunicate_plava,
-                R.drawable.manage_plava,
-                R.drawable.teamwork_plava
-        };
 
         viewPager.setCurrentItem(0);
         tabLayout.setupWithViewPager(viewPager);
-
-//        ViewPager viewPagerImages = rootView.findViewById(R.id.view_pager_imgs);
-//        PagerAdapter pagerAdapter;
-//        pagerAdapter = new ViewPagerAdapter(getActivity(), landing_pictures);
-//        CirclePageIndicator mIndicator = rootView.findViewById(R.id.page_indicator);
-//        viewPagerImages.setAdapter(pagerAdapter);
-//        mIndicator.setViewPager(viewPagerImages);
-
-
-//        if(Objects.equals(getIntent().getStringExtra("SIGNUP"), "signUp")){
-//        }
-
         return rootView;
     }
-
 }

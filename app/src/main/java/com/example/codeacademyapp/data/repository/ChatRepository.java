@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.codeacademyapp.data.model.PublicMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -190,9 +191,7 @@ public class ChatRepository {
         return displayMessage;
     }
 
-    public void saveMessageForPublicChat(final String userId, final String currentUserName, final String userGroup, final String image,
-                                         final String message,final String type, final String currentDate,
-                                         final String currentTime) {
+    public void saveMessageForPublicChat(PublicMessage message) {
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Chat Public Wall");
         String messageKey = myRef.push().getKey();
@@ -205,22 +204,20 @@ public class ChatRepository {
         }
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
-        messageInfoMap.put("id", userId);
-        messageInfoMap.put("name", currentUserName);
-        messageInfoMap.put("image", image);
-        messageInfoMap.put("sector", userGroup);
-        messageInfoMap.put("message", message);
-        messageInfoMap.put("date", currentDate);
-        messageInfoMap.put("time", currentTime);
-        messageInfoMap.put("docType",type);
+        messageInfoMap.put("id", message.getId());
+        messageInfoMap.put("name", message.getName());
+        messageInfoMap.put("image", message.getImage());
+        messageInfoMap.put("sector", message.getSector());
+        messageInfoMap.put("message", message.getMessage());
+        messageInfoMap.put("date", message.getDate());
+        messageInfoMap.put("time", message.getTime());
+        messageInfoMap.put("docType",message.getDocType());
 
         groupMessageKeyRef.updateChildren(messageInfoMap);
     }
 
 
-    public void saveDocForPublicChat(final String userId, final String currentUserName, final String userGroup, final String image,
-                                     final Uri docRef,final String type, final String fileName, final String currentDate,
-                                     final String currentTime) {
+    public void saveDocForPublicChat(final PublicMessage message) {
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Chat Public Wall");
         final String messageKey = myRef.push().getKey();
@@ -231,9 +228,9 @@ public class ChatRepository {
                     .getReference()
                     .child("Send Doc Files");
 
-            StorageReference storagePath = storageReference.child(docRef.toString());
+            StorageReference storagePath = storageReference.child(message.getUri().toString());
 
-            storagePath.putFile(docRef).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            storagePath.putFile(message.getUri()).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
@@ -251,15 +248,15 @@ public class ChatRepository {
                                 }
 
                                 HashMap<String, Object> messageInfoMap = new HashMap<>();
-                                messageInfoMap.put("id", userId);
-                                messageInfoMap.put("name", currentUserName);
-                                messageInfoMap.put("image", image);
-                                messageInfoMap.put("sector", userGroup);
+                                messageInfoMap.put("id", message.getId());
+                                messageInfoMap.put("name", message.getName());
+                                messageInfoMap.put("image", message.getImage());
+                                messageInfoMap.put("sector", message.getSector());
                                 messageInfoMap.put("message", uri.toString());
-                                messageInfoMap.put("date", currentDate);
-                                messageInfoMap.put("time", currentTime);
-                                messageInfoMap.put("docType",type);
-                                messageInfoMap.put("docName",fileName);
+                                messageInfoMap.put("date", message.getDate());
+                                messageInfoMap.put("time", message.getTime());
+                                messageInfoMap.put("docType",message.getDocType());
+                                messageInfoMap.put("docName",message.getDocName());
 
                                 groupMessageKeyRef.updateChildren(messageInfoMap);
 
@@ -273,11 +270,9 @@ public class ChatRepository {
 
     }
 
-    public void saveMessageForGroupChat(String userId, String group_name, String currentUserName, String userImage,
-                                        String message, String currentDate,
-                                        String currentTime) {
+    public void saveMessageForGroupChat(PublicMessage message) {
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Chat Sector").child(group_name);
+        myRef = FirebaseDatabase.getInstance().getReference().child("Chat Sector").child(message.getSector());
         String messageKey = myRef.push().getKey();
 
         HashMap<String, Object> groipMessageKey = new HashMap<>();
@@ -288,23 +283,23 @@ public class ChatRepository {
         }
 
         HashMap<String, Object> messageInfoMap = new HashMap<>();
-        messageInfoMap.put("id", userId);
-        messageInfoMap.put("sector", group_name);
-        messageInfoMap.put("name", currentUserName);
-        messageInfoMap.put("image", userImage);
-        messageInfoMap.put("message", message);
-        messageInfoMap.put("date", currentDate);
-        messageInfoMap.put("time", currentTime);
+        messageInfoMap.put("id", message.getId());
+        messageInfoMap.put("sector", message.getSector());
+        messageInfoMap.put("name", message.getName());
+        messageInfoMap.put("image", message.getImage());
+        messageInfoMap.put("message", message.getMessage());
+        messageInfoMap.put("date", message.getDate());
+        messageInfoMap.put("time", message.getTime());
+        messageInfoMap.put("docType",message.getDocType());
+        messageInfoMap.put("docName",message.getDocName());
 
         groupMessageKeyRef.updateChildren(messageInfoMap);
     }
 
 
-    public void saveDocForGroupChat(final String userId, final String currentUserName, final String userGroup, final String image,
-                                     final Uri docRef,final String type, final String fileName, final String currentDate,
-                                     final String currentTime) {
+    public void saveDocForGroupChat(final PublicMessage message) {
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Chat Sector").child(userGroup);
+        myRef = FirebaseDatabase.getInstance().getReference().child("Chat Sector").child(message.getSector());
         final String messageKey = myRef.push().getKey();
 
         if (messageKey!=null) {
@@ -313,9 +308,9 @@ public class ChatRepository {
                     .getReference()
                     .child("Send Doc Files");
 
-            StorageReference storagePath = storageReference.child(docRef.toString());
+            StorageReference storagePath = storageReference.child(message.getUri().toString());
 
-            storagePath.putFile(docRef).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            storagePath.putFile(message.getUri()).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
@@ -333,15 +328,15 @@ public class ChatRepository {
                                 }
 
                                 HashMap<String, Object> messageInfoMap = new HashMap<>();
-                                messageInfoMap.put("id", userId);
-                                messageInfoMap.put("name", currentUserName);
-                                messageInfoMap.put("image", image);
-                                messageInfoMap.put("sector", userGroup);
+                                messageInfoMap.put("id", message.getId());
+                                messageInfoMap.put("name", message.getName());
+                                messageInfoMap.put("image", message.getImage());
+                                messageInfoMap.put("sector", message.getSector());
                                 messageInfoMap.put("message", uri.toString());
-                                messageInfoMap.put("date", currentDate);
-                                messageInfoMap.put("time", currentTime);
-                                messageInfoMap.put("docType",type);
-                                messageInfoMap.put("docName",fileName);
+                                messageInfoMap.put("date", message.getDate());
+                                messageInfoMap.put("time", message.getTime());
+                                messageInfoMap.put("docType",message.getDocType());
+                                messageInfoMap.put("docName",message.getDocName());
 
                                 groupMessageKeyRef.updateChildren(messageInfoMap);
 
@@ -352,6 +347,5 @@ public class ChatRepository {
             });
 
         }
-
     }
 }

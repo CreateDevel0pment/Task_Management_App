@@ -23,8 +23,4 @@
     <style name="BottomNavStyleDark" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="background">@color/colorPrimaryDarkMode</item>
     </style>
-    <style name="BottomNavStyleLight" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="background">@color/colorPrimaryLightMode</item>
-    </style>
-
 </resources>

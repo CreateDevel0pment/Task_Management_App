@@ -1,12 +1,12 @@
 package com.example.codeacademyapp.ui.main.sector.chat;
 
 import android.app.Application;
-import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.data.repository.ChatRepository;
 import com.google.firebase.database.DataSnapshot;
 
@@ -24,43 +24,35 @@ public class ChatViewModel extends AndroidViewModel {
         chatRepository.setGroupNameToFirebase(chatName);
     }
 
-    public void saveMessageFromGroupChat(String userID,String group_name, String currentUserName,String userImage,
-                                         String message, String currentDate,
-                                         String currentTime) {
-        chatRepository.saveMessageForGroupChat(userID,group_name,currentUserName,userImage, message,currentDate,currentTime);
+    public void saveMessageFromGroupChat(PublicMessage message) {
+        chatRepository.saveMessageForGroupChat(message);
     }
 
-    public LiveData<DataSnapshot> displayMessageToGroup(String curenUserGroup){
+    public LiveData<DataSnapshot> displayMessageToGroup(String curenUserGroup) {
         return chatRepository.displayMessageInUsersGroup(curenUserGroup);
     }
 
-    public void saveMessageFromWallChat (String userId,String currentUserName,String userGroup,String userImage,
-                                         String message,String type, String currentDate,
-                                         String currentTime) {
-        chatRepository.saveMessageForPublicChat(userId,currentUserName,userGroup,userImage, message,type,currentDate,currentTime);
+    public void saveMessageFromWallChat(PublicMessage message) {
+        chatRepository.saveMessageForPublicChat(message);
     }
 
-    public void saveDocFromWallChat (String userId, String currentUserName, String userGroup, String userImage,
-                                     Uri docRef,String type,String fileName, String currentDate,
-                                     String currentTime) {
-        chatRepository.saveDocForPublicChat(userId,currentUserName,userGroup,userImage, docRef,type,fileName,currentDate,currentTime);
+    public void saveDocFromWallChat(PublicMessage message) {
+        chatRepository.saveDocForPublicChat(message);
     }
 
-    public void saveDocFromGroupChat (String userId, String currentUserName, String userGroup, String userImage,
-                                     Uri docRef,String type,String fileName, String currentDate,
-                                     String currentTime) {
-        chatRepository.saveDocForGroupChat(userId,currentUserName,userGroup,userImage, docRef,type,fileName,currentDate,currentTime);
+    public void saveDocFromGroupChat(PublicMessage message) {
+        chatRepository.saveDocForGroupChat(message);
     }
 
-    public LiveData<DataSnapshot> displayMessageToWall(){
+    public LiveData<DataSnapshot> displayMessageToWall() {
         return chatRepository.displayMessageOnPublicWall();
     }
 
-    public LiveData<DataSnapshot> displayMessageToPrivateChat(String message_reciever_id ){
+    public LiveData<DataSnapshot> displayMessageToPrivateChat(String message_reciever_id) {
         return chatRepository.displayMessageOnPrivateChat(message_reciever_id);
     }
 
-    public LiveData<DataSnapshot> getchatRequest (String currentUserId){
+    public LiveData<DataSnapshot> getchatRequest(String currentUserId) {
         return chatRepository.getChatRequest(currentUserId);
     }
 }

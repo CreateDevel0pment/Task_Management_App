@@ -78,31 +78,6 @@ public class SignUpRepository {
                                     }
                                 }
                             });
-
-//                                myRef.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                                        if((dataSnapshot.exists())&& (dataSnapshot.hasChild("Name"))
-//                                                &&(dataSnapshot.hasChild("Surname"))&& (dataSnapshot.hasChild("Sector"))
-//                                                && (dataSnapshot.hasChild("Role"))){
-//
-//
-//                                            User setUser = new User();
-//                                            setUser.setName(dataSnapshot.child("Name").getValue().toString());
-//                                            setUser.setSurname(user.getSurname());
-//                                            setUser.setPosition_spinner(user.getPosition_spinner());
-//                                            setUser.setSector_spinner(user.getSector_spinner());
-//                                            setUserInformation.setValue(setUser);
-//
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                                    }
-//                                });
-
                         }
                     }
                 }
@@ -110,5 +85,4 @@ public class SignUpRepository {
         }
         return setUserInformation;
     }
-
 }

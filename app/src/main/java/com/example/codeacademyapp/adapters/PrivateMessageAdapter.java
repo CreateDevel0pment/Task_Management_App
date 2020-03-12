@@ -22,19 +22,19 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder> {
+public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAdapter.MyHolder> {
 
     private List<PrivateMessages> mList;
     private FirebaseAuth auth;
 
-    public MessageAdapter(List<PrivateMessages> mList) {
+    public PrivateMessageAdapter(List<PrivateMessages> mList) {
         this.mList = mList;
     }
 
 
     @NonNull
     @Override
-    public MessageAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PrivateMessageAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_message_layout,parent, false);
 
@@ -45,7 +45,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MessageAdapter.MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PrivateMessageAdapter.MyHolder holder, int position) {
 
         String messageSenderId = auth.getCurrentUser().getUid();
 

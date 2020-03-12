@@ -77,10 +77,14 @@ public class GetUserInformationRepository {
 
         return getUserTasksStats;
     }
+
     public MutableLiveData<Integer> getUserCompletedTasksStats (String userId){
         final MutableLiveData<Integer> getUserCompletedTasksStats = new MutableLiveData<>();
 
-        DatabaseReference personalTasksRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("CompletedTasks");
+        DatabaseReference personalTasksRef = FirebaseDatabase.getInstance()
+                .getReference().child("Users")
+                .child(userId)
+                .child("CompletedTasks");
         personalTasksRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

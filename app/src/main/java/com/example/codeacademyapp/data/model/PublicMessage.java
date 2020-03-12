@@ -1,5 +1,7 @@
 package com.example.codeacademyapp.data.model;
 
+import android.net.Uri;
+
 public class PublicMessage {
 
     private String date;
@@ -11,12 +13,13 @@ public class PublicMessage {
     private String image;
     private String docType;
     private String docName;
+    private Uri uri;
 
     public PublicMessage() {
     }
 
-    public PublicMessage(String date, String id, String sector, String message, String name,
-                         String time, String image, String docType, String docName) {
+    public PublicMessage(String date, String id, String sector, String message,
+                         String name, String time, String image, String docType, String docName, Uri uri) {
         this.date = date;
         this.id = id;
         this.sector = sector;
@@ -26,41 +29,86 @@ public class PublicMessage {
         this.image = image;
         this.docType = docType;
         this.docName = docName;
+        this.uri = uri;
     }
 
     public String getDate() {
         return date;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSector() {
         return sector;
     }
 
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getTime() {
         return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getImage() {
         return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getDocType() {
         return docType;
     }
 
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
     public String getDocName() {
         return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
     }
 }

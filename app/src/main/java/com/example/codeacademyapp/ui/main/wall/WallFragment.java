@@ -29,14 +29,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.MessageWallAdapter;
+import com.example.codeacademyapp.adapters.PublicMessageAdapter;
 import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.storage.StorageTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,11 +59,11 @@ public class WallFragment extends BaseFragment {
 
     private String checker = "";
     private String currentDate, currentTime;
-    private String myUrl = "";
+    private String message;
 
-    private StorageTask uploadTask;
-    private Uri fileUri;
+    private String fileName;
 
+    private Uri uri;
 
     private View view;
 
@@ -72,7 +71,7 @@ public class WallFragment extends BaseFragment {
     private UserInformationViewModel userInformationViewModel;
 
     private RecyclerView recyclerView;
-    private MessageWallAdapter adapter;
+    private PublicMessageAdapter adapter;
 
     private List<PublicMessage> messageList = new ArrayList<>();
 
@@ -90,7 +89,7 @@ public class WallFragment extends BaseFragment {
 
                 messageList.add(messages);
                 if (messageList.size() > 0) {
-                    adapter = new MessageWallAdapter(messageList);
+                    adapter = new PublicMessageAdapter(messageList,getChildFragmentManager());
                     recyclerView.setAdapter(adapter);
 
                     loadingDialog.dismiss();
@@ -114,8 +113,6 @@ public class WallFragment extends BaseFragment {
         setTitle(R.string.academy_wall);
         initializedView(view);
         getUserInfo();
-
-
 
         sentMessage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,44 +166,41 @@ public class WallFragment extends BaseFragment {
                                 break;
 
                             default:
-                                return;
                         }
                     }
                 });
                 builder.show();
-
             }
         });
 
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (NetworkConnectivity.isConnectivityNetworkAvailable(Objects.requireNonNull(getContext()))) {
+
+            Toast connectivityToast = Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG);
+            connectivityToast.setGravity(Gravity.CENTER, 0, 0);
+            connectivityToast.show();
+        }
+    }
 
     private void SaveMessageToDataBase() {
 
-        String message = userMessage_input.getText().toString();
+        message = userMessage_input.getText().toString();
 
         if (TextUtils.isEmpty(message)) {
             Toast.makeText(getContext(), "Write your message", Toast.LENGTH_SHORT).show();
         } else {
 
-            Calendar calForDate = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
-
-            currentDate = currentDateFormat.format(calForDate.getTime());
-
-
-            Calendar calForTime = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
-
-            currentTime = currentTimeFormat.format(calForTime.getTime());
+            getCurrentDateAndTime();
 
             checker="";
 
-            wallChatViewModel.saveMessageFromWallChat(id, currentUserName, userGroup, userImage, message, checker, currentDate, currentTime);
 
+            wallChatViewModel.saveMessageFromWallChat(getMessage());
         }
     }
 
@@ -242,19 +236,6 @@ public class WallFragment extends BaseFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-
-        if (NetworkConnectivity.isConnectivityNetworkAvailable(getContext())) {
-
-            Toast connectivityToast = Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG);
-            connectivityToast.setGravity(Gravity.CENTER, 0, 0);
-            connectivityToast.show();
-        }
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -265,37 +246,58 @@ public class WallFragment extends BaseFragment {
             loadingDialog.setCanceledOnTouchOutside(false);
             loadingDialog.show();
 
+            getCurrentDateAndTime();
 
-            Calendar calForDate = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
-
-            currentDate = currentDateFormat.format(calForDate.getTime());
-
-
-            Calendar calForTime = Calendar.getInstance();
-            @SuppressLint("SimpleDateFormat")
-            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
-
-            currentTime = currentTimeFormat.format(calForTime.getTime());
-
-            Uri uri = data.getData();
-
+            uri = data.getData();
             if (uri != null) {
-                String mimeType = Objects.requireNonNull(getContext()).getContentResolver().getType(uri);
-
                 Cursor returnCursor =
-                        getContext().getContentResolver().query(uri, null, null, null, null);
+                        Objects.requireNonNull(getContext())
+                                .getContentResolver()
+                                .query(uri, null, null, null, null);
 
-                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
-                returnCursor.moveToFirst();
+                int nameIndex = 0;
+                if (returnCursor != null) {
+                    nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                }
+                if (returnCursor != null) {
+                    returnCursor.moveToFirst();
+                }
+                if (returnCursor != null) {
+                    fileName = returnCursor.getString(nameIndex);
+                }
 
-                String fileName = returnCursor.getString(nameIndex);
-
-                wallChatViewModel.saveDocFromWallChat(id, currentUserName, userGroup, userImage, uri, checker,fileName, currentDate, currentTime);
+                wallChatViewModel.saveDocFromWallChat(getMessage());
             }
-
         }
+    }
+
+    private PublicMessage getMessage(){
+
+        PublicMessage publicMessage=new PublicMessage();
+        publicMessage.setId(id);
+        publicMessage.setName(currentUserName);
+        publicMessage.setSector(userGroup);
+        publicMessage.setImage(userImage);
+        publicMessage.setMessage(message);
+        publicMessage.setDocType(checker);
+        publicMessage.setDate(currentDate);
+        publicMessage.setTime(currentTime);
+        publicMessage.setDocName(fileName);
+        publicMessage.setUri(uri);
+
+        return publicMessage;
+    }
+
+    private void getCurrentDateAndTime(){
+
+        Calendar calForDate = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat currentDateFormat = new SimpleDateFormat("dd MMM,yyyy");
+        currentDate = currentDateFormat.format(calForDate.getTime());
+
+        Calendar calForTime = Calendar.getInstance();
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm");
+        currentTime = currentTimeFormat.format(calForTime.getTime());
     }
 }

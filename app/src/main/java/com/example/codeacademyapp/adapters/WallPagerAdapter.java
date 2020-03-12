@@ -20,7 +20,6 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         WallFragment wallFragment = new WallFragment();
-//        AllContactsFragment allContactsFragment = new AllContactsFragment();
         MyContactsFragment myContactsFragment = new MyContactsFragment();
         RequestsFragment requestsFragment = new RequestsFragment();
 
@@ -29,9 +28,6 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
         } else if (position == 1) {
             return myContactsFragment;
         }
-//        else if (position == 2) {
-//            return allContactsFragment;
-//        }
         else {
             return requestsFragment;
         }
@@ -49,8 +45,6 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
                 return "Wall";
             case 1:
                 return "My Contacts";
-//            case 1:
-//                return "Find Contact";
             case 2:
                 return "Requests";
             default:

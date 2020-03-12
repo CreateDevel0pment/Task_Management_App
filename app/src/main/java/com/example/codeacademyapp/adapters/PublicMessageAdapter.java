@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
@@ -19,18 +20,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Objects;
 
-public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.MyHolder> {
+public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdapter.MyHolder> {
 
     private List<PublicMessage> mList;
 
-    public MessageWallAdapter(List<PublicMessage> mList) {
+    private FragmentManager fragmentManager;
+
+    public PublicMessageAdapter(List<PublicMessage> mList, FragmentManager fragmentManager) {
         this.mList = mList;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
     @Override
-    public MessageWallAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PublicMessageAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_message_layout, parent, false);
 
@@ -39,11 +44,11 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final MessageWallAdapter.MyHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final PublicMessageAdapter.MyHolder holder, final int position) {
 
         final PublicMessage messages = mList.get(holder.getAdapterPosition());
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        String currenUser = auth.getCurrentUser().getUid();
+        String currenUser = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
         holder.receiver_message.setVisibility(View.INVISIBLE);
         holder.reciverProfileImage.setVisibility(View.INVISIBLE);
@@ -54,52 +59,54 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
 
         if (messages.getId().equals(currenUser)) {
 
+            if (messages.getDocType().equals(".jpg")) {
 
-            if(messages.getDocType().equals(".jpg")){
-
+                holder.sender_image_card.setVisibility(View.VISIBLE);
                 holder.sender_doc_image.setVisibility(View.VISIBLE);
                 Picasso.get().load(messages.getMessage()).into(holder.sender_doc_image);
 
                 holder.sender_doc_time.setVisibility(View.VISIBLE);
                 holder.sender_doc_time.setText(messages.getTime());
 
-            }else if(messages.getDocType().equals(".pdf")){
+            } else if (messages.getDocType().equals(".pdf")) {
 
+                holder.sender_doc_image.setVisibility(View.GONE);
                 holder.sender_message.setVisibility(View.VISIBLE);
-                holder.sender_message.setText(messages.getDocName());
-
-                holder.sender_doc_time.setVisibility(View.VISIBLE);
-                holder.sender_doc_time.setText(messages.getTime());
+                holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
+                holder.sender_message.setText(messages.getMessage());
+                holder.sender_time.setVisibility(View.VISIBLE);
+                holder.sender_time.setText(messages.getTime());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(mList.get(position).getMessage()));
                         holder.itemView.getContext().startActivity(intent);
                     }
                 });
 
-            }else if(messages.getDocType().equals(".docx")) {
+            } else if (messages.getDocType().equals(".docx")) {
 
+                holder.sender_doc_image.setVisibility(View.GONE);
                 holder.sender_message.setVisibility(View.VISIBLE);
-                holder.sender_message.setText(messages.getDocName());
-
-                holder.sender_doc_time.setVisibility(View.VISIBLE);
-                holder.sender_doc_time.setText(messages.getTime());
+                holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
+                holder.sender_message.setText(messages.getMessage());
+                holder.sender_time.setVisibility(View.VISIBLE);
+                holder.sender_time.setText(messages.getTime());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(mList.get(position).getMessage()));
                         holder.itemView.getContext().startActivity(intent);
                     }
                 });
 
-            }else {
+            } else {
 
                 holder.sender_doc_image.setVisibility(View.GONE);
                 holder.sender_message.setVisibility(View.VISIBLE);
@@ -113,8 +120,9 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
         } else {
 
 
-            if(messages.getDocType().equals(".jpg")){
+            if (messages.getDocType().equals(".jpg")) {
 
+                holder.receiver_image_card.setVisibility(View.VISIBLE);
                 holder.receiver_message.setVisibility(View.INVISIBLE);
                 holder.reciever_doc_image.setVisibility(View.VISIBLE);
                 Picasso.get().load(messages.getMessage()).into(holder.reciever_doc_image);
@@ -133,7 +141,7 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
                 holder.receiver_doc_time.setVisibility(View.VISIBLE);
                 holder.receiver_doc_time.setText(messages.getTime());
 
-            }else if(messages.getDocType().equals(".pdf")){
+            } else if (messages.getDocType().equals(".pdf")) {
 
                 holder.receiver_name.setVisibility(View.VISIBLE);
                 holder.receiver_name.setText(messages.getName());
@@ -155,13 +163,13 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(mList.get(position).getMessage()));
                         holder.itemView.getContext().startActivity(intent);
                     }
                 });
 
-            }else if(messages.getDocType().equals(".docx")) {
+            } else if (messages.getDocType().equals(".docx")) {
 
                 holder.receiver_name.setVisibility(View.VISIBLE);
                 holder.receiver_name.setText(messages.getName());
@@ -183,12 +191,12 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent=new Intent(Intent.ACTION_VIEW,
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(mList.get(position).getMessage()));
                         holder.itemView.getContext().startActivity(intent);
                     }
                 });
-            }else {
+            } else {
 
                 holder.receiver_name.setVisibility(View.VISIBLE);
                 holder.receiver_name.setText(messages.getName());
@@ -208,7 +216,6 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
                 Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
             }
-
         }
     }
 
@@ -220,9 +227,9 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
     public class MyHolder extends RecyclerView.ViewHolder {
 
         TextView sender_message, receiver_message, receiver_name, receiver_sector,
-                receiver_time, sender_time,receiver_doc_time,sender_doc_time;
-        ImageView reciverProfileImage,sender_doc_image,reciever_doc_image;
-        CardView cardView;
+                receiver_time, sender_time, receiver_doc_time, sender_doc_time;
+        ImageView reciverProfileImage, sender_doc_image, reciever_doc_image;
+        CardView cardView, sender_image_card, receiver_image_card;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -235,12 +242,12 @@ public class MessageWallAdapter extends RecyclerView.Adapter<MessageWallAdapter.
             receiver_sector = itemView.findViewById(R.id.reciever_sector);
             receiver_time = itemView.findViewById(R.id.reciever_time);
             sender_time = itemView.findViewById(R.id.sender_time);
-            sender_doc_image=itemView.findViewById(R.id.sender_doc);
-            reciever_doc_image=itemView.findViewById(R.id.reciever_doc);
-            receiver_doc_time=itemView.findViewById(R.id.reciever_doc_time);
-            sender_doc_time=itemView.findViewById(R.id.sender_doc_time);
-
-
+            sender_doc_image = itemView.findViewById(R.id.sender_doc);
+            reciever_doc_image = itemView.findViewById(R.id.reciever_doc);
+            receiver_doc_time = itemView.findViewById(R.id.reciever_doc_time);
+            sender_doc_time = itemView.findViewById(R.id.sender_doc_time);
+            sender_image_card = itemView.findViewById(R.id.sender_doc_card);
+            receiver_image_card = itemView.findViewById(R.id.receiver_doc_card);
         }
     }
 }

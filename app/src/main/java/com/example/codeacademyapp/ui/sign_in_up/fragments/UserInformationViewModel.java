@@ -18,27 +18,13 @@ public class UserInformationViewModel extends AndroidViewModel {
 
         userInformationRepository=new GetUserInformationRepository();
     }
-
     public LiveData<DataSnapshot> getUserInformation (){
 
         return userInformationRepository.getUserInformation();
     }
-
-    public LiveData<Integer> getUserTasksStats (String userId){
-        return userInformationRepository.getUserTasksStats(userId);
-    }
-    public LiveData<Integer> getUserCompletedTasksStats (String userId){
-        return userInformationRepository.getUserCompletedTasksStats(userId);
-    }
-
     public LiveData<DataSnapshot> retrieveRecieverUserInfo (String receiver_user_id){
         return userInformationRepository.retrieveRecieverUserInfo(receiver_user_id);
     }
-
-    public LiveData<DataSnapshot> contactInfo (){
-        return userInformationRepository.myContactsInfo();
-    }
-
     public String getUserId(){
         return userInformationRepository.getUserId();
     }

@@ -35,12 +35,11 @@ public class MyContactsFragment extends Fragment {
     private DatabaseReference contactsRef, usersRef;
     private FirebaseAuth auth;
     private String currentUserId;
-    private String profileImageE;
     private String userSector;
     private String userName;
 
 
-    String profileImage="default";
+    private String profileImage="default";
 
     public MyContactsFragment() {
     }

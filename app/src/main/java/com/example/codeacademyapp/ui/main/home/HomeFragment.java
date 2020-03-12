@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -33,6 +34,7 @@ public class HomeFragment extends BaseFragment {
     private View view;
     private HomeViewModel homeViewModel;
     private String getUrl;
+    private ProgressBar progressBar;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -53,7 +55,7 @@ public class HomeFragment extends BaseFragment {
                     browser.setBackgroundColor(Color.TRANSPARENT);
                     CardView cardView = view.findViewById(R.id.web_card_view);
 
-//                    browser.loadUrl(getUrl);
+                    browser.loadUrl(getUrl);
                     browser.setVisibility(View.VISIBLE);
                     cardView.setVisibility(View.VISIBLE);
                 } else {
@@ -76,6 +78,7 @@ public class HomeFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setTitle(R.string.home);
 
+        progressBar= view.findViewById(R.id.progress_circular_web);
         web_text = view.findViewById(R.id.home_enter_website_text);
         ok_btn = view.findViewById(R.id.home_ok_btn);
         ok_btn.setOnClickListener(new View.OnClickListener() {

@@ -5,23 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.databinding.ItemSingleTaskBinding;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +24,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     private Context context;
     private String userId;
     private String completedCheck;
-
     private TaskViewModel taskViewModel;
     private List<CompletedBy> completedByList;
-    private DatabaseReference myRef;
-
 
     public TaskAdapter(Context context, List<TaskInformation> tasks, String userId, TaskViewModel taskViewModel, String completedCheck) {
         this.tasks = tasks;
@@ -50,8 +39,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @Override
     public TaskAdapter.TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemSingleTaskBinding binding = ItemSingleTaskBinding.inflate(LayoutInflater.from(parent.getContext()));
-//        ItemSingleTaskBinding binding = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_single_task, parent, false);
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_single_task, parent, false);
         return new TaskViewHolder(binding);
     }
 
@@ -60,7 +47,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         final TaskInformation task = tasks.get(holder.getAdapterPosition());
 
         completedByList = new ArrayList<>();
-        List<CompletedBy> localCompletedByList = new ArrayList<>();
 
         holder.itemSingleTaskBinding.taskNameItem.setText(task.getName());
         holder.itemSingleTaskBinding.taskPriority.setText(task.getTaskPriority());
@@ -73,7 +59,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, task.getName()+"\n" + "\n" + task.getDescription());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, task.getName() + "\n" + "\n" + task.getDescription());
                 sendIntent.setType("text/plain");
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
@@ -139,7 +125,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
-       ItemSingleTaskBinding itemSingleTaskBinding;
+        ItemSingleTaskBinding itemSingleTaskBinding;
 
         TaskViewHolder(ItemSingleTaskBinding itemSingleTaskBinding) {
             super(itemSingleTaskBinding.getRoot());
