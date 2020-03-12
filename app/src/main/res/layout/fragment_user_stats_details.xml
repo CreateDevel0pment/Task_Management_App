@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.main.sector.task.fragment.UserStatsDetailsFragment">
+
+    <TextView
+        android:textColor="@color/colorPrimaryDarkMode"
+        android:id="@+id/user_name_stats_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="26sp" />
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/tasks_stats_chart"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+         />
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/pie_chart_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/pie_chart_data"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/text_below_pieChartImg"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimaryDarkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Data for this user is not available."
+        android:layout_below="@id/pie_chart_img"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</RelativeLayout>

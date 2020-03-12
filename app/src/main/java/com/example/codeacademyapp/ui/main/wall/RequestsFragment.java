@@ -10,13 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.data.model.ModelFirebase;
+import com.example.codeacademyapp.data.model.UserModelFirebase;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -80,15 +79,15 @@ public class RequestsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        final FirebaseRecyclerOptions<ModelFirebase> options =
-                new FirebaseRecyclerOptions.Builder<ModelFirebase>()
-                        .setQuery(chat_request_ref.child(currentUserId), ModelFirebase.class)
+        final FirebaseRecyclerOptions<UserModelFirebase> options =
+                new FirebaseRecyclerOptions.Builder<UserModelFirebase>()
+                        .setQuery(chat_request_ref.child(currentUserId), UserModelFirebase.class)
                         .build();
 
-        final FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder> adapter =
-                new FirebaseRecyclerAdapter<ModelFirebase, RequestsContactsHolder>(options) {
+        final FirebaseRecyclerAdapter<UserModelFirebase, RequestsContactsHolder> adapter =
+                new FirebaseRecyclerAdapter<UserModelFirebase, RequestsContactsHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final ModelFirebase model) {
+                    protected void onBindViewHolder(@NonNull final RequestsContactsHolder holder, int position, @NonNull final UserModelFirebase model) {
 
                         list_user_id = getRef(position).getKey();
 

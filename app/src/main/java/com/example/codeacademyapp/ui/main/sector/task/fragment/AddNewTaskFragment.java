@@ -39,17 +39,11 @@ import java.util.Calendar;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener, DatePickerDialogListener {
 
     private EditText task_name, task_description;
     private Button create_task;
-    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef, assignedUserRef;
     private FirebaseUser userFb;
     private String userID, userGroup, taskPriority, userName, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
@@ -59,9 +53,8 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     private TextView assignedUserNameTV;
     private String assignedUserId;
     private CheckBox checkBoxSectorProject;
-    private CardView assignUserCardView, checkBoxCardView;
     private TaskNotificationViewModel taskNotificationViewModel;
-    private String  userPostition;
+
 
     public AddNewTaskFragment(String userName, String extrasUserId) {
         this.extrasUserName = userName;
@@ -85,8 +78,8 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task_description = rootView.findViewById(R.id.task_desc);
         assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
         checkBoxSectorProject = rootView.findViewById(R.id.create_sector_project_checkbox);
-        assignUserCardView = rootView.findViewById(R.id.assigned_user_card);
-        checkBoxCardView = rootView.findViewById(R.id.cardView_CheckBox);
+        CardView assignUserCardView = rootView.findViewById(R.id.assigned_user_card);
+        CardView checkBoxCardView = rootView.findViewById(R.id.cardView_CheckBox);
 
         if (extrasUserName != null) {
             assignedUserNameTV.setText(extrasUserName);
@@ -120,8 +113,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
         currentDate = currentDateFormat.format(calForDate.getTime());
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -155,6 +147,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
                 }
             }
         });
+
 
         priorityBtnMedium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -235,7 +228,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     public void passListOfUsersToAddNewTaskFragment(String userID) {
         this.assignedUserId = userID;
 
-        assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
+        DatabaseReference assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
         assignedUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

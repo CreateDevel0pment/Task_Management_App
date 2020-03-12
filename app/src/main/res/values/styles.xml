@@ -1,5 +1,5 @@
 <resources>
-    <style name="DarkAppTheme" parent="Theme.MaterialComponents.NoActionBar" >
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar" >
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkMode</item>
         <item name="colorAccent">@color/AccentColor</item>
@@ -9,10 +9,7 @@
         <item name="android:colorBackground">@color/colorPrimaryDarkMode</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="bottomNavigationStyle">@style/BottomNavStyleDark</item>
-
     </style>
-
-
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>

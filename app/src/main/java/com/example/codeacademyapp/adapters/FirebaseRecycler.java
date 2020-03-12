@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.data.model.ModelFirebase;
+import com.example.codeacademyapp.data.model.UserModelFirebase;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.UserByIdFragment;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
@@ -21,19 +21,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.example.codeacademyapp.utils.Constants.USER_BY_ID;
 
 public class FirebaseRecycler extends
-        com.firebase.ui.database.FirebaseRecyclerAdapter<ModelFirebase,
+        com.firebase.ui.database.FirebaseRecyclerAdapter<UserModelFirebase,
                 FirebaseRecycler.FindFriendsViewHolder> {
 
     private FragmentManager fragmentManager;
 
 
-    public FirebaseRecycler(@NonNull FirebaseRecyclerOptions<ModelFirebase> options, FragmentManager fragmentManager) {
+    public FirebaseRecycler(@NonNull FirebaseRecyclerOptions<UserModelFirebase> options, FragmentManager fragmentManager) {
         super(options);
         this.fragmentManager=fragmentManager;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final FindFriendsViewHolder holder, int position, @NonNull ModelFirebase model) {
+    protected void onBindViewHolder(@NonNull final FindFriendsViewHolder holder, int position, @NonNull UserModelFirebase model) {
 
         holder.userNAme.setText(model.Name);
         holder.userGroup.setText(model.Sector);

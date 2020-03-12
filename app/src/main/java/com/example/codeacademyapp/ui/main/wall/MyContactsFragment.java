@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.data.model.ModelFirebase;
+import com.example.codeacademyapp.data.model.UserModelFirebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,14 +61,14 @@ public class MyContactsFragment extends Fragment {
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         FirebaseRecyclerOptions options =
-                new FirebaseRecyclerOptions.Builder<ModelFirebase>()
-                        .setQuery(contactsRef, ModelFirebase.class)
+                new FirebaseRecyclerOptions.Builder<UserModelFirebase>()
+                        .setQuery(contactsRef, UserModelFirebase.class)
                         .build();
 
-        FirebaseRecyclerAdapter<ModelFirebase, MyContactsHolder> adapter =
-                new FirebaseRecyclerAdapter<ModelFirebase, MyContactsHolder>(options) {
+        FirebaseRecyclerAdapter<UserModelFirebase, MyContactsHolder> adapter =
+                new FirebaseRecyclerAdapter<UserModelFirebase, MyContactsHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final MyContactsHolder holder, int position, @NonNull final ModelFirebase model) {
+                    protected void onBindViewHolder(@NonNull final MyContactsHolder holder, int position, @NonNull final UserModelFirebase model) {
 
                         final String usersIds = getRef(position).getKey();
 

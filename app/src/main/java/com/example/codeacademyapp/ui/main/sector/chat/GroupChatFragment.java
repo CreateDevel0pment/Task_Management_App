@@ -316,8 +316,6 @@ public class GroupChatFragment extends BaseFragment {
                 returnCursor.moveToFirst();
 
                 String fileName = returnCursor.getString(nameIndex);
-
-
                 groupChatViewModel.saveDocFromGroupChat(userID, currentUserName, userGroup, userImage, uri, checker, fileName, currentDate, currentTime);
             }
 

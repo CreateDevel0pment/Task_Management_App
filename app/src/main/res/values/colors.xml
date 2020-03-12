@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#dadfe9</color>
-    <color name="colorPrimaryDarkMode">#333333</color>
+    <color name="colorPrimaryDarkMode">#444444</color>
     <color name="colorPrimaryLightMode">#0f4c81</color>
     <color name="AccentColor">#edb705</color>
     <color name="AccentColorLight">#dadfe9</color>
@@ -10,6 +10,7 @@
     <color name="red">#E53935</color>
     <color name="green">#00897B</color>
     <color name="orange">#FFB300</color>
+    <color name="black">#000000</color>
     <color name="text_dark_grey">#424242</color>
     <color name="recyclerview_grey_background">#888888</color>
 

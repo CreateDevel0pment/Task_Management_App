@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.FirebaseRecycler;
-import com.example.codeacademyapp.data.model.ModelFirebase;
+import com.example.codeacademyapp.data.model.UserModelFirebase;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,9 +33,9 @@ public class AllContactsFragment extends Fragment {
                 .getReference()
                 .child("Users");
 
-        FirebaseRecyclerOptions<ModelFirebase> options =
-                new FirebaseRecyclerOptions.Builder<ModelFirebase>()
-                        .setQuery(usersRef, ModelFirebase.class)
+        FirebaseRecyclerOptions<UserModelFirebase> options =
+                new FirebaseRecyclerOptions.Builder<UserModelFirebase>()
+                        .setQuery(usersRef, UserModelFirebase.class)
                         .build();
 
         adapter = new FirebaseRecycler(options, getFragmentManager());

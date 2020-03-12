@@ -1,5 +1,7 @@
 package com.example.codeacademyapp.data.repository;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,11 +14,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class GetUserInformationRepository {
 
     private FirebaseAuth auth;
     private DatabaseReference myRef;
     private String currentUserId;
+    private Integer completedTasksCount, personalTasksCount;
+
 
 
     public MutableLiveData<DataSnapshot> getUserInformation() {
@@ -49,6 +55,47 @@ public class GetUserInformationRepository {
         String userId=auth.getCurrentUser().getUid();
 
         return userId;
+    }
+
+    public MutableLiveData<Integer> getUserTasksStats (String userId){
+        final MutableLiveData<Integer> getUserTasksStats = new MutableLiveData<>();
+
+        DatabaseReference personalTasksRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Tasks");
+        personalTasksRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               Integer tasksCount = (int) dataSnapshot.getChildrenCount();
+               getUserTasksStats.setValue(tasksCount);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        });
+
+        return getUserTasksStats;
+    }
+    public MutableLiveData<Integer> getUserCompletedTasksStats (String userId){
+        final MutableLiveData<Integer> getUserCompletedTasksStats = new MutableLiveData<>();
+
+        DatabaseReference personalTasksRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("CompletedTasks");
+        personalTasksRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               Integer tasksCount = (int) dataSnapshot.getChildrenCount();
+               getUserCompletedTasksStats.setValue(tasksCount);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
+            }
+        });
+
+        return getUserCompletedTasksStats;
     }
 
 

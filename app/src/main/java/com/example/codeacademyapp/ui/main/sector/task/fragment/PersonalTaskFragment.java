@@ -2,6 +2,7 @@ package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -40,7 +43,6 @@ public class PersonalTaskFragment extends Fragment {
 
     private List<TaskInformation> tasks;
     private List<CompletedBy> completedByList;
-    private DatabaseReference myRef;
 
     private TaskViewModel taskViewModel;
     private UserInformationViewModel userInformationViewModel;
@@ -79,7 +81,7 @@ public class PersonalTaskFragment extends Fragment {
         completedByList = new ArrayList<>();
         assignedUsersList = new ArrayList<>();
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Tasks");
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Tasks");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -127,7 +129,7 @@ public class PersonalTaskFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
 
