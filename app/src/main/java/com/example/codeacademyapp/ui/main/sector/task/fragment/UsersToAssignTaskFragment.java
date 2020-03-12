@@ -51,8 +51,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.colorPrimary)));
         }
 
-
-
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
         usersListRV = rootView.findViewById(R.id.users_list_task_toAssign_RV);
         usersListRV.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -101,8 +99,7 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             @Override
             public FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_users_list, parent, false);
-                FindFriendsViewHolder viewHolder = new FindFriendsViewHolder(view);
-                return viewHolder;
+                return new FindFriendsViewHolder(view);
             }
     };
         usersListRV.setAdapter(adapter);
@@ -119,7 +116,6 @@ public class UsersToAssignTaskFragment extends DialogFragment{
             userNAme=itemView.findViewById(R.id.user_profile_name);
             userGroup=itemView.findViewById(R.id.user_group);
             profileImage=itemView.findViewById(R.id.users_profile_image);
-
 
         }
     }

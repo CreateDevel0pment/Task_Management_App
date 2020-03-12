@@ -41,8 +41,6 @@ public class ViewAllTaskFragment extends Fragment {
 
     private List<TaskInformation> tasks;
     private DatabaseReference myRef;
-    private List<AssignedUsers> assignedUsersList;
-    private List<CompletedBy> completedByList;
     private TaskAdapter taskAdapter;
 
     private TaskViewModel taskViewModel;
@@ -73,8 +71,6 @@ public class ViewAllTaskFragment extends Fragment {
                     userSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                 }
 
-                assignedUsersList = new ArrayList<>();
-                completedByList = new ArrayList<>();
                 rvTasks = rootView.findViewById(R.id.task_list_RV);
                 tasks = new ArrayList<>();
                 myRef = FirebaseDatabase.getInstance().getReference().child("Tasks").child("GroupTasks").child(userSector);
@@ -86,16 +82,13 @@ public class ViewAllTaskFragment extends Fragment {
 
                         for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
-                            assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
-                            completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
-                            String description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
-                            String group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
-                            String name = taskDataSnapshot.getValue(TaskInformation.class).getName();
-                            String timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
-                            String taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
-                            String endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
-                            String taskRef = taskDataSnapshot.getValue(TaskInformation.class).getTaskRef();
-
+                            String description = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDescription();
+                            String group = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getSector();
+                            String name = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getName();
+                            String timeCreated = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTimeCreated();
+                            String taskPriority = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskPriority();
+                            String endDate = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getEndDate();
+                            String taskRef = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskRef();
 
                             TaskInformation task = new TaskInformation(name, description,
                                     group, timeCreated, taskPriority, endDate, taskRef);
@@ -122,7 +115,7 @@ public class ViewAllTaskFragment extends Fragment {
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                             rvTasks.setLayoutManager(layoutManager);
                             String completedCheck = "completeGONE";
-                            taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
+                            taskAdapter = new TaskAdapter(getContext(), tasks, userId, taskViewModel, completedCheck);
                             taskAdapter.notifyDataSetChanged();
                             rvTasks.setAdapter(taskAdapter);
                         }

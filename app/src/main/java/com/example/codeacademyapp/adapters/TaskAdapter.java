@@ -38,7 +38,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     private DatabaseReference myRef;
 
 
-    public TaskAdapter(Context context, List<TaskInformation> tasks, FragmentManager fragmentManager, String userId, TaskViewModel taskViewModel, String completedCheck) {
+    public TaskAdapter(Context context, List<TaskInformation> tasks, String userId, TaskViewModel taskViewModel, String completedCheck) {
         this.tasks = tasks;
         this.context = context;
         this.userId = userId;

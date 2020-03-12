@@ -35,6 +35,9 @@
     <string name="add_title">Add Title</string>
     <string name="created">Created:</string>
 
+    <string name="update_your_website_here">Update your website here</string>
+    <string name="https_myweb_com">https://myweb.com</string>
+
 
     <string-array name="Sector">
         <item>Choose Sector - </item>

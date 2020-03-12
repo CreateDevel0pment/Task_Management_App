@@ -26,9 +26,7 @@ public class DatePickerDialogFragment extends DialogFragment {
 
 
     public DatePickerDialogFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

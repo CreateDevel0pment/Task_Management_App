@@ -1,15 +1,14 @@
 package com.example.codeacademyapp.ui.main.sector.task;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.AddNewTaskFragment;
@@ -20,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class TaskActivity extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class TaskActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if(dataSnapshot.exists()){
-                        userName = dataSnapshot.getValue().toString();
+                        userName = Objects.requireNonNull(dataSnapshot.getValue()).toString();
                         AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment(userName, userID);
                         FragmentManager manager = getSupportFragmentManager();
                         manager.beginTransaction()

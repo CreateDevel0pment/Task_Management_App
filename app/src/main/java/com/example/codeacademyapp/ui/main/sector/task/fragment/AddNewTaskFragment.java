@@ -8,12 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,9 +21,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.Task;
+import com.example.codeacademyapp.ui.main.sector.task.TaskNotificationViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.DatePickerDialogListener;
-import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.UsersToAssignDialogListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,23 +34,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogListener, DatePickerDialogListener {
+public class AddNewTaskFragment extends Fragment implements DatePickerDialogListener {
 
     private EditText task_name, task_description;
-    private Button create_task;
-    private FirebaseAuth mAuth;
-    private FirebaseUser userFb;
-    private String userID, userGroup, taskPriority, userName, extrasUserName, extrasUserId;
+    private String userID, userGroup, taskPriority, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
-    private Task task;
     private View rootView;
     private String currentDate, endDate;
-    private TextView assignedUserNameTV;
-    private String assignedUserId;
-    private CheckBox checkBoxSectorProject;
     private TaskNotificationViewModel taskNotificationViewModel;
 
 
@@ -65,7 +57,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         if (rootView != null) {
@@ -76,8 +68,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
-        assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
-        checkBoxSectorProject = rootView.findViewById(R.id.create_sector_project_checkbox);
+        TextView assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
         CardView assignUserCardView = rootView.findViewById(R.id.assigned_user_card);
         CardView checkBoxCardView = rootView.findViewById(R.id.cardView_CheckBox);
 
@@ -98,11 +89,11 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             }
         });
 
-        create_task = rootView.findViewById(R.id.create_task_btn);
+        Button create_task = rootView.findViewById(R.id.create_task_btn);
 
         taskViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskViewModel.class);
-        mAuth = FirebaseAuth.getInstance();
-        userFb = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser userFb = mAuth.getCurrentUser();
         if (userFb != null) {
             userID = userFb.getUid();
         }
@@ -119,8 +110,7 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    userGroup = dataSnapshot.child("Sector").getValue().toString();
-
+                    userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                 }
             }
 
@@ -135,7 +125,6 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         RadioButton priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
         RadioButton priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
 
-        RadioGroup priorityRadioGroup = rootView.findViewById(R.id.priority_radioGroup);
 
         priorityBtnHigh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -174,14 +163,13 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTaskValues();
-                if (assignedUserId != null || extrasUserId != null) {
-                    taskViewModel.createAssignedTask(task);
 
+                if (extrasUserId != null) {
+                    taskViewModel.createAssignedTask(setTaskValues());
                 } else {
-                    taskViewModel.createGroupTask(task);
+                    taskViewModel.createGroupTask(setTaskValues());
                 }
-                getActivity().onBackPressed();
+                Objects.requireNonNull(getActivity()).onBackPressed();
             }
         });
 
@@ -190,21 +178,14 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
 
     private void showDatePickerDialog() {
         DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
-        datePickerDialogFragment.show(getFragmentManager(), "date_picker_fragemnt");
+        assert getFragmentManager() != null;{
+            datePickerDialogFragment.show(getFragmentManager(), "date_picker_fragment");
+        }
         datePickerDialogFragment.setTargetFragment(AddNewTaskFragment.this, 300);
     }
 
-    private void showUsersListDialog() {
-
-        UsersToAssignTaskFragment usersToAssignTaskFragment = new UsersToAssignTaskFragment();
-        usersToAssignTaskFragment.show(getFragmentManager(), "fragment_alert");
-        usersToAssignTaskFragment.onDestroy();
-        usersToAssignTaskFragment.setTargetFragment(AddNewTaskFragment.this, 300);
-    }
-
-
-    private void setTaskValues() {
-        task = new Task();
+    private Task setTaskValues() {
+        Task task = new Task();
         task.setName(task_name.getText().toString());
         task.setDescription(task_description.getText().toString());
         task.setStart_date(currentDate);
@@ -213,37 +194,12 @@ public class AddNewTaskFragment extends Fragment implements UsersToAssignDialogL
         task.setEndDate(endDate);
         if (extrasUserId != null) {
             task.setAssignedUserId(extrasUserId);
-        } else {
-            task.setAssignedUserId(assignedUserId);
         }
 
         if (extrasUserId!=null){
             taskNotificationViewModel.sendTaskNotification(userID, extrasUserId);
         }
-
-
-    }
-
-    @Override
-    public void passListOfUsersToAddNewTaskFragment(String userID) {
-        this.assignedUserId = userID;
-
-        DatabaseReference assignedUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(assignedUserId);
-        assignedUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    userName = dataSnapshot.child("Name").getValue().toString();
-                    assignedUserNameTV.setText(userName);
-                    checkBoxSectorProject.setChecked(false);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-
+        return task;
     }
 
     @Override

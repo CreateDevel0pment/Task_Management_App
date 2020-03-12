@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
@@ -31,11 +33,8 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class TaskTabsFragment extends Fragment {
 
-    private TabLayout tabLayout;
     private ViewPager viewPager;
-    private UserInformationViewModel userInformationViewModel;
     private String userPosition;
-    private int completedTasksCount, personalTasksCount;
 
 
     private FloatingActionButton userStatsFloatingBtn;
@@ -46,7 +45,7 @@ public class TaskTabsFragment extends Fragment {
     private View rootView;
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         if (rootView != null) {
@@ -55,7 +54,7 @@ public class TaskTabsFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_task_tabs, container, false);
 
-        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        UserInformationViewModel userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
         String userID = userInformationViewModel.getUserId();
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
@@ -64,7 +63,7 @@ public class TaskTabsFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
-                    userPosition = dataSnapshot.child("Position").getValue().toString();
+                    userPosition = Objects.requireNonNull(dataSnapshot.child("Position").getValue()).toString();
 
                     if (userPosition.equals("Manager")) {
 
@@ -73,6 +72,7 @@ public class TaskTabsFragment extends Fragment {
                             @Override
                             public void onClick(View v) {
                                 UserStatisticsFragment statisticsFragment = new UserStatisticsFragment();
+                                assert getFragmentManager() != null;
                                 getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, statisticsFragment)
                                         .commit();
 
@@ -90,8 +90,9 @@ public class TaskTabsFragment extends Fragment {
             }
         });
 
-        tabLayout = rootView.findViewById(R.id.tab_layout_new_tasks);
+        TabLayout tabLayout = rootView.findViewById(R.id.tab_layout_new_tasks);
         viewPager = rootView.findViewById(R.id.view_pager_new_tasks);
+        assert getFragmentManager() != null;
         NewTaskPagerAdapter adapter = new NewTaskPagerAdapter(getFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 

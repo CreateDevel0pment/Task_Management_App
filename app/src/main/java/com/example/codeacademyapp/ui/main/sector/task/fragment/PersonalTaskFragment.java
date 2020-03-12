@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.TaskAdapter;
-import com.example.codeacademyapp.data.model.AssignedUsers;
-import com.example.codeacademyapp.data.model.CompletedBy;
 import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.ui.main.sector.task.QuoteViewModel;
@@ -33,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -42,26 +41,21 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class PersonalTaskFragment extends Fragment {
 
     private List<TaskInformation> tasks;
-    private List<CompletedBy> completedByList;
 
     private TaskViewModel taskViewModel;
-    private UserInformationViewModel userInformationViewModel;
     private QuoteViewModel quoteViewModel;
 
     private RecyclerView rvPersonalTasks;
     private String userId;
-    private String name, group, note, timeCreated, taskPriority, description, endDate;
-    private String id, completedCheck, userSector;
-    View rootView;
-
-    private List<AssignedUsers> assignedUsersList;
+    private String name, group, timeCreated, taskPriority, description, endDate;
+    private View rootView;
 
     public PersonalTaskFragment() {
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         if (rootView != null) {
@@ -71,15 +65,14 @@ public class PersonalTaskFragment extends Fragment {
 
         rvPersonalTasks = rootView.findViewById(R.id.personal_task_list_RV);
 
-        userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        UserInformationViewModel userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
         userId = userInformationViewModel.getUserId();
 
         quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
         tasks = new ArrayList<>();
-        completedByList = new ArrayList<>();
-        assignedUsersList = new ArrayList<>();
+
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Tasks");
 
@@ -89,16 +82,13 @@ public class PersonalTaskFragment extends Fragment {
                 tasks.clear();
                 for (DataSnapshot taskDataSnapshot : dataSnapshot.getChildren()) {
 
-
-                    completedByList = taskDataSnapshot.getValue(TaskInformation.class).getCompletedBy();
-                    assignedUsersList = taskDataSnapshot.getValue(TaskInformation.class).getAssignedUsers();
-                    description = taskDataSnapshot.getValue(TaskInformation.class).getDescription();
-                    group = taskDataSnapshot.getValue(TaskInformation.class).getSector();
-                    name = taskDataSnapshot.getValue(TaskInformation.class).getName();
-                    timeCreated = taskDataSnapshot.getValue(TaskInformation.class).getTimeCreated();
-                    taskPriority = taskDataSnapshot.getValue(TaskInformation.class).getTaskPriority();
-                    endDate = taskDataSnapshot.getValue(TaskInformation.class).getEndDate();
-                    String taskRef = taskDataSnapshot.getValue(TaskInformation.class).getTaskRef();
+                    description = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDescription();
+                    group = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getSector();
+                    name = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getName();
+                    timeCreated = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTimeCreated();
+                    taskPriority = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskPriority();
+                    endDate = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getEndDate();
+                    String taskRef = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskRef();
 
                     TaskInformation task =
                             new TaskInformation(name, description, group, timeCreated, taskPriority, endDate, taskRef);
@@ -122,7 +112,7 @@ public class PersonalTaskFragment extends Fragment {
 
                 } else {
                     String completedCheck = "";
-                    TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, getFragmentManager(), userId, taskViewModel, completedCheck);
+                    TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, userId, taskViewModel, completedCheck);
                     rvPersonalTasks.setAdapter(taskAdapter);
                 }
             }

@@ -8,28 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.UserModelFirebase;
-import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,10 +35,8 @@ public class UserStatisticsFragment extends Fragment {
     private String selectedUserId;
     private int personalTasksCount, completedTasksCount;
 
-
     public UserStatisticsFragment() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,8 +46,6 @@ public class UserStatisticsFragment extends Fragment {
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
         usersListRV = view.findViewById(R.id.users_list_stats_rv);
         usersListRV.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
 
         return view;
     }
@@ -83,7 +71,6 @@ public class UserStatisticsFragment extends Fragment {
                         .placeholder(R.drawable.astronaut)
                         .into(holder.profileImage);
 
-
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -95,8 +82,9 @@ public class UserStatisticsFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 personalTasksCount = (int) dataSnapshot.child("Tasks").getChildrenCount();
                                 completedTasksCount = (int) dataSnapshot.child("CompletedTasks").getChildrenCount();
-                                UserStatsDetailsFragment statsDetailsFragment = new UserStatsDetailsFragment(selectedUserId, model.Name,
+                                UserStatsDetailsFragment statsDetailsFragment = new UserStatsDetailsFragment(model.Name,
                                         completedTasksCount, personalTasksCount);
+                                assert getFragmentManager() != null;
                                 getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, statsDetailsFragment)
                                         .commit();
                             }
@@ -106,7 +94,6 @@ public class UserStatisticsFragment extends Fragment {
                                 Log.w(TAG, "Failed to read value.", databaseError.toException());
                             }
                         });
-
                     }
                 });
             }
@@ -115,8 +102,7 @@ public class UserStatisticsFragment extends Fragment {
             @Override
             public UserStatisticsFragment.FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_users_list, parent, false);
-                UserStatisticsFragment.FindFriendsViewHolder viewHolder = new UserStatisticsFragment.FindFriendsViewHolder(view);
-                return viewHolder;
+                return new FindFriendsViewHolder(view);
             }
         };
         usersListRV.setAdapter(adapter);
@@ -129,11 +115,8 @@ public class UserStatisticsFragment extends Fragment {
 
         FindFriendsViewHolder(@NonNull View itemView) {
             super(itemView);
-
             userNAme=itemView.findViewById(R.id.user_profile_name);
             profileImage=itemView.findViewById(R.id.users_profile_image);
-
-
         }
     }
 }
