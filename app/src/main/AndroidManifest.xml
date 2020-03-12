@@ -13,7 +13,6 @@
         android:roundIcon="@drawable/logoworkers"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.edit_find.SettingsActivity"></activity>
         <activity android:name=".ui.main.home.HomeSettings" />
         <activity
             android:name=".ui.main.wall.PrivateChatActivity"

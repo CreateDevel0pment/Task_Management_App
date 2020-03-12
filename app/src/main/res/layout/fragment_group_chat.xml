@@ -49,6 +49,15 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_attach_file"
             android:background="@android:color/transparent"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:visibility="gone"
+            android:id="@+id/new_task_button"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/AccentColor"
+            android:src="@drawable/assignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <androidx.cardview.widget.CardView
             app:cardElevation="10dp"
@@ -80,15 +89,7 @@
             android:src="@drawable/ic_send"
             android:background="@android:color/transparent"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:visibility="gone"
-            android:id="@+id/new_task_button"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="8dp"
-            android:backgroundTint="@color/AccentColor"
-            android:src="@drawable/assignment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
 
 
     </LinearLayout>

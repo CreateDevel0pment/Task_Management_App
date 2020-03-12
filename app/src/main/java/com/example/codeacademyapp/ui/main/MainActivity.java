@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.ui.main.edit_find.SettingsActivity;
 import com.example.codeacademyapp.ui.main.edit_find.edit.EditProfileActivity;
 import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActivity;
 import com.example.codeacademyapp.ui.main.home.HomeFragment;
@@ -44,11 +43,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         boolean darkModeEnabled = sharedPreferences.getBoolean("dark_mode_on_off", true);
-//        View view = findViewById(R.id.activity_main_layout);
-//        view.setBackgroundColor(EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled));
-////        bottomNav.setBackgroundColor(ContextCompat.getColor(this, EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled)));
-//        toolbar.setBackgroundColor(ContextCompat.getColor(this, EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled)));
-//        this.setTheme(EnableDarkModeUtil.enableDarkModePrimary(darkModeEnabled));
 
         if(darkModeEnabled){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -137,10 +131,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.edit_home:
                 Intent intentSettingsHome = new Intent(MainActivity.this, HomeSettings.class);
                 startActivity(intentSettingsHome);
-                break;
-                case R.id.settings:
-                Intent intentSettings = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(intentSettings);
             default:
                 return false;
         }

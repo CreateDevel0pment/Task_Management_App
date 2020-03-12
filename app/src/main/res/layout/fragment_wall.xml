@@ -28,6 +28,16 @@
         android:layout_alignParentStart="true"
         android:id="@+id/my_linear_layout">
 
+
+        <ImageButton
+            android:layout_weight="1"
+            android:id="@+id/upload_file_btn"
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_attach_file"
+            android:background="@android:color/transparent"/>
+
         <androidx.cardview.widget.CardView
             app:cardElevation="10dp"
             android:layout_weight="8"
@@ -48,6 +58,7 @@
 
         </androidx.cardview.widget.CardView>
 
+
         <ImageButton
             android:layout_margin="8dp"
             android:layout_weight="1"
@@ -59,14 +70,6 @@
             android:background="@android:color/transparent"/>
 
 
-        <ImageButton
-            android:layout_weight="1"
-            android:id="@+id/upload_file_btn"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_attach_file"
-            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -35,6 +35,7 @@ public class HomeFragment extends BaseFragment {
     private HomeViewModel homeViewModel;
     private String getUrl;
     private ProgressBar progressBar;
+    private WebView browser;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -51,7 +52,7 @@ public class HomeFragment extends BaseFragment {
                 if (dataSnapshot.exists()) {
                     getUrl = dataSnapshot.getValue().toString();
 
-                    WebView browser = view.findViewById(R.id.home_web_view);
+                    browser = view.findViewById(R.id.home_web_view);
                     browser.setBackgroundColor(Color.TRANSPARENT);
                     CardView cardView = view.findViewById(R.id.web_card_view);
 
@@ -60,6 +61,7 @@ public class HomeFragment extends BaseFragment {
                     cardView.setVisibility(View.VISIBLE);
                 } else {
                     web_layout.setVisibility(View.VISIBLE);
+
                 }
             }
         });
@@ -74,6 +76,7 @@ public class HomeFragment extends BaseFragment {
         if (view != null) {
             return view;
         }
+
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setTitle(R.string.home);

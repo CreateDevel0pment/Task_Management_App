@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:text="reciever_sector"
         android:visibility="gone"
-        android:textColor="#8D00C1"
+        android:textColor="@color/recyclerview_grey_background"
         android:layout_marginStart="4dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/reciever_name"
