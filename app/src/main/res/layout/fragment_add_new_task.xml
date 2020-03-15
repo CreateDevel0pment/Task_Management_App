@@ -218,7 +218,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/create_task_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

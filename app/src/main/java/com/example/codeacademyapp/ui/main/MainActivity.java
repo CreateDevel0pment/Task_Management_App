@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         switchToFragment(new HomeFragment(), R.id.home_container);
                         break;
-                    case R.id.academy_wall:
+                    case R.id.wall:
                         switchToFragment(new WallTabFragment(), R.id.wall_container);
                         break;
                     case R.id.sector:

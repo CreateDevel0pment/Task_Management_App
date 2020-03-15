@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp"
-    android:background="@color/colorPrimaryDarkMode"
+    android:background="#00FFFFFF"
     android:orientation="vertical">
 
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.AddNewTaskFragment;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.TaskTabsFragment;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.UserStatisticsFragment;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,13 +47,14 @@ public class TaskActivity extends AppCompatActivity {
 
         final String userID = getIntent().getStringExtra("id");
         final String taskType = getIntent().getStringExtra("type");
+        final String openStatsFragCheck = getIntent().getStringExtra("openStatsFrag");
 
-        if(userID!=null){
+        if (userID != null) {
             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Name");
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists()){
+                    if (dataSnapshot.exists()) {
                         userName = Objects.requireNonNull(dataSnapshot.getValue()).toString();
                         AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment(userName, userID);
                         FragmentManager manager = getSupportFragmentManager();
@@ -68,16 +70,19 @@ public class TaskActivity extends AppCompatActivity {
 
                 }
             });
-        } else if (taskType!=null){
+        } else if (taskType != null) {
             AddNewTaskFragment addNewTaskFragment = new AddNewTaskFragment(null, null);
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction()
                     .replace(R.id.task_fragments_container, addNewTaskFragment)
                     .commit();
             toolbar.setTitle("Create project");
-        }
+        } else if (openStatsFragCheck != null) {
 
-         else {
+            UserStatisticsFragment statisticsFragment = new UserStatisticsFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.task_fragments_container, statisticsFragment)
+                    .commit();
+        } else {
             TaskTabsFragment taskTabsFragment = new TaskTabsFragment();
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction()

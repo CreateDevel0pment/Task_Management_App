@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/gradient"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     tools:context=".ui.main.wall.WallFragment">
@@ -12,31 +12,29 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDarkMode"
         android:layout_above="@id/my_linear_layout"
         android:id="@+id/group_chat_recycler"/>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorPrimaryDarkMode"
         android:weightSum="10"
-        android:padding="8dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:id="@+id/my_linear_layout">
 
 
-        <ImageButton
+        <ImageView
             android:layout_weight="1"
             android:id="@+id/upload_file_btn"
-            android:layout_width="0dp"
+            android:layout_width="35dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_attach_file"
-            android:background="@android:color/transparent"/>
+            android:layout_height="35dp"
+            android:src="@drawable/attach"
+           />
 
         <androidx.cardview.widget.CardView
             app:cardElevation="10dp"
@@ -52,7 +50,7 @@
                 android:padding="8dp"
                 android:hint="@string/write_message"
                 android:textColor="@color/colorPrimaryDarkMode"
-                android:background="@color/colorPrimary"
+                android:background="@android:color/white"
                 android:textColorHint="@android:color/darker_gray"
                 android:id="@+id/input_user_message"/>
 

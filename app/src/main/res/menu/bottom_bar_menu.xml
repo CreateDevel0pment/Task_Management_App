@@ -4,19 +4,18 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home_ic"
-        android:title="Home"
-        />
+        android:title="@string/home" />
     <item
-        android:id="@+id/academy_wall"
+        android:id="@+id/wall"
         android:icon="@drawable/group_people_ic"
-        android:title="Wall" />
+        android:title="@string/wall" />
     <item
         android:id="@+id/sector"
         android:icon="@drawable/group_chat"
-        android:title="My Sector" />
+        android:title="@string/my_sector" />
     <item
         android:id="@+id/tasks"
         android:icon="@drawable/assignment"
-        android:title="Tasks" />
+        android:title="@string/tasks" />
 
 </menu>

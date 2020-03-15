@@ -34,7 +34,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_margin="8dp"
-            android:src="@drawable/profile_image" />
+            android:src="@drawable/astronaut" />
 
         <LinearLayout
             android:layout_width="match_parent"

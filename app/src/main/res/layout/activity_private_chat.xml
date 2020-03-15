@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".ui.main.wall.PrivateChatActivity">
 
     <LinearLayout
@@ -30,12 +31,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDarkMode"
         android:layout_below="@+id/private_chat_toolbar"
         android:id="@+id/private_message_list"/>
 
     </LinearLayout>
-
 
 
     <LinearLayout
@@ -43,7 +42,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="@color/colorPrimaryDarkMode"
         android:weightSum="10"
         android:padding="8dp"
         android:layout_alignParentBottom="true"
@@ -89,7 +87,7 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="2dp"
             android:backgroundTint="@color/AccentColor"
-            android:src="@drawable/assignment"
+            android:src="@drawable/new_task"
             />
 
     </LinearLayout>

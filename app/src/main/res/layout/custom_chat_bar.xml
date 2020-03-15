@@ -11,7 +11,7 @@
         android:layout_height="75dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/profile_image"
+        android:src="@drawable/astronaut"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"

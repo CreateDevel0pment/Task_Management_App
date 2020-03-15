@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
+import com.example.codeacademyapp.data.model.Task;
+import com.example.codeacademyapp.ui.main.MainActivity;
+import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,9 +53,6 @@ public class TaskTabsFragment extends BaseFragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if (rootView != null) {
-            return rootView;
-        }
 
         rootView = inflater.inflate(R.layout.fragment_task_tabs, container, false);
 
@@ -72,13 +73,9 @@ public class TaskTabsFragment extends BaseFragment {
                         userStatsFloatingBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
-                                UserStatisticsFragment statisticsFragment = new UserStatisticsFragment();
-
-                                assert getFragmentManager() != null;
-                                getChildFragmentManager().beginTransaction()
-                                        .replace(R.id.task_fragments_container, statisticsFragment)
-                                        .commit();
+                                Intent intent = new Intent(getContext(), TaskActivity.class);
+                                intent.putExtra("openStatsFrag", "openStatsFrag");
+                                startActivity(intent);
 
                             }
                         });
@@ -115,6 +112,7 @@ public class TaskTabsFragment extends BaseFragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
         });
 

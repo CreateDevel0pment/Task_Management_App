@@ -129,7 +129,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
 
         Picasso.get().load(user_image)
-                .placeholder(R.drawable.profile_image)
+                .placeholder(R.drawable.astronaut)
                 .into(iserImage);
 
         send_message_btn.setOnClickListener(new View.OnClickListener() {

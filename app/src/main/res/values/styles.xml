@@ -1,5 +1,5 @@
 <resources>
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar" >
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkMode</item>
         <item name="colorAccent">@color/AccentColor</item>
@@ -8,7 +8,6 @@
         <item name="colorSecondary">@color/text_dark_grey</item>
         <item name="android:colorBackground">@color/colorPrimaryDarkMode</item>
         <item name="android:windowDisablePreview">true</item>
-        <item name="bottomNavigationStyle">@style/BottomNavStyleDark</item>
     </style>
 
     <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
@@ -20,7 +19,8 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="BottomNavStyleDark" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="background">@color/colorPrimaryDarkMode</item>
+    <style name="BottomBar" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/colorPrimaryDarkMode</item>
     </style>
+
 </resources>

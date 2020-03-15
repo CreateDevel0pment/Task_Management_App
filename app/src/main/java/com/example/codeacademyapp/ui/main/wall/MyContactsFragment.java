@@ -79,7 +79,7 @@ public class MyContactsFragment extends Fragment {
                                 if (dataSnapshot.hasChild("image")) {
 
                                     profileImage = dataSnapshot.child("image").getValue().toString();
-                                    Picasso.get().load(profileImage).into(holder.image);
+                                    Picasso.get().load(profileImage).placeholder(R.drawable.astronaut).into(holder.image);
                                 }
 
                                 userName = dataSnapshot.child("Name").getValue().toString();

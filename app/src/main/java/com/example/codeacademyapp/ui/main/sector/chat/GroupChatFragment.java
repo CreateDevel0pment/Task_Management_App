@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,7 +57,8 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class GroupChatFragment extends BaseFragment {
 
-    private ImageButton sentMessage_btn, uploadFile_btn;
+    private ImageButton sentMessage_btn;
+    private ImageView uploadFile_btn;
     private EditText userMessage_input;
     private String currentUserName, userImage;
     private String userGroup;
@@ -72,7 +74,7 @@ public class GroupChatFragment extends BaseFragment {
 
     private ChatViewModel groupChatViewModel;
     private UserInformationViewModel userInformationViewModel;
-    private FloatingActionButton new_task_btn;
+    private ImageView new_task_btn;
 
     private ProgressDialog progressDialog;
 
@@ -103,7 +105,7 @@ public class GroupChatFragment extends BaseFragment {
                 if (dataSnapshot.exists()) {
                     userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                     if (!Objects.requireNonNull(dataSnapshot.child("Position").getValue()).equals("Staff")) {
-                        new_task_btn.show();
+                        new_task_btn.setVisibility(View.VISIBLE);
                     }
                 }
             }

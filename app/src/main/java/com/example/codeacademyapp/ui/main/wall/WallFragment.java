@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ import java.util.Objects;
 public class WallFragment extends BaseFragment {
 
     private ImageButton sentMessage_btn;
-    private ImageButton uploadFile_btn;
+    private ImageView uploadFile_btn;
     private EditText userMessage_input;
 
     private ProgressDialog loadingDialog;
