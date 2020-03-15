@@ -116,7 +116,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
             }
         });
-
     }
 
     @Override

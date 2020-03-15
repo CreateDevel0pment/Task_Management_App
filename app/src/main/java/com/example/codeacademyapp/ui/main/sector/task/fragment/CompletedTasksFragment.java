@@ -64,6 +64,8 @@ public class CompletedTasksFragment extends Fragment {
         quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
+
+
         UserInformationViewModel userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
         userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override

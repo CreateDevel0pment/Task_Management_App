@@ -53,14 +53,17 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        app:itemIconTint="@color/AccentColor"
-        app:itemTextColor="@color/AccentColor"
-        android:background="@color/colorPrimaryDarkMode"
         android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        android:background="@color/colorPrimaryDarkMode"
+        app:itemTextColor="@drawable/selector_bottombar_text"
+        app:itemIconTint="@drawable/selector_bottombar_text"
+        app:elevation="8dp"
         app:menu="@menu/bottom_bar_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

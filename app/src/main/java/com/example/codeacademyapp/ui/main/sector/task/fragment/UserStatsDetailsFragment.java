@@ -48,8 +48,8 @@ public class UserStatsDetailsFragment extends Fragment {
         TextView textUnderImg = view.findViewById(R.id.text_below_pieChartImg);
         userNameTV.setText(userName);
 
-        if(completedTasksCount!=0&&personalTasksCount!=0){
-        double allTasks = completedTasksCount+personalTasksCount;
+        if (completedTasksCount != 0 && personalTasksCount != 0) {
+            double allTasks = completedTasksCount + personalTasksCount;
             double completionRate1 = (completedTasksCount / allTasks);
             double completionRate2 = completionRate1 * 100;
             completionRate3 = (int) completionRate2;
@@ -59,7 +59,7 @@ public class UserStatsDetailsFragment extends Fragment {
         data.add(new PieEntry(completedTasksCount, "Number of completed Tasks"));
         data.add(new PieEntry(personalTasksCount, "Number of TODO Tasks"));
 
-        PieDataSet dataSet = new PieDataSet(data,  "");
+        PieDataSet dataSet = new PieDataSet(data, "");
         dataSet.setValueLineColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.AccentColor));
         dataSet.setColor(ContextCompat.getColor(getContext(), R.color.AccentColor));
         dataSet.setColors(ContextCompat.getColor(getContext(), R.color.AccentColor),
@@ -68,7 +68,7 @@ public class UserStatsDetailsFragment extends Fragment {
         dataSet.setDrawValues(true);
         dataSet.setValueTextSize(18f);
 
-        chart.setCenterText(completionRate3 +"%");
+        chart.setCenterText(completionRate3 + "%");
         chart.setCenterTextSize(10f);
         chart.getDescription().setEnabled(false);
         chart.setHoleRadius(45f);
@@ -79,7 +79,7 @@ public class UserStatsDetailsFragment extends Fragment {
         chart.setEntryLabelColor(ContextCompat.getColor(getContext(), R.color.black));
         chart.setEntryLabelTextSize(16);
         PieData pieData = new PieData(dataSet);
-        if(completedTasksCount!=0&&personalTasksCount!=0){
+        if (completedTasksCount != 0 && personalTasksCount != 0) {
             chart.setData(pieData);
         } else {
             chart.setVisibility(View.GONE);

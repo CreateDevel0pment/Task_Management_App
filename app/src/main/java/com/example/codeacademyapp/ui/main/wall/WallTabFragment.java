@@ -12,12 +12,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.WallPagerAdapter;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WallTabFragment extends Fragment {
+public class WallTabFragment extends BaseFragment {
 
     private ViewPager viewPager;
 

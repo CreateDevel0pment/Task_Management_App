@@ -82,8 +82,11 @@ public class UserStatisticsFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 personalTasksCount = (int) dataSnapshot.child("Tasks").getChildrenCount();
                                 completedTasksCount = (int) dataSnapshot.child("CompletedTasks").getChildrenCount();
+
+
                                 UserStatsDetailsFragment statsDetailsFragment = new UserStatsDetailsFragment(model.Name,
                                         completedTasksCount, personalTasksCount);
+
                                 assert getFragmentManager() != null;
                                 getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, statsDetailsFragment)
                                         .commit();

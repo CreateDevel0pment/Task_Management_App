@@ -26,8 +26,10 @@ import com.example.codeacademyapp.ui.main.home.HomeFragment;
 import com.example.codeacademyapp.ui.main.home.HomeSettings;
 import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
+import com.example.codeacademyapp.ui.main.sector.task.fragment.TaskTabsFragment;
 import com.example.codeacademyapp.ui.main.wall.WallTabFragment;
 import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,20 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNav;
     Toolbar toolbar;
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        boolean darkModeEnabled = sharedPreferences.getBoolean("dark_mode_on_off", true);
-
-        if(darkModeEnabled){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         bottomNav = findViewById(R.id.bottom_bar);
+
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -76,21 +65,22 @@ public class MainActivity extends AppCompatActivity {
                         switchToFragment(new GroupChatFragment(), R.id.group_container);
                         break;
                     case R.id.tasks:
-                        Intent intent = new Intent(MainActivity.this, TaskActivity.class);
-                        startActivity(intent);
+                        switchToFragment(new TaskTabsFragment(), R.id.group_container);
                 }
-                return false;
+                return true;
             }
         });
+
         bottomNav.setSelectedItemId(R.id.home);
     }
 
 
 
-    public void switchToFragment(Fragment fragment, int container) {
+    public void switchToFragment(BaseFragment fragment, int container) {
         Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
-        if (topFragment == fragment) {
-            fragment = new Fragment();
+        if (topFragment==fragment) {
+            fragment = new BaseFragment() {
+            };
         }
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()

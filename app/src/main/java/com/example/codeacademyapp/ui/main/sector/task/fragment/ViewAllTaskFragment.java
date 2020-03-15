@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,13 @@ public class ViewAllTaskFragment extends Fragment {
     private View rootView;
 
     public ViewAllTaskFragment() {
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+
     }
 
     @Override

@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -31,7 +32,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TaskTabsFragment extends Fragment {
+public class TaskTabsFragment extends BaseFragment {
 
     private ViewPager viewPager;
     private String userPosition;
@@ -71,9 +72,12 @@ public class TaskTabsFragment extends Fragment {
                         userStatsFloatingBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 UserStatisticsFragment statisticsFragment = new UserStatisticsFragment();
+
                                 assert getFragmentManager() != null;
-                                getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, statisticsFragment)
+                                getChildFragmentManager().beginTransaction()
+                                        .replace(R.id.task_fragments_container, statisticsFragment)
                                         .commit();
 
                             }
