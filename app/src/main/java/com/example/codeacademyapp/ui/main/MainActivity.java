@@ -47,10 +47,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         bottomNav = findViewById(R.id.bottom_bar);
-
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,14 +55,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         switchToFragment(new HomeFragment(), R.id.home_container);
                         break;
-                    case R.id.wall:
+                    case R.id.walle:
                         switchToFragment(new WallTabFragment(), R.id.wall_container);
                         break;
                     case R.id.sector:
                         switchToFragment(new GroupChatFragment(), R.id.group_container);
                         break;
-                    case R.id.tasks:
-                        switchToFragment(new TaskTabsFragment(), R.id.group_container);
+                    case R.id.tasks_b_v:
+                        switchToFragment(new TaskTabsFragment(), R.id.task_container);
+                        break;
                 }
                 return true;
             }
@@ -93,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         wall.setVisibility(View.GONE);
         FrameLayout group = findViewById(R.id.group_container);
         group.setVisibility(View.GONE);
+        FrameLayout task = findViewById(R.id.task_container);
+        task.setVisibility(View.GONE);
         findViewById(container).setVisibility(View.VISIBLE);
     }
 

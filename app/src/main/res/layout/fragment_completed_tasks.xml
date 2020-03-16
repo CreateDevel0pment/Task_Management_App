@@ -3,7 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context=".ui.main.sector.task.fragment.CompletedTasksFragment">
+
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/task_completed_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
     <LinearLayout
         android:id="@+id/quote_linear_layout_completed"
         android:orientation="vertical"
@@ -15,34 +24,37 @@
         >
 
         <TextView
-            android:layout_margin="8dp"
+            android:id="@+id/f"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You have no new tasks.."
-            android:textStyle="bold"
-            android:textSize="28sp"/>
+            android:layout_margin="8dp"
+            android:fontFamily="@font/comfortaa"
+            android:text="You have no tasks available"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_margin="8dp"
             android:src="@drawable/clipboard"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
 
 
         <TextView
+            android:fontFamily="@font/comfortaa"
             android:layout_margin="24dp"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/AccentColor"
-            android:textStyle="bold"
             android:id="@+id/random_quote_tv_completed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:fontFamily="@font/comfortaa"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="end"
             android:textStyle="italic"
@@ -54,6 +66,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:background="@color/recyclerview_grey_background"
         android:id="@+id/tasks_completed_list_RV"
         android:layout_width="match_parent"

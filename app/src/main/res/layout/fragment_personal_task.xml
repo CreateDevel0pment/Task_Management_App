@@ -4,7 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".ui.main.sector.task.fragment.PersonalTaskFragment">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/task_personal_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <LinearLayout
@@ -23,20 +29,21 @@
                     android:layout_height="wrap_content"
                     android:text="You have no tasks available"
                     android:textStyle="bold"
-                    android:textSize="28sp"/>
+                    android:fontFamily="@font/comfortaa"
+                    android:textSize="24sp"/>
 
                 <ImageView
                     android:layout_margin="8dp"
                     android:src="@drawable/clipboard"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"/>
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
 
 
         <TextView
             android:layout_margin="24dp"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/AccentColor"
-            android:textStyle="bold"
+            android:fontFamily="@font/comfortaa"
             android:id="@+id/random_quote_tv_personal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -45,7 +52,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/colorPrimary"
             android:layout_gravity="end"
             android:textStyle="italic"
@@ -57,6 +64,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:background="@color/recyclerview_grey_background"
         android:id="@+id/personal_task_list_RV"
         android:layout_width="match_parent"

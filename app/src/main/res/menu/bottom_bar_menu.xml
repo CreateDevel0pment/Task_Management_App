@@ -6,15 +6,16 @@
         android:icon="@drawable/home_ic"
         android:title="@string/home" />
     <item
-        android:id="@+id/wall"
+        android:id="@+id/walle"
         android:icon="@drawable/group_people_ic"
         android:title="@string/wall" />
     <item
         android:id="@+id/sector"
         android:icon="@drawable/group_chat"
         android:title="@string/my_sector" />
+
     <item
-        android:id="@+id/tasks"
+        android:id="@+id/tasks_b_v"
         android:icon="@drawable/assignment"
         android:title="@string/tasks" />
 

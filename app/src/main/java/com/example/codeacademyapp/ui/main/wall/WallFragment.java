@@ -111,7 +111,7 @@ public class WallFragment extends BaseFragment {
 
         view = inflater.inflate(R.layout.fragment_wall, container, false);
 
-        setTitle(R.string.academy_wall);
+        setTitle(R.string.wall);
         initializedView(view);
         getUserInfo();
 

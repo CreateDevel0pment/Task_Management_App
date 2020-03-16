@@ -22,7 +22,7 @@ public class WallTabFragment extends BaseFragment {
 
     private ViewPager viewPager;
 
-    View view;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

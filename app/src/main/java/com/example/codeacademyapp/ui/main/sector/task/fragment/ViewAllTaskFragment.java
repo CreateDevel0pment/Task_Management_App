@@ -24,6 +24,7 @@ import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.ui.main.sector.task.QuoteViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +39,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewAllTaskFragment extends Fragment {
+public class ViewAllTaskFragment extends BaseFragment {
 
     private List<TaskInformation> tasks;
     private DatabaseReference myRef;
@@ -55,15 +56,11 @@ public class ViewAllTaskFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (rootView != null) {
+            return rootView;
+        }
 
         final QuoteViewModel quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
 
@@ -71,6 +68,8 @@ public class ViewAllTaskFragment extends Fragment {
 
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
         userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
+        rvTasks = rootView.findViewById(R.id.task_list_RV);
+        tasks = new ArrayList<>();
 
         userInformationViewModel.getUserInformation().observe(this, new Observer<DataSnapshot>() {
             @Override
@@ -79,10 +78,7 @@ public class ViewAllTaskFragment extends Fragment {
                     userSector = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                 }
 
-                rvTasks = rootView.findViewById(R.id.task_list_RV);
-                tasks = new ArrayList<>();
                 myRef = FirebaseDatabase.getInstance().getReference().child("Tasks").child("GroupTasks").child(userSector);
-
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,12 +115,10 @@ public class ViewAllTaskFragment extends Fragment {
                             quoteViewModel.loadRandomQuote();
                         } else {
                             userId = userInformationViewModel.getUserId();
-
-                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-                            rvTasks.setLayoutManager(layoutManager);
                             String completedCheck = "completeGONE";
                             taskAdapter = new TaskAdapter(getContext(), tasks, userId, taskViewModel, completedCheck);
                             taskAdapter.notifyDataSetChanged();
+                            rvTasks.setVisibility(View.VISIBLE);
                             rvTasks.setAdapter(taskAdapter);
                         }
                     }
@@ -136,6 +130,9 @@ public class ViewAllTaskFragment extends Fragment {
                 });
             }
         });
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        rvTasks.setLayoutManager(layoutManager);
         return rootView;
     }
 }

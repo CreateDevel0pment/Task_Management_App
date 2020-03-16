@@ -22,6 +22,7 @@ import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.ui.main.sector.task.QuoteViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,7 +39,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PersonalTaskFragment extends Fragment {
+public class PersonalTaskFragment extends BaseFragment {
 
     private List<TaskInformation> tasks;
 
@@ -57,6 +58,8 @@ public class PersonalTaskFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        setTitle("Tasks");
 
         if (rootView != null) {
             return rootView;

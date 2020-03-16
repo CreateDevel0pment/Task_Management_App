@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.example.codeacademyapp.data.model.Quote;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.ui.main.sector.task.QuoteViewModel;
 import com.example.codeacademyapp.ui.main.sector.task.TaskViewModel;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +39,7 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompletedTasksFragment extends Fragment {
+public class CompletedTasksFragment extends BaseFragment {
 
 
     private List<TaskInformation> tasks;
@@ -45,6 +47,7 @@ public class CompletedTasksFragment extends Fragment {
     private TaskAdapter taskAdapter;
     private QuoteViewModel quoteViewModel;
     private TaskViewModel taskViewModel;
+    private ProgressBar progressBar;
 
     private RecyclerView rvTasks;
     private String userId;
@@ -63,7 +66,7 @@ public class CompletedTasksFragment extends Fragment {
 
         quoteViewModel = ViewModelProviders.of(this).get(QuoteViewModel.class);
         taskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
-
+        progressBar = rootView.findViewById(R.id.task_completed_progress_bar);
 
 
         UserInformationViewModel userInformationViewModel = ViewModelProviders.of(this).get(UserInformationViewModel.class);
@@ -103,8 +106,8 @@ public class CompletedTasksFragment extends Fragment {
                                     LinearLayout quoteLinearLayout = rootView.findViewById(R.id.quote_linear_layout_completed);
                                     randomQuoteTV.setText(String.format("%s%s\"", '"', quote.getEn()));
                                     authorQuoteTV.setText(quote.getAuthor());
+                                    progressBar.setVisibility(View.GONE);
                                     quoteLinearLayout.setVisibility(View.VISIBLE);
-                                    rvTasks.setVisibility(View.GONE);
                                 }
                             });
                             quoteViewModel.loadRandomQuote();
@@ -114,7 +117,9 @@ public class CompletedTasksFragment extends Fragment {
                             rvTasks.setLayoutManager(layoutManager);
                             String completedCheck = "completeGONE";
                             taskAdapter = new TaskAdapter(getContext(), tasks, userId, taskViewModel, completedCheck);
-                            rvTasks.setAdapter(taskAdapter);}
+                                progressBar.setVisibility(View.GONE);
+                                rvTasks.setVisibility(View.VISIBLE);
+                                rvTasks.setAdapter(taskAdapter);}
                     }
 
                     @Override

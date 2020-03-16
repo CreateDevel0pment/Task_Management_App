@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,12 +17,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.adapters.NewTaskPagerAdapter;
-import com.example.codeacademyapp.data.model.Task;
-import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,26 +31,25 @@ import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class TaskTabsFragment extends BaseFragment {
 
     private ViewPager viewPager;
     private String userPosition;
-
-
-    private FloatingActionButton userStatsFloatingBtn;
+    private ImageView userStatsBtn;
 
     public TaskTabsFragment() {
     }
-
     private View rootView;
 
     @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        if (rootView != null) {
+            return rootView;
+        }
+        setTitle("Task");
 
         rootView = inflater.inflate(R.layout.fragment_task_tabs, container, false);
 
@@ -69,8 +66,8 @@ public class TaskTabsFragment extends BaseFragment {
 
                     if (userPosition.equals("Manager")) {
 
-                        userStatsFloatingBtn = rootView.findViewById(R.id.user_stats_floating_btn);
-                        userStatsFloatingBtn.setOnClickListener(new View.OnClickListener() {
+                        userStatsBtn = rootView.findViewById(R.id.user_stats_floating_btn);
+                        userStatsBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getContext(), TaskActivity.class);
@@ -79,7 +76,7 @@ public class TaskTabsFragment extends BaseFragment {
 
                             }
                         });
-                        userStatsFloatingBtn.show();
+                        userStatsBtn.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -93,8 +90,7 @@ public class TaskTabsFragment extends BaseFragment {
 
         TabLayout tabLayout = rootView.findViewById(R.id.tab_layout_new_tasks);
         viewPager = rootView.findViewById(R.id.view_pager_new_tasks);
-        assert getFragmentManager() != null;
-        NewTaskPagerAdapter adapter = new NewTaskPagerAdapter(getFragmentManager(),
+        NewTaskPagerAdapter adapter = new NewTaskPagerAdapter(getChildFragmentManager(),
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         viewPager.setAdapter(adapter);
@@ -112,7 +108,6 @@ public class TaskTabsFragment extends BaseFragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
             }
         });
 
