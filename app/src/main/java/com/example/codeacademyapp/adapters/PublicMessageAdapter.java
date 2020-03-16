@@ -56,6 +56,8 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
         holder.cardView.setVisibility(View.INVISIBLE);
         holder.receiver_time.setVisibility(View.INVISIBLE);
         holder.sender_time.setVisibility(View.INVISIBLE);
+        holder.receiver_name.setVisibility(View.INVISIBLE);
+        holder.receiver_sector.setVisibility(View.INVISIBLE);
 
         if (messages.getId().equals(currenUser)) {
 
@@ -107,6 +109,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
                 });
 
             } else {
+
 
                 holder.sender_doc_image.setVisibility(View.GONE);
                 holder.sender_message.setVisibility(View.VISIBLE);
