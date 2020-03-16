@@ -116,6 +116,7 @@ public class PersonalTaskFragment extends BaseFragment {
                 } else {
                     String completedCheck = "";
                     TaskAdapter taskAdapter = new TaskAdapter(getContext(), tasks, userId, taskViewModel, completedCheck);
+                    rvPersonalTasks.setVisibility(View.VISIBLE);
                     rvPersonalTasks.setAdapter(taskAdapter);
                 }
             }

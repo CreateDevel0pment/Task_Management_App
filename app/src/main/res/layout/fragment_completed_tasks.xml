@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="@font/comfortaa"
-            android:text="You have no tasks available"
+            android:text="@string/you_have_no_tasks_available"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -40,6 +40,9 @@
             android:layout_height="80dp"/>
 
 
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <TextView
             android:fontFamily="@font/comfortaa"
             android:layout_margin="24dp"
@@ -48,7 +51,7 @@
             android:id="@+id/random_quote_tv_completed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
+        </ScrollView>
         <TextView
             android:fontFamily="@font/comfortaa"
             android:layout_marginStart="24dp"

@@ -75,7 +75,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
                 holder.sender_doc_image.setVisibility(View.GONE);
                 holder.sender_message.setVisibility(View.VISIBLE);
                 holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
-                holder.sender_message.setText(messages.getMessage());
+                holder.sender_message.setText(messages.getDocName());
                 holder.sender_time.setVisibility(View.VISIBLE);
                 holder.sender_time.setText(messages.getTime());
 
@@ -94,7 +94,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
                 holder.sender_doc_image.setVisibility(View.GONE);
                 holder.sender_message.setVisibility(View.VISIBLE);
                 holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
-                holder.sender_message.setText(messages.getMessage());
+                holder.sender_message.setText(messages.getDocName());
                 holder.sender_time.setVisibility(View.VISIBLE);
                 holder.sender_time.setText(messages.getTime());
 

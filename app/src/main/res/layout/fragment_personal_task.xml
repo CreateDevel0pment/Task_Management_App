@@ -27,7 +27,7 @@
                     android:layout_margin="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You have no tasks available"
+                    android:text="@string/you_have_no_tasks_available"
                     android:textStyle="bold"
                     android:fontFamily="@font/comfortaa"
                     android:textSize="24sp"/>
@@ -38,15 +38,19 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"/>
 
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_margin="24dp"
+        android:textSize="14sp"
+        android:textColor="@color/AccentColor"
+        android:fontFamily="@font/comfortaa"
+        android:id="@+id/random_quote_tv_personal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <TextView
-            android:layout_margin="24dp"
-            android:textSize="14sp"
-            android:textColor="@color/AccentColor"
-            android:fontFamily="@font/comfortaa"
-            android:id="@+id/random_quote_tv_personal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+</ScrollView>
 
         <TextView
             android:layout_marginStart="24dp"

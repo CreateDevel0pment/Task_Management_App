@@ -39,6 +39,7 @@
     <string name="wall">Wall</string>
     <string name="my_sector">My Sector</string>
     <string name="tasks">Tasks</string>
+    <string name="you_have_no_tasks_available">You have no tasks available</string>
 
 
     <string-array name="Sector">
