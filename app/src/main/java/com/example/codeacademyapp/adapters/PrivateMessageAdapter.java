@@ -26,6 +26,11 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
 
     private List<PrivateMessages> mList;
     private FirebaseAuth auth;
+    private String receiverImage;
+    private String fromMessageType;
+    private String fromUserId;
+    private String messageSenderId;
+    private PrivateMessages messages;
 
     public PrivateMessageAdapter(List<PrivateMessages> mList) {
         this.mList = mList;
@@ -47,12 +52,13 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
     @Override
     public void onBindViewHolder(@NonNull final PrivateMessageAdapter.MyHolder holder, int position) {
 
-        String messageSenderId = auth.getCurrentUser().getUid();
 
-        PrivateMessages messages=mList.get(holder.getAdapterPosition());
+        messageSenderId = auth.getCurrentUser().getUid();
 
-        String fromUserId=messages.getFrom();
-        String fromMessageType=messages.getType();
+        messages = mList.get(holder.getAdapterPosition());
+
+        fromUserId = messages.getFrom();
+        fromMessageType = messages.getType();
 
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference()
                 .child("Users").child(fromUserId);
@@ -63,11 +69,12 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
 
                 if(dataSnapshot.hasChild("image")){
 
-                    String receiverImage=dataSnapshot.child("image").getValue().toString();
+                    receiverImage =dataSnapshot.child("image").getValue().toString();
 
                     Picasso.get().load(receiverImage)
-                            .placeholder(R.drawable.profile_image)
+                            .placeholder(R.drawable.astronaut)
                             .into(holder.receiverProfileImage);
+
                 }
             }
 
@@ -76,7 +83,6 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
 
             }
         });
-
 
         if(fromMessageType.equals("text")){
 
@@ -92,15 +98,13 @@ public class PrivateMessageAdapter extends RecyclerView.Adapter<PrivateMessageAd
                 holder.sender_message.setVisibility(View.VISIBLE);
                 holder.sender_message.setBackgroundResource(R.drawable.sender_message_layout);
                 holder.sender_message.setText(messages.getMessage());
-
-            }else {
+            } else {
 
                 holder.receiverProfileImage.setVisibility(View.VISIBLE);
-                holder.receiver_message.setVisibility(View.VISIBLE);
                 holder.cardView.setVisibility(View.VISIBLE);
+                holder.receiver_message.setVisibility(View.VISIBLE);
                 holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
                 holder.receiver_message.setText(messages.getMessage());
-
             }
         }
     }
