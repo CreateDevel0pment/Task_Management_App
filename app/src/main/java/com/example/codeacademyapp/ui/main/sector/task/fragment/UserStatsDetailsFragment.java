@@ -56,8 +56,8 @@ public class UserStatsDetailsFragment extends Fragment {
         }
 
         List<PieEntry> data = new ArrayList<>();
-        data.add(new PieEntry(completedTasksCount, "Number of completed Tasks"));
-        data.add(new PieEntry(personalTasksCount, "Number of TODO Tasks"));
+        data.add(new PieEntry(completedTasksCount, "Completed Tasks"));
+        data.add(new PieEntry(personalTasksCount, "TODO Tasks"));
 
         PieDataSet dataSet = new PieDataSet(data, "");
         dataSet.setValueLineColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.AccentColor));
@@ -77,7 +77,7 @@ public class UserStatsDetailsFragment extends Fragment {
         chart.setCenterTextSize(18);
         chart.setTransparentCircleRadius(50f);
         chart.setEntryLabelColor(ContextCompat.getColor(getContext(), R.color.black));
-        chart.setEntryLabelTextSize(16);
+        chart.setEntryLabelTextSize(11);
         PieData pieData = new PieData(dataSet);
         if (completedTasksCount != 0 && personalTasksCount != 0) {
             chart.setData(pieData);

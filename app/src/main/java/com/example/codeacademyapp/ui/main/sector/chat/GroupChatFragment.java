@@ -31,13 +31,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.PublicMessageAdapter;
+import com.example.codeacademyapp.adapters.MessageAdapter;
 import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,7 +78,7 @@ public class GroupChatFragment extends BaseFragment {
     private ProgressDialog progressDialog;
 
     private RecyclerView chat_recycler;
-    private PublicMessageAdapter adapter;
+    private MessageAdapter adapter;
     private DatabaseReference myRef;
     private List<PublicMessage> messageList = new ArrayList<>();
 
@@ -204,7 +203,7 @@ public class GroupChatFragment extends BaseFragment {
 
             checker = "";
 
-            groupChatViewModel.saveMessageFromGroupChat(getMessage());
+            groupChatViewModel.saveMessage(getMessage(),"Chat Sector",userGroup);
         }
     }
 
@@ -215,6 +214,7 @@ public class GroupChatFragment extends BaseFragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+
                     currentUserName = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
 
                     userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
@@ -235,14 +235,14 @@ public class GroupChatFragment extends BaseFragment {
     private void displayMessageToGroup(String userGroup) {
 
         groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        groupChatViewModel.displayMessageToGroup(userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
+        groupChatViewModel.displayMessage("Chat Sector",userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
                 PublicMessage messages = dataSnapshot.getValue(PublicMessage.class);
 
                 messageList.add(messages);
-                adapter = new PublicMessageAdapter(messageList, getFragmentManager());
+                adapter = new MessageAdapter(messageList, getFragmentManager(),"Group Chat");
                 chat_recycler.setAdapter(adapter);
                 progressDialog.dismiss();
 
@@ -301,7 +301,7 @@ public class GroupChatFragment extends BaseFragment {
 
                 fileName = returnCursor.getString(nameIndex);
 
-                groupChatViewModel.saveDocFromGroupChat(getMessage());
+                groupChatViewModel.saveDocumentFile(getMessage(),"Chat Sector",userGroup);
             }
         }
     }

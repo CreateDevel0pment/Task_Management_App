@@ -18,6 +18,8 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/tasks_stats_chart"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_centerHorizontal="true"

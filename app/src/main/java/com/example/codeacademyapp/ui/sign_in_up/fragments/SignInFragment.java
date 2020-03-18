@@ -47,7 +47,6 @@ public class SignInFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
-        //TODO splash
         userViewModel = ViewModelProviders.of(SignInFragment.this).get(LogUserViewModel.class);
         userInformationViewModel = ViewModelProviders.of(SignInFragment.this).get(UserInformationViewModel.class);
 

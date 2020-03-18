@@ -48,9 +48,26 @@
         android:layout_alignParentStart="true"
         android:id="@+id/private_chat_linear_layout">
 
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/private_chat_file_btn"
+            android:layout_width="30dp"
+            android:layout_gravity="center"
+            android:layout_height="30dp"
+            android:src="@drawable/attach"
+            />
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:id="@+id/private_new_task_button"
+            android:src="@drawable/new_task"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
         <androidx.cardview.widget.CardView
             app:cardElevation="10dp"
-            android:layout_weight="8"
+            android:layout_weight="7"
             app:cardCornerRadius="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -64,14 +81,14 @@
                 android:textColor="@android:color/black"
                 android:background="@android:color/white"
                 android:textColorHint="@android:color/darker_gray"
-                android:id="@+id/input_private_message"/>
+                android:id="@+id/private_input_user_message"/>
 
         </androidx.cardview.widget.CardView>
 
         <ImageButton
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:id="@+id/sent_private_message_btn"
+            android:id="@+id/private_sent_message_btn"
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -79,16 +96,6 @@
             android:background="@android:color/transparent"/>
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:visibility="gone"
-            android:id="@+id/new_personal_task_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="2dp"
-            android:backgroundTint="@color/AccentColor"
-            android:src="@drawable/new_task"
-            />
 
     </LinearLayout>
 
