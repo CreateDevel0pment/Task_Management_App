@@ -137,6 +137,7 @@
         android:layout_alignParentTop="@+id/reciever_message_text"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="48dp"
         android:background="@drawable/sender_message_layout"
         android:text="sender Message"
         android:padding="8dp"
