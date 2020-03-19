@@ -39,4 +39,8 @@ public class ChatRequestViewModel extends AndroidViewModel {
     public LiveData<DataSnapshot> setValueForRemove (String current_user_id, String receiver_user_id){
         return chatRequestRepository.removeContacts(current_user_id,receiver_user_id);
     }
+
+    public LiveData<DataSnapshot> getChatRequestData(String currentUserId) {
+        return chatRequestRepository.getChatRequest(currentUserId);
+    }
 }

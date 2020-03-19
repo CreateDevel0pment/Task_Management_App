@@ -37,7 +37,6 @@ import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.example.codeacademyapp.utils.NetworkConnectivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -204,7 +203,7 @@ public class GroupChatFragment extends BaseFragment {
 
             checker = "";
 
-            groupChatViewModel.saveMessageFromGroupChat(getMessage());
+            groupChatViewModel.saveMessage(getMessage(), "Chat Sector", userGroup);
         }
     }
 
@@ -235,7 +234,7 @@ public class GroupChatFragment extends BaseFragment {
     private void displayMessageToGroup(String userGroup) {
 
         groupChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        groupChatViewModel.displayMessageToGroup(userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
+        groupChatViewModel.displayMessage("Chat Sector", userGroup).observe(GroupChatFragment.this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
@@ -301,7 +300,7 @@ public class GroupChatFragment extends BaseFragment {
 
                 fileName = returnCursor.getString(nameIndex);
 
-                groupChatViewModel.saveDocFromGroupChat(getMessage());
+                groupChatViewModel.saveDocumentFile(getMessage(), "Chat Sector", userGroup);
             }
         }
     }
@@ -319,6 +318,7 @@ public class GroupChatFragment extends BaseFragment {
         publicMessage.setTime(currentTime);
         publicMessage.setDocName(fileName);
         publicMessage.setUri(uri);
+        publicMessage.setChatName("Chat Sector");
 
         return publicMessage;
     }

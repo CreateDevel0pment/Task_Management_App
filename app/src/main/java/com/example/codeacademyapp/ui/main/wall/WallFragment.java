@@ -82,7 +82,8 @@ public class WallFragment extends BaseFragment {
         super.onAttach(context);
 
         wallChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        wallChatViewModel.displayMessageToWall().observe(this, new Observer<DataSnapshot>() {
+        wallChatViewModel.displayMessage("Chat Public Wall","")
+                .observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
@@ -201,7 +202,7 @@ public class WallFragment extends BaseFragment {
             checker="";
 
 
-            wallChatViewModel.saveMessageFromWallChat(getMessage());
+            wallChatViewModel.saveMessage(getMessage(),"Chat Public Wall","");
         }
     }
 
@@ -267,7 +268,7 @@ public class WallFragment extends BaseFragment {
                     fileName = returnCursor.getString(nameIndex);
                 }
 
-                wallChatViewModel.saveDocFromWallChat(getMessage());
+                wallChatViewModel.saveDocumentFile(getMessage(),"Chat Public Wall","");
             }
         }
     }
@@ -285,6 +286,7 @@ public class WallFragment extends BaseFragment {
         publicMessage.setTime(currentTime);
         publicMessage.setDocName(fileName);
         publicMessage.setUri(uri);
+        publicMessage.setChatName("");
 
         return publicMessage;
     }

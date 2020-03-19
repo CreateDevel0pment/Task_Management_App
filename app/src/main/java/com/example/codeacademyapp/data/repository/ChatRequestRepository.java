@@ -18,6 +18,30 @@ public class ChatRequestRepository {
     private DatabaseReference chatRequestRef, notificationRef,contactRef;
 
 
+    public MutableLiveData<DataSnapshot> getChatRequest(final String currentUserId) {
+
+        final MutableLiveData<DataSnapshot> setChatRequest = new MutableLiveData<>();
+        chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
+
+        chatRequestRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                setChatRequest.setValue(dataSnapshot);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return setChatRequest;
+    }
+
+
     public MutableLiveData<Task> sendChatRequest(final String current_user_id, final String receiver_user_id){
 
         final MutableLiveData<Task> getTaskRequest= new MutableLiveData<>();

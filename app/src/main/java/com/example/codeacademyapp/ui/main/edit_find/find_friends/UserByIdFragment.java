@@ -98,9 +98,8 @@ public class UserByIdFragment extends Fragment {
 
     private void menageChatRequest() {
 
-        chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
         chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
-        chatViewModel.getchatRequest(current_user_id).observe(this, new Observer<DataSnapshot>() {
+        chatRequestViewModel.getChatRequestData(current_user_id).observe(this, new Observer<DataSnapshot>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {

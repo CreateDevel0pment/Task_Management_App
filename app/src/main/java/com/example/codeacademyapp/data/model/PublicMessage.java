@@ -14,12 +14,13 @@ public class PublicMessage {
     private String docType;
     private String docName;
     private Uri uri;
+    private String chatName;
 
     public PublicMessage() {
     }
 
     public PublicMessage(String date, String id, String sector, String message,
-                         String name, String time, String image, String docType, String docName, Uri uri) {
+                         String name, String time, String image, String docType, String docName, Uri uri,String chatName) {
         this.date = date;
         this.id = id;
         this.sector = sector;
@@ -30,6 +31,7 @@ public class PublicMessage {
         this.docType = docType;
         this.docName = docName;
         this.uri = uri;
+        this.chatName=chatName;
     }
 
     public String getDate() {
@@ -110,5 +112,13 @@ public class PublicMessage {
 
     public void setUri(Uri uri) {
         this.uri = uri;
+    }
+
+    public String getChatName() {
+        return chatName;
+    }
+
+    public void setChatName(String chatName) {
+        this.chatName = chatName;
     }
 }

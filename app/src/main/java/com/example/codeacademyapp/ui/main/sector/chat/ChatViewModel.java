@@ -24,36 +24,19 @@ public class ChatViewModel extends AndroidViewModel {
         chatRepository.setGroupNameToFirebase(chatName);
     }
 
-    public void saveMessageFromGroupChat(PublicMessage message) {
-        chatRepository.saveMessageForGroupChat(message);
+    public void saveMessage(PublicMessage message,String chat_name,String group_name) {
+        chatRepository.saveMessage(message,chat_name,group_name);
     }
 
-    public LiveData<DataSnapshot> displayMessageToGroup(String curenUserGroup) {
-        return chatRepository.displayMessageInUsersGroup(curenUserGroup);
+    public void saveDocumentFile(PublicMessage message,String chat_name,String group_name) {
+        chatRepository.saveDocumentFile(message,chat_name,group_name);
     }
 
-    public void saveMessageFromWallChat(PublicMessage message) {
-        chatRepository.saveMessageForPublicChat(message);
-    }
-
-    public void saveDocFromWallChat(PublicMessage message) {
-        chatRepository.saveDocForPublicChat(message);
-    }
-
-    public void saveDocFromGroupChat(PublicMessage message) {
-        chatRepository.saveDocForGroupChat(message);
-    }
-
-    public LiveData<DataSnapshot> displayMessageToWall() {
-        return chatRepository.displayMessageOnPublicWall();
+    public LiveData<DataSnapshot> displayMessage(String chat_name, String user_group) {
+        return chatRepository.displayMessage(chat_name, user_group);
     }
 
     public LiveData<DataSnapshot> displayMessageToPrivateChat(String message_reciever_id) {
         return chatRepository.displayMessageOnPrivateChat(message_reciever_id);
-    }
-
-
-    public LiveData<DataSnapshot> getchatRequest(String currentUserId) {
-        return chatRepository.getChatRequest(currentUserId);
     }
 }
