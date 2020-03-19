@@ -68,11 +68,11 @@ public class UserStatsDetailsFragment extends Fragment {
 
         if (completionRate3 <= 20.00) {
             userEfficiency.setText(String.format("%s's efficiency is very low.", userName));
-        } else if (completionRate3 > 20.00 && completionRate3 < 40.00) {
+        } else if (completionRate3 >= 20.00 && completionRate3 <= 40.00) {
             userEfficiency.setText(String.format("%s's efficiency is low.", userName));
-        } else if (completionRate3  > 40.00 && completionRate3 < 60.00) {
+        } else if (completionRate3  >= 40.00 && completionRate3 <= 60.00) {
             userEfficiency.setText(String.format("%s's efficiency: Not great, not terrible.", userName));
-        } else if (completionRate3 > 60.00 && completionRate3 < 80.00) {
+        } else if (completionRate3 >= 60.00 && completionRate3 <= 80.00) {
             userEfficiency.setText(String.format("%s's efficiency is very good.", userName));
         } else{
             userEfficiency.setText(String.format("%s's efficiency is excellent.", userName));
