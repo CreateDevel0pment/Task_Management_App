@@ -16,28 +16,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.PublicMessage;
-import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Objects;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder> {
+public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdapter.MyHolder> {
 
     private List<PublicMessage> mList;
-    private FragmentManager fragmentManager;
-    private String group_caht;
 
-    public MessageAdapter(List<PublicMessage> mList, FragmentManager fragmentManager,String group_caht) {
+    private FragmentManager fragmentManager;
+
+    public PublicMessageAdapter(List<PublicMessage> mList, FragmentManager fragmentManager) {
         this.mList = mList;
         this.fragmentManager = fragmentManager;
-        this.group_caht = group_caht;
     }
 
     @NonNull
     @Override
-    public MessageAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PublicMessageAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_message_layout, parent, false);
 
@@ -46,7 +44,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final MessageAdapter.MyHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final PublicMessageAdapter.MyHolder holder, final int position) {
 
         final PublicMessage messages = mList.get(holder.getAdapterPosition());
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -220,25 +218,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyHolder
                 holder.receiver_message.setText(messages.getMessage());
                 Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
-                if(!group_caht.equals("")){
-
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent intent = new Intent(holder.itemView.getContext(), PrivateChatActivity.class);
-                            intent.putExtra("visit_user_id", messages.getId());
-                            intent.putExtra("visit_user_name",messages.getName());
-
-                            if (messages.getImage()!= null) {
-                                intent.putExtra("visit_user_image", messages.getImage());
-                            }
-
-                            intent.putExtra("visit_user_sector",messages.getSector());
-                            holder.itemView.getContext().startActivity(intent);
-                        }
-                    });
-                }
             }
         }
     }

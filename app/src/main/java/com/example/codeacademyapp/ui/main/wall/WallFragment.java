@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
-import com.example.codeacademyapp.adapters.MessageAdapter;
+import com.example.codeacademyapp.adapters.PublicMessageAdapter;
 import com.example.codeacademyapp.data.model.PublicMessage;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
@@ -72,7 +72,7 @@ public class WallFragment extends BaseFragment {
     private UserInformationViewModel userInformationViewModel;
 
     private RecyclerView recyclerView;
-    private MessageAdapter adapter;
+    private PublicMessageAdapter adapter;
 
     private List<PublicMessage> messageList = new ArrayList<>();
 
@@ -82,8 +82,7 @@ public class WallFragment extends BaseFragment {
         super.onAttach(context);
 
         wallChatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
-        wallChatViewModel.displayMessage("Chat Public Wall","")
-                .observe(this, new Observer<DataSnapshot>() {
+        wallChatViewModel.displayMessageToWall().observe(this, new Observer<DataSnapshot>() {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
@@ -91,7 +90,7 @@ public class WallFragment extends BaseFragment {
 
                 messageList.add(messages);
                 if (messageList.size() > 0) {
-                    adapter = new MessageAdapter(messageList,getChildFragmentManager(),"");
+                    adapter = new PublicMessageAdapter(messageList,getChildFragmentManager());
                     recyclerView.setAdapter(adapter);
 
                     loadingDialog.dismiss();
@@ -202,7 +201,7 @@ public class WallFragment extends BaseFragment {
             checker="";
 
 
-            wallChatViewModel.saveMessage(getMessage(),"Chat Public Wall","");
+            wallChatViewModel.saveMessageFromWallChat(getMessage());
         }
     }
 
@@ -220,6 +219,7 @@ public class WallFragment extends BaseFragment {
 
                     if (dataSnapshot.child("image").getValue() != null) {
                         userImage = Objects.requireNonNull(dataSnapshot.child("image").getValue()).toString();
+
                     }
                 }
             }
@@ -267,7 +267,7 @@ public class WallFragment extends BaseFragment {
                     fileName = returnCursor.getString(nameIndex);
                 }
 
-                wallChatViewModel.saveDocumentFile(getMessage(),"Chat Public Wall","");
+                wallChatViewModel.saveDocFromWallChat(getMessage());
             }
         }
     }
