@@ -84,7 +84,7 @@ public class UserStatisticsFragment extends Fragment {
                               completedTasksCount = (int) dataSnapshot.child("CompletedTasks").getChildrenCount();
 
 
-                                UserStatsDetailsFragment statsDetailsFragment = new UserStatsDetailsFragment(model.Name,
+                                UserStatsDetailsFragment statsDetailsFragment = new UserStatsDetailsFragment(model.image, model.Name,
                                         completedTasksCount, personalTasksCount);
 
                                 if (getFragmentManager()!=null)

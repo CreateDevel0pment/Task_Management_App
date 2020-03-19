@@ -55,14 +55,9 @@
         </androidx.cardview.widget.CardView>
 
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="8dp"
-            android:id="@+id/cardView_CheckBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
+                android:id="@+id/checkbox_users_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -72,11 +67,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textColor="@color/AccentColor"
                     android:text="Create sector project" />
 
                 <CheckBox
+                    android:buttonTint="@color/colorPrimary"
                     android:id="@+id/create_sector_project_checkbox"
                     android:checked="true"
                     android:layout_margin="8dp"
@@ -85,17 +81,9 @@
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="8dp"
-            android:id="@+id/assigned_user_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
+                android:id="@+id/assigned_user_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -105,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textColor="@color/AccentColor"
                     android:text="Create personal task for.." />
 
@@ -114,7 +102,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:src="@drawable/ic_person_" />
+                    android:src="@drawable/ic_person_"
+                    android:tint="@color/colorPrimary"/>
 
                 <TextView
                     android:id="@+id/assigned_user_name"
@@ -126,14 +115,6 @@
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/AccentColor"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:layout_margin="8dp"
                     android:text="Set task end date.." />
 
@@ -154,18 +135,19 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:src="@drawable/date_picker_icon"
-                    android:tint="@color/AccentColor" />
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/assigned_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_margin="8dp"
+                    />
 
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textColor="@color/AccentColor"
                     android:text="Task priority" />
 
@@ -185,7 +167,7 @@
                     android:id="@+id/priority_radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="8dp"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -193,14 +175,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="High"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
                         android:textColor="@color/AccentColor" />
 
                     <RadioButton
                         android:id="@+id/radiobtn_priority_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
                         android:text="Medium"
                         android:textColor="@color/AccentColor" />
 
@@ -216,11 +198,10 @@
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/create_task_btn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="32dp"
@@ -228,7 +209,7 @@
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/AccentColor"
             android:hint="Create Task"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColorHint="@color/colorPrimaryDarkMode" />
 
     </LinearLayout>

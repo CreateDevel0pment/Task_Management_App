@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class AddNewTaskFragment extends Fragment implements DatePickerDialogListener {
 
     private EditText task_name, task_description;
+    TextView assignedDate;
     private String userID, userGroup, taskPriority, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
     private View rootView;
@@ -69,14 +71,15 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
         TextView assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
-        CardView assignUserCardView = rootView.findViewById(R.id.assigned_user_card);
-        CardView checkBoxCardView = rootView.findViewById(R.id.cardView_CheckBox);
+        LinearLayout assignUserLayout = rootView.findViewById(R.id.assigned_user_linear);
+        LinearLayout checkBoxLayout = rootView.findViewById(R.id.checkbox_users_linear);
+        assignedDate = rootView.findViewById(R.id.assigned_end_date);
 
         if (extrasUserName != null) {
             assignedUserNameTV.setText(extrasUserName);
-            checkBoxCardView.setVisibility(View.GONE);
+            checkBoxLayout.setVisibility(View.GONE);
         } else {
-            assignUserCardView.setVisibility(View.GONE);
+            assignUserLayout.setVisibility(View.GONE);
         }
 
         taskNotificationViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskNotificationViewModel.class);
@@ -205,5 +208,6 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
     @Override
     public void passDateString(String date) {
         this.endDate = date;
+        assignedDate.setText(date);
     }
 }

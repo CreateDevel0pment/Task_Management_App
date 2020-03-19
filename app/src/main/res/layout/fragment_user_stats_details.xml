@@ -7,8 +7,18 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.main.sector.task.fragment.UserStatsDetailsFragment">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/astronaut"
+        android:id="@+id/users_profile_image_stats_details"/>
+
     <TextView
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@+id/users_profile_image_stats_details"
         android:textColor="@color/colorPrimaryDarkMode"
         android:id="@+id/user_name_stats_details"
         android:layout_width="wrap_content"
@@ -46,6 +56,17 @@
         android:layout_below="@id/pie_chart_img"
         android:layout_centerHorizontal="true"
         />
+
+    <TextView
+        android:textColor="@color/colorPrimaryDarkMode"
+        android:id="@+id/user_efficiency_tv"
+        android:layout_below="@+id/tasks_stats_chart"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 
 </RelativeLayout>

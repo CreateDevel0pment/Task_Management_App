@@ -15,26 +15,31 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class UserStatsDetailsFragment extends Fragment {
 
-    private String userName;
+    private String userName, imageUrl;
     private int completedTasksCount, personalTasksCount;
     private double completionRate3;
+    TextView userEfficiency;
+    CircleImageView userImg;
 
 
-    public UserStatsDetailsFragment(String userName, int completedTasksCount, int personalTasksCount) {
+    public UserStatsDetailsFragment(String imageUrl, String userName, int completedTasksCount, int personalTasksCount) {
         this.userName = userName;
         this.completedTasksCount = completedTasksCount;
         this.personalTasksCount = personalTasksCount;
-
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -46,13 +51,31 @@ public class UserStatsDetailsFragment extends Fragment {
         TextView userNameTV = view.findViewById(R.id.user_name_stats_details);
         ImageView pieImg = view.findViewById(R.id.pie_chart_img);
         TextView textUnderImg = view.findViewById(R.id.text_below_pieChartImg);
+        userEfficiency = view.findViewById(R.id.user_efficiency_tv);
         userNameTV.setText(userName);
+        userImg = view.findViewById(R.id.users_profile_image_stats_details);
+
+        Picasso.get().load(imageUrl)
+                .placeholder(R.drawable.astronaut)
+                .into(userImg);
 
         if (completedTasksCount != 0 && personalTasksCount != 0) {
             double allTasks = completedTasksCount + personalTasksCount;
             double completionRate1 = (completedTasksCount / allTasks);
             double completionRate2 = completionRate1 * 100;
             completionRate3 = (int) completionRate2;
+        }
+
+        if (completionRate3 <= 20.00) {
+            userEfficiency.setText(String.format("%s's efficiency is very low.", userName));
+        } else if (completionRate3 > 20.00 && completionRate3 < 40.00) {
+            userEfficiency.setText(String.format("%s's efficiency is low.", userName));
+        } else if (completionRate3  > 40.00 && completionRate3 < 60.00) {
+            userEfficiency.setText(String.format("%s's efficiency: Not great, not terrible.", userName));
+        } else if (completionRate3 > 60.00 && completionRate3 < 80.00) {
+            userEfficiency.setText(String.format("%s's efficiency is very good.", userName));
+        } else{
+            userEfficiency.setText(String.format("%s's efficiency is excellent.", userName));
         }
 
         List<PieEntry> data = new ArrayList<>();
