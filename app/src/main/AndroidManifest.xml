@@ -18,8 +18,7 @@
             android:name=".ui.main.wall.PrivateChatActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity
-            android:name=".ui.main.edit_find.find_friends.FindFriendsActivity"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:name=".ui.main.edit_find.find_friends.FindFriendsActivity" />
         <activity
             android:name=".ui.main.edit_find.edit.EditProfileActivity"
             android:parentActivityName=".ui.main.MainActivity" />

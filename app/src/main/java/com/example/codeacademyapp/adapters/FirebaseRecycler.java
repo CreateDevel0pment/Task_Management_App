@@ -54,8 +54,8 @@ public class FirebaseRecycler extends
                 fragment.setArguments(bundle);
 
                 fragmentManager.beginTransaction()
-                        .replace(R.id.user_byId_container, fragment)
-                        .addToBackStack("back")
+                        .add(R.id.user_byId_container, fragment)
+                        .addToBackStack("tag")
                         .commit();
             }
         });

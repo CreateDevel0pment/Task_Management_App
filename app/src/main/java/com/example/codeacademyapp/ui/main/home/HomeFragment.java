@@ -56,7 +56,7 @@ public class HomeFragment extends BaseFragment {
                     browser.setBackgroundColor(Color.TRANSPARENT);
                     CardView cardView = view.findViewById(R.id.web_card_view);
 
-                    browser.loadUrl(getUrl);
+//                    browser.loadUrl(getUrl);
                     browser.setVisibility(View.VISIBLE);
                     cardView.setVisibility(View.VISIBLE);
                 } else {

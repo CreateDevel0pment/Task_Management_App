@@ -104,7 +104,6 @@ public class UserByIdFragment extends Fragment {
             @Override
             public void onChanged(DataSnapshot dataSnapshot) {
 
-
                 if (dataSnapshot.hasChild(receiver_user_id)) {
 
                     String request_type = Objects.requireNonNull(dataSnapshot.child(receiver_user_id)
@@ -231,6 +230,7 @@ public class UserByIdFragment extends Fragment {
     }
 
     private void sendChatRequest() {
+
         chatRequestViewModel = ViewModelProviders.of(this).get(ChatRequestViewModel.class);
         chatRequestViewModel.getChatRequest(current_user_id, receiver_user_id).observe(this, new Observer<Task>() {
             @SuppressLint("SetTextI18n")

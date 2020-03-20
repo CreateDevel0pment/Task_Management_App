@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui.main.edit_find.find_friends;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,21 @@ public class FindFriendsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+
+                if(backStackEntryCount == 0){
+                    finish();
+                }else {
+
+                    onBackPressed();
+                }
+            }
+        });
         getSupportActionBar().setTitle("Find Employ");
         layout = findViewById(R.id.user_byId_container);
 
