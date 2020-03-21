@@ -22,9 +22,9 @@ public class SignUpRepository {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference myRef = rootRef.getReference();
     private String deviceToken;
+    private User setUser;
 
-
-    private String userID ;
+    private String userID;
 
     public MutableLiveData<User> signUpNewUser(final User user) {
         final MutableLiveData<User> setUserInformation = new MutableLiveData<>();
@@ -32,56 +32,53 @@ public class SignUpRepository {
         if (user != null) {
             mAuth.createUserWithEmailAndPassword(user.geteMail(), user.getPassword())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    if(task.isSuccessful()){
-                        final boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                            if (task.isSuccessful()) {
+                                final boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
 
-                        if (!user.getName().equals("") || !user.getPosition_spinner().equals("") ||
-                                !user.getSector_spinner().equals("")) {
+                                if (!user.getName().equals("") || !user.getPosition_spinner().equals("") ||
+                                        !user.getSector_spinner().equals("")) {
 
-                            final FirebaseUser userFb = mAuth.getCurrentUser();
-                            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                    if(task.isSuccessful()){
+                                    final FirebaseUser userFb = mAuth.getCurrentUser();
+                                    FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (task.isSuccessful()) {
 
-                                        if(task.isSuccessful()){
+                                                deviceToken = Objects.requireNonNull(task.getResult()).getToken();
 
-                                            deviceToken = Objects.requireNonNull(task.getResult()).getToken();
+                                                if (userFb != null) {
+                                                    userID = userFb.getUid();
 
-                                            if (userFb != null) {
-                                                userID = userFb.getUid();
+                                                    myRef.child("Users").child(userID)
+                                                            .child("Name")
+                                                            .setValue(user.getName());
+                                                    myRef.child("Users").child(userID)
+                                                            .child("Sector")
+                                                            .setValue(user.getSector_spinner());
+                                                    myRef.child("Users").child(userID)
+                                                            .child("Position")
+                                                            .setValue(user.getPosition_spinner());
+                                                    myRef.child("Users").child(userID)
+                                                            .child("Device_token").setValue(deviceToken);
 
-                                                myRef.child("Users").child(userID)
-                                                        .child("Name")
-                                                        .setValue(user.getName());
-                                                myRef.child("Users").child(userID)
-                                                        .child("Sector")
-                                                        .setValue(user.getSector_spinner());
-                                                myRef.child("Users").child(userID)
-                                                        .child("Position")
-                                                        .setValue(user.getPosition_spinner());
-                                                myRef.child("Users").child(userID)
-                                                        .child("Device_token").setValue(deviceToken);
-
-                                                User setUser = new User();
-                                                setUser.isNew = isNewUser;
-                                                setUser.setName(user.getName());
-                                                setUser.setPosition_spinner(user.getPosition_spinner());
-                                                setUser.setSector_spinner(user.getSector_spinner());
-                                                setUser.setDevice_token(deviceToken);
-                                                setUserInformation.setValue(setUser);
+                                                    setUser = new User();
+                                                    setUser.isNew = isNewUser;
+                                                    setUser.setName(user.getName());
+                                                    setUser.setPosition_spinner(user.getPosition_spinner());
+                                                    setUser.setSector_spinner(user.getSector_spinner());
+                                                    setUser.setDevice_token(deviceToken);
+                                                    setUserInformation.setValue(setUser);
+                                                }
                                             }
                                         }
-                                    }
+                                    });
                                 }
-                            });
+                            }
                         }
-                    }
-                }
-            });
+                    });
         }
         return setUserInformation;
     }

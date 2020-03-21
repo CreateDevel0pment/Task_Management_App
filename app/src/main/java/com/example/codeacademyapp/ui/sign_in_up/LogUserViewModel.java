@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.codeacademyapp.data.Resource;
 import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.data.repository.SigInRepository;
 import com.example.codeacademyapp.data.repository.SignUpRepository;
@@ -31,7 +32,7 @@ public class LogUserViewModel extends AndroidViewModel {
         signInRepository.forgotPassword(email);
     }
 
-    public LiveData<FirebaseUser> signInNewUser(String mail, String password) {
+    public LiveData<Resource<FirebaseUser>> signInNewUser(String mail, String password) {
         return signInRepository.authUserInformation(mail, password);
     }
 

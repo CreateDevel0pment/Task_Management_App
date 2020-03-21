@@ -3,11 +3,15 @@ package com.example.codeacademyapp.data.repository;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.codeacademyapp.data.Resource;
 import com.example.codeacademyapp.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,25 +22,28 @@ import java.util.Objects;
 
 public class SigInRepository {
 
-    private MutableLiveData<FirebaseUser> userInformationsMutableLiveData;
+    private MutableLiveData<Resource<FirebaseUser>> userInformationsMutableLiveData;
     private FirebaseAuth firebaseAuth= FirebaseAuth.getInstance();
     private DatabaseReference usersRef;
+    private FirebaseUser firebaseUser;
 
-    public MutableLiveData<FirebaseUser> authUserInformation(String email, String password) {
+    public MutableLiveData<Resource<FirebaseUser>> authUserInformation(String email, String password) {
 
         userInformationsMutableLiveData = new MutableLiveData<>();
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
 
         if (!email.equals("") && !password.equals("")) {
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+
 
                     if (task.isSuccessful()) {
 
                         final boolean isNewUser = Objects.requireNonNull(Objects.requireNonNull(task.getResult())
                                 .getAdditionalUserInfo()).isNewUser();
-                        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        firebaseUser = firebaseAuth.getCurrentUser();
 
                         if (firebaseUser != null) {
 
@@ -44,7 +51,8 @@ public class SigInRepository {
                             final String name = firebaseUser.getDisplayName();
                             final String email = firebaseUser.getEmail();
 
-                            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<InstanceIdResult> task) {
 
@@ -52,7 +60,8 @@ public class SigInRepository {
 
                                         final String deviceToken= Objects.requireNonNull(task.getResult()).getToken();
 
-                                        usersRef.child(uid).child("Device_token").setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        usersRef.child(uid).child("Device_token").setValue(deviceToken)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
 
@@ -61,7 +70,7 @@ public class SigInRepository {
                                                     User user = new User(uid, name, email,deviceToken);
                                                     user.isNew = isNewUser;
 
-                                                    userInformationsMutableLiveData.setValue(firebaseUser);
+                                                    userInformationsMutableLiveData.setValue(Resource.success(firebaseUser));
                                                 }
 
                                             }
@@ -71,10 +80,23 @@ public class SigInRepository {
                                 }
                             });
                         }
-
-                    } else {
-
                     }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                    if(e instanceof FirebaseAuthInvalidCredentialsException){
+                        userInformationsMutableLiveData.setValue(Resource.error("Invalid password",firebaseUser));
+
+                    }else if(e instanceof FirebaseAuthInvalidUserException){
+                        userInformationsMutableLiveData.setValue(Resource.error("Invalid email address",firebaseUser));
+
+                    }else {
+                        userInformationsMutableLiveData.setValue(Resource.error(e.getLocalizedMessage(),firebaseUser));
+                    }
+
+
                 }
             });
         }

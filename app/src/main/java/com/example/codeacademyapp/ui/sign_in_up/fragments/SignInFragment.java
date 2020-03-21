@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.data.Resource;
 import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.ui.main.MainActivity;
 import com.example.codeacademyapp.ui.sign_in_up.LogUserViewModel;
@@ -72,16 +73,30 @@ public class SignInFragment extends Fragment {
                     user.seteMail(mail);
                     user.setPassword(password);
 
-                    userViewModel.signInNewUser(mail, password).observe(SignInFragment.this, new Observer<FirebaseUser>() {
+//                    userViewModel.signInNewUser(mail, password).observe(SignInFragment.this, new Observer<FirebaseUser>() {
+//                        @Override
+//                        public void onChanged(FirebaseUser firebaseUser) {
+//
+//                            if (firebaseUser != null) {
+//                                getReferencesForUserGroup();
+//                            } else {
+//                                Toast.makeText(getContext(), "Please Sign Up", Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        }
+//                    });
+
+                    userViewModel.signInNewUser(mail,password).observe(SignInFragment.this, new Observer<Resource<FirebaseUser>>() {
                         @Override
-                        public void onChanged(FirebaseUser firebaseUser) {
+                        public void onChanged(Resource<FirebaseUser> firebaseUserResource) {
 
-                            if (firebaseUser != null) {
+                            if(firebaseUserResource.data != null){
+
                                 getReferencesForUserGroup();
-                            } else {
-                                Toast.makeText(getContext(), "Please Sign Up", Toast.LENGTH_SHORT).show();
-
+                            }else {
+                                Toast.makeText(getContext(), firebaseUserResource.message, Toast.LENGTH_SHORT).show();
                             }
+
                         }
                     });
                 }

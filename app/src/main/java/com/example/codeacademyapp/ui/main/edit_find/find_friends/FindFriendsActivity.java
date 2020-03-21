@@ -32,10 +32,9 @@ public class FindFriendsActivity extends AppCompatActivity {
 
                 int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
 
-                if(backStackEntryCount == 0){
+                if (backStackEntryCount == 0){
                     finish();
                 }else {
-
                     onBackPressed();
                 }
             }
