@@ -41,7 +41,14 @@ public class TaskActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+
+                if(backStackEntryCount == 0){
+                    finish();
+                }else {
+
                     onBackPressed();
+                }
             }
         });
 

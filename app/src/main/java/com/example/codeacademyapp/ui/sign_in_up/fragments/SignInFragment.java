@@ -75,7 +75,6 @@ public class SignInFragment extends Fragment {
                     userViewModel.signInNewUser(mail, password).observe(SignInFragment.this, new Observer<FirebaseUser>() {
                         @Override
                         public void onChanged(FirebaseUser firebaseUser) {
-
                             if (firebaseUser != null) {
                                 getReferencesForUserGroup();
                             } else {
@@ -85,8 +84,11 @@ public class SignInFragment extends Fragment {
                         }
                     });
                 }
+
             }
+
         });
+
 
         forgot_pass.setOnClickListener(new View.OnClickListener() {
             @Override
