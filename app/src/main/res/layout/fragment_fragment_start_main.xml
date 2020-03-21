@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@color/colorPrimaryDarkMode"
+    android:background="@drawable/background"
     tools:context=".ui.sign_in_up.fragments.FragmentStartMain">
 
 

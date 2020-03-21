@@ -30,7 +30,8 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
             app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="@color/colorPrimary">
+            app:cardBackgroundColor="@android:color/white"
+            >
 
             <EditText
                 android:layout_width="match_parent"
@@ -52,7 +53,8 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
             app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="@color/colorPrimary">
+            app:cardBackgroundColor="@android:color/white"
+            >
 
             <EditText
                 android:layout_width="match_parent"
@@ -63,7 +65,8 @@
                 android:drawableTint="@color/colorPrimaryDarkMode"
                 android:textColor="@color/colorPrimaryDarkMode"
                 android:id="@+id/person_password"
-                android:textColorHint="@color/colorPrimaryDarkMode" />
+                android:textColorHint="@color/colorPrimaryDarkMode"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -75,7 +78,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@color/colorPrimary">
+            app:cardBackgroundColor="@android:color/white">
 
             <EditText
                 android:layout_width="match_parent"
@@ -108,7 +111,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@color/colorPrimary">
+            app:cardBackgroundColor="@android:color/white">
 
             <Spinner
                 android:layout_width="match_parent"
@@ -139,7 +142,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="@color/colorPrimary">
+            app:cardBackgroundColor="@android:color/white">
 
             <Spinner
                 android:layout_width="match_parent"
@@ -157,11 +160,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_marginEnd="25dp"
-            android:backgroundTint="@color/AccentColor"
+            android:backgroundTint="@color/colorPrimaryDarkMode"
             android:id="@+id/sign_up_btn"
             android:hint="Sign Up"
             android:textSize="20sp"
-            android:textColorHint="@color/colorPrimaryDarkMode"
+            android:textColorHint="@color/colorPrimary"
             android:textColor="@color/colorPrimaryDarkMode"/>
 
     </LinearLayout>
