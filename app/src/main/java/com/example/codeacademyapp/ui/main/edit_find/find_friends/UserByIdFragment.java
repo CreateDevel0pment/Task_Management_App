@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui.main.edit_find.find_friends;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -39,7 +41,6 @@ public class UserByIdFragment extends Fragment {
     private Button send_message_btn;
 
     private UserInformationViewModel userInformationViewModel;
-    private ChatViewModel chatViewModel;
     private ChatRequestViewModel chatRequestViewModel;
 
     public UserByIdFragment() {
