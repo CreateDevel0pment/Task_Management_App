@@ -8,14 +8,11 @@
     android:orientation="vertical"
     tools:context=".ui.main.edit_find.find_friends.UserByIdFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         >
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -23,7 +20,7 @@
         android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/astronaut"
         app:civ_border_color="@color/AccentColor"
         app:civ_border_width="2dp"
@@ -75,7 +72,5 @@
         android:layout_marginTop="24dp"/>
 
     </RelativeLayout>
-
-    </ScrollView>
 
 </RelativeLayout>

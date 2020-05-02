@@ -26,6 +26,7 @@ import java.util.Objects;
 public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdapter.MyHolder> {
 
     private List<PublicMessage> mList;
+    private String checkIfContinuedMessages, prevMessage;
 
     private FragmentManager fragmentManager;
 
@@ -48,6 +49,10 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
     public void onBindViewHolder(@NonNull final PublicMessageAdapter.MyHolder holder, final int position) {
 
         final PublicMessage messages = mList.get(holder.getAdapterPosition());
+        prevMessage = mList.get(holder.getAdapterPosition()).getId();
+        if(position>0){
+            checkIfContinuedMessages = mList.get(holder.getAdapterPosition()-1).getId();
+        }
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String currenUser = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
@@ -59,6 +64,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
         holder.sender_time.setVisibility(View.INVISIBLE);
         holder.receiver_name.setVisibility(View.INVISIBLE);
         holder.receiver_sector.setVisibility(View.INVISIBLE);
+
 
         if (messages.getId().equals(currenUser)) {
 
@@ -239,6 +245,23 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
                     }
                 }
         }
+
+        if(checkIfContinuedMessages!=null){
+            if (checkIfContinuedMessages.equals(prevMessage)) {
+                holder.receiver_name.setVisibility(View.GONE);
+                holder.cardView.setVisibility(View.GONE);
+                holder.reciverProfileImage.setVisibility(View.GONE);
+                holder.receiver_time.setVisibility(View.GONE);
+                holder.receiver_sector.setVisibility(View.GONE);
+                holder.sender_doc_image.setVisibility(View.GONE);
+                holder.sender_doc_time.setVisibility(View.GONE);
+                holder.sender_message.setVisibility(View.GONE);
+                holder.receiver_message.setVisibility(View.GONE);
+                holder.receiver_message_continuous.setVisibility(View.VISIBLE);
+                holder.receiver_message_continuous.setText(messages.getMessage());
+            }
+        }
+
     }
 
     @Override
@@ -249,7 +272,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
     public class MyHolder extends RecyclerView.ViewHolder {
 
         TextView sender_message, receiver_message, receiver_name, receiver_sector,
-                receiver_time, sender_time, receiver_doc_time, sender_doc_time;
+                receiver_time, sender_time, receiver_doc_time,receiver_message_continuous, sender_doc_time;
         ImageView reciverProfileImage, sender_doc_image, reciever_doc_image;
         CardView cardView, sender_image_card, receiver_image_card;
 
@@ -258,6 +281,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
 
             sender_message = itemView.findViewById(R.id.sender_message_text);
             receiver_message = itemView.findViewById(R.id.reciever_message_text);
+            receiver_message_continuous = itemView.findViewById(R.id.reciever_message_text_continuous);
             reciverProfileImage = itemView.findViewById(R.id.message_profile_image);
             cardView = itemView.findViewById(R.id.message_profile_image_card);
             receiver_name = itemView.findViewById(R.id.reciever_name);

@@ -26,7 +26,6 @@ public class StartActivity extends AppCompatActivity {
                 .commit();
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();

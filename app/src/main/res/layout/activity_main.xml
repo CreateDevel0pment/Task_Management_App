@@ -73,7 +73,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"
-        android:background="#535353"
+        android:background="#363E4A"
         app:itemTextColor="@drawable/selector_bottombar_text"
         app:itemIconTint="@drawable/selector_bottombar_text"
         app:elevation="8dp"

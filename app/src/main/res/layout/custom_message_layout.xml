@@ -16,12 +16,12 @@
         app:cardCornerRadius="16dp">
 
         <ImageView
+
             android:id="@+id/message_profile_image"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:scaleType="fitCenter"
             android:layout_gravity="center"
-
             />
 
     </androidx.cardview.widget.CardView>
@@ -35,6 +35,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/message_profile_image_card"
+
         android:id="@+id/reciever_name"
         />
 
@@ -50,26 +51,41 @@
         android:id="@+id/reciever_sector"
         />
 
+
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/AccentColor"
         android:text="11:11"
         android:textSize="11sp"
-        android:layout_toEndOf="@+id/message_profile_image_card"
-        android:layout_below="@+id/reciever_message_text"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="4dp"
         android:id="@+id/reciever_time"
+        android:layout_toEndOf="@id/reciever_sector"
         />
+
 
     <TextView
         android:id="@+id/reciever_message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
-        android:layout_toEndOf="@+id/message_profile_image_card"
+        android:layout_below="@+id/reciever_name"
+        android:background="@drawable/reciever_message_layout"
+        android:text="reciever Message"
+        android:textColor="@color/colorPrimaryDarkMode"
+        android:padding="8dp"
+        android:textSize="16sp"
+        />
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/reciever_message_text_continuous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="48dp"
         android:layout_below="@+id/reciever_name"
         android:background="@drawable/reciever_message_layout"
         android:text="reciever Message"

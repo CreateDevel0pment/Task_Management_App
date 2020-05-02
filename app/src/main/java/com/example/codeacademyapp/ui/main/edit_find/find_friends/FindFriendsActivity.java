@@ -40,12 +40,11 @@ public class FindFriendsActivity extends AppCompatActivity {
                 }
             }
         });
-        getSupportActionBar().setTitle("Find Employ");
+        getSupportActionBar().setTitle("Find Employee");
         layout = findViewById(R.id.user_byId_container);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.user_byId_container, new AllContactsFragment())
                 .commit();
     }
-
 }

@@ -89,7 +89,7 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
 
                 if (web_text.getText().toString().equals("")) {
-                    web_text.setError("Enter web");
+                    web_text.setError("Enter website");
 
                 } else {
 
