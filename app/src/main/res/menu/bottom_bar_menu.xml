@@ -2,12 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/home_ic"
-        android:title="@string/home" />
-    <item
         android:id="@+id/walle"
-        android:icon="@drawable/group_people_ic"
+        android:icon="@drawable/home_ic"
         android:title="@string/wall" />
     <item
         android:id="@+id/sector"
@@ -18,5 +14,9 @@
         android:id="@+id/tasks_b_v"
         android:icon="@drawable/assignment"
         android:title="@string/tasks" />
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_info_"
+        android:title="@string/home" />
 
 </menu>

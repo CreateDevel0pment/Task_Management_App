@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:textColor="@color/AccentColor"
-                    android:text="username"
+                    android:text="@string/username"
                     android:textAlignment="textStart"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="sector"
+                android:text="@string/sector"
                 android:textColor="@color/colorPrimary" />
 
             <LinearLayout
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     android:backgroundTint="@android:color/holo_red_dark"
-                    android:text="cancel"
+                    android:text="@string/cancel"
                     android:textAllCaps="false"
                     android:visibility="gone"
                     />
@@ -99,7 +99,7 @@
                     android:layout_marginEnd="12dp"
                     android:backgroundTint="@color/AccentColor"
                     android:textColor="@color/colorPrimaryDarkMode"
-                    android:text="accept"
+                    android:text="@string/accept"
                     android:textAllCaps="false"
                     android:visibility="gone"
                      />

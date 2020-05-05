@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string name="app_name">Workers+</string>
+
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="my_group">Мој Сектор</string>
+        <string name="home">Инфо</string>
+        <string name="find_friends">Пронајди Пријател</string>
+        <string name="settings">Поставки</string>
+        <string name="log_out">Одјави се</string>
+        <string name="username">корисник</string>
+        <string name="edit_profile">Измени Податоци</string>
+        <string name="warning_text">Промени ја позицијата или секторот во случај, \n ако си унапреден или преместен во друг сектор!
+</string>
+        <string name="set_profile_image">Постави Слика</string>
+        <string name="back_to_task_list">Назат кон листата со задачи</string>
+        <string name="change_position">Промени Позиција:</string>
+        <string name="change_group">Промени Сектор</string>
+        <string name="edit">Измени</string>
+        <string name="write_message">внеси порака…</string>
+        <string name="info_page">Инфо Страница</string>
+        <string name="new_task_view">new task view</string>
+        <string name="log_in">Логирај се</string>
+        <string name="forgot_your_password">Заборавена лозинка?</string>
+        <string name="email">е-адреса</string>
+        <string name="password">лозинка</string>
+        <string name="full_name">Име и Презиме</string>
+        <string name="on_position">На Позиција:</string>
+        <string name="in_sector">Во Сектор/Струка:</string>
+        <string name="info_settings">Ново Инфо</string>
+
+        <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+        <string name="fcm_message">FCM Message</string>
+        <string name="add_title">Внеси наслов</string>
+        <string name="created">Креирано на:</string>
+
+        <string name="update_your_website_here">Измени ја веб страницата</string>
+        <string name="https_myweb_com">https://myweb.com</string>
+        <string name="wall">Дома</string>
+        <string name="my_sector">Мој Сектор</string>
+        <string name="tasks">Задачи</string>
+        <string name="you_have_no_tasks_available"> Монетално нема нова задача</string>
+        <string name="ok">потврди</string>
+        <string name="user_name">корисничко име</string>
+        <string name="sector">сектор</string>
+        <string name="last_seen">last seen</string>
+        <string name="add_description">додади опис</string>
+        <string name="create_sector_project">Креирај проект за сектор</string>
+        <string name="create_personal_task_for">Додели задача на вработен..</string>
+        <string name="set_task_end_date">Set task end date..</string>
+        <string name="task_priority">Итност на задача</string>
+        <string name="high">Висок!</string>
+        <string name="medium">Среден</string>
+        <string name="low">Мал</string>
+        <string name="enter_your_email_here_and_we_will_send_you_a_password_recovery_mail">Внеси ја твојата електронска адреса , за да ви испратиме порака за нова лозика</string>
+        <string name="workers_helps_you_work">Workers ти помага во работата</string>
+        <string name="set_a_home_page_by_entering_a_website">Постави инфо екран со внесување на посакувана веб адреса</string>
+        <string name="no_new_requests">Нема нови барања за пријател</string>
+        <string name="sign_up">Креирај Профил</string>
+        <string name="send_message">Испрати Порака</string>
+        <string name="data_for_this_user_is_not_available">Нема податоци за користикот.</string>
+        <string name="cancel">одби</string>
+        <string name="accept">прифати</string>
+        <string name="create_task">Креирај Задача</string>
+        <string name="set_date">Постави датум</string>
+        <string name="deadline">Краен рок:</string>
+        <string name="complete">Завршена</string>
+
+        <string name="tab_my_tasks">Мој Задачи</string>
+        <string name="tab_Projects">Проекти</string>
+        <string name="tab_Completed">Завршени</string>
+
+        <string name="tab_Wall">Пораки</string>
+        <string name="tab_MyContacts">Мој Контакти</string>
+        <string name="tab_Requests">Побарувања</string>
+
+        <string name="copleted_tasks">Завршени задачи</string>
+        <string name="todo_tasks">Задачи во тек</string>
+        <string name="efficiency_very_low"> Лош работник.</string>
+        <string name="efficiecy_low"> Под просечен работник.</string>
+        <string name="efficiency_normal"> Нормален работник.</string>
+        <string name="efficiency_very_good"> Добар работник.</string>
+        <string name="efficiency_excellent"> Одличен работник.</string>
+
+        <string name="Switched_English">English</string>
+        <string name="Switched_Makedonski">Македонски Јазик</string>
+        <string name="language">Јазик</string>
+        <string name="Dark_disabled">Темен екран уклучен</string>
+        <string name="Dark_enabled">Темен екран исклучен</string>
+        <string name="Dark_mode">Темен екран</string>
+        <string name="set_info_page">Подеси Инфо екран</string>
+
+        <string name="Task_activity">Задачи</string>
+        <string name="Create_task">Креирај Задача</string>
+        <string name="CreateProject">Креирај Проект</string>
+
+        <string-array name="Sector">
+            <item>Избери Сектор/Професија - </item>
+            <item>Android</item>
+            <item>Web Development</item>
+            <item>Ruby on rails</item>
+        </string-array>
+
+        <string-array name="Position">
+            <item>Избери Позиција - </item>
+            <item>Manager</item>
+            <item>Staff</item>
+        </string-array>
+
+        <string-array name="Priority">
+            <item>Итност на задача - </item>
+            <item>Приоритетна</item>
+            <item>Средна Итност</item>
+            <item>Мала Итност</item>
+        </string-array>
+
+</resources>

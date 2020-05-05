@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".ui.main.wall.PrivateChatActivity">
+    tools:context=".ui.main.home.PrivateChatActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.wall;
+package com.example.codeacademyapp.ui.main.home;
 
 
 import android.annotation.SuppressLint;

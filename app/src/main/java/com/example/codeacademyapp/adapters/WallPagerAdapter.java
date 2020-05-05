@@ -5,14 +5,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.codeacademyapp.ui.main.wall.WallFragment;
-import com.example.codeacademyapp.ui.main.wall.MyContactsFragment;
-import com.example.codeacademyapp.ui.main.wall.RequestsFragment;
+import com.example.codeacademyapp.ui.main.home.WallFragment;
+import com.example.codeacademyapp.ui.main.home.MyContactsFragment;
+import com.example.codeacademyapp.ui.main.home.RequestsFragment;
+
+import java.util.ArrayList;
 
 public class WallPagerAdapter extends FragmentPagerAdapter {
 
-    public WallPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    public ArrayList<String> tab_PageTitle;
+
+    public WallPagerAdapter(@NonNull FragmentManager fm, int behavior,ArrayList<String> tab_PageTitle) {
         super(fm, behavior);
+        this.tab_PageTitle=tab_PageTitle;
     }
 
     @NonNull
@@ -36,19 +41,22 @@ public class WallPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return tab_PageTitle.size();
     }
 
+
+
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "Wall";
-            case 1:
-                return "My Contacts";
-            case 2:
-                return "Requests";
-            default:
-                return null;
-        }
+//        switch (position) {
+//            case 0:
+//                return Resources.getSystem().getString(R.string.tab_Wall);
+//            case 1:
+//                return Resources.getSystem().getString(R.string.tab_MyContacts);
+//            case 2:
+//                return Resources.getSystem().getString(R.string.tab_Requests);
+//            default:
+//                return null;
+//        }
+        return tab_PageTitle.get(position);
     }
 }

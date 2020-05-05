@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
@@ -37,6 +38,7 @@ public class TaskTabsFragment extends BaseFragment {
     private ViewPager viewPager;
     private String userPosition;
     private ImageView userStatsBtn;
+    private ArrayList<String> tab_PageTitle;
 
     public TaskTabsFragment() {
     }
@@ -88,10 +90,15 @@ public class TaskTabsFragment extends BaseFragment {
             }
         });
 
+        tab_PageTitle=new ArrayList<>();
+        tab_PageTitle.add(getString(R.string.tab_my_tasks));
+        tab_PageTitle.add(getString(R.string.tab_Projects));
+        tab_PageTitle.add(getString(R.string.tab_Completed));
+
         TabLayout tabLayout = rootView.findViewById(R.id.tab_layout_new_tasks);
         viewPager = rootView.findViewById(R.id.view_pager_new_tasks);
         NewTaskPagerAdapter adapter = new NewTaskPagerAdapter(getChildFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,tab_PageTitle);
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

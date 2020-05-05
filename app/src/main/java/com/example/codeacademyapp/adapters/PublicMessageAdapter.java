@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.PublicMessage;
-import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
+import com.example.codeacademyapp.ui.main.home.PrivateChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 

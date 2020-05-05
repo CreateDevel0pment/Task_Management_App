@@ -36,7 +36,7 @@ public class TaskActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar_tasks_tab_fragment);
         toolbar.setNavigationIcon(R.drawable.ic_back_button_white);
-        toolbar.setTitle("Tasks");
+        toolbar.setTitle(R.string.Task_activity);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class TaskActivity extends AppCompatActivity {
                         manager.beginTransaction()
                                 .replace(R.id.task_fragments_container, addNewTaskFragment)
                                 .commit();
-                        toolbar.setTitle("Create task");
+                        toolbar.setTitle(R.string.Create_task);
                     }
                 }
 
@@ -83,7 +83,7 @@ public class TaskActivity extends AppCompatActivity {
             manager.beginTransaction()
                     .replace(R.id.task_fragments_container, addNewTaskFragment)
                     .commit();
-            toolbar.setTitle("Create project");
+            toolbar.setTitle(R.string.CreateProject);
         } else if (openStatsFragCheck != null) {
 
             UserStatisticsFragment statisticsFragment = new UserStatisticsFragment();

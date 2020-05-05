@@ -104,7 +104,7 @@ public class GroupChatFragment extends BaseFragment {
                 if (dataSnapshot.exists()) {
                     userGroup = Objects.requireNonNull(dataSnapshot.child("Sector").getValue()).toString();
                     if (!Objects.requireNonNull(dataSnapshot.child("Position").getValue()).equals("Staff")) {
-                        new_task_btn.setVisibility(View.VISIBLE);
+//                        new_task_btn.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -116,15 +116,15 @@ public class GroupChatFragment extends BaseFragment {
             }
         });
 
-        new_task_btn = view.findViewById(R.id.new_task_button);
-        new_task_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newTaskIntent = new Intent(getActivity(), TaskActivity.class);
-                newTaskIntent.putExtra("type", "forAll");
-                startActivity(newTaskIntent);
-            }
-        });
+//        new_task_btn = view.findViewById(R.id.new_task_button);
+//        new_task_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent newTaskIntent = new Intent(getActivity(), TaskActivity.class);
+//                newTaskIntent.putExtra("type", "forAll");
+//                startActivity(newTaskIntent);
+//            }
+//        });
 
         initialisedFields(view);
         sentMessage_btn.setOnClickListener(new View.OnClickListener() {
@@ -199,11 +199,14 @@ public class GroupChatFragment extends BaseFragment {
         if (TextUtils.isEmpty(message)) {
             Toast.makeText(getContext(), "Write your message", Toast.LENGTH_SHORT).show();
         } else {
+            Log.d("WWW", "SaveMessageToDataBase: Massage saved");
+
             getCurrentDateAndTime();
 
             checker = "";
 
             groupChatViewModel.saveMessage(getMessage(), "Chat Sector", userGroup);
+
         }
     }
 

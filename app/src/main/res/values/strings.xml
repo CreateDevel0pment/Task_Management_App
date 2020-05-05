@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Workers+</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home">Home</string>
+    <string name="home">Web</string>
     <string name="my_group">My Group</string>
     <string name="find_friends">Find Friends</string>
     <string name="settings">Settings</string>
@@ -27,7 +26,7 @@
     <string name="full_name">Full Name</string>
     <string name="on_position">On Position:</string>
     <string name="in_sector">In Sector:</string>
-    <string name="home_settings">Home Settings</string>
+    <string name="info_settings">New Info</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="fcm_message">FCM Message</string>
@@ -36,10 +35,60 @@
 
     <string name="update_your_website_here">Update your website here</string>
     <string name="https_myweb_com">https://myweb.com</string>
-    <string name="wall">Wall</string>
+    <string name="wall">Home</string>
     <string name="my_sector">My Sector</string>
     <string name="tasks">Tasks</string>
     <string name="you_have_no_tasks_available">You have no tasks available</string>
+    <string name="ok">Ok</string>
+    <string name="user_name">user name</string>
+    <string name="sector">sector</string>
+    <string name="last_seen">last seen</string>
+    <string name="add_description">add description..</string>
+    <string name="create_sector_project">Create sector project</string>
+    <string name="create_personal_task_for">Create personal task for..</string>
+    <string name="set_task_end_date">Set task end date..</string>
+    <string name="task_priority">Task priority</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="low">Low</string>
+    <string name="create_task">Create Task</string>
+    <string name="set_date">Set Date</string>
+    <string name="enter_your_email_here_and_we_will_send_you_a_password_recovery_mail">Enter your email here and we will send you a password recovery mail.</string>
+    <string name="workers_helps_you_work">Workers helps you work</string>
+    <string name="set_a_home_page_by_entering_a_website">Set a info page by entering a website</string>
+    <string name="no_new_requests">No new Requests</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="send_message">Send Message</string>
+    <string name="data_for_this_user_is_not_available">Data for this user is not available.</string>
+    <string name="cancel">cancel</string>
+    <string name="accept">accept</string>
+    <string name="deadline">Deadline:</string>
+    <string name="complete">Complete</string>
+
+    <string name="tab_my_tasks">My Tasks</string>
+    <string name="tab_Projects">Projects</string>
+    <string name="tab_Completed">Completed</string>
+    <string name="tab_Wall">Wall</string>
+    <string name="tab_MyContacts">My Contacts</string>
+    <string name="tab_Requests">Requests</string>
+    <string name="copleted_tasks">Completed Tasks</string>
+    <string name="todo_tasks">TODO Tasks</string>
+    <string name="efficiency_very_low">%s\'s efficiency is very low.</string>
+    <string name="efficiecy_low">%s\'s efficiency is low.</string>
+    <string name="efficiency_normal">%s\'s efficiency: Normal.</string>
+    <string name="efficiency_very_good">%s\'s efficiency is very good.</string>
+    <string name="efficiency_excellent">%s\'s efficiency is excellent.</string>
+
+    <string name="Switched_English">English</string>
+    <string name="Switched_Makedonski">Makedonski</string>
+    <string name="language">Language</string>
+    <string name="Dark_disabled">Dark mode disabled</string>
+    <string name="Dark_enabled">Dark mode enabled</string>
+    <string name="Dark_mode">Dark mode</string>
+    <string name="set_info_page">Set Info page</string>
+    <string name="Task_activity">Tasks</string>
+    <string name="Create_task">Create task</string>
+    <string name="CreateProject">Create project</string>
 
 
     <string-array name="Sector">
@@ -60,6 +109,12 @@
         <item>High</item>
         <item>Medium</item>
         <item>Low</item>
+    </string-array>
+
+    <string-array name="Tab_Task">
+        <item>My Tasks</item>
+        <item>Projects</item>
+        <item>Completed</item>
     </string-array>
 
 </resources>

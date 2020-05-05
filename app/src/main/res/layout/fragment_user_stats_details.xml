@@ -52,7 +52,7 @@
         android:layout_margin="8dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Data for this user is not available."
+        android:text="@string/data_for_this_user_is_not_available"
         android:layout_below="@id/pie_chart_img"
         android:layout_centerHorizontal="true"
         />

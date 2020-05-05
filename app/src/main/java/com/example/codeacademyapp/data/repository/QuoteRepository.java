@@ -33,6 +33,7 @@ public class QuoteRepository {
     }
 
     private void setQuoteApi(QuotesApi quotesApi) {
+
         this.quotesApi = quotesApi;
     }
 

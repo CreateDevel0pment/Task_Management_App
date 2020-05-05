@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDarkMode"
-    tools:context=".ui.main.home.HomeSettings">
+    tools:context=".ui.main.info.SetInfo">
 
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-light"
-        android:text="@string/settings"
+        android:text="@string/set_info_page"
         android:textColor="@color/AccentColor"
         android:textSize="24sp" />
 
@@ -66,7 +66,7 @@
         android:layout_marginTop="16dp"
         android:id="@+id/settings_ok_btn"
         android:textAllCaps="false"
-        android:text="Ok"
+        android:text="@string/ok"
         android:textSize="20sp"
         android:textColor="@color/colorPrimaryDarkMode"
         android:backgroundTint="@color/AccentColor"

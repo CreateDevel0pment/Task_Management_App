@@ -9,7 +9,7 @@
     android:backgroundTint="@color/colorPrimaryDarkMode"
     android:weightSum="1"
     android:gravity="center"
-    tools:context=".ui.main.home.HomeFragment">
+    tools:context=".ui.main.info.InfoFragment">
 
     <LinearLayout
         android:id="@+id/home_welcome_layout"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="Set a home page by entering a website"
+            android:text="@string/set_a_home_page_by_entering_a_website"
             android:textAlignment="center"
             android:textColor="@color/AccentColor"
             android:textSize="16sp"
@@ -68,7 +68,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:backgroundTint="@color/AccentColor"
-            android:text="Ok"
+            android:text="@string/ok"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryDarkMode"
             android:textSize="16sp" />

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#dadfe9</color>
+    <color name="colorPrimary">#e7eaef</color>
     <color name="colorPrimaryDarkMode">#1f252e</color>
-    <color name="AccentColor">#edb705</color>
+    <color name="AccentColor">#97A0AD</color>
     <color name="LogoMainColor">#683092</color>
 
     <color name="black">#000000</color>
     <color name="text_dark_grey">#424242</color>
-    <color name="recyclerview_grey_background">#6E7A83</color>
+    <color name="recyclerview_grey_background">#e7eaef</color>
+    <color name="card_main_screen">#374151</color>
 
 </resources>

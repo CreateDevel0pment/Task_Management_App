@@ -1,6 +1,7 @@
 package com.example.codeacademyapp.ui.main.sector.chat;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;

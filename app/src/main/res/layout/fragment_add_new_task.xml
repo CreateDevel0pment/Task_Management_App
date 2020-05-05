@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|start"
-                android:hint="add description.."
+                android:hint="@string/add_description"
                 android:maxLines="10"
                 android:minLines="5"
                 android:padding="10dp"
@@ -69,7 +69,7 @@
                     android:layout_margin="8dp"
                     android:textSize="16sp"
                     android:textColor="@color/AccentColor"
-                    android:text="Create sector project" />
+                    android:text="@string/create_sector_project" />
 
                 <CheckBox
                     android:buttonTint="@color/colorPrimary"
@@ -95,7 +95,7 @@
                     android:layout_margin="8dp"
                     android:textSize="16sp"
                     android:textColor="@color/AccentColor"
-                    android:text="Create personal task for.." />
+                    android:text="@string/create_personal_task_for" />
 
                 <ImageView
                     android:id="@+id/assign_to_img"
@@ -127,7 +127,7 @@
                     android:textColor="@color/AccentColor"
                     android:textSize="16sp"
                     android:layout_margin="8dp"
-                    android:text="Set task end date.." />
+                    android:text="@string/set_task_end_date" />
 
                 <ImageView
                     android:id="@+id/date_picker_icon"
@@ -149,53 +149,56 @@
 
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/AccentColor"
-                    android:text="Task priority" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@color/AccentColor"-->
+<!--                    android:text="@string/task_priority" />-->
 
-                <RadioGroup
-                    android:id="@+id/priority_radioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:orientation="horizontal">
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/priority_radioGroup"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <RadioButton
-                        android:id="@+id/radiobtn_priority_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="High"
-                        android:layout_marginEnd="4dp"
-                        android:textColor="@color/AccentColor" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radiobtn_priority_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/high"-->
+<!--                        android:textSize="11dp"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:textColor="@color/AccentColor" />-->
 
-                    <RadioButton
-                        android:id="@+id/radiobtn_priority_medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="Medium"
-                        android:textColor="@color/AccentColor" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radiobtn_priority_medium"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:textSize="11dp"-->
+<!--                        android:text="@string/medium"-->
+<!--                        android:textColor="@color/AccentColor" />-->
 
-                    <RadioButton
-                        android:id="@+id/radiobtn_priority_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Low"
-                        android:textColor="@color/AccentColor" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radiobtn_priority_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="11dp"-->
+<!--                        android:text="@string/low"-->
+<!--                        android:textColor="@color/AccentColor" />-->
 
-                </RadioGroup>
+<!--                </RadioGroup>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
 
@@ -208,7 +211,7 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/AccentColor"
-            android:hint="Create Task"
+            android:hint="@string/create_task"
             android:textSize="16sp"
             android:textColorHint="@color/colorPrimaryDarkMode" />
 
