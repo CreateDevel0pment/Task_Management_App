@@ -2,7 +2,14 @@ package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -42,12 +50,16 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class AddNewTaskFragment extends Fragment implements DatePickerDialogListener {
 
     private EditText task_name, task_description;
-    TextView assignedDate;
+    private TextView assignedDate;
     private String userID, userGroup, taskPriority, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
     private View rootView;
     private String currentDate, endDate;
+    private String checker,fileName;
     private TaskNotificationViewModel taskNotificationViewModel;
+    private ImageView uploadFile;
+    private ProgressDialog progressDialog;
+    private Uri uri;
 
 
     public AddNewTaskFragment(String userName, String extrasUserId) {
@@ -72,12 +84,15 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
         task_description = rootView.findViewById(R.id.task_desc);
         TextView assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
         LinearLayout assignUserLayout = rootView.findViewById(R.id.assigned_user_linear);
-        LinearLayout checkBoxLayout = rootView.findViewById(R.id.checkbox_users_linear);
+
+        uploadFile = rootView.findViewById(R.id.task_file_btn_upload);
         assignedDate = rootView.findViewById(R.id.assigned_end_date);
+        progressDialog = new ProgressDialog(getContext());
+
+        uploadFile();
 
         if (extrasUserName != null) {
             assignedUserNameTV.setText(extrasUserName);
-            checkBoxLayout.setVisibility(View.GONE);
         } else {
             assignUserLayout.setVisibility(View.GONE);
         }
@@ -195,6 +210,9 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
         task.setImportance(taskPriority);
         task.setGroup(userGroup);
         task.setEndDate(endDate);
+        task.setDocType(checker);
+        task.setDocName(fileName);
+        task.setUri(uri);
         if (extrasUserId != null) {
             task.setAssignedUserId(extrasUserId);
         }
@@ -209,5 +227,88 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
     public void passDateString(String date) {
         this.endDate = date;
         assignedDate.setText(date);
+    }
+
+    private void uploadFile(){
+        uploadFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence[] options = new CharSequence[]{
+                        "Images",
+                        "PDF files",
+                        "Ms Word files"
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Select file type");
+
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent().setAction(Intent.ACTION_GET_CONTENT);
+
+                        switch (which) {
+                            case 0:
+                                checker = ".jpg";
+
+                                intent.setType("image/*");
+                                startActivityForResult(Intent.createChooser(intent, "Select Photo"), 1);
+                                break;
+
+                            case 1:
+                                checker = ".pdf";
+
+                                intent.setType("application/pdf");
+                                startActivityForResult(Intent.createChooser(intent, "Select PDF File"), 1);
+                                break;
+
+                            case 2:
+                                checker = ".docx";
+
+                                intent.setType("application/msword");
+                                startActivityForResult(Intent.createChooser(intent, "Select Ms Word File"), 1);
+                                break;
+
+                            default:
+                        }
+                    }
+                });
+
+                builder.show();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && data != null) {
+
+            progressDialog.setTitle("Upload document");
+            progressDialog.setMessage("Please wait. Document loading..");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+
+
+//            getCurrentDateAndTime();
+
+            uri = data.getData();
+
+            if (uri != null) {
+
+                Cursor returnCursor =
+                        getContext().getContentResolver().query(uri, null, null, null, null);
+
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                returnCursor.moveToFirst();
+
+                fileName = returnCursor.getString(nameIndex);
+
+
+            }
+        }
+
     }
 }

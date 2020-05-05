@@ -39,9 +39,9 @@
         <ImageView
             android:layout_weight="1"
             android:id="@+id/group_chat_file_btn"
-            android:layout_width="30dp"
+            android:layout_width="25dp"
             android:layout_gravity="center"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:src="@drawable/attach"
            />
 

@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 
@@ -87,6 +89,13 @@ public class CreateTaskRepository {
             if (taskRef.getKey() == null) {
                 return setTaskInformation;
             }
+
+            StorageReference storageReference = FirebaseStorage.getInstance()
+                    .getReference()
+                    .child("Send Doc Files");
+            StorageReference storagePath = storageReference.child(task.getUri().toString());
+
+            storagePath.putFile(task.getUri());
 
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("Description")

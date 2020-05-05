@@ -1,17 +1,20 @@
 package com.example.codeacademyapp.data.model;
 
+import android.net.Uri;
+
 import java.util.List;
 
 public class Task {
 
     private String name;
     private String description;
-    private String note;
+    private String docType;
+    private String docName;
     private int state;
     private String importance;
     private String start_date;
     private String endDate;
-    private String user_Id;
+    private Uri uri;
     private String id;
     private String group;
     private String assignedUserId;
@@ -24,31 +27,54 @@ public class Task {
     public Task(String name, String description, String note) {
         this.name = name;
         this.description = description;
-        this.note = note;
     }
 
-    public Task(String name, String description, String note, int state, String importance, String start_date,
+    public Task(String name, String description, String docType, String docName,
+                int state, String importance, String start_date,
                 String due_date, String user_Id, String id, String assignedUserId) {
         this.name = name;
         this.description = description;
-        this.note = note;
         this.state = state;
         this.importance = importance;
         this.start_date = start_date;
         this.endDate = due_date;
-        this.user_Id = user_Id;
         this.id = id;
         this.assignedUserId = assignedUserId;
+        this.docName = docName;
+        this.docType = docType;
     }
 
-    public Task(String name, String description, String note, int state, String importance, String due_date, String user_Id) {
+    public Task(String name, String description, int state, String importance, String due_date, String user_Id) {
         this.name = name;
         this.description = description;
-        this.note = note;
         this.state = state;
         this.importance = importance;
         this.endDate = due_date;
-        this.user_Id = user_Id;
+
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public String getDocName() {
+        return docName;
+    }
+
+    public Uri getUri() {
+        return uri;
     }
 
     public List<AssignedUsers> getAssignedUsers() {
@@ -58,7 +84,6 @@ public class Task {
     public void setAssignedUsers(List<AssignedUsers> assignedUsers) {
         this.assignedUsers = assignedUsers;
     }
-
     public String getGroup() {
         return group;
     }
@@ -81,14 +106,6 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 
     public int getState() {
@@ -121,14 +138,6 @@ public class Task {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-    }
-
-    public String getUser_Id() {
-        return user_Id;
-    }
-
-    public void setUser_Id(String user_Id) {
-        this.user_Id = user_Id;
     }
 
     public String getId() {
