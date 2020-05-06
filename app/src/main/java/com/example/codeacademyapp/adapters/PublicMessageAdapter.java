@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.PublicMessage;
-import com.example.codeacademyapp.ui.main.wall.PrivateChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
@@ -26,7 +25,6 @@ import java.util.Objects;
 public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdapter.MyHolder> {
 
     private List<PublicMessage> mList;
-    private String checkIfContinuedMessages, prevMessage;
 
     private FragmentManager fragmentManager;
 
@@ -49,10 +47,6 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
     public void onBindViewHolder(@NonNull final PublicMessageAdapter.MyHolder holder, final int position) {
 
         final PublicMessage messages = mList.get(holder.getAdapterPosition());
-        prevMessage = mList.get(holder.getAdapterPosition()).getId();
-        if(position>0){
-            checkIfContinuedMessages = mList.get(holder.getAdapterPosition()-1).getId();
-        }
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String currenUser = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
@@ -64,7 +58,6 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
         holder.sender_time.setVisibility(View.INVISIBLE);
         holder.receiver_name.setVisibility(View.INVISIBLE);
         holder.receiver_sector.setVisibility(View.INVISIBLE);
-
 
         if (messages.getId().equals(currenUser)) {
 
@@ -129,139 +122,104 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
 
         } else {
 
-                if (messages.getDocType().equals(".jpg")) {
 
-                    holder.receiver_image_card.setVisibility(View.VISIBLE);
-                    holder.receiver_message.setVisibility(View.INVISIBLE);
-                    holder.reciever_doc_image.setVisibility(View.VISIBLE);
-                    Picasso.get().load(messages.getMessage()).into(holder.reciever_doc_image);
+            if (messages.getDocType().equals(".jpg")) {
 
-                    holder.receiver_name.setVisibility(View.VISIBLE);
-                    holder.receiver_name.setText(messages.getName());
+                holder.receiver_image_card.setVisibility(View.VISIBLE);
+                holder.receiver_message.setVisibility(View.INVISIBLE);
+                holder.reciever_doc_image.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getMessage()).into(holder.reciever_doc_image);
 
-                    holder.receiver_sector.setVisibility(View.VISIBLE);
-                    holder.receiver_sector.setText("| " + messages.getSector());
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
 
-                    holder.reciverProfileImage.setVisibility(View.VISIBLE);
-                    holder.cardView.setVisibility(View.VISIBLE);
-                    Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
 
-                    holder.receiver_doc_time.setVisibility(View.VISIBLE);
-                    holder.receiver_doc_time.setText(messages.getTime());
+                holder.receiver_doc_time.setVisibility(View.VISIBLE);
+                holder.receiver_doc_time.setText(messages.getTime());
 
-                } else if (messages.getDocType().equals(".pdf")) {
+            } else if (messages.getDocType().equals(".pdf")) {
 
-                    holder.receiver_name.setVisibility(View.VISIBLE);
-                    holder.receiver_name.setText(messages.getName());
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
 
-                    holder.receiver_sector.setVisibility(View.VISIBLE);
-                    holder.receiver_sector.setText("| " + messages.getSector());
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
 
-                    holder.reciverProfileImage.setVisibility(View.VISIBLE);
-                    holder.cardView.setVisibility(View.VISIBLE);
-                    Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
-                    holder.receiver_message.setVisibility(View.VISIBLE);
-                    holder.receiver_message.setText(messages.getDocName());
+                holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.receiver_message.setText(messages.getDocName());
 
-                    holder.receiver_time.setVisibility(View.VISIBLE);
-                    holder.receiver_time.setText(messages.getTime());
+                holder.receiver_time.setVisibility(View.VISIBLE);
+                holder.receiver_time.setText(messages.getTime());
 
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                holder.receiver_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                            Intent intent = new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse(mList.get(position).getMessage()));
-                            holder.itemView.getContext().startActivity(intent);
-                        }
-                    });
-
-                } else if (messages.getDocType().equals(".docx")) {
-
-                    holder.receiver_name.setVisibility(View.VISIBLE);
-                    holder.receiver_name.setText(messages.getName());
-
-                    holder.receiver_sector.setVisibility(View.VISIBLE);
-                    holder.receiver_sector.setText("| " + messages.getSector());
-
-                    holder.reciverProfileImage.setVisibility(View.VISIBLE);
-                    Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
-
-                    holder.cardView.setVisibility(View.VISIBLE);
-                    holder.receiver_message.setVisibility(View.VISIBLE);
-                    holder.receiver_message.setText(messages.getDocName());
-
-                    holder.receiver_time.setVisibility(View.VISIBLE);
-                    holder.receiver_time.setText(messages.getTime());
-
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent intent = new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse(mList.get(position).getMessage()));
-                            holder.itemView.getContext().startActivity(intent);
-                        }
-                    });
-                } else {
-
-                    holder.receiver_name.setVisibility(View.VISIBLE);
-                    holder.receiver_name.setText(messages.getName());
-
-                    holder.receiver_sector.setVisibility(View.VISIBLE);
-                    holder.receiver_sector.setText("| " + messages.getSector());
-
-                    holder.reciverProfileImage.setVisibility(View.VISIBLE);
-                    holder.receiver_message.setVisibility(View.VISIBLE);
-                    holder.cardView.setVisibility(View.VISIBLE);
-
-                    holder.receiver_time.setVisibility(View.VISIBLE);
-                    holder.receiver_time.setText(messages.getTime());
-
-                    holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
-                    holder.receiver_message.setText(messages.getMessage());
-                    Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
-
-                    if(!messages.getChatName().equals("")) {
-
-                        holder.reciverProfileImage.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                Intent intent = new Intent(holder.itemView.getContext(), PrivateChatActivity.class);
-                                intent.putExtra("visit_user_id", messages.getId());
-                                intent.putExtra("visit_user_name",messages.getName());
-
-                                if (messages.getImage()!= null) {
-                                    intent.putExtra("visit_user_image", messages.getImage());
-                                }
-
-                                intent.putExtra("visit_user_sector",messages.getSector());
-                                holder.itemView.getContext().startActivity(intent);
-                            }
-                        });
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(mList.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
                     }
-                }
-        }
+                });
 
-        if(checkIfContinuedMessages!=null){
-            if (checkIfContinuedMessages.equals(prevMessage)) {
-                holder.receiver_name.setVisibility(View.GONE);
-                holder.cardView.setVisibility(View.GONE);
-                holder.reciverProfileImage.setVisibility(View.GONE);
-                holder.receiver_time.setVisibility(View.GONE);
-                holder.receiver_sector.setVisibility(View.GONE);
-                holder.sender_doc_image.setVisibility(View.GONE);
-                holder.sender_doc_time.setVisibility(View.GONE);
-                holder.sender_message.setVisibility(View.GONE);
-                holder.receiver_message.setVisibility(View.GONE);
-                holder.receiver_message_continuous.setVisibility(View.VISIBLE);
-                holder.receiver_message_continuous.setText(messages.getMessage());
+            } else if (messages.getDocType().equals(".docx")) {
+
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
+
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+
+                holder.cardView.setVisibility(View.VISIBLE);
+                holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.receiver_message.setText(messages.getDocName());
+
+                holder.receiver_time.setVisibility(View.VISIBLE);
+                holder.receiver_time.setText(messages.getTime());
+
+                holder.receiver_message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(mList.get(position).getMessage()));
+                        holder.itemView.getContext().startActivity(intent);
+                    }
+                });
+            } else {
+
+                holder.receiver_name.setVisibility(View.VISIBLE);
+                holder.receiver_name.setText(messages.getName());
+
+                holder.receiver_sector.setVisibility(View.VISIBLE);
+                holder.receiver_sector.setText("| " + messages.getSector());
+
+                holder.reciverProfileImage.setVisibility(View.VISIBLE);
+                holder.receiver_message.setVisibility(View.VISIBLE);
+                holder.cardView.setVisibility(View.VISIBLE);
+
+                holder.receiver_time.setVisibility(View.VISIBLE);
+                holder.receiver_time.setText(messages.getTime());
+
+                holder.receiver_message.setBackgroundResource(R.drawable.reciever_message_layout);
+                holder.receiver_message.setText(messages.getMessage());
+                Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
+
             }
         }
-
     }
 
     @Override
@@ -272,7 +230,7 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
     public class MyHolder extends RecyclerView.ViewHolder {
 
         TextView sender_message, receiver_message, receiver_name, receiver_sector,
-                receiver_time, sender_time, receiver_doc_time,receiver_message_continuous, sender_doc_time;
+                receiver_time, sender_time, receiver_doc_time, sender_doc_time;
         ImageView reciverProfileImage, sender_doc_image, reciever_doc_image;
         CardView cardView, sender_image_card, receiver_image_card;
 
@@ -281,7 +239,6 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
 
             sender_message = itemView.findViewById(R.id.sender_message_text);
             receiver_message = itemView.findViewById(R.id.reciever_message_text);
-            receiver_message_continuous = itemView.findViewById(R.id.reciever_message_text_continuous);
             reciverProfileImage = itemView.findViewById(R.id.message_profile_image);
             cardView = itemView.findViewById(R.id.message_profile_image_card);
             receiver_name = itemView.findViewById(R.id.reciever_name);

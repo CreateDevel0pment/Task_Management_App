@@ -318,7 +318,6 @@ public class GroupChatFragment extends BaseFragment {
         publicMessage.setTime(currentTime);
         publicMessage.setDocName(fileName);
         publicMessage.setUri(uri);
-        publicMessage.setChatName("Chat Sector");
 
         return publicMessage;
     }

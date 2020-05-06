@@ -93,7 +93,6 @@ public class WallFragment extends BaseFragment {
                 if (messageList.size() > 0) {
                     adapter = new PublicMessageAdapter(messageList,getChildFragmentManager());
                     recyclerView.setAdapter(adapter);
-
                     loadingDialog.dismiss();
                 }
 
@@ -286,7 +285,7 @@ public class WallFragment extends BaseFragment {
         publicMessage.setTime(currentTime);
         publicMessage.setDocName(fileName);
         publicMessage.setUri(uri);
-        publicMessage.setChatName("");
+        publicMessage.setChatName("Chat Public Wall");
 
         return publicMessage;
     }
