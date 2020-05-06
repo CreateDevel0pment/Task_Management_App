@@ -28,21 +28,20 @@
             android:weightSum="2"
             android:id="@+id/LinearTop"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:onClick="onCLick"
-                android:layout_marginStart="42dp"
+                android:layout_marginStart="64dp"
                 android:layout_weight="1"
                 android:id="@+id/home_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="4dp"
                 android:backgroundTint="@color/card_main_screen"
-                android:padding="32dp"
                 app:cardCornerRadius="16dp">
 
                 <LinearLayout
@@ -65,14 +64,13 @@
                         android:layout_gravity="center"
                         android:text="Home"
                         android:textColor="@color/AccentColor" />
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:onClick="onCLick"
-                android:layout_marginEnd="42dp"
+                android:layout_marginEnd="64dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:id="@+id/calendar_card"
@@ -120,12 +118,12 @@
 
             <androidx.cardview.widget.CardView
                 android:onClick="onCLick"
-                android:layout_marginStart="42dp"
+                android:layout_marginStart="64dp"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:padding="32dp"
                 android:id="@+id/sector_card"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/card_main_screen"
                 app:cardCornerRadius="16dp"
@@ -161,14 +159,14 @@
 
             <androidx.cardview.widget.CardView
                 android:onClick="onCLick"
-                android:layout_marginEnd="42dp"
+                android:layout_marginEnd="64dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:padding="32dp"
                 android:id="@+id/tasks_card"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/card_main_screen"
+                android:backgroundTint="@color/AccentColor"
                 app:cardCornerRadius="16dp"
                 >
 
@@ -186,6 +184,7 @@
                         android:layout_height="45dp"
                         android:layout_gravity="center"
                         android:src="@drawable/assignment"
+                        android:tint="@color/card_main_screen"
                         />
 
                     <TextView
@@ -193,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="Tasks"
-                        android:textColor="@color/AccentColor"
+                        android:textColor="@color/card_main_screen"
                         />
 
                 </LinearLayout>
@@ -215,7 +214,7 @@
 
             <androidx.cardview.widget.CardView
                 android:onClick="onCLick"
-                android:layout_marginStart="42dp"
+                android:layout_marginStart="64dp"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:padding="32dp"
@@ -256,7 +255,7 @@
 
             <androidx.cardview.widget.CardView
                 android:onClick="onCLick"
-                android:layout_marginEnd="42dp"
+                android:layout_marginEnd="64dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:padding="32dp"
