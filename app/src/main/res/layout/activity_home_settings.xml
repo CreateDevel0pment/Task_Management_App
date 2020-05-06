@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDarkMode"
-    tools:context=".ui.main.info.SetInfo">
+    tools:context=".ui.main.home.HomeSettings">
 
 
     <TextView

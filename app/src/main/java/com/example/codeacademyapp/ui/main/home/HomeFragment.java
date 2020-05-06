@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.info;
+package com.example.codeacademyapp.ui.main.home;
 
 
 import android.content.Context;
@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -27,7 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
     private LinearLayout web_layout;
     private EditText web_text;
@@ -94,7 +93,7 @@ public class InfoFragment extends BaseFragment {
                     String webUrl = web_text.getText().toString();
                     homeViewModel.setHomePageUrl(webUrl);
 
-                    InfoFragment homeFragment = new InfoFragment();
+                    HomeFragment homeFragment = new HomeFragment();
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.home_container, homeFragment)

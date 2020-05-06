@@ -7,7 +7,7 @@
     android:background="@drawable/gradient"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
-    tools:context=".ui.main.home.WallFragment">
+    tools:context=".ui.main.wall.WallFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

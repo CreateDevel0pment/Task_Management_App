@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.info;
+package com.example.codeacademyapp.ui.main.home;
 
 import android.app.Application;
 

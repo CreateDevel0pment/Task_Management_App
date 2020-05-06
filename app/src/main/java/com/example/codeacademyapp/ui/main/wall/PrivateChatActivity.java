@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.home;
+package com.example.codeacademyapp.ui.main.wall;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;

@@ -9,7 +9,7 @@
     android:backgroundTint="@color/colorPrimaryDarkMode"
     android:weightSum="1"
     android:gravity="center"
-    tools:context=".ui.main.info.InfoFragment">
+    tools:context=".ui.main.home.HomeFragment">
 
     <LinearLayout
         android:id="@+id/home_welcome_layout"

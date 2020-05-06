@@ -89,6 +89,7 @@
     <string name="Task_activity">Tasks</string>
     <string name="Create_task">Create task</string>
     <string name="CreateProject">Create project</string>
+    <string name="home_settings">Home Settings</string>
 
 
     <string-array name="Sector">

@@ -95,6 +95,9 @@
         <string name="Create_task">Креирај Задача</string>
         <string name="CreateProject">Креирај Проект</string>
 
+        <string name="home_settings">Home Settings</string>
+
+
         <string-array name="Sector">
             <item>Избери Сектор/Професија - </item>
             <item>Android</item>

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tool:context=".ui.main.ProbaMainActvivity">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/web_"
         android:layout_width="0dp"

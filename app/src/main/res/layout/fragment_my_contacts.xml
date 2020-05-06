@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main.home.MyContactsFragment">
+    tools:context=".ui.main.wall.MyContactsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

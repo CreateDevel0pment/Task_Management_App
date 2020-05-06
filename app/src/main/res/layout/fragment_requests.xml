@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical"
-    tools:context=".ui.main.home.RequestsFragment">
+    tools:context=".ui.main.wall.RequestsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_requests_list"

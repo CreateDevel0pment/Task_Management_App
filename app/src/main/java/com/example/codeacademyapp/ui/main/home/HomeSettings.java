@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.info;
+package com.example.codeacademyapp.ui.main.home;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.databinding.ActivityHomeSettingsBinding;
 
-public class SetInfo extends AppCompatActivity {
+public class HomeSettings extends AppCompatActivity {
 
     InfoViewModel homeViewModel;
     ActivityHomeSettingsBinding binding;

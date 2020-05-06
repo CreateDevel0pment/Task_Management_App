@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     CardView homeCard, calendarCard, sectorCard, taskCard, statsCard, webCard;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +132,4 @@ public class MainActivity extends AppCompatActivity {
             connectivityToast.show();
         }
     }
-
-
 }
