@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.UserModelFirebase;
+import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
-public class UserStatisticsFragment extends Fragment {
+public class UserStatisticsFragment extends BaseFragment {
 
     private RecyclerView usersListRV;
     private DatabaseReference usersRef;

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.ui.main.MainActivity;
+import com.example.codeacademyapp.ui.main.MainBoardActivity;
 import com.example.codeacademyapp.ui.sign_in_up.StartActivity;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.UserInformationViewModel;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void goToStartActivity() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        Intent intent = new Intent(SplashActivity.this, MainBoardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.ui.main.MainActivity;
+import com.example.codeacademyapp.ui.main.MainBoardActivity;
 import com.example.codeacademyapp.ui.main.sector.chat.ChatViewModel;
 import com.example.codeacademyapp.ui.sign_in_up.LogUserViewModel;
 
@@ -155,7 +156,7 @@ public class SignUpFragment extends Fragment {
                     });
 
                     groupChatViewModel.setGroupNameToFirebase(sector_string);
-                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    Intent intent = new Intent(getContext(), MainBoardActivity.class);
                     intent.putExtra("TITLE", sector_string);
                     startActivity(intent);
                 }
@@ -171,7 +172,7 @@ public class SignUpFragment extends Fragment {
     }
 
     private void goToMainActivity(User user) {
-        Intent intent = new Intent(getContext(), MainActivity.class);
+        Intent intent = new Intent(getContext(), MainBoardActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(USER, user.getName());
         startActivity(intent);
