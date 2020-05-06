@@ -140,7 +140,6 @@ public class PublicMessageAdapter extends RecyclerView.Adapter<PublicMessageAdap
                 holder.cardView.setVisibility(View.VISIBLE);
                 Picasso.get().load(messages.getImage()).placeholder(R.drawable.astronaut).into(holder.reciverProfileImage);
 
-
                 holder.receiver_doc_time.setVisibility(View.VISIBLE);
                 holder.receiver_doc_time.setText(messages.getTime());
 
