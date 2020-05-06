@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#374151</color>
+    <color name="colorPrimary">#CDD5E3</color>
+    <color name="card_main_screen">#374151</color>
     <color name="colorPrimaryDarkMode">#1f252e</color>
     <color name="AccentColor">#C3CCDA</color>
     <color name="LogoMainColor">#683092</color>
