@@ -39,62 +39,62 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNav;
     Toolbar toolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        bottomNav = findViewById(R.id.bottom_bar);
+//        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                switch (menuItem.getItemId()) {
+//                    case R.id.home:
+//                        switchToFragment(new HomeFragment(), R.id.home_container);
+//                        break;
+//                    case R.id.walle:
+//                        switchToFragment(new WallTabFragment(), R.id.wall_container);
+//                        break;
+//                    case R.id.sector:
+//                        switchToFragment(new GroupChatFragment(), R.id.group_container);
+//                        break;
+//                    case R.id.tasks_b_v:
+//                        switchToFragment(new TaskTabsFragment(), R.id.task_container);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
+//
+//        bottomNav.setSelectedItemId(R.id.home);
+//    }
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        bottomNav = findViewById(R.id.bottom_bar);
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.home:
-                        switchToFragment(new HomeFragment(), R.id.home_container);
-                        break;
-                    case R.id.walle:
-                        switchToFragment(new WallTabFragment(), R.id.wall_container);
-                        break;
-                    case R.id.sector:
-                        switchToFragment(new GroupChatFragment(), R.id.group_container);
-                        break;
-                    case R.id.tasks_b_v:
-                        switchToFragment(new TaskTabsFragment(), R.id.task_container);
-                        break;
-                }
-                return true;
-            }
-        });
-
-        bottomNav.setSelectedItemId(R.id.home);
-    }
 
 
-
-    public void switchToFragment(BaseFragment fragment, int container) {
-        Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
-        if (topFragment==fragment) {
-            fragment = new BaseFragment() {
-            };
-        }
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .replace(container, fragment)
-                .commit();
-
-        FrameLayout home = findViewById(R.id.home_container);
-        home.setVisibility(View.GONE);
-        FrameLayout wall = findViewById(R.id.wall_container);
-        wall.setVisibility(View.GONE);
-        FrameLayout group = findViewById(R.id.group_container);
-        group.setVisibility(View.GONE);
-        FrameLayout task = findViewById(R.id.task_container);
-        task.setVisibility(View.GONE);
-        findViewById(container).setVisibility(View.VISIBLE);
-    }
+//    public void switchToFragment(BaseFragment fragment, int container) {
+//        Fragment topFragment = getSupportFragmentManager().findFragmentById(container);
+//        if (topFragment==fragment) {
+//            fragment = new BaseFragment() {
+//            };
+//        }
+//        FragmentManager manager = getSupportFragmentManager();
+//        manager.beginTransaction()
+//                .replace(container, fragment)
+//                .commit();
+//
+//        FrameLayout home = findViewById(R.id.home_container);
+//        home.setVisibility(View.GONE);
+//        FrameLayout wall = findViewById(R.id.wall_container);
+//        wall.setVisibility(View.GONE);
+//        FrameLayout group = findViewById(R.id.group_container);
+//        group.setVisibility(View.GONE);
+//        FrameLayout task = findViewById(R.id.task_container);
+//        task.setVisibility(View.GONE);
+//        findViewById(container).setVisibility(View.VISIBLE);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
