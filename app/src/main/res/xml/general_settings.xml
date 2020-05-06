@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="dark_mode_on_off"
+        android:summaryOff="@string/Dark_disabled"
+        android:summaryOn="@string/Dark_enabled"
+        android:title="@string/Dark_mode"/>
+
+    <SwitchPreference
+        android:key="key_language"
+        android:summaryOn="@string/Switched_Makedonski"
+        android:summaryOff="@string/Switched_English"
+        android:title="@string/language"/>
+
+</PreferenceScreen>

@@ -90,7 +90,8 @@ public class UserStatisticsFragment extends BaseFragment {
 
                                 if (getFragmentManager()!=null)
                                 {
-                                    getFragmentManager().beginTransaction().replace(R.id.task_fragments_container, statsDetailsFragment)
+                                    getFragmentManager().beginTransaction()
+                                            .replace(R.id.task_container, statsDetailsFragment)
                                             .commit();
                                 }
 

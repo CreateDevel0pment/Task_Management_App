@@ -1,5 +1,6 @@
 package com.example.codeacademyapp.ui.main.sector.task.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,8 @@ public class UserStatsDetailsFragment extends Fragment {
     private String userName, imageUrl;
     private int completedTasksCount, personalTasksCount;
     private double completionRate3;
-    TextView userEfficiency;
-    CircleImageView userImg;
+    private TextView userEfficiency;
+    private CircleImageView userImg;
 
 
     public UserStatsDetailsFragment(String imageUrl, String userName, int completedTasksCount, int personalTasksCount) {
@@ -42,6 +43,7 @@ public class UserStatsDetailsFragment extends Fragment {
         this.imageUrl = imageUrl;
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,20 +71,20 @@ public class UserStatsDetailsFragment extends Fragment {
         if (completionRate3 <= 0.00) {
             userEfficiency.setVisibility(View.GONE);
         } else if (completionRate3 <= 20.00) {
-            userEfficiency.setText(String.format("%s's efficiency is very low.", userName));
+            userEfficiency.setText(String.format(getString(R.string.efficiency_very_low), userName));
         } else if (completionRate3 >= 20.00 && completionRate3 <= 40.00) {
-            userEfficiency.setText(String.format("%s's efficiency is low.", userName));
+            userEfficiency.setText(String.format(getString(R.string.efficiecy_low), userName));
         } else if (completionRate3 >= 40.00 && completionRate3 <= 60.00) {
-            userEfficiency.setText(String.format("%s's efficiency: Not great, not terrible.", userName));
+            userEfficiency.setText(String.format(getString(R.string.efficiency_normal), userName));
         } else if (completionRate3 >= 60.00 && completionRate3 <= 80.00) {
-            userEfficiency.setText(String.format("%s's efficiency is very good.", userName));
+            userEfficiency.setText(String.format(getString(R.string.efficiency_very_good), userName));
         } else {
-            userEfficiency.setText(String.format("%s's efficiency is excellent.", userName));
+            userEfficiency.setText(String.format(getString(R.string.efficiency_excellent), userName));
         }
 
         List<PieEntry> data = new ArrayList<>();
-        data.add(new PieEntry(completedTasksCount, "Completed Tasks"));
-        data.add(new PieEntry(personalTasksCount, "TODO Tasks"));
+        data.add(new PieEntry(completedTasksCount, getString(R.string.copleted_tasks)));
+        data.add(new PieEntry(personalTasksCount, getString(R.string.todo_tasks)));
 
         PieDataSet dataSet = new PieDataSet(data, "");
         dataSet.setValueLineColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.AccentColor));

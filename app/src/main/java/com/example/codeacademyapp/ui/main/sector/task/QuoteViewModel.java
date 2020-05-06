@@ -23,6 +23,7 @@ public class QuoteViewModel extends AndroidViewModel {
 
 
     public void loadRandomQuote(){
+
         repo.getRandomQuote(new LoadRandomQuoteListener() {
             @Override
             public void onSuccess(Quote quote) {

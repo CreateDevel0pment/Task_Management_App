@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="Deadline:"
+                    android:text="@string/deadline"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -172,7 +172,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Task priority:"
+                    android:text="@string/task_priority"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
 
@@ -211,7 +211,7 @@
                     android:layout_alignParentStart="true"
                     android:fontFamily="sans-serif-thin"
                     android:gravity="start|center_vertical"
-                    android:text="Complete"
+                    android:text="@string/complete"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:textColor="@color/AccentColor"

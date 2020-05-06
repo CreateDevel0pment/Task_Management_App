@@ -9,10 +9,15 @@ import com.example.codeacademyapp.ui.main.sector.task.fragment.CompletedTasksFra
 import com.example.codeacademyapp.ui.main.sector.task.fragment.PersonalTaskFragment;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.ViewAllTaskFragment;
 
+import java.util.ArrayList;
+
 public class NewTaskPagerAdapter extends FragmentPagerAdapter {
 
-    public NewTaskPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    private ArrayList<String> tab_PageTitle;
+
+    public NewTaskPagerAdapter(@NonNull FragmentManager fm, int behavior,ArrayList<String> tab_PageTitle ) {
         super(fm, behavior);
+        this.tab_PageTitle=tab_PageTitle;
     }
 
     @NonNull
@@ -35,20 +40,13 @@ public class NewTaskPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return tab_PageTitle.size();
     }
 
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "My Tasks";
-            case 1:
-                return "Projects";
-            case 2:
-                return "Completed";
-            default:
-                return null;
 
-        }
+        return tab_PageTitle.get(position);
+
     }
+
 }

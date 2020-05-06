@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical"
-    tools:context=".ui.main.wall.RequestsFragment">
+    tools:context=".ui.main.home.RequestsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_requests_list"
@@ -28,7 +28,7 @@
         android:id="@+id/request_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No new Requests"
+        android:text="@string/no_new_requests"
         android:textColor="@color/AccentColor"
         android:textSize="21sp"
         android:textAlignment="center"

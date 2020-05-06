@@ -7,7 +7,7 @@
     android:background="@drawable/gradient"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
-    tools:context=".ui.main.wall.WallFragment">
+    tools:context=".ui.main.home.WallFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:layout_width="35dp"
             android:layout_gravity="center"
             android:layout_height="35dp"
-            android:src="@drawable/attach"
+            android:src="@drawable/ic_attach_file"
            />
 
         <androidx.cardview.widget.CardView

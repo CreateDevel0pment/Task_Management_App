@@ -139,44 +139,44 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
             }
         });
 
-        RadioButton priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
-        RadioButton priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
-        RadioButton priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
+//        RadioButton priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
+//        RadioButton priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
+//        RadioButton priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
 
 
-        priorityBtnHigh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    taskPriority = "High";
-                } else {
-                    taskPriority = null;
-                }
-            }
-        });
-
-
-        priorityBtnMedium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    taskPriority = "Medium";
-                } else {
-                    taskPriority = null;
-                }
-            }
-        });
-
-        priorityBtnLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    taskPriority = "Low";
-                } else {
-                    taskPriority = null;
-                }
-            }
-        });
+//        priorityBtnHigh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (buttonView.isChecked()) {
+//                    taskPriority = "High";
+//                } else {
+//                    taskPriority = null;
+//                }
+//            }
+//        });
+//
+//
+//        priorityBtnMedium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (buttonView.isChecked()) {
+//                    taskPriority = "Medium";
+//                } else {
+//                    taskPriority = null;
+//                }
+//            }
+//        });
+//
+//        priorityBtnLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (buttonView.isChecked()) {
+//                    taskPriority = "Low";
+//                } else {
+//                    taskPriority = null;
+//                }
+//            }
+//        });
 
         create_task.setOnClickListener(new View.OnClickListener() {
             @Override

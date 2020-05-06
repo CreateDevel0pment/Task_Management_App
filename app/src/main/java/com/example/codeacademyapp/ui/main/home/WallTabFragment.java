@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.wall;
+package com.example.codeacademyapp.ui.main.home;
 
 
 import android.os.Bundle;
@@ -15,12 +15,15 @@ import com.example.codeacademyapp.adapters.WallPagerAdapter;
 import com.example.codeacademyapp.ui.sign_in_up.fragments.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class WallTabFragment extends BaseFragment {
 
     private ViewPager viewPager;
+    private ArrayList<String> tab_PageTitle;
 
     private View view;
 
@@ -33,10 +36,15 @@ public class WallTabFragment extends BaseFragment {
         }
         view = inflater.inflate(R.layout.fragment_wall_pager, container, false);
 
+        tab_PageTitle= new ArrayList<>();
+        tab_PageTitle.add(getString(R.string.tab_Wall));
+        tab_PageTitle.add(getString(R.string.tab_MyContacts));
+        tab_PageTitle.add(getString(R.string.tab_Requests));
+
         TabLayout tabLayout = view.findViewById(R.id.tab_layout_public_wall);
         viewPager = view.findViewById(R.id.view_pager_public_wall);
         WallPagerAdapter adapter = new WallPagerAdapter(getChildFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,tab_PageTitle);
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

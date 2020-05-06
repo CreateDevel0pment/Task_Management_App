@@ -39,19 +39,19 @@
         <ImageView
             android:layout_weight="1"
             android:id="@+id/group_chat_file_btn"
-            android:layout_width="25dp"
+            android:layout_width="30dp"
             android:layout_gravity="center"
-            android:layout_height="25dp"
-            android:src="@drawable/attach"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_attach_file_"
            />
 
-        <ImageView
-            android:visibility="gone"
-            android:layout_weight="1"
-            android:id="@+id/new_task_button"
-            android:src="@drawable/new_task"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
+<!--        <ImageView-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_weight="1"-->
+<!--            android:id="@+id/new_task_button"-->
+<!--            android:src="@drawable/new_task"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"/>-->
 
         <androidx.cardview.widget.CardView
             app:cardElevation="10dp"
@@ -82,9 +82,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_send"
             android:background="@android:color/transparent"/>
-
-
-
 
     </LinearLayout>
 

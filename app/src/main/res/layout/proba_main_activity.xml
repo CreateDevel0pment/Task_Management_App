@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tool:context=".ui.main.ProbaMainActvivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/web_"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="171dp"
+        android:backgroundTint="@color/card_main_screen"
+        android:onClick="onClick"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/statistic_"
+        app:layout_constraintTop_toBottomOf="@+id/task_">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Web"
+            android:textColor="@color/AccentColor"
+            android:textStyle="bold"
+            tool:layout_editor_absoluteX="247dp"
+            tool:layout_editor_absoluteY="429dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/calendar_"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/card_main_screen"
+        android:onClick="onClick"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/task_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home_"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tool:layout_editor_absoluteX="211dp"
+            tool:layout_editor_absoluteY="172dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_date_"
+                tool:layout_editor_absoluteX="239dp"
+                tool:layout_editor_absoluteY="190dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Schedule"
+                android:textColor="@color/AccentColor"
+                tool:layout_editor_absoluteX="233dp"
+                tool:layout_editor_absoluteY="235dp" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sector_"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/card_main_screen"
+        android:onClick="onClick"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/statistic_"
+        app:layout_constraintEnd_toStartOf="@+id/task_"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tool:layout_editor_absoluteX="103dp"
+            tool:layout_editor_absoluteY="280dp">
+
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/group_people_ic"
+                tool:layout_editor_absoluteX="130dp"
+                tool:layout_editor_absoluteY="298dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Sector"
+                android:textColor="@color/AccentColor"
+                tool:layout_editor_absoluteX="132dp"
+                tool:layout_editor_absoluteY="343dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/task_"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/card_main_screen"
+        android:onClick="onClick"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/web_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sector_"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tool:layout_editor_absoluteX="211dp"
+            tool:layout_editor_absoluteY="280dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_task"
+                    tool:layout_editor_absoluteX="239dp"
+                    tool:layout_editor_absoluteY="298dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Task's"
+                    android:textColor="@color/AccentColor"
+                    tool:layout_editor_absoluteX="246dp"
+                    tool:layout_editor_absoluteY="343dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/statistic_"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="171dp"
+        android:backgroundTint="@color/card_main_screen"
+        android:onClick="onClick"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/web_"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sector_">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tool:layout_editor_absoluteX="103dp"
+            tool:layout_editor_absoluteY="388dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_pie_"
+                tool:layout_editor_absoluteX="130dp"
+                tool:layout_editor_absoluteY="406dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Statistic"
+                android:textColor="@color/AccentColor"
+                tool:layout_editor_absoluteX="127dp"
+                tool:layout_editor_absoluteY="451dp" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/home_"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/card_main_screen"
+        android:onClick="onClick"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/sector_"
+        app:layout_constraintEnd_toStartOf="@+id/calendar_"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            tool:layout_editor_absoluteX="103dp"
+            tool:layout_editor_absoluteY="172dp">
+
+            <ImageView
+                android:id="@+id/homeClick"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/home_ic"
+                tool:layout_editor_absoluteX="130dp"
+                tool:layout_editor_absoluteY="190dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Home"
+                android:textColor="@color/AccentColor"
+                tool:layout_editor_absoluteX="134dp"
+                tool:layout_editor_absoluteY="235dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/new_task_button"
+        android:visibility="invisible"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/add_new" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

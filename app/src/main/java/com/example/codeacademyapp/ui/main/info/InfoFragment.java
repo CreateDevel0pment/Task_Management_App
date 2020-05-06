@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.home;
+package com.example.codeacademyapp.ui.main.info;
 
 
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -26,13 +27,13 @@ import com.google.firebase.database.DataSnapshot;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment {
+public class InfoFragment extends BaseFragment {
 
     private LinearLayout web_layout;
     private EditText web_text;
     private Button ok_btn;
     private View view;
-    private HomeViewModel homeViewModel;
+    private InfoViewModel homeViewModel;
     private String getUrl;
     private ProgressBar progressBar;
     private WebView browser;
@@ -41,7 +42,7 @@ public class HomeFragment extends BaseFragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this).get(InfoViewModel.class);
 
         homeViewModel.getStringUrl().observe(this, new Observer<DataSnapshot>() {
             @Override
@@ -56,7 +57,7 @@ public class HomeFragment extends BaseFragment {
                     browser.setBackgroundColor(Color.TRANSPARENT);
                     CardView cardView = view.findViewById(R.id.web_card_view);
 
-//                    browser.loadUrl(getUrl);
+                    browser.loadUrl(getUrl);
                     browser.setVisibility(View.VISIBLE);
                     cardView.setVisibility(View.VISIBLE);
                 } else {
@@ -65,8 +66,6 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
-
-
     }
 
     @Override
@@ -76,7 +75,6 @@ public class HomeFragment extends BaseFragment {
         if (view != null) {
             return view;
         }
-
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         setTitle(R.string.home);
@@ -96,7 +94,7 @@ public class HomeFragment extends BaseFragment {
                     String webUrl = web_text.getText().toString();
                     homeViewModel.setHomePageUrl(webUrl);
 
-                    HomeFragment homeFragment = new HomeFragment();
+                    InfoFragment homeFragment = new InfoFragment();
                     getFragmentManager()
                             .beginTransaction()
                             .replace(R.id.home_container, homeFragment)

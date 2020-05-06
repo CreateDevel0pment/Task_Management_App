@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -59,6 +60,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 editProfileViewModel.updateUserInfo(position_string, group_string);
 
                 Toast.makeText(EditProfileActivity.this, "Changes are updated", Toast.LENGTH_SHORT).show();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        finish();
+                    }
+                },2000);
             }
         });
 

@@ -1,70 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDarkMode"
     android:padding="16dp"
-    android:gravity="top"
+    android:gravity="bottom|center_horizontal"
     android:orientation="vertical"
     tools:context=".ui.main.sector.task.fragment.AddNewTaskFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDarkMode"
-        android:gravity="center"
-        android:orientation="vertical">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="5"
-    >
-
-
-        <EditText
-            android:layout_weight="4"
-            android:id="@+id/task_name"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/add_title"
-            android:padding="10dp"
-            android:layout_marginEnd="16dp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@android:color/darker_gray" />
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:padding="4dp">
 
-    <ImageView
-        android:layout_weight="1"
-        android:id="@+id/task_file_btn_upload"
-        android:layout_width="25dp"
-        android:layout_gravity="center"
-        android:layout_height="25dp"
-        android:src="@drawable/attach"
-        />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/add_title"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@android:color/secondary_text_light" />
 
-</LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/colorPrimaryDarkMode">
 
             <EditText
                 android:id="@+id/task_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top|start"
-                android:hint="add description.."
-                android:maxLines="10"
+                android:hint="@string/add_description"
                 android:minLines="5"
-                android:padding="10dp"
+                android:gravity="top"
+                android:padding="8dp"
                 android:textColor="@color/colorPrimary"
-                android:textColorHint="@android:color/darker_gray" />
-        </androidx.cardview.widget.CardView>
+                android:textColorHint="@android:color/secondary_text_light" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/checkbox_users_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/AccentColor"
+                    android:text="@string/create_sector_project" />
+
+                <CheckBox
+                    android:buttonTint="@color/colorPrimary"
+                    android:id="@+id/create_sector_project_checkbox"
+                    android:checked="true"
+                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
 
 
             <LinearLayout
@@ -80,7 +85,7 @@
                     android:layout_margin="8dp"
                     android:textSize="16sp"
                     android:textColor="@color/AccentColor"
-                    android:text="Create personal task for.." />
+                    android:text="@string/create_personal_task_for" />
 
                 <ImageView
                     android:id="@+id/assign_to_img"
@@ -112,7 +117,7 @@
                     android:textColor="@color/AccentColor"
                     android:textSize="16sp"
                     android:layout_margin="8dp"
-                    android:text="Set task end date.." />
+                    android:text="@string/set_task_end_date" />
 
                 <ImageView
                     android:id="@+id/date_picker_icon"
@@ -134,53 +139,56 @@
 
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="start|center_vertical"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/AccentColor"
-                    android:text="Task priority" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@color/AccentColor"-->
+<!--                    android:text="@string/task_priority" />-->
 
-                <RadioGroup
-                    android:id="@+id/priority_radioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:orientation="horizontal">
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/priority_radioGroup"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <RadioButton
-                        android:id="@+id/radiobtn_priority_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="High"
-                        android:layout_marginEnd="4dp"
-                        android:textColor="@color/AccentColor" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radiobtn_priority_high"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/high"-->
+<!--                        android:textSize="11dp"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:textColor="@color/AccentColor" />-->
 
-                    <RadioButton
-                        android:id="@+id/radiobtn_priority_medium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="Medium"
-                        android:textColor="@color/AccentColor" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radiobtn_priority_medium"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="4dp"-->
+<!--                        android:textSize="11dp"-->
+<!--                        android:text="@string/medium"-->
+<!--                        android:textColor="@color/AccentColor" />-->
 
-                    <RadioButton
-                        android:id="@+id/radiobtn_priority_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Low"
-                        android:textColor="@color/AccentColor" />
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radiobtn_priority_low"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="11dp"-->
+<!--                        android:text="@string/low"-->
+<!--                        android:textColor="@color/AccentColor" />-->
 
-                </RadioGroup>
+<!--                </RadioGroup>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
 
@@ -193,10 +201,16 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="30dp"
             android:backgroundTint="@color/AccentColor"
-            android:hint="Create Task"
+            android:hint="@string/create_task"
             android:textSize="16sp"
             android:textColorHint="@color/colorPrimaryDarkMode" />
 
-    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/task_file_btn_upload"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_height="wrap_content"
+        android:src="@drawable/attach"
+        />
 
-</ScrollView>
+</LinearLayout>

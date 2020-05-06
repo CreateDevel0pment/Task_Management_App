@@ -13,9 +13,15 @@
         app:showAsAction="never"/>
 
     <item
-        android:title="@string/home_settings"
-        android:id="@+id/edit_home"
+        android:title="@string/info_settings"
+        android:id="@+id/edit_info"
         app:showAsAction="never"/>
+
+    <item
+        android:title="@string/settings"
+        android:id="@+id/settings_"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_settings_"/>
 
     <item
         android:title="@string/log_out"

@@ -45,7 +45,6 @@ public class ChatRepository {
                 });
     }
 
-
     public void saveMessage(PublicMessage message, String chat_name, String group_name) {
 
         if (!group_name.equals("")) {
@@ -128,7 +127,6 @@ public class ChatRepository {
                                 messageInfoMap.put("chatName", message.getChatName());
 
                                 groupMessageKeyRef.updateChildren(messageInfoMap);
-
                             }
                         });
                     }
@@ -136,7 +134,6 @@ public class ChatRepository {
             });
         }
     }
-
 
     public MutableLiveData<DataSnapshot> displayMessage(String chat_name, String group_name) {
         final MutableLiveData<DataSnapshot> displayMessage = new MutableLiveData<>();

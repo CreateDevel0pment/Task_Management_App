@@ -24,15 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/user_stats_floating_btn"
-        app:backgroundTint="@color/AccentColor"
-        android:src="@drawable/pie_chart_extra"
-        android:layout_margin="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
+<!--    <ImageView-->
+<!--        android:visibility="gone"-->
+<!--        android:id="@+id/user_stats_floating_btn"-->
+<!--        app:backgroundTint="@color/AccentColor"-->
+<!--        android:src="@drawable/pie_chart_extra"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"/>-->
 
 </RelativeLayout>

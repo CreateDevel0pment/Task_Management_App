@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.home;
+package com.example.codeacademyapp.ui.main.info;
 
 import android.app.Application;
 
@@ -9,11 +9,11 @@ import androidx.lifecycle.LiveData;
 import com.example.codeacademyapp.data.repository.HomePageRepository;
 import com.google.firebase.database.DataSnapshot;
 
-public class HomeViewModel extends AndroidViewModel {
+public class InfoViewModel extends AndroidViewModel {
 
     private HomePageRepository homePageRepository;
 
-    public HomeViewModel(@NonNull Application application) {
+    public InfoViewModel(@NonNull Application application) {
         super(application);
 
         homePageRepository=new HomePageRepository();

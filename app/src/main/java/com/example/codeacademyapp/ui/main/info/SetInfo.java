@@ -1,4 +1,4 @@
-package com.example.codeacademyapp.ui.main.home;
+package com.example.codeacademyapp.ui.main.info;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.databinding.ActivityHomeSettingsBinding;
 
-public class HomeSettings extends AppCompatActivity {
+public class SetInfo extends AppCompatActivity {
 
-    HomeViewModel homeViewModel;
+    InfoViewModel homeViewModel;
     ActivityHomeSettingsBinding binding;
 
     @Override
@@ -20,7 +20,7 @@ public class HomeSettings extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.of(this).get(InfoViewModel.class);
         binding.settingsOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
