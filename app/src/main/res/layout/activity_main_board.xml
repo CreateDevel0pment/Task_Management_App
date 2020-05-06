@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="4dp"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/card_main_screen"
                 android:padding="32dp"
                 app:cardCornerRadius="16dp">
 
@@ -78,7 +78,7 @@
                 android:id="@+id/calendar_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/card_main_screen"
                 android:padding="32dp"
                 app:cardCornerRadius="16dp">
 
@@ -127,7 +127,7 @@
                 android:id="@+id/sector_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/card_main_screen"
                 app:cardCornerRadius="16dp"
                 >
 
@@ -168,7 +168,7 @@
                 android:id="@+id/tasks_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/card_main_screen"
                 app:cardCornerRadius="16dp"
                 >
 
@@ -222,7 +222,7 @@
                 android:id="@+id/statistics_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/card_main_screen"
                 app:cardCornerRadius="16dp"
                 >
 
@@ -263,7 +263,7 @@
                 android:id="@+id/web_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@color/card_main_screen"
                 app:cardCornerRadius="16dp"
                 >
 
