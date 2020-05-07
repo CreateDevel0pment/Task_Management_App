@@ -26,7 +26,6 @@ public class ProbaMainActvivity extends AppCompatActivity implements View.OnClic
 
     DatabaseReference databaseReference;
     FloatingActionButton fab;
-    String userSectorName;
     CardView statisticBtn;
 
     @Override
@@ -50,8 +49,8 @@ public class ProbaMainActvivity extends AppCompatActivity implements View.OnClic
 
                 if(dataSnapshot.getValue()!=null) {
                     String userPosition = dataSnapshot.child("Position").getValue().toString();
-                    if (userPosition.equals("Manager")) {
-                        fab.setVisibility(View.VISIBLE);
+                    if (userPosition.equals("Staff")) {
+                        fab.setVisibility(View.INVISIBLE);
                         statisticBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

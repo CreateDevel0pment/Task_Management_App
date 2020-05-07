@@ -13,11 +13,10 @@
         android:roundIcon="@drawable/logoworkers"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MainBoardActivity"></activity>
         <activity android:name=".ui.main.home.HomeSettings" />
         <activity
             android:name=".ui.main.wall.PrivateChatActivity"
-            android:parentActivityName=".ui.main.MainActivity" />
+            android:parentActivityName=".ui.main.ProbaMainActvivity" />
         <activity android:name=".ui.main.edit_find.find_friends.FindFriendsActivity" />
         <activity
             android:name=".ui.main.edit_find.edit.EditProfileActivity"
@@ -28,6 +27,10 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.MainActivity"
+            android:parentActivityName=".ui.main.ProbaMainActvivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.main.ProbaMainActvivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.splash.SplashActivity"

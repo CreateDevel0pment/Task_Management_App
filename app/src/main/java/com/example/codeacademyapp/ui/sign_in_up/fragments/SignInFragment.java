@@ -18,8 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.codeacademyapp.R;
 import com.example.codeacademyapp.data.Resource;
 import com.example.codeacademyapp.data.model.User;
-import com.example.codeacademyapp.ui.main.MainActivity;
-import com.example.codeacademyapp.ui.main.MainBoardActivity;
+import com.example.codeacademyapp.ui.main.ProbaMainActvivity;
 import com.example.codeacademyapp.ui.sign_in_up.LogUserViewModel;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -139,7 +138,7 @@ public class SignInFragment extends Fragment {
     }
 
     private void goToStartActivity(String userGroup) {
-        Intent intent = new Intent(getContext(), MainBoardActivity.class);
+        Intent intent = new Intent(getContext(), ProbaMainActvivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("TITLE", userGroup);
         startActivity(intent);

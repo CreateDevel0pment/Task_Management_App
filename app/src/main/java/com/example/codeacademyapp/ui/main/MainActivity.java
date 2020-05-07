@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String open = getIntent().getStringExtra("MAIN");
 
         if (open != null) {

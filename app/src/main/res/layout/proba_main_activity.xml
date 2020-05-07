@@ -10,8 +10,8 @@
         android:id="@+id/web_"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="171dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="160dp"
         android:backgroundTint="@color/card_main_screen"
         android:onClick="onClick"
         app:cardCornerRadius="16dp"
@@ -35,8 +35,8 @@
         android:id="@+id/calendar_"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="103dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="80dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/card_main_screen"
         android:onClick="onClick"
@@ -80,7 +80,7 @@
         android:id="@+id/sector_"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/card_main_screen"
@@ -126,9 +126,9 @@
         android:id="@+id/task_"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="103dp"
+        android:layout_marginEnd="80dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/card_main_screen"
+        android:backgroundTint="@color/AccentColor"
         android:onClick="onClick"
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toTopOf="@+id/web_"
@@ -140,38 +140,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
-            tool:layout_editor_absoluteX="211dp"
-            tool:layout_editor_absoluteY="280dp">
+            android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_task"
+                tool:layout_editor_absoluteX="239dp"
+                tool:layout_editor_absoluteY="298dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_task"
-                    tool:layout_editor_absoluteX="239dp"
-                    tool:layout_editor_absoluteY="298dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Task's"
-                    android:textColor="@color/AccentColor"
-                    tool:layout_editor_absoluteX="246dp"
-                    tool:layout_editor_absoluteY="343dp" />
-            </LinearLayout>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Task's"
+                android:textColor="@color/colorPrimaryDarkMode"
+                tool:layout_editor_absoluteX="246dp"
+                tool:layout_editor_absoluteY="343dp" />
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 
@@ -179,9 +166,9 @@
         android:id="@+id/statistic_"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="80dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="171dp"
+        android:layout_marginBottom="160dp"
         android:backgroundTint="@color/card_main_screen"
         android:onClick="onClick"
         app:cardCornerRadius="16dp"
@@ -224,8 +211,8 @@
         android:id="@+id/home_"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/card_main_screen"
@@ -268,9 +255,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_task_button"
-        android:visibility="invisible"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
@@ -278,6 +264,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/add_new" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
