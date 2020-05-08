@@ -90,6 +90,7 @@
     <string name="Create_task">Create task</string>
     <string name="CreateProject">Create project</string>
     <string name="home_settings">Home Settings</string>
+    <string name="download_attachments">Download attachments</string>
 
 
     <string-array name="Sector">

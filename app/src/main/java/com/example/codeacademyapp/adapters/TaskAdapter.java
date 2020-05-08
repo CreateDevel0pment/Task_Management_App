@@ -50,7 +50,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         completedByList = new ArrayList<>();
 
         holder.itemSingleTaskBinding.taskNameItem.setText(task.getName());
-//        holder.itemSingleTaskBinding.taskPriority.setText(task.getTaskPriority());
         holder.itemSingleTaskBinding.taskDescDetails.setText(task.getDescription());
         holder.itemSingleTaskBinding.taskDateCreatedDetails.setText(task.getTimeCreated());
         holder.itemSingleTaskBinding.taskEndDateDetails.setText(task.getEndDate());
@@ -78,7 +77,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
 //                }
 
-//                holder.itemSingleTaskBinding.priorityLinear.setVisibility(View.VISIBLE);
+                holder.itemSingleTaskBinding.downloadAttachmentsLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.descLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.datesLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setVisibility(View.VISIBLE);
@@ -92,7 +91,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 holder.itemSingleTaskBinding.completeLinear.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.lineSeparator.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.taskComplete.setVisibility(View.GONE);
-//                holder.itemSingleTaskBinding.priorityLinear.setVisibility(View.GONE);
+                holder.itemSingleTaskBinding.downloadAttachmentsLinear.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.descLinear.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.datesLinear.setVisibility(View.GONE);
                 holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setVisibility(View.GONE);

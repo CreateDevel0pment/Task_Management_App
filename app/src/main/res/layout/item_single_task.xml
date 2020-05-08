@@ -156,36 +156,41 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/priority_linear"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="start|center_vertical"-->
-<!--                android:background="@color/colorPrimaryDarkMode"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:visibility="gone">-->
+            <LinearLayout
+                android:id="@+id/download_attachments_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:background="@color/colorPrimaryDarkMode"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                >
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:layout_marginEnd="4dp"-->
-<!--                    android:layout_marginBottom="8dp"-->
-<!--                    android:text="@string/task_priority"-->
-<!--                    android:textColor="@color/colorPrimary"-->
-<!--                    android:textSize="14sp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/download_attachments"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/task_priority"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="8dp"-->
-<!--                    android:textColor="@color/colorPrimary"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textSize="14sp" />-->
+                <ImageView
+                    android:id="@+id/download_document_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_file_download"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="end|center_vertical"
+                    />
 
-<!--            </LinearLayout>-->
+
+            </LinearLayout>
 
             <View
                 android:id="@+id/line_separator"
@@ -229,18 +234,10 @@
                     android:src="@drawable/ic_share"
                     android:layout_margin="18dp"
                     android:gravity="center_vertical"
-                    android:layout_toStartOf="@+id/download_document_task"
+                     android:layout_alignParentEnd="true"
                     />
 
-                <ImageView
-                    android:id="@+id/download_document_task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_assign"
-                    android:layout_margin="18dp"
-                    android:gravity="end|center_vertical"
-                    />
+
 
             </RelativeLayout>
 

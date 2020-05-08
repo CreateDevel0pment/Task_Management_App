@@ -154,7 +154,8 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
                         public void onChanged(DataSnapshot dataSnapshot) {
                             progressDialog.dismiss();
                         }
-                    });                }
+                    });
+                }
 
                 Objects.requireNonNull(getActivity()).onBackPressed();
             }
