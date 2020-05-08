@@ -1,5 +1,7 @@
 package com.example.codeacademyapp.data.model;
 
+import android.net.Uri;
+
 import java.util.List;
 
 public class TaskInformation {
@@ -16,6 +18,9 @@ public class TaskInformation {
     private String AssignedUser;
     private List<AssignedUsers> AssignedUsers;
     private List<CompletedBy> CompletedBy;
+    private String DocType;
+    private String DocName;
+    private String DocPath;
 
 
     public TaskInformation() {
@@ -23,7 +28,8 @@ public class TaskInformation {
 
     public TaskInformation(String name, String description,
                            String group, String timeCreated,
-                           String taskPriority, String endDate, String taskRef) {
+                           String taskPriority, String endDate, String taskRef, String docType,
+                           String docName, String docPath) {
         this.Name = name;
         this.Description = description;
         this.Sector = group;
@@ -31,6 +37,33 @@ public class TaskInformation {
         this.TaskPriority = taskPriority;
         this.EndDate = endDate;
         this.TaskRef = taskRef;
+        this.DocName = docName;
+        this.DocPath = docPath;
+        this.DocType = docType;
+    }
+
+    public String getDocType() {
+        return DocType;
+    }
+
+    public void setDocType(String docType) {
+        this.DocType = docType;
+    }
+
+    public String getDocName() {
+        return DocName;
+    }
+
+    public void setDocName(String docName) {
+        this.DocName = docName;
+    }
+
+    public String getDocPath() {
+        return DocPath;
+    }
+
+    public void setDocPath(String docPath) {
+        this.DocPath = docPath;
     }
 
     public String getTaskPriority() {

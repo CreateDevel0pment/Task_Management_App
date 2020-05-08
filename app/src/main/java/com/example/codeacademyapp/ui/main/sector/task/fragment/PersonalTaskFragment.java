@@ -92,9 +92,14 @@ public class PersonalTaskFragment extends BaseFragment {
                     taskPriority = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskPriority();
                     endDate = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getEndDate();
                     String taskRef = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskRef();
+                    String docName = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDocName();
+                    String docPath = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDocPath();
+                    String docType = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDocType();
 
                     TaskInformation task =
-                            new TaskInformation(name, description, group, timeCreated, taskPriority, endDate, taskRef);
+                            new TaskInformation(name, description, group, timeCreated,
+                                    taskPriority, endDate, taskRef, docType,
+                                    docName, docPath);
                     tasks.add(task);
                 }
 

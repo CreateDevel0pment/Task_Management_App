@@ -91,9 +91,13 @@ public class CompletedTasksFragment extends BaseFragment {
                             String taskPriority = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskPriority();
                             String endDate = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getEndDate();
                             String taskRef = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getTaskRef();
+                            String docName = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDocName();
+                            String docPath = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDocPath();
+                            String docType = Objects.requireNonNull(taskDataSnapshot.getValue(TaskInformation.class)).getDocType();
 
                             TaskInformation task = new TaskInformation(name, description,
-                                    group, timeCreated, taskPriority, endDate, taskRef);
+                                    group, timeCreated, taskPriority, endDate, taskRef, docType,
+                                    docName, docPath);
                             tasks.add(task);
                         }
 

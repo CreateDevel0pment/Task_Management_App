@@ -9,13 +9,11 @@ import androidx.lifecycle.LiveData;
 import com.example.codeacademyapp.data.model.Task;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.example.codeacademyapp.data.repository.CreateTaskRepository;
+import com.google.firebase.database.DataSnapshot;
 
 public class TaskViewModel extends AndroidViewModel {
 
     private CreateTaskRepository createTaskRepository;
-    private LiveData<Task> createGroupTaskLiveData;
-    private LiveData<Task> createAssignedTaskLiveData;
-    private LiveData<TaskInformation> createNewTaskInformationLiveData;
 
     public TaskViewModel(@NonNull Application application) {
         super(application);
@@ -25,15 +23,20 @@ public class TaskViewModel extends AndroidViewModel {
     }
 
     public void createGroupTask(Task task){
-        createGroupTaskLiveData = createTaskRepository.createGroupTask(task);
+        LiveData<Task> createGroupTaskLiveData = createTaskRepository.createGroupTask(task);
     }
 
     public void createAssignedTask(Task task){
-        createAssignedTaskLiveData = createTaskRepository.createAssignedTask(task);
+        LiveData<Task> createAssignedTaskLiveData = createTaskRepository.createAssignedTask(task);
+    }
+
+
+    public LiveData<DataSnapshot> checkForDoc(String userGroup) {
+        return createTaskRepository.uploadDocChecker(userGroup);
     }
 
 
     public void addCompletedBy(TaskInformation taskInformation){
-        createNewTaskInformationLiveData = createTaskRepository.addCompletedByOnTask(taskInformation);
+        LiveData<TaskInformation> createNewTaskInformationLiveData = createTaskRepository.addCompletedByOnTask(taskInformation);
     }
 }

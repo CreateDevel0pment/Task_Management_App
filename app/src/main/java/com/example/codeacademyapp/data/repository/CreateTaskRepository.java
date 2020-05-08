@@ -1,17 +1,25 @@
 package com.example.codeacademyapp.data.repository;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.codeacademyapp.data.model.Task;
 import com.example.codeacademyapp.data.model.TaskInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
@@ -71,7 +79,7 @@ public class CreateTaskRepository {
         return taskInformationMutableLiveData;
     }
 
-    public MutableLiveData<Task> createGroupTask(Task task) {
+    public MutableLiveData<Task> createGroupTask(final Task task) {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference();
@@ -85,17 +93,10 @@ public class CreateTaskRepository {
                 userID = userFb.getUid();
             }
 
-            DatabaseReference taskRef = myRef.child("Tasks").push();
+            final DatabaseReference taskRef = myRef.child("Tasks").push();
             if (taskRef.getKey() == null) {
                 return setTaskInformation;
             }
-
-            StorageReference storageReference = FirebaseStorage.getInstance()
-                    .getReference()
-                    .child("Send Doc Files");
-            StorageReference storagePath = storageReference.child(task.getUri().toString());
-
-            storagePath.putFile(task.getUri());
 
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("Description")
@@ -121,6 +122,35 @@ public class CreateTaskRepository {
             myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                     .child("TaskRef")
                     .setValue(taskRef.getKey());
+
+            StorageReference storageReference = FirebaseStorage.getInstance()
+                    .getReference()
+                    .child("Send Doc Files");
+            StorageReference storagePath = storageReference.child(task.getUri().toString());
+
+            storagePath.putFile(task.getUri()).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull final com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> t) {
+                        if (t.isSuccessful()){
+                            t.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
+                                            .child("DocPath")
+                                            .setValue(uri.toString());
+                                    myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
+                                            .child("DocName")
+                                            .setValue(task.getDocName());
+                                    myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
+                                            .child("DocType")
+                                            .setValue(task.getDocType());
+                                    myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child("docChecker").removeValue();
+                                }
+                            });
+                        }
+                }
+            });
+
         }
         return setTaskInformation;
     }
@@ -173,6 +203,31 @@ public class CreateTaskRepository {
 
         }
         return setTaskInformation;
+
+    }
+
+    public MutableLiveData<DataSnapshot> uploadDocChecker(String userGroup) {
+        final MutableLiveData<DataSnapshot> docCheck = new MutableLiveData<>();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        myRef.child("Tasks").child("GroupTasks").child(userGroup);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    docCheck.setValue(dataSnapshot);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return docCheck;
     }
 
     public MutableLiveData<com.google.android.gms.tasks.Task> sendTaskNotification(final String current_user_id, final String receiver_user_id){

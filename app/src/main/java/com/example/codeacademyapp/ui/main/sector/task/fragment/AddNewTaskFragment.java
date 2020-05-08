@@ -15,17 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.codeacademyapp.R;
@@ -50,7 +48,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class AddNewTaskFragment extends Fragment implements DatePickerDialogListener {
 
     private EditText task_name, task_description;
-    private TextView assignedDate;
+    private TextView assignedDate, docNameTV;
     private String userID, userGroup, taskPriority, extrasUserName, extrasUserId;
     private TaskViewModel taskViewModel;
     private View rootView;
@@ -60,6 +58,7 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
     private ImageView uploadFile;
     private ProgressDialog progressDialog;
     private Uri uri;
+    private Button createTaskButton;
 
 
     public AddNewTaskFragment(String userName, String extrasUserId) {
@@ -82,22 +81,15 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
 
         task_name = rootView.findViewById(R.id.task_name);
         task_description = rootView.findViewById(R.id.task_desc);
+        docNameTV = rootView.findViewById(R.id.doc_name_newTask);
         TextView assignedUserNameTV = rootView.findViewById(R.id.assigned_user_name);
         LinearLayout assignUserLayout = rootView.findViewById(R.id.assigned_user_linear);
-
         uploadFile = rootView.findViewById(R.id.task_file_btn_upload);
         assignedDate = rootView.findViewById(R.id.assigned_end_date);
         progressDialog = new ProgressDialog(getContext());
+        createTaskButton = rootView.findViewById(R.id.create_task_btn);
 
         uploadFile();
-
-        if (extrasUserName != null) {
-            assignedUserNameTV.setText(extrasUserName);
-        } else {
-            assignUserLayout.setVisibility(View.GONE);
-        }
-
-        taskNotificationViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskNotificationViewModel.class);
 
         ImageView datePickerImg = rootView.findViewById(R.id.date_picker_icon);
         datePickerImg.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +99,13 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
             }
         });
 
-        Button create_task = rootView.findViewById(R.id.create_task_btn);
+        if (extrasUserName != null) {
+            assignedUserNameTV.setText(extrasUserName);
+        } else {
+            assignUserLayout.setVisibility(View.GONE);
+        }
 
+        taskNotificationViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskNotificationViewModel.class);
         taskViewModel = ViewModelProviders.of(AddNewTaskFragment.this).get(TaskViewModel.class);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser userFb = mAuth.getCurrentUser();
@@ -139,46 +136,8 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
             }
         });
 
-//        RadioButton priorityBtnHigh = rootView.findViewById(R.id.radiobtn_priority_high);
-//        RadioButton priorityBtnMedium = rootView.findViewById(R.id.radiobtn_priority_medium);
-//        RadioButton priorityBtnLow = rootView.findViewById(R.id.radiobtn_priority_low);
 
-
-//        priorityBtnHigh.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (buttonView.isChecked()) {
-//                    taskPriority = "High";
-//                } else {
-//                    taskPriority = null;
-//                }
-//            }
-//        });
-//
-//
-//        priorityBtnMedium.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (buttonView.isChecked()) {
-//                    taskPriority = "Medium";
-//                } else {
-//                    taskPriority = null;
-//                }
-//            }
-//        });
-//
-//        priorityBtnLow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (buttonView.isChecked()) {
-//                    taskPriority = "Low";
-//                } else {
-//                    taskPriority = null;
-//                }
-//            }
-//        });
-
-        create_task.setOnClickListener(new View.OnClickListener() {
+        createTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -186,7 +145,17 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
                     taskViewModel.createAssignedTask(setTaskValues());
                 } else {
                     taskViewModel.createGroupTask(setTaskValues());
-                }
+                    progressDialog.setTitle("Upload document");
+                    progressDialog.setMessage("Please wait. Document loading..");
+                    progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.show();
+                    taskViewModel.checkForDoc(userGroup).observe(AddNewTaskFragment.this, new Observer<DataSnapshot>() {
+                        @Override
+                        public void onChanged(DataSnapshot dataSnapshot) {
+                            progressDialog.dismiss();
+                        }
+                    });                }
+
                 Objects.requireNonNull(getActivity()).onBackPressed();
             }
         });
@@ -234,7 +203,7 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
             @Override
             public void onClick(View v) {
                 CharSequence[] options = new CharSequence[]{
-                        "Images",
+//                        "Images",
                         "PDF files",
                         "Ms Word files"
                 };
@@ -249,21 +218,21 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
                         Intent intent = new Intent().setAction(Intent.ACTION_GET_CONTENT);
 
                         switch (which) {
+//                            case 0:
+//                                checker = ".jpg";
+//
+//                                intent.setType("image/*");
+//                                startActivityForResult(Intent.createChooser(intent, "Select Photo"), 1);
+//                                break;
+
                             case 0:
-                                checker = ".jpg";
-
-                                intent.setType("image/*");
-                                startActivityForResult(Intent.createChooser(intent, "Select Photo"), 1);
-                                break;
-
-                            case 1:
                                 checker = ".pdf";
 
                                 intent.setType("application/pdf");
                                 startActivityForResult(Intent.createChooser(intent, "Select PDF File"), 1);
                                 break;
 
-                            case 2:
+                            case 1:
                                 checker = ".docx";
 
                                 intent.setType("application/msword");
@@ -276,8 +245,12 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
                 });
 
                 builder.show();
+
             }
         });
+
+
+
     }
 
     @Override
@@ -285,14 +258,6 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && data != null) {
-
-            progressDialog.setTitle("Upload document");
-            progressDialog.setMessage("Please wait. Document loading..");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-
-
-//            getCurrentDateAndTime();
 
             uri = data.getData();
 
@@ -305,8 +270,9 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
                 returnCursor.moveToFirst();
 
                 fileName = returnCursor.getString(nameIndex);
-
-
+                docNameTV.setText(fileName);
+                LinearLayout docNameLL = rootView.findViewById(R.id.checkbox_doc_linear);
+                docNameLL.setVisibility(View.VISIBLE);
             }
         }
 
