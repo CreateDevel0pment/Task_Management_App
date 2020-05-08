@@ -21,6 +21,7 @@ import com.example.codeacademyapp.ui.main.edit_find.find_friends.FindFriendsActi
 import com.example.codeacademyapp.ui.main.home.WallTabFragment;
 import com.example.codeacademyapp.ui.main.info.InfoFragment;
 import com.example.codeacademyapp.ui.main.info.SetInfo;
+import com.example.codeacademyapp.ui.main.schedule.ScheduleActivity;
 import com.example.codeacademyapp.ui.main.sector.chat.GroupChatFragment;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.TaskTabsFragment;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.UserStatisticsFragment;
@@ -53,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
             if(open.equals("home")){
                 switchToFragment(new WallTabFragment(), R.id.wall_container);
             }else if(open.equals("calendar")){
-                Toast.makeText(this, "CALENDAR", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(this, ScheduleActivity.class);
+                startActivity(intent);
             }
             else if(open.equals("sector")){
                 switchToFragment(new GroupChatFragment(), R.id.group_container);

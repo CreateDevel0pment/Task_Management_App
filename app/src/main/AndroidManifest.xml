@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/logoworkers"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.ProbaMainActvivity"></activity>
+        <activity android:name=".ui.main.schedule.ScheduleActivity"></activity>
+        <activity android:name=".ui.main.ProbaMainActvivity" />
         <activity android:name=".ui.main.settings.SettingsActvity" />
         <activity android:name=".ui.main.info.SetInfo" />
         <activity

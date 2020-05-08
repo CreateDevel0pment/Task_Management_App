@@ -95,6 +95,16 @@
         <string name="Create_task">Креирај Задача</string>
         <string name="CreateProject">Креирај Проект</string>
 
+
+        <string name="checked_for_schedule">Checked for schedule</string>
+        <string name="monday">Monday</string>
+        <string name="tuesday">Tuesday</string>
+        <string name="wednesday">Wednesday</string>
+        <string name="thursday">Thursday</string>
+        <string name="friday">Friday</string>
+        <string name="saturday">Saturday</string>
+        <string name="sunday">Sunday</string>
+
         <string-array name="Sector">
             <item>Избери Сектор/Професија - </item>
             <item>Android</item>
