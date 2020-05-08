@@ -76,8 +76,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                     holder.itemSingleTaskBinding.completeLinear.setVisibility(View.VISIBLE);
 
 //                }
-
-                holder.itemSingleTaskBinding.downloadAttachmentsLinear.setVisibility(View.VISIBLE);
+        if(task.getDocPath()!=null){
+            holder.itemSingleTaskBinding.downloadAttachmentsLinear.setVisibility(View.VISIBLE);
+        }
                 holder.itemSingleTaskBinding.descLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.datesLinear.setVisibility(View.VISIBLE);
                 holder.itemSingleTaskBinding.detailsTaskDropUpBtnImg.setVisibility(View.VISIBLE);

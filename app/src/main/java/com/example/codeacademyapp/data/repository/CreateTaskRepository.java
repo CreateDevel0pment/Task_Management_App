@@ -144,7 +144,6 @@ public class CreateTaskRepository {
                                     myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child(taskRef.getKey())
                                             .child("DocType")
                                             .setValue(task.getDocType());
-                                    myRef.child("Tasks").child("GroupTasks").child(task.getGroup()).child("docChecker").removeValue();
                                 }
                             });
                         }
@@ -155,7 +154,7 @@ public class CreateTaskRepository {
         return setTaskInformation;
     }
 
-    public MutableLiveData<Task> createAssignedTask(Task task) {
+    public MutableLiveData<Task> createAssignedTask(final Task task) {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         myRef = firebaseDatabase.getReference();
@@ -168,7 +167,7 @@ public class CreateTaskRepository {
                 userID = userFb.getUid();
             }
 
-            DatabaseReference taskRef = myRef.child("Tasks").push();
+            final DatabaseReference taskRef = myRef.child("Tasks").push();
             if (taskRef.getKey() == null) {
                 return setTaskInformation;
             }
@@ -201,9 +200,35 @@ public class CreateTaskRepository {
                     .child("TaskRef")
                     .setValue(taskRef.getKey());
 
+            StorageReference storageReference = FirebaseStorage.getInstance()
+                    .getReference()
+                    .child("Send Doc Files");
+            StorageReference storagePath = storageReference.child(task.getUri().toString());
+
+            storagePath.putFile(task.getUri()).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull final com.google.android.gms.tasks.Task<UploadTask.TaskSnapshot> t) {
+                    if (t.isSuccessful()){
+                        t.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
+                                        .child("DocPath")
+                                        .setValue(uri.toString());
+                                myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
+                                        .child("DocName")
+                                        .setValue(task.getDocName());
+                                myRef.child("Users").child(task.getAssignedUserId()).child("Tasks").child(taskRef.getKey())
+                                        .child("DocType")
+                                        .setValue(task.getDocType());
+                            }
+                        });
+                    }
+                }
+            });
+
         }
         return setTaskInformation;
-
     }
 
     public MutableLiveData<DataSnapshot> uploadDocChecker(String userGroup) {

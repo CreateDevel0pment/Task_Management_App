@@ -145,17 +145,17 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
                     taskViewModel.createAssignedTask(setTaskValues());
                 } else {
                     taskViewModel.createGroupTask(setTaskValues());
-                    progressDialog.setTitle("Upload document");
-                    progressDialog.setMessage("Please wait. Document loading..");
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.show();
-                    taskViewModel.checkForDoc(userGroup).observe(AddNewTaskFragment.this, new Observer<DataSnapshot>() {
-                        @Override
-                        public void onChanged(DataSnapshot dataSnapshot) {
-                            progressDialog.dismiss();
-                        }
-                    });
                 }
+                progressDialog.setTitle("Upload document");
+                progressDialog.setMessage("Please wait. Document loading..");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                taskViewModel.checkForDoc(userGroup).observe(AddNewTaskFragment.this, new Observer<DataSnapshot>() {
+                    @Override
+                    public void onChanged(DataSnapshot dataSnapshot) {
+                        progressDialog.dismiss();
+                    }
+                });
 
                 Objects.requireNonNull(getActivity()).onBackPressed();
             }
