@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.main.schedule.ScheduleFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/AccentColor"
+        app:cardCornerRadius="16dp"
+        android:id="@+id/user_schedule_info">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Employ"
+                android:textSize="21dp"
+                android:layout_marginBottom="16dp"
+                android:id="@+id/employ_"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/astronaut"
+                android:layout_below="@+id/employ_"
+                android:id="@+id/user_schedule_image"/>
+
+            <TextView
+                android:id="@+id/user_schedule_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/user_schedule_image"
+                android:layout_below="@+id/employ_"
+                android:layout_marginStart="8dp"
+                android:text="Full Name"/>
+
+            <TextView
+                android:id="@+id/user_schedule_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/user_schedule_image"
+                android:layout_below="@+id/user_schedule_name"
+                android:layout_marginStart="8dp"
+                android:text="Position"/>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:id="@+id/schedule_daysList"/>
+
+</LinearLayout>
