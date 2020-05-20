@@ -13,6 +13,7 @@ public class User implements Serializable {
     public String position_spinner;
     public String sector_spinner;
     public String device_token;
+    public String imageUrl;
 
 
     @Exclude
@@ -24,7 +25,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String eMail, String password, String user_id,String device_token ) {
+    public User(String eMail, String password, String user_id,String device_token) {
         this.eMail = eMail;
         this.password = password;
         this.id_user=user_id;
@@ -85,5 +86,17 @@ public class User implements Serializable {
 
     public void setDevice_token(String device_token) {
         this.device_token = device_token;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

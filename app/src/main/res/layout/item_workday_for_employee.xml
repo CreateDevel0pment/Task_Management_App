@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="8dp"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:paddingStart="8dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/circle_card_indicator"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        app:cardCornerRadius="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_date_"
+            android:tint="@color/colorPrimary" />
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/LLWDInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toStartOf="@+id/interaction_img"
+        android:layout_toEndOf="@id/circle_card_indicator"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dayTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Someday(Day)"
+            android:textColor="@color/colorPrimaryDarkMode"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/assigned_to_work_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/text_dark_grey"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/assigned_shift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First shift."
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/interaction_img"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
+        android:tint="@color/colorPrimaryDarkMode" />
+
+    <LinearLayout
+        android:id="@+id/LLWDRequestShift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LLWDInfo"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_toStartOf="@+id/interaction_img"
+        android:layout_toEndOf="@id/circle_card_indicator"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/colorPrimaryDarkMode" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shift request:"
+            android:textColor="@color/colorPrimaryDarkMode"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/shiftRequestRG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/shiftFirstRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First shift" />
+
+            <RadioButton
+                android:id="@+id/shiftSecondRB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Second shift" />
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/requestShiftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/colorPrimaryDarkMode"
+            android:text="Request" />
+
+    </LinearLayout>
+
+</RelativeLayout>

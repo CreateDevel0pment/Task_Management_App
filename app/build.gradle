@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -48,7 +50,8 @@ dependencies {
 
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
     implementation "de.hdodenhof:circleimageview:$circleImage"
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
     implementation "androidx.legacy:legacy-preference-v14:1.0.0"
@@ -73,4 +76,13 @@ dependencies {
     implementation 'com.akexorcist:RoundCornerProgressBar:2.0.3'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.archit.calendar:awesome-calendar:1.1.6'
+    implementation 'com.akexorcist:snap-time-picker:1.0.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

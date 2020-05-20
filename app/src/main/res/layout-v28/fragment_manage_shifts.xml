@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:weightSum="2"
+    tools:context=".ui.main.scheduler.CreateScheduleFragment">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/LLFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/date_picker_icon"
+                android:tint="@color/colorPrimaryDarkMode" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Requests for: First shift"
+                android:textColor="@color/colorPrimaryDarkMode"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/LLFirst"
+            android:background="@color/colorPrimaryDarkMode" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRequestsFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/LLFirst"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/LLSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/date_picker_icon"
+                android:tint="@color/colorPrimaryDarkMode" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Requests for: Second shift"
+                android:textColor="@color/colorPrimaryDarkMode"
+                android:textSize="22sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/LLSecond"
+            android:background="@color/colorPrimaryDarkMode" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRequestsSecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" />
+
+
+    </LinearLayout>
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"/>-->
+
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:id="@+id/cancel_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="8dp"-->
+    <!--        android:backgroundTint="@color/colorPrimary"-->
+    <!--        android:text="Cancel"-->
+    <!--        android:textColor="@color/colorPrimaryDarkMode" />-->
+
+
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:id="@+id/approveWDBtn"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/colorPrimaryDarkMode"-->
+    <!--        android:text="Approve" />-->
+
+</LinearLayout>

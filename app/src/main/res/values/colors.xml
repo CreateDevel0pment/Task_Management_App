@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#CDD5E3</color>
+    <color name="colorPrimary">#E4E9F3</color>
     <color name="card_main_screen">#374151</color>
     <color name="colorPrimaryDarkMode">#1f252e</color>
     <color name="AccentColor">#C3CCDA</color>
@@ -9,5 +9,8 @@
     <color name="black">#000000</color>
     <color name="text_dark_grey">#424242</color>
     <color name="recyclerview_grey_background">#6E7A83</color>
+
+    <color name="good_green">#078B75</color>
+    <color name="purple">#8E24AA</color>
 
 </resources>

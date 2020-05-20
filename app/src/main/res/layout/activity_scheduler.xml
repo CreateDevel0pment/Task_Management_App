@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.main.scheduler.SchedulerActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/colorPrimaryDarkMode"
+        android:id="@+id/toolbar_scheduler"
+        app:titleTextColor="@color/AccentColor"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        >
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/AccentColor" />
+
+    <FrameLayout
+        android:id="@+id/scheduler_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

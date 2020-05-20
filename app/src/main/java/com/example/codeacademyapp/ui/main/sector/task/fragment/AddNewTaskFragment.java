@@ -204,7 +204,6 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
             @Override
             public void onClick(View v) {
                 CharSequence[] options = new CharSequence[]{
-//                        "Images",
                         "PDF files",
                         "Ms Word files"
                 };
@@ -249,7 +248,6 @@ public class AddNewTaskFragment extends Fragment implements DatePickerDialogList
 
             }
         });
-
 
 
     }

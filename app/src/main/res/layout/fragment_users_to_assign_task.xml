@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryDarkMode"
     android:orientation="vertical"
-    tools:context=".ui.main.sector.task.fragment.UsersToAssignTaskFragment">
+    tools:context=".ui.main.sector.task.fragment.UsersToAssignFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_users_list_assignTo_fragment"
@@ -22,18 +22,26 @@
 
     <ScrollView
         android:layout_margin="8dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="350dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/users_list_task_toAssign_RV"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/recyclerview_grey_background" />
+        />
     </ScrollView>
 
 
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/assign_users_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Assign users"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDarkMode"
+        />
 
 
 </LinearLayout>

@@ -9,25 +9,31 @@
     android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/users_profile_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/astronaut"
-        android:id="@+id/users_profile_image"/>
+        android:src="@drawable/astronaut" />
 
-        <TextView
-            android:id="@+id/user_profile_name"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/user_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
+    <CheckBox
+        android:id="@+id/user_to_assign_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:buttonTint="@color/colorPrimary" />
 
 
 </LinearLayout>

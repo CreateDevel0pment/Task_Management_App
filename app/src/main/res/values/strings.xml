@@ -91,7 +91,8 @@
     <string name="CreateProject">Create project</string>
     <string name="home_settings">Home Settings</string>
     <string name="download_attachments"><u>Download attachments</u></string>
-
+    <string name="select_shift_start_time"><u>Select shift starting time</u></string>
+    <string name="select_shift_end_time"><u>Select shift ending time</u></string>
 
     <string-array name="Sector">
         <item>Choose Sector - </item>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorPrimary"
+    android:paddingTop="16dp"
+    android:layout_marginBottom="8dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/LLWDDescription"
+        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toEndOf="@+id/interaction_img"
+        >
+        <TextView
+
+            android:id="@+id/dayTitle"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Someday(Day)"
+            android:textColor="@color/colorPrimaryDarkMode"
+            />
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:id="@+id/assigned_to_work_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Employees are not assigned for this date."
+            android:textColor="@color/text_dark_grey"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/interaction_img"
+        android:layout_centerVertical="true"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/date_picker_icon"
+        android:tint="@color/colorPrimaryDarkMode"
+        />
+
+    <Button
+        android:id="@+id/manageWDBtn"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Workday"
+        android:textColor="@color/colorPrimaryDarkMode"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/LLWDDescription"
+        android:textAllCaps="false"
+        />
+    <View
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDarkMode"
+        android:layout_below="@+id/manageWDBtn"/>
+
+</RelativeLayout>

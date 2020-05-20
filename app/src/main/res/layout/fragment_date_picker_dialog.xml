@@ -18,7 +18,7 @@
             >
                 <DatePicker
                     android:id="@+id/datePicker"
-                    android:headerBackground="@color/AccentColor"
+                    android:headerBackground="@color/colorPrimaryDarkMode"
                     android:calendarTextColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>

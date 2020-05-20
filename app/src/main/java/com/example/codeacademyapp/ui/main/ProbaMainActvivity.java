@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.ui.main.scheduler.SchedulerActivity;
 import com.example.codeacademyapp.ui.main.sector.task.TaskActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -84,8 +85,8 @@ public class ProbaMainActvivity extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.calendar_:
-                Intent intent1 = new Intent(this, MainActivity.class);
-                intent1.putExtra("MAIN", "calendar");
+                Intent intent1 = new Intent(this, SchedulerActivity.class);
+//                intent1.putExtra("MAIN", "calendar");
                 startActivity(intent1);
                 break;
             case R.id.sector_:

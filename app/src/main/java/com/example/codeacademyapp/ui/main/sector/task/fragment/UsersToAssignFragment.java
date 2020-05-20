@@ -14,30 +14,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.codeacademyapp.R;
+import com.example.codeacademyapp.data.model.User;
 import com.example.codeacademyapp.data.model.UserModelFirebase;
 import com.example.codeacademyapp.ui.main.sector.task.fragment.listeners.UsersToAssignDialogListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UsersToAssignTaskFragment extends DialogFragment{
+public class UsersToAssignFragment extends DialogFragment{
 
     private RecyclerView usersListRV;
     private DatabaseReference usersRef;
     private String selectedUserId;
+    private List<User> listOfUserIds;
+    private MaterialButton buttonToAssign;
 
 
-    public UsersToAssignTaskFragment() {
+    public UsersToAssignFragment() {
     }
 
     @Override
@@ -50,6 +59,23 @@ public class UsersToAssignTaskFragment extends DialogFragment{
         if(getContext()!=null){
             toolbar.setTitleTextColor((ContextCompat.getColor(getContext(), R.color.colorPrimary)));
         }
+        buttonToAssign = rootView.findViewById(R.id.assign_users_btn);
+        buttonToAssign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UsersToAssignDialogListener listener = (UsersToAssignDialogListener) getTargetFragment();
+                if (listener != null) {
+                    listener.passListOfUsersFragment(listOfUserIds);
+                }
+                if(getDialog()!=null){
+                                getDialog().dismiss();
+                }
+
+            }
+        });
+
+
+        listOfUserIds = new ArrayList<>();
 
         usersRef= FirebaseDatabase.getInstance().getReference().child("Users");
         usersListRV = rootView.findViewById(R.id.users_list_task_toAssign_RV);
@@ -70,15 +96,29 @@ public class UsersToAssignTaskFragment extends DialogFragment{
         FirebaseRecyclerAdapter<UserModelFirebase, FindFriendsViewHolder> adapter = new FirebaseRecyclerAdapter<UserModelFirebase,FindFriendsViewHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(@NonNull final FindFriendsViewHolder holder, final int position, @NonNull UserModelFirebase model) {
+            protected void onBindViewHolder(@NonNull final FindFriendsViewHolder holder, final int position, @NonNull final UserModelFirebase model) {
 
                 holder.userNAme.setText(model.Name);
-                holder.userGroup.setText(model.Sector);
+//                holder.userGroup.setText(model.getSector());
 
                 Picasso.get().load(model.image)
-                        .placeholder(R.drawable.profile_image)
+                        .placeholder(R.drawable.astronaut)
                         .into(holder.profileImage);
 
+                holder.checkBoxAssign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked){
+                            selectedUserId = getRef(holder.getAdapterPosition()).getKey();
+                            User user = new User();
+                            user.setName(model.Name);
+                            user.setId_user(selectedUserId);
+                            user.setImageUrl(model.image);
+                            listOfUserIds.add(user);
+
+                        }
+                    }
+                });
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -109,13 +149,15 @@ public class UsersToAssignTaskFragment extends DialogFragment{
 
         TextView userNAme, userGroup;
         CircleImageView profileImage;
+        CheckBox checkBoxAssign;
 
         FindFriendsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             userNAme=itemView.findViewById(R.id.user_profile_name);
-            userGroup=itemView.findViewById(R.id.user_group);
+//            userGroup=itemView.findViewById(R.id.user_group);
             profileImage=itemView.findViewById(R.id.users_profile_image);
+            checkBoxAssign=itemView.findViewById(R.id.user_to_assign_check_box);
 
         }
     }
